@@ -1,0 +1,94 @@
+@font-face {
+    font-family: 'robotoregular';
+    src: url('../font/roboto/Roboto-Regular.eot');
+    src: url('../font/roboto/Roboto-Regular.eot?#iefix') format('embedded-opentype'),
+         url('../font/roboto/Roboto-Regular.woff2') format('woff2'),
+         url('../font/roboto/Roboto-Regular.woff') format('woff'),
+         url('../font/roboto/Roboto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'robotobold';
+    src: url('../font/roboto/Roboto-Bold.eot');
+    src: url('../font/roboto/Roboto-Bold.eot?#iefix') format('embedded-opentype'),
+         url('../font/roboto/Roboto-Bold.woff2') format('woff2'),
+         url('../font/roboto/Roboto-Bold.woff') format('woff'),
+         url('../font/roboto/Roboto-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'robotothin';
+    src: url('../font/roboto/Roboto-Thin.eot');
+    src: url('../font/roboto/Roboto-Thin.eot?#iefix') format('embedded-opentype'),
+         url('../font/roboto/Roboto-Thin.woff2') format('woff2'),
+         url('../font/roboto/Roboto-Thin.woff') format('woff'),
+         url('../font/roboto/Roboto-Thin.ttf') format('truetype');
+    font-weight: regular;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'exo2regular';
+    src: url('../font/exo-2/Exo2-Regular.eot');
+    src: url('../font/exo-2/Exo2-Regular.eot?#iefix') format('embedded-opentype'),
+         url('../font/exo-2/Exo2-Regular.woff2') format('woff2'),
+         url('../font/exo-2/Exo2-Regular.woff') format('woff'),
+         url('../font/exo-2/Exo2-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'exo2light';
+    src: url('../font/exo-2/Exo2-Light.eot');
+    src: url('../font/exo-2/Exo2-Light.eot?#iefix') format('embedded-opentype'),
+         url('../font/exo-2/Exo2-Light.woff2') format('woff2'),
+         url('../font/exo-2/Exo2-Light.woff') format('woff'),
+         url('../font/exo-2/Exo2-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+h1 {
+	font-family: 'exo2regular' , Arial, sans-serif;
+	font-weight:normal;
+	font-style:normal;
+}
+
+h2 {
+	font-family: 'robotothin' , Arial, sans-serif;
+	font-weight:normal;
+	font-style:normal;
+}
+
+h3 {
+	font-family: 'robotoregular' , Arial, sans-serif;
+	font-weight:normal;
+	font-style:normal;
+}
+
+h4 {
+	font-family: 'robotothin' , Arial, sans-serif;
+	font-weight:normal;
+	font-style:normal;
+}
+
+p {
+	font-family: 'robotoregular' , Arial, sans-serif;
+	font-weight:normal;
+	font-style:normal;
+}
+
+a {
+	font-family: 'robotolight' , Arial, sans-serif;
+	font-weight:normal;
+	font-style:normal;
+}
