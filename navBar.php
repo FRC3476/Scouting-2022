@@ -29,7 +29,6 @@
 				<li><a href="leadScoutInput.php" style="color:Black;">LS Input</a></li>
 				<li><a href="pitInput.php" style="color:Black;">PS Form</a></li>
 				<li><a href="pictureUpload.php" style="color:Black;">Picture Upload</a></li>
-				<li><a href="matchData.php" style="color:Black;">Match Data</a></li>
 				<!--<li><a href="databaseOperations.php" style="color:Black;">Database Op</a></li>-->
 				<!--        </ul>
 				</li>-->

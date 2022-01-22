@@ -38,7 +38,7 @@ include("header.php")?>
                 if($i==0){
                         echo("<tr>");
                         foreach ($row as $key => $value){
-                                        if(!is_numeric($key) && $key != "autoPath"){
+                                        if(!is_numeric($key) && (($key != "autoPath") || ($key != "teleopPath"))){
                                             echo("<td>".$key."</td>");
                                         }
                                 }

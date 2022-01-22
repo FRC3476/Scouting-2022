@@ -33,13 +33,15 @@ if (isset($_POST['matchNum'])) {
 	$climb = filter($_POST['climb']);
 	$climbTwo = filter($_POST['climbTwo']);
 	$climbThree = filter($_POST['climbThree']);
+	$climbFour = filter($_POST['climbFour']);
 
 	$issues = filter($_POST['issues']);
 	$defenseBot = filter($_POST['defenseBot']);
 	$defenseComments = filter($_POST['defenseComments']);
 	$matchComments = filter($_POST['matchComments']);
 	$penalties = filter($_POST['penalties']);
-	$cycleNumber = filter($_POST['cycleNumber']);
+	$cycleCount = filter($_POST['cycleCount']);
+	$teleopPath = filter($_POST['teleopPath']);
 
 	matchInput(
 		$user,
@@ -60,12 +62,14 @@ if (isset($_POST['matchNum'])) {
 		$climb,
 		$climbTwo,
 		$climbThree,
+		$climbFour,
 		$issues,
 		$defenseBot,
 		$defenseComments,
 		$matchComments,
 		$penalties,
-		$cycleNumber
+		$cycleCount,
+		$teleopPath
 	);
 }
 

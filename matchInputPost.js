@@ -21,11 +21,15 @@ function postwith(to){
 		'climb' : climb,
 		'climbTwo' : climbTwo,
 		'climbThree' : climbThree,
+		'climbFour' : climbFour,
 
 		'issues' : document.getElementById('issues').value,
 		'defenseBot' : document.getElementById('defenseBot').checked?1:0,
 		'defenseComments' : document.getElementById('defenseComments').value,
-		'matchComments' : document.getElementById('matchComments').value
+		'matchComments' : document.getElementById('matchComments').value,
+		'penalties': document.getElementById('penalties').value,
+		'cycleCount': cycleCount,
+		'teleopPath' : JSON.stringify(coordinateList2)
 		};
 
 		var id = document.getElementById('matchNum').value + "-" + document.getElementById('teamNum').value;

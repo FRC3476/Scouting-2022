@@ -23,7 +23,7 @@ include("header.php");
                 if($i==0){
                         echo("<tr>");
                         foreach ($row as $key => $value){
-                                        if(!is_numeric($key) && $key != "autoPath"){
+                                if(!is_numeric($key) && (($key != "autoPath") || ($key != "teleopPath"))){
                                         echo("<td>".$key."</td>");
                                 }
                         }
@@ -32,7 +32,7 @@ include("header.php");
                 }
                 echo("<tr>");        
                         foreach ($row as $key => $value){
-                                if(!is_numeric($key) && $key != "autoPath"){
+                                if(!is_numeric($key) && (($key != "autoPath") || ($key != "teleopPath"))){
                                         if($key == "teamNum"){
                                                 $value= '<a href="teamData.php?team='.$value.'">'.$value.'</a>';
                                                 }
@@ -45,7 +45,9 @@ include("header.php");
                 echo("</tr>");                
                 }
                 echo("</table>");
-       } else{
+       } 
+       /*
+       else{
         $result = getAllPrimaryMatchData();
         echo('<div style="border:1px solid black;overflow-y:hidden;overflow-x:scroll;"><table  class="sortable table table-hover" id="RawData" border="1">');
         foreach ($result as $row_key => $row){
@@ -75,6 +77,7 @@ include("header.php");
              }
              echo("</table>");
        }
+       */
 ?>
 
 </div>

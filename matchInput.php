@@ -35,13 +35,15 @@ include("navBar.php");
 			'climb': climb,
 			'climbTwo': climbTwo,
 			'climbThree': climbThree,
+			'climbFour': climbFour,
 
 			'issues': document.getElementById('issues').value,
 			'defenseBot': document.getElementById('defenseBot').checked ? 1 : 0,
 			'defenseComments': document.getElementById('defenseComments').value,
 			'matchComments': document.getElementById('matchComments').value,
 			'penalties': document.getElementById('penalties').value,
-			'cycleNumber': cycleNumber
+			'cycleCount': cycleCount,
+			'teleopPath' : JSON.stringify(coordinateList2)
 		};
 
 		var id = document.getElementById('matchNum').value + "-" + document.getElementById('teamNum').value;
@@ -96,7 +98,7 @@ include("navBar.php");
 				<div class="row">
 					<div class="col-md-4">
 						<div class="togglebutton" id="reach">
-							<h4><b>Left Auto Line:</b></h4>
+							<h4><b>Left Tarmac:</b></h4>
 							<label>
 								<input id="crossLineA" type="checkbox">
 							</label>
@@ -139,7 +141,13 @@ include("navBar.php");
 					<h2><b><u>Teleop Scouting:</u></b></h2>
 				</a>
 				<div>
-				</div>
+					<div class="row">
+							<canvas id="myCanvas2" width=600px height=300px style="border:0px solid #d3d3d3;">
+								<script src="Drawing2.js"></script>
+							</canvas>
+						</div>
+
+					</div>
 
 				<script>
 					function updatelowerGoalMiss() {
@@ -203,6 +211,7 @@ include("navBar.php");
 					climb = 0;
 					climbTwo = 0;
 					climbThree = 0;
+					climbFour = 0;
 
 
 					function updateupperGoalT() {
@@ -253,41 +262,55 @@ include("navBar.php");
 						cycleCount += ("]");
 					}
 
+					function addCoordinate2(){
+  						coordinateList2.push(tempCoordinateList2[tempCoordinateList2.length - 1]);
+  						tempCoordinateList2 = [];
+					}
+
 					function okButton() {
-						lowerGoalT += lowerGoalTemp;
-						upperGoalT += upperGoalTemp;
-						lowerGoalMissT += lowerGoalMissTemp;
-						upperGoalMissT += upperGoalMissTemp;
+						
 
 						if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) == 0) {
-							cycleNumber = cycleNumber;
-						} else {
+
+						} else if(tempCoordinateList2 != 0){
+
+							lowerGoalT += lowerGoalTemp;
+							upperGoalT += upperGoalTemp;
+							lowerGoalMissT += lowerGoalMissTemp;
+							upperGoalMissT += upperGoalMissTemp;
+
 							cycleNumber += 1;
 							cycleCount += ("["+cycleNumber + ", " + upperGoalTemp + ", " + upperGoalMissTemp + ", " + lowerGoalTemp + "], ");
 							lowerMissTemp = lowerGoalMissTemp;
 						
 							console.log(cycleCount);
 							console.log(cycleNumber);
+							console.log(coordinateList2);
+							addCoordinate2();
+							clearPath3();
+							console.log(coordinateList2);
+
+							lowerGoalTemp = 0;
+							upperGoalTemp = 0;
+							lowerGoalMissTemp = 0;
+							upperGoalMissTemp = 0;
+
+							document.getElementById("lowerGoalTemp").innerHTML = lowerGoalTemp;
+							document.getElementById("lowerGoalMissTemp").innerHTML = lowerGoalMissTemp;
+							document.getElementById("upperGoalTemp").innerHTML = upperGoalTemp;
+							document.getElementById("upperGoalMissTemp").innerHTML = upperGoalMissTemp;
+						}else{
+							alert("You haven't selected a shot location");
 						}
 
-						lowerGoalTemp = 0;
-						upperGoalTemp = 0;
-						lowerGoalMissTemp = 0;
-						upperGoalMissTemp = 0;
-
-						document.getElementById("lowerGoalTemp").innerHTML = lowerGoalTemp;
-						document.getElementById("lowerGoalMissTemp").innerHTML = lowerGoalMissTemp;
-						document.getElementById("upperGoalTemp").innerHTML = upperGoalTemp;
-						document.getElementById("upperGoalMissTemp").innerHTML = upperGoalMissTemp;
-
 					}
+
 
 					function undoSave() {
 						
 						if (cycleNumber == 0){
 							console.log("continue");
 						}else{
-							console.log((cycleCount.substring(cycleCount.length -4, cycleCount.length -3)));
 							cycleNumber -= 1;
 							lowerGoalTemp = parseInt(cycleCount.substring(cycleCount.length -4, cycleCount.length -3));
 							upperGoalTemp = parseInt(cycleCount.substring(cycleCount.length -10, cycleCount.length -9));
@@ -300,6 +323,13 @@ include("navBar.php");
 							
 							console.log(cycleCount);
 							console.log(cycleNumber);
+							console.log(coordinateList2);
+							popped = [];
+							popped = coordinateList2[coordinateList2.length - 1];
+  							coordinateList2 = coordinateList2.slice(0,-1);
+							drawPoint2(context2, popped[0], popped[1]);
+							popped = [];
+							console.log(coordinateList2);
 						}
 						
 						cycleCount = cycleCount.substring(0, cycleCount.length -14);
@@ -316,17 +346,26 @@ include("navBar.php");
 							climb = 1;
 							climbTwo = 0;
 							climbThree = 0;
+							climbFour = 0;
 						} else {
 							if (climbType == 2) {
 								climbTwo = 1;
 								climbThree = 0;
 								climb = 0;
+								climbFour = 0;
 							} else {
 								if (climbType == 3) {
 									climbThree = 1;
 									climb = 0;
 									climbTwo = 0;
-
+									climbFour = 0;
+								}else{
+									if (climbType == 4){
+										climbThree = 0;
+										climb = 0;
+										climbTwo = 0;
+										climbFour = 1;
+									}
 								}
 							}
 						}
@@ -392,9 +431,10 @@ include("navBar.php");
 					<h3><b><u>Climb:</u></b></h3>
 				</a>
 				<input type="radio" onClick="climbTyp(0)" name="ClimbTyp" value="None"> None&nbsp&nbsp</button>
-				<input type="radio" onClick="climbTyp(1)" name="ClimbTyp" value="Single"> Single&nbsp&nbsp</button>
-				<input type="radio" onClick="climbTyp(2)" name="ClimbTyp" value="Double"> Double&nbsp&nbsp</button>
-				<input type="radio" onClick="climbTyp(3)" name="ClimbTyp" value="Triple"> Triple&nbsp&nbsp</button>
+				<input type="radio" onClick="climbTyp(1)" name="ClimbTyp" value="Single"> Low&nbsp&nbsp</button>
+				<input type="radio" onClick="climbTyp(2)" name="ClimbTyp" value="Double"> Med&nbsp&nbsp</button>
+				<input type="radio" onClick="climbTyp(3)" name="ClimbTyp" value="Triple"> High&nbsp&nbsp</button>
+				<input type="radio" onClick="climbTyp(4)" name="ClimbTyp" value="Quad"> Traversal&nbsp&nbsp</button>
 
 				<h4><b><u>Penalties: </u></b></h4>
 				<textarea placeholder="Number of Penalties" type="text" id="penalties" class="form-control md-textarea" rows="6">0</textarea>

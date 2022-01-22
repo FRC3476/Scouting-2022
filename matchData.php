@@ -58,7 +58,7 @@ include("header.php")?>
                 if($i==0){
                         echo("<tr>");
                         foreach ($row as $key => $value){
-                                        if(!is_numeric($key) && $key != "autoPath"){
+                                if(!is_numeric($key) && (($key != "autoPath") || ($key != "teleopPath"))){
                                         echo("<td>".$key."</td>");
                                                                                 }
                                 }
@@ -72,7 +72,7 @@ include("header.php")?>
                                                 $value= '<a href="matchData.php?match='.$value.'">'.$value.'</a>';
                                                                                         echo("<td align='center'>".$value."</td>");
                                         }
-                                                                                else if($key != "autoPath"){
+                                                                                }else if($key !=  "autoPath" && $key != "teleopPath"){
                                                                                         echo("<td align='center'>".$value."</td>");
                                                                                 }
                                                                                 
@@ -82,105 +82,7 @@ include("header.php")?>
                 echo("</tr>");                
                 }
                 echo("</table>");
-        }
-/*
-            $result = getAllPrimaryMatchData();
-            echo('<div><table  class="table table-hover" id="RawData" border="1"></div>');
-            foreach ($result as $row_key => $row){
-                    if($i==0){
-                            echo("<tr>");
-                            foreach ($row as $key => $value){
-                                         if(!is_numeric($key) && $key != "cycleNumber"){
-                                            echo("<td>".$key."</td>");
-                                                                             }
-                                    }
-                            $i++;
-                            echo("</tr>");  
-                    }
-        
-                    echo("<tr>");        
-                         foreach ($row as $key => $value) {
-                                 if(!is_numeric($key) and $row["matchNum"] == $_GET["match"]){
-                                         if($key == "matchNum"){
-                                              $value= '<a href="matchData.php?match='.$value.'">'.$value.'</a>';
-                                                                                     echo("<td align='center'>".$value."</td>");
-                                         }
-                                                                             else if($key != "cycleNumber"){
-                                                                                     echo("<td align='center'>".$value."</td>");
-                                                                             }
-                                                                             
-                                                                             
-                            }
-                    }        
-                    echo("</tr>");                
-                 }
-                 echo("</table>");
-                
-                $result = getAllSecondaryMatchData();
-       
-            echo('<div><table  class="table table-hover" id="RawData" border="1"></div>');
-            foreach ($result as $row_key => $row){
-                    if($i==0){
-                            echo("<tr>");
-                            foreach ($row as $key => $value){
-                                         if(!is_numeric($key) && (($key != "autoPath") && ($key != "teleopPath"))){
-                                            echo("<td>".$key."</td>");
-                                                                             }
-                                    }
-                            $i++;
-                            echo("</tr>");                
-                    }
-                    echo("<tr>");        
-                         foreach ($row as $key => $value) {
-                                 if(!is_numeric($key) and $row["matchNum"] == $_GET["match"]){
-                                         if($key == "matchNum"){
-                                              $value= '<a href="matchData.php?match='.$value.'">'.$value.'</a>';
-                                                                                     echo("<td align='center'>".$value."</td>");
-                                         }
-                                                                             else if(($key != "autoPath") && ($key != "teleopPath")){
-                                                                                     echo("<td align='center'>".$value."</td>");
-                                                                             }
-                                                                             
-                                                                             
-                            }
-                    }        
-                    echo("</tr>");                
-                 }
-                 echo("</table>");
-*/
-                 $result = getAllNewMatchData();
-       
-            echo('<div><table  class="table table-hover" id="RawData" border="1"></div>');
-            foreach ($result as $row_key => $row){
-                    if($i==0){
-                            echo("<tr>");
-                            foreach ($row as $key => $value){
-                                         if((!is_numeric($key) && $key != "cycleNumber") && (($key != "autoPath") && ($key != "teleopPath"))){
-                                            echo("<td>".$key."</td>");
-                                                                             }
-                                    }
-                            $i++;
-                            echo("</tr>");                
-                    }
-                    echo("<tr>");        
-                         foreach ($row as $key => $value) {
-                                 if(!is_numeric($key) and $row["matchNum"] == $_GET["match"]){
-                                         if($key == "matchNum"){
-                                              $value= '<a href="matchData.php?match='.$value.'">'.$value.'</a>';
-                                                                                     echo("<td align='center'>".$value."</td>");
-                                         }
-                                                                             else if($key != "cycleNumber" && ($key != "autoPath") && ($key != "teleopPath")){
-                                                                                     echo("<td align='center'>".$value."</td>");
-                                                                             }
-                                                                             
-                                                                             
-                            }
-                    }        
-                    echo("</tr>");                
-                 }
-                 echo("</table>");
 
-        
                  
 ?>
 </div>

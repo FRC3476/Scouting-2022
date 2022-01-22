@@ -160,20 +160,20 @@ include("navBar.php"); ?>
 									},
 
 									{
-										label: "Auto Upper Attempted",
+										label: "Auto Upper Goal Miss",
 										fillColor: "rgba(220,220,220,0.1)",
-										strokeColor: "brown",
+										strokeColor: "green",
 										pointColor: "rgba(107, 75, 26,1)",
 										pointStrokeColor: "#ffff00",
 										pointHighlightFill: "#fff",
 										pointHighlightStroke: "rgba(220,220,220,1)",
-										data: <?php echo (json_encode(getAutoUpperGoalMiss($teamNumber)) + (getAutoUpperGoal($teamNumber))); ?>
+										data: <?php echo (json_encode(getAutoUpperGoalMiss($teamNumber))); ?>
 									},
 
 									{
 										label: "Teleop Upper Goal",
 										fillColor: "rgba(220,220,220,0.1)",
-										strokeColor: "green",
+										strokeColor: "blue",
 										pointColor: "rgba(16, 224, 19,1)",
 										pointStrokeColor: "#ffff00",
 										pointHighlightFill: "#fff",
@@ -181,21 +181,22 @@ include("navBar.php"); ?>
 										data: <?php echo (json_encode(getTeleopUpperGoal($teamNumber))); ?>
 									},
 
+
 									{
-										label: "Teleop Total Upper Attempted",
+										label: "Teleop Upper Goal Miss",
 										fillColor: "rgba(220,220,220,0.1)",
-										strokeColor: "yellow",
+										strokeColor: "orange",
 										pointColor: "rgba(215,222,16,1)",
 										pointStrokeColor: "#ffff00",
 										pointHighlightFill: "#fff",
 										pointHighlightStroke: "rgba(220,220,220,1)",
-										data: <?php echo (json_encode((getTeleopUpperGoalMiss($teamNumber)) + (getTeleopUpperGoal($teamNumber)))); ?>
+										data: <?php echo (json_encode(getTeleopUpperGoalMiss($teamNumber))); ?>
 									},
 
 									{
 										label: "Cycle Count",
 										fillColor: "rgba(220,220,220,0.1)",
-										strokeColor: "blue",
+										strokeColor: "red",
 										pointColor: "rgba(44, 130, 201, 1)",
 										pointStrokeColor: "#ffff00",
 										pointHighlightFill: "#fff",
@@ -204,9 +205,9 @@ include("navBar.php"); ?>
 									},
 
 									{
-										label: "Total Lower Goal",
+										label: "Auto Lower Goal",
 										fillColor: "rgba(220,220,220,0.1)",
-										strokeColor: "red",
+										strokeColor: "brown",
 										pointColor: "rgba(219, 20, 20,1)",
 										pointStrokeColor: "#ffff00",
 										pointHighlightFill: "#fff",
@@ -217,7 +218,7 @@ include("navBar.php"); ?>
 									{
 										label: "Climb",
 										fillColor: "rgba(220,220,220,0.1)",
-										strokeColor: "orange",
+										strokeColor: "brown",
 										pointColor: "rgba(222, 137, 18,1)",
 										pointStrokeColor: "#ffff00",
 										pointHighlightFill: "#fff",
@@ -233,7 +234,7 @@ include("navBar.php"); ?>
 					</div>
 					<div class="col-md-4">
 						<a>
-							<h3><b><u>Upper and Lower Goal Statistics:</u></b></h3>
+						<h3><b><u>Upper and Lower Goal Statistics:</u></b></h3>
 						</a>
 						<div class="table-responsive">
 							<table class="table">
@@ -280,12 +281,11 @@ include("navBar.php"); ?>
 									</tr>
 
 
-
 								</tbody>
 							</table>
 						</div>
 						<a>
-							<h3><b><u>Comments:</u></b></h3>
+						<h3><b><u>Comments:</u></b></h3>
 						</a>
 						<div class="table-responsive">
 							<table class="table">
@@ -334,26 +334,10 @@ include("navBar.php"); ?>
 							</table>
 
 						</div>
-						<a>
-							<h3><b><u>D Statistics:</u></b></h3>
-						</a>
-						<div class="table-responsive">
-							<table class="table">
-								<tbody>
-									<tr class="danger">
-										<td>Total Times Defense Played</td>
-										<td><?php echo (getTotalDefense($teamNumber)); ?></td>
-									</tr>
-									<tr class="info">
-										<td>Average Defense Rank</td>
-										<td><?php echo (getAvgDefenseRank($teamNumber)); ?></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-
-
+						
 					</div>
+
+
 					<div class="col-md-4">
 						<a>
 							<h3><b><u>Pit Statistics:</u></b></h3>
@@ -402,10 +386,8 @@ include("navBar.php"); ?>
 								var imageObj = new Image();
 								var matchToPoints = [];
 								<?php
-								if ($teamData[8] != null){
-									for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-										echo ("matchToPoints[" . $teamData[8][$i][2] . "] = " . $teamData[8][$i][5] . ";");
-									}
+								for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+									echo ("matchToPoints[" . $teamData[8][$i][2] . "] = " . $teamData[8][$i][5] . ";");
 								}
 								?>
 								imageObj.onload = function() {
@@ -453,15 +435,14 @@ include("navBar.php"); ?>
 							</script>
 							<h4><b>Match Number -</b></h4>
 							<select onclick="drawPointLines()" id="matchNum" class="form-control">
-								<?php 
-								for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-										echo ("<option value='" . $teamData[8][$i][2] . "'>" . $teamData[8][$i][2] . "</option>");
-									} 
-								?>
+								<?php for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+									echo ("<option value='" . $teamData[8][$i][2] . "'>" . $teamData[8][$i][2] . "</option>");
+								} ?>
 							</select>
 						</div>
 
-						<!--
+
+
 
 						<h4><b>Teleop Path -</b></h4>
 						<div>
@@ -478,13 +459,13 @@ include("navBar.php"); ?>
 								var imageObj2 = new Image();
 								var matchToPoints2 = [];
 								var matchToPoints3 = [];
-								<?php /*
-								for ($i = 0; $i != sizeof($teamData[10]); $i++) {
-									echo ("matchToPoints2[" . $teamData[10][$i][2] . "] = " . $teamData[10][$i][7] . ";");
+								<?php
+								for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+									echo ("matchToPoints2[" . $teamData[8][$i][2] . "] = " . $teamData[8][$i][25] . ";");
 								}
-								for ($i = 0; $i != sizeof($teamData[9]); $i++) {
-									echo ("matchToPoints3[" . $teamData[9][$i][2] . "] = " . $teamData[9][$i][14] . ";");
-								} */
+								for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+									echo ("matchToPoints3[" . $teamData[8][$i][2] . "] = " . $teamData[8][$i][24] . ";");
+								}
 								?>
 								imageObj2.onload = function() {
 									makeCanvasReady2();
@@ -516,23 +497,17 @@ include("navBar.php"); ?>
 									for (var i = 0; i != a.length; i++) {
 										if (((b[i][1]/(b[i][2]+b[i][1])) >= 0.9)){
 											context2.fillStyle = "#3cff00";
-											context2.fillRect((a[i][0])/2, (a[i][1])/2, 3, 3);
+											context2.fillRect((a[i][0])/2, (a[i][1])/2, 8, 8);
 											console.log(b[i][1]);
-										} else if (((b[i][1]/(b[i][2]+b[i][1])) >= 0.8)){
+										} else if (((b[i][1]/(b[i][2]+b[i][1])) >= 0.5)){
 											context2.fillStyle = "#d0ff00";
-											context2.fillRect((a[i][0])/2, (a[i][1])/2, 3, 3);
-										} else if (((b[i][1]/(b[i][2]+b[i][1])) >= 0.6)){
+											context2.fillRect((a[i][0])/2, (a[i][1])/2, 8, 8);
+										} else if (((b[i][1]/(b[i][2]+b[i][1])) >= 0.3)){
 											context2.fillStyle = "#ffee00";
-											context2.fillRect((a[i][0])/2, (a[i][1])/2, 3, 3);
-										} else if (((b[i][1]/(b[i][2]+b[i][1])) >= 0.4)){
-											context2.fillStyle = "#ff8800";
-											context2.fillRect((a[i][0])/2, (a[i][1])/2, 3, 3);
-										} else if ((b[i][2]) == 0){
-											context2.fillStyle = "#FFFFFF";
-											context2.fillRect((a[i][0])/2, (a[i][1])/2, 3, 3);
+											context2.fillRect((a[i][0])/2, (a[i][1])/2, 8, 8);
 										} else{
 											context2.fillStyle = "#ff0000";
-											context2.fillRect((a[i][0])/2, (a[i][1])/2, 3, 3);
+											context2.fillRect((a[i][0])/2, (a[i][1])/2, 8, 8);
 										}
 									}
 								}
@@ -558,17 +533,13 @@ include("navBar.php"); ?>
 							</script>
 							<h4><b>Match Number -</b></h4>
 							<select onclick="drawPoint2()" id="matchNum2" class="form-control">
-								<?php 
-								/*
-								for ($i = 0; $i != sizeof($teamData[10]); $i++) {
-									echo ("<option value='" . $teamData[10][$i][2] . "'>" . $teamData[10][$i][2] . "</option>");
-								} 
-								
-								*/?>
+								<?php for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+									echo ("<option value='" . $teamData[8][$i][2] . "'>" . $teamData[8][$i][2] . "</option>");
+								} ?>
 							</select>
 						</div>
 
-							-->
+
 
 						<a>
 							<h3><b><u>Climb Statistics:</u></b></h3>
@@ -585,19 +556,21 @@ include("navBar.php"); ?>
 										<td><?php echo (getTotalClimb($teamNumber)); ?></td>
 									</tr>
 									<tr class="danger">
-										<td>Total Single Climbs</td>
+										<td>Total Low Climbs</td>
 										<td><?php echo (getTotalSingleClimb($teamNumber)); ?></td>
 									</tr>
 									<tr class="info">
-										<td>Total Double Climbs</td>
+										<td>Total Med Climbs</td>
 										<td><?php echo (getTotalDoubleClimb($teamNumber)); ?></td>
 									</tr>
 									<tr class="success">
-										<td>Total Triple Climbs</td>
+										<td>Total High Climbs</td>
 										<td><?php echo (getTotalTripleClimb($teamNumber)); ?></td>
 									</tr>
-
-
+									<tr class="danger">
+										<td>Total Traversal Climbs</td>
+										<td><?php echo (getTotalQuadClimb($teamNumber)); ?></td>
+									</tr>
 								</tbody>
 							</table>
 						</div>

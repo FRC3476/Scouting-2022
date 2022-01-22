@@ -45,6 +45,7 @@ function addCoordinate2(){
 
 
 function addTempCoordinate2(coor2){
+  tempCoordinateList2 = [];  
   tempCoordinateList2.push(coor2);
 }
 
@@ -118,7 +119,7 @@ function getMousePos2(canvas2, evt2) {
 
 function drawPoint2(context2 , x, y){
   clearPath3();
-  context2.fillRect(x,y,5,5);
+  context2.fillRect(x,y,8,8);
   context2.fillStyle = "#FFFFFF";
   context2.fill();
   addTempCoordinate2([x,y]);
