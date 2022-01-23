@@ -1109,6 +1109,22 @@ function getAvgCycleCount($teamNumber)
 	return ($cycleCount / $matchCount);
 }
 
+//
+
+function getCycleCount($teamNumber)
+{
+	$teamData = getTeamData($teamNumber);
+	$cycleCount = 0;
+	$matchCount  = 0;
+	if ($teamData[8] != null){
+			$cycleCount = $teamData[8][24];
+	} 
+
+	return ($cycleCount);
+}
+
+//
+
 function getAvgScore($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);

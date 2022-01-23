@@ -128,11 +128,11 @@ include("navBar.php"); ?>
 							</div>
 						</div>
 						<button class=" btn btn-material-purple">Auto Upper Made</button>
-						<button class=" btn btn-material-brown"> Auto Upper Attempted</button>
+						<button class=" btn btn-material-brown"> Auto Upper Miss</button>
+						<button class=" btn btn-material-red">Auto Lower Made</button>
 						<button class=" btn btn-material-green">Teleop Upper Made</button>
-						<button class=" btn btn-material-yellow">Teleop Upper Attempted</button>
-						<button class=" btn btn-material-blue">Cycle Count</button>
-						<button class=" btn btn-material-red">Total Lower Made</button>
+						<button class=" btn btn-material-yellow">Teleop Upper Miss</button>
+						<button class=" btn btn-material-blue">Teleop Lower Made</button>
 						<button class=" btn btn-material-orange">Climb</button>
 
 
@@ -153,8 +153,8 @@ include("navBar.php"); ?>
 										fillColor: "rgba(220,220,220,0.1)",
 										strokeColor: "purple",
 										pointColor: "rgba(146, 16, 222,1)",
-										pointStrokeColor: "#ffff00",
-										pointHighlightFill: "#fff",
+										pointStrokeColor: "#ee00ff",
+										pointHighlightFill: "#ee00ff",
 										pointHighlightStroke: "rgba(220,220,220,1)",
 										data: <?php echo (json_encode(getAutoUpperGoal($teamNumber))); ?>
 									},
@@ -162,7 +162,7 @@ include("navBar.php"); ?>
 									{
 										label: "Auto Upper Goal Miss",
 										fillColor: "rgba(220,220,220,0.1)",
-										strokeColor: "green",
+										strokeColor: "brown",
 										pointColor: "rgba(107, 75, 26,1)",
 										pointStrokeColor: "#ffff00",
 										pointHighlightFill: "#fff",
@@ -171,9 +171,20 @@ include("navBar.php"); ?>
 									},
 
 									{
-										label: "Teleop Upper Goal",
+										label: "Auto Lower Goal",
 										fillColor: "rgba(220,220,220,0.1)",
-										strokeColor: "blue",
+										strokeColor: "red",
+										pointColor: "rgba(219, 20, 20,1)",
+										pointStrokeColor: "#ffff00",
+										pointHighlightFill: "#fff",
+										pointHighlightStroke: "rgba(220,220,220,1)",
+										data: <?php echo (json_encode(getAutoLowerGoal($teamNumber))); ?>
+									},
+
+									{
+										label: "Teleop Upper Goal Made",
+										fillColor: "rgba(220,220,220,0.1)",
+										strokeColor: "green",
 										pointColor: "rgba(16, 224, 19,1)",
 										pointStrokeColor: "#ffff00",
 										pointHighlightFill: "#fff",
@@ -185,7 +196,7 @@ include("navBar.php"); ?>
 									{
 										label: "Teleop Upper Goal Miss",
 										fillColor: "rgba(220,220,220,0.1)",
-										strokeColor: "orange",
+										strokeColor: "yellow",
 										pointColor: "rgba(215,222,16,1)",
 										pointStrokeColor: "#ffff00",
 										pointHighlightFill: "#fff",
@@ -194,31 +205,20 @@ include("navBar.php"); ?>
 									},
 
 									{
-										label: "Cycle Count",
+										label: "Teleop Lower Goal",
 										fillColor: "rgba(220,220,220,0.1)",
-										strokeColor: "red",
+										strokeColor: "blue",
 										pointColor: "rgba(44, 130, 201, 1)",
 										pointStrokeColor: "#ffff00",
 										pointHighlightFill: "#fff",
 										pointHighlightStroke: "rgba(220,220,220,1)",
-										data: <?php echo (json_encode(getCycle($teamNumber))); ?>
-									},
-
-									{
-										label: "Auto Lower Goal",
-										fillColor: "rgba(220,220,220,0.1)",
-										strokeColor: "brown",
-										pointColor: "rgba(219, 20, 20,1)",
-										pointStrokeColor: "#ffff00",
-										pointHighlightFill: "#fff",
-										pointHighlightStroke: "rgba(220,220,220,1)",
-										data: <?php echo (json_encode(getLowerGoal($teamNumber))); ?>
+										data: <?php echo (json_encode(getTeleopLowerGoal($teamNumber))); ?>
 									},
 
 									{
 										label: "Climb",
 										fillColor: "rgba(220,220,220,0.1)",
-										strokeColor: "brown",
+										strokeColor: "orange",
 										pointColor: "rgba(222, 137, 18,1)",
 										pointStrokeColor: "#ffff00",
 										pointHighlightFill: "#fff",
@@ -500,13 +500,16 @@ include("navBar.php"); ?>
 											context2.fillRect((a[i][0])/2, (a[i][1])/2, 8, 8);
 											console.log(b[i][1]);
 										} else if (((b[i][1]/(b[i][2]+b[i][1])) >= 0.5)){
-											context2.fillStyle = "#d0ff00";
+											context2.fillStyle = "#fff200";
 											context2.fillRect((a[i][0])/2, (a[i][1])/2, 8, 8);
 										} else if (((b[i][1]/(b[i][2]+b[i][1])) >= 0.3)){
-											context2.fillStyle = "#ffee00";
+											context2.fillStyle = "#ff9100";
 											context2.fillRect((a[i][0])/2, (a[i][1])/2, 8, 8);
-										} else{
+										} else if (((b[i][1]/(b[i][2]+b[i][1])) >= 0)){
 											context2.fillStyle = "#ff0000";
+											context2.fillRect((a[i][0])/2, (a[i][1])/2, 8, 8);
+										}else{
+											context2.fillStyle = "#000000";
 											context2.fillRect((a[i][0])/2, (a[i][1])/2, 8, 8);
 										}
 									}
