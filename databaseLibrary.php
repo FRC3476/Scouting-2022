@@ -384,8 +384,10 @@ function getTeamData($teamNumber)
 
 
 
+
 // The functions below output data per match
 // These are used in graphs in the Match Strategy and Team Data Pages
+
 
 
 
@@ -588,7 +590,9 @@ function getScore($teamNumber)
 
 
 
+
 // The functions below are Averages
+
 
 
 
@@ -685,6 +689,81 @@ function getAvgLowerGoal($teamNumber)
 	return ($lowerGoalCount / $matchCount);
 }
 
+
+function getAvgClimb($teamNumber)
+{
+	$teamData = getTeamData($teamNumber);
+	$climbSum = 0;
+	$matchCount = 0;
+
+	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+		$climbSum += $teamData[8][$i][15];
+		$climbSum += $teamData[8][$i][16];
+		$climbSum += $teamData[8][$i][17];
+		$climbSum += $teamData[8][$i][18];
+		$matchCount++;
+	}
+
+	return ($climbSum / $matchCount);
+}
+
+function getAvgPenalties($teamNumber)
+{
+	$teamData = getTeamData($teamNumber);
+	$penalCount = 0;
+	$matchCount  = 0;
+	if ($teamData[8] != null){
+		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+			$penalCount = $penalCount + $teamData[8][$i][23];
+			$matchCount++;
+		}
+	}
+
+	return ($penalCount / $matchCount);
+}
+
+
+// Below, it considers $teamData[8][$i][24] a string. We found the length of the string and divided by 14 because there were 14 characters used to store data for each Cycle
+function getAvgCycleCount($teamNumber)
+{
+	$teamData = getTeamData($teamNumber);
+	$cycleCount = 0;
+	$array = [];
+	$matchCount  = 0;
+	if ($teamData[8] != null){
+		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+			$cycleCount = $cycleCount + (strlen($teamData[8][$i][24])/14);
+			$matchCount++;
+		}
+	} 
+
+	return ($cycleCount/$matchCount);
+}
+
+function getAvgScore($teamNumber)
+{
+	$teamData = getTeamData($teamNumber);
+	$matchCount  = 0;
+	$Score = 0;
+	if ($teamData[8] != null){
+		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+			$Score = $Score + ((4 * ($teamData[8][$i][7])) + (2 * ($teamData[8][$i][9])) + (2 * ($teamData[8][$i][11])) + ($teamData[8][$i][13]) + (4 * ($teamData[8][$i][15])) + (6 * ($teamData[8][$i][16])) + (10 * ($teamData[8][$i][17])) + (15 * ($teamData[8][$i][18])) + (5 * ($teamData[8][$i][6])));
+			$matchCount++;
+		}
+	} 
+
+	return ($Score / $matchCount);
+}
+
+
+
+
+// Get Max
+
+
+
+
+
 function getMaxUpperGoalT($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);
@@ -737,30 +816,23 @@ function getMaxLowerGoal($teamNumber)
 	return ($maxLowerGoal);
 }
 
-function getAvgClimb($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$climbSum = 0;
-	$matchCount = 0;
-
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$climbSum += $teamData[8][$i][15];
-		$climbSum += $teamData[8][$i][16];
-		$climbSum += $teamData[8][$i][17];
-		$climbSum += $teamData[8][$i][18];
-		$matchCount++;
-	}
-
-	return ($climbSum / $matchCount);
-}
-
-
-
 
 // Get Alls
 
 
+function matchNum($teamNumber)
+{
+	$teamData = getTeamData($teamNumber);
+	$matchNum = array();
+	if ($teamData[8] != null){
+		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+			array_push($matchNum, $teamData[8][$i][2]);
+		}
+	}
 
+	sort($matchNum);
+	return ($matchNum);
+}
 
 function getAllMatchData()
 {
@@ -888,6 +960,41 @@ function getTotalQuadClimb($teamNumber)
 	return ($climbCount);
 }
 
+
+function getTotalScore($teamNumber)
+{
+	$teamData = getTeamData($teamNumber);
+	$matchCount  = 0;
+	$Score = 0;
+	if ($teamData[8] != null){
+		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+			$Score = $Score + ((4 * ($teamData[8][$i][7])) + (2 * ($teamData[8][$i][9])) + (2 * ($teamData[8][$i][11])) + ($teamData[8][$i][13]) + (4 * ($teamData[8][$i][15])) + (6 * ($teamData[8][$i][16])) + (10 * ($teamData[8][$i][17])) + (15 * ($teamData[8][$i][18])) + (5 * ($teamData[8][$i][6])));
+			$matchCount++;
+		}
+	} 
+
+	return ($Score);
+}
+
+function getTotalDefense($teamNumber)
+{
+	$teamData = getTeamData($teamNumber);
+	$defenseCount = 0;
+	if ($teamData[8] != null){
+		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+			$defenseCount = $defenseCount + $teamData[8][$i][20];
+		}
+	} 
+
+	return ($defenseCount);
+}
+
+
+// Ranks
+
+
+
+
 function getAvgDriveRank($teamNumber)
 {
 	$result = getAllLeadScoutData();
@@ -982,19 +1089,10 @@ function getAvgOffenseRank($teamNumber)
 }
 
 
-function matchNum($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchNum = array();
-	if ($teamData[8] != null){
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			array_push($matchNum, $teamData[8][$i][2]);
-		}
-	}
 
-	sort($matchNum);
-	return ($matchNum);
-}
+// Comments
+
+
 
 function defenseComments($teamNumber)
 {
@@ -1058,83 +1156,6 @@ function getPickList($teamNumber)
 	}
 
 	return (round(($pointCal / $matchCount), 3));
-}
-
-
-function getAvgPenalties($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$penalCount = 0;
-	$matchCount  = 0;
-	if ($teamData[8] != null){
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$penalCount = $penalCount + $teamData[8][$i][23];
-			$matchCount++;
-		}
-	}
-
-	return ($penalCount / $matchCount);
-}
-
-
-// Below, it considers $teamData[8][$i][24] a string. We found the length of the string and divided by 14 because there were 14 characters used to store data for each Cycle
-function getAvgCycleCount($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$cycleCount = 0;
-	$array = [];
-	$matchCount  = 0;
-	if ($teamData[8] != null){
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$cycleCount = $cycleCount + (strlen($teamData[8][$i][24])/14);
-			$matchCount++;
-		}
-	} 
-
-	return ($cycleCount/$matchCount);
-}
-
-function getAvgScore($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchCount  = 0;
-	$Score = 0;
-	if ($teamData[8] != null){
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$Score = $Score + ((4 * ($teamData[8][$i][7])) + (2 * ($teamData[8][$i][9])) + (2 * ($teamData[8][$i][11])) + ($teamData[8][$i][13]) + (4 * ($teamData[8][$i][15])) + (6 * ($teamData[8][$i][16])) + (10 * ($teamData[8][$i][17])) + (15 * ($teamData[8][$i][18])) + (5 * ($teamData[8][$i][6])));
-			$matchCount++;
-		}
-	} 
-
-	return ($Score / $matchCount);
-}
-
-function getTotalScore($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchCount  = 0;
-	$Score = 0;
-	if ($teamData[8] != null){
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$Score = $Score + ((4 * ($teamData[8][$i][7])) + (2 * ($teamData[8][$i][9])) + (2 * ($teamData[8][$i][11])) + ($teamData[8][$i][13]) + (4 * ($teamData[8][$i][15])) + (6 * ($teamData[8][$i][16])) + (10 * ($teamData[8][$i][17])) + (15 * ($teamData[8][$i][18])) + (5 * ($teamData[8][$i][6])));
-			$matchCount++;
-		}
-	} 
-
-	return ($Score);
-}
-
-function getTotalDefense($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$defenseCount = 0;
-	if ($teamData[8] != null){
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$defenseCount = $defenseCount + $teamData[8][$i][20];
-		}
-	} 
-
-	return ($defenseCount);
 }
 
 
