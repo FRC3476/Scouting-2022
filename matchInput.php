@@ -301,6 +301,7 @@ include("navBar.php");
 							document.getElementById("upperGoalMissTemp").innerHTML = upperGoalMissTemp;
 						}else{
 							alert("You haven't selected a shot location");
+							exit();
 						}
 
 					}
