@@ -494,22 +494,6 @@ function getTeleopUpperGoalMiss($teamNumber)
 }
 
 
-function getCycle($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchN = matchNum($teamNumber);
-	$cubeGraphT = array();
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$cubeGraphT[$teamData[8][$i][2]] = sizeof($teamData[8][$i][24]);
-		}
-
-	$out = array();
-	for ($i = 0; $i != sizeof($matchN); $i++) {
-		array_push($out, $cubeGraphT[$matchN[$i]]);
-	}
-	return ($out);
-}
-
 function getLowerGoal($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);
@@ -1093,37 +1077,22 @@ function getAvgPenalties($teamNumber)
 }
 
 
-
+// Below, it considers $teamData[8][$i][24] a string. We found the length of the string and divided by 14 because there were 14 characters used to store data for each Cycle
 function getAvgCycleCount($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);
 	$cycleCount = 0;
+	$array = [];
 	$matchCount  = 0;
 	if ($teamData[8] != null){
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$cycleCount = $cycleCount + sizeof($teamData[8][$i][24]);
+			$cycleCount = $cycleCount + (strlen($teamData[8][$i][24])/14);
 			$matchCount++;
 		}
 	} 
 
-	return ($cycleCount / $matchCount);
+	return ($cycleCount/$matchCount);
 }
-
-//
-
-function getCycleCount($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$cycleCount = 0;
-	$matchCount  = 0;
-	if ($teamData[8] != null){
-			$cycleCount = $teamData[8][24];
-	} 
-
-	return ($cycleCount);
-}
-
-//
 
 function getAvgScore($teamNumber)
 {
