@@ -16,7 +16,7 @@
 		<!-- Left justified logo/text -->
 		<div class="navbar-header">
 			<a class="navbar-brand" href="index.php" style="color:Black;">
-				Scouting 2020
+				Scouting 2022
 			</a>
 		</div>
 		<!-- What goes under the drop down button/rest of navbar -->
