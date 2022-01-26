@@ -518,7 +518,7 @@ function getClimb($teamNumber)
 	$matchN = matchNum($teamNumber);
 	$cubeGraphT = array();
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][15] + $teamData[8][$i][16] + $teamData[8][$i][17] + $teamData[8][$i][18];
+			$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][15] + 2*$teamData[8][$i][16] + 3*$teamData[8][$i][17] + 4*$teamData[8][$i][18];
 		}
 
 	$out = array();
