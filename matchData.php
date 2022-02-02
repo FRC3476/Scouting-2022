@@ -17,36 +17,6 @@ include("header.php")?>
 	<br>
 <?php
 	include("databaseLibrary.php");
-	$result = getAllLeadScoutData();
-	$w=0;
-       if ($result != null){
-        echo('<div style="overflow-y:hidden;"><table  class="sortable table table-hover" id="RawData" border="1">');
-        foreach ($result as $row_key => $row){
-                if($w==0){
-                        echo("<tr>");
-                        foreach ($row as $key => $value){
-                                        if(!is_numeric($key)){
-                                        echo("<td>".$key."</td>");
-                                }
-                        }
-                        $w++;
-                        echo("</tr>");                
-                }
-                                                echo("<tr>");        
-                        foreach ($row as $key => $value){
-                                if(!is_numeric($key) and $row["matchNum"] == $_GET["match"]){
-                                        if($key == "matchNum"){
-                                                $value= '<a href="leadScoutForm.php?match='.$value.'">'.$value.'</a>';
-                                                                                        
-                                        }
-                                                                                echo("<td align='center'>".$value."</td>");
-                                                                                
-                        }
-                }        
-                echo("</tr>");                    
-                }
-                echo("</table>");
-        }
 
 	 //end of new stuff
         
@@ -58,7 +28,7 @@ include("header.php")?>
                 if($i==0){
                         echo("<tr>");
                         foreach ($row as $key => $value){
-                                if(!is_numeric($key) && (($key != "autoPath") || ($key != "teleopPath"))){
+                                if(!is_numeric($key) && (($key != "autoPath") && ($key != "teleopPath"))){
                                         echo("<td>".$key."</td>");
                                                                                 }
                                 }
