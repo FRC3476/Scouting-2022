@@ -222,6 +222,34 @@ function postwith(to){
 		myForm.method="post";
 		myForm.action = to;
 
+		if (document.getElementById('team1Off').value == "") {
+			document.getElementById('team1Off').value = 0;
+		}
+		if (document.getElementById('team2Off').value == "") {
+			document.getElementById('team2Off').value = 0;
+		}
+		if (document.getElementById('team3Off').value == "") {
+			document.getElementById('team3Off').value = 0;
+		}
+		if (document.getElementById('team1Def').value == "") {
+			document.getElementById('team1Def').value = 0;
+		}
+		if (document.getElementById('team2Def').value == "") {
+			document.getElementById('team2Def').value = 0;
+		}
+		if (document.getElementById('team3Def').value == "") {
+			document.getElementById('team3Def').value = 0;
+		}
+		if (document.getElementById('team1Dri').value == "") {
+			document.getElementById('team1Dri').value = 0;
+		}
+		if (document.getElementById('team2Dri').value == "") {
+			document.getElementById('team2Dri').value = 0;
+		}
+		if (document.getElementById('team3Dri').value == "") {
+			document.getElementById('team3Dri').value = 0;
+		}
+
 		var names = [
 		'matchNum',
 		'team1Off',

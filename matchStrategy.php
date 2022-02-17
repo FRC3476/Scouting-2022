@@ -607,6 +607,16 @@ include("navBar.php"); ?>
 									</div>
 								</div>
 							</div>
+
+							<div>
+
+								<button type="button" onClick="" class="enlargedtext stylishLower1" id="bigFont"><a id="lowerGoalTemp" class="enlargedtext"></a> 100 Percent </button>
+								<button type="button" onClick="" class="enlargedtext stylishLower2" id="bigFont"><a id="lowerGoalTemp" class="enlargedtext"></a> 50 Percent </button>
+								<button type="button" onClick="" class="enlargedtext stylishLower3" id="bigFont"><a id="lowerGoalTemp" class="enlargedtext"></a> 30 Percent </button>
+								<button type="button" onClick="" class="enlargedtext stylishLower4" id="bigFont"><a id="lowerGoalTemp" class="enlargedtext"></a> 0 Percent </button>
+								<button type="button" onClick="" class="enlargedtext stylishLower5" id="bigFont"><a id="lowerGoalTemp" class="enlargedtext"></a> Lower Only </button>
+							</div>
+
 						</div>
 
 						
@@ -677,6 +687,61 @@ include("navBar.php"); ?>
 				</div>
 		</div>
 	</div>
+
+	<style>
+    .stylishLower1 {
+        background-color: #3cff00;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+		}
+    .stylishLower2 {
+        background-color: #fff200;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+		}
+    .stylishLower3 {
+        background-color: #ff9100;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+		}
+    .stylishLower4 {
+        background-color: #ff0000;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+		}
+    .stylishLower5 {
+        background-color: #000000;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+		}
+    </style>
+
+
 </body>
 
 </html>
