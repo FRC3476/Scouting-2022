@@ -68,14 +68,14 @@ function filter($str){
 			</div>
 
 			<div class="col-lg-2">
-			<b><br>How Many Batteries in the Pit: </b>
+			<b><br>Number of batteries in the pit and how many can be charged simultaneously: </b>
 			</div>
 				<div class="col-lg-10">
 				<input type="text" class="form-control" id="numBatteries" name="numBatteries" placeholder=" ">
 				</div>
 
 			<div class="col-lg-2">
-			<b><br>How Many Batteries Can Be Charged Simultaneously: </b>
+			<b><br>Did they locktite their Falcons: </b>
 			</div>
 				<div class="col-lg-10">
 				<input type="text" class="form-control" id="chargedBatteries" name="chargedBatteries" placeholder=" ">
@@ -91,7 +91,7 @@ function filter($str){
 				</div>
 
 				<div class="col-lg-2">
-				<b><br>Have a Climber? </b>
+				<b><br> If they have a Climber, what is their highest climb level: </b>
 				</div>
 				<div class="col-lg-10">
 				<input type="text" class="form-control" id="climbHelp" name="climbHelp" placeholder=" ">
@@ -99,7 +99,7 @@ function filter($str){
 				</div>
 
 			<div class="col-lg-2">
-			<b><br>Comments: </b>
+			<b><br>Auto Paths and Comments:</b>
 			</div>
 				<div class="col-lg-10">
 				<input type="text" class="form-control" id="pitComments" name="pitComments" placeholder=" ">
