@@ -350,7 +350,7 @@ include("navBar.php"); ?>
 										<td><?php echo ($teamData[2]); ?></td>
 									</tr>
 									<tr class="info">
-										<td>Batteries Charged Simultaneously</td>
+										<td>Locktighted Falcolns?</td>
 										<td><?php echo ($teamData[3]); ?></td>
 									</tr>
 
@@ -360,7 +360,7 @@ include("navBar.php"); ?>
 									</tr>
 
 									<tr class="danger">
-										<td>Pit Comments</td>
+										<td>Auto Path and Pit Comments</td>
 										<td><?php echo ($teamData[5]); ?></td>
 									</tr>
 									<tr class="info">
