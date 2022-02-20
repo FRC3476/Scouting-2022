@@ -890,6 +890,16 @@ function getAuto($teamNumber)
 	}
 }
 
+function getAutoValue($teamNumber)
+{
+	$auto = getTotalAuto($teamNumber);
+	if ($auto == 0){
+		return 0;
+	} else{
+		return 1;
+	}
+}
+
 
 function getClimbAbility($teamNumber)
 {
@@ -958,6 +968,22 @@ function getTotalQuadClimb($teamNumber)
 	}
 	
 	return ($climbCount);
+}
+
+function getHighestClimb($teamNumber)
+{
+	if(getTotalQuadClimb($teamNumber) != 0){
+		return ("Traversal");
+	} else if(getTotalTripleClimb($teamNumber) != 0){
+		return ("High");
+	} else if(getTotalDoubleClimb($teamNumber) != 0){
+		return ("Medium");
+	} else if(getTotalSingleClimb($teamNumber) != 0){
+		return ("Medium");
+	} else{
+		return ("No Climb");
+	}
+	
 }
 
 
