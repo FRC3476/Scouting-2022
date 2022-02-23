@@ -3,6 +3,45 @@
 include("header.php");
 include("navBar.php");
 ?>
+<script>
+    function postwith(to) {
+
+        var myForm = document.createElement("form");
+        myForm.method = "post";
+        myForm.action = to;
+
+        var names = [
+            'team1Blue',
+            'team2Blue',
+            'team3Blue',
+            'team1Red',
+            'team2Red',
+            'team3Red'
+        ];
+
+        var nums = [
+            document.getElementById('team1Blue').value,
+            document.getElementById('team2Blue').value,
+            document.getElementById('team3Blue').value,
+            document.getElementById('team1Red').value,
+            document.getElementById('team2Red').value,
+            document.getElementById('team3Red').value
+        ];
+
+
+        for (var i = 0; i != names.length; i++) {
+            var myInput = document.createElement("input");
+            myInput.setAttribute("name", names[i]);
+            myInput.setAttribute("value", nums[i]);
+            myForm.appendChild(myInput);
+        }
+
+        document.body.appendChild(myForm);
+        myForm.submit();
+        document.body.removeChild(myForm);
+    }
+</script>
+
 <?php
 $blueEstimate = 0;
 $redEstimate = 0;
@@ -175,34 +214,34 @@ if (
                             <td><?php echo (getAvgCycleCount($team1Red)); ?></td>
                             <td><?php echo (getAvgCycleCount($team2Red)); ?></td>
                             <td><?php echo (getAvgCycleCount($team3Red)); ?></td>
-                            <td><?php echo (getAvgCycleCount($team3Red)+getAvgCycleCount($team2Red)+getAvgCycleCount($team1Red)); ?></td>
+                            <td><?php echo (getAvgCycleCount($team3Red) + getAvgCycleCount($team2Red) + getAvgCycleCount($team1Red)); ?></td>
                         </tr>
                         <tr class="danger">
                             <td>Traversal Climb Percentage</td>
-                            <td><?php echo (100*getQuadClimbPercent($team1Red)); ?>%</td>
-                            <td><?php echo (100*getQuadClimbPercent($team2Red)); ?>%</td>
-                            <td><?php echo (100*getQuadClimbPercent($team3Red)); ?>%</td>
+                            <td><?php echo (100 * getQuadClimbPercent($team1Red)); ?>%</td>
+                            <td><?php echo (100 * getQuadClimbPercent($team2Red)); ?>%</td>
+                            <td><?php echo (100 * getQuadClimbPercent($team3Red)); ?>%</td>
                             <td></td>
                         </tr>
                         <tr class="danger">
                             <td>High Climb Percentage</td>
-                            <td><?php echo (100*getTripleClimbPercent($team1Red)); ?>%</td>
-                            <td><?php echo (100*getTripleClimbPercent($team2Red)); ?>%</td>
-                            <td><?php echo (100*getTripleClimbPercent($team3Red)); ?>%</td>
+                            <td><?php echo (100 * getTripleClimbPercent($team1Red)); ?>%</td>
+                            <td><?php echo (100 * getTripleClimbPercent($team2Red)); ?>%</td>
+                            <td><?php echo (100 * getTripleClimbPercent($team3Red)); ?>%</td>
                             <td></td>
                         </tr>
                         <tr class="danger">
                             <td>Med Climb Percentage</td>
-                            <td><?php echo (100*getDoubleClimbPercent($team1Red)); ?>%</td>
-                            <td><?php echo (100*getDoubleClimbPercent($team2Red)); ?>%</td>
-                            <td><?php echo (100*getDoubleClimbPercent($team3Red)); ?>%</td>
+                            <td><?php echo (100 * getDoubleClimbPercent($team1Red)); ?>%</td>
+                            <td><?php echo (100 * getDoubleClimbPercent($team2Red)); ?>%</td>
+                            <td><?php echo (100 * getDoubleClimbPercent($team3Red)); ?>%</td>
                             <td></td>
                         </tr>
                         <tr class="danger">
                             <td>Low Climb Percentage</td>
-                            <td><?php echo (100*getSingleClimbPercent($team1Red)); ?>%</td>
-                            <td><?php echo (100*getSingleClimbPercent($team2Red)); ?>%</td>
-                            <td><?php echo (100*getSingleClimbPercent($team3Red)); ?>%</td>
+                            <td><?php echo (100 * getSingleClimbPercent($team1Red)); ?>%</td>
+                            <td><?php echo (100 * getSingleClimbPercent($team2Red)); ?>%</td>
+                            <td><?php echo (100 * getSingleClimbPercent($team3Red)); ?>%</td>
                             <td></td>
                         </tr>
                     </table>
@@ -274,34 +313,34 @@ if (
                             <td><?php echo (getAvgCycleCount($team1Blue)); ?></td>
                             <td><?php echo (getAvgCycleCount($team2Blue)); ?></td>
                             <td><?php echo (getAvgCycleCount($team3Blue)); ?></td>
-                            <td><?php echo (getAvgCycleCount($team3Blue)+getAvgCycleCount($team2Blue)+getAvgCycleCount($team1Blue)); ?></td>
+                            <td><?php echo (getAvgCycleCount($team3Blue) + getAvgCycleCount($team2Blue) + getAvgCycleCount($team1Blue)); ?></td>
                         </tr>
                         <tr class="info">
                             <td>Traversal Climb Percentage</td>
-                            <td><?php echo (100*getQuadClimbPercent($team1Blue)); ?>%</td>
-                            <td><?php echo (100*getQuadClimbPercent($team2Blue)); ?>%</td>
-                            <td><?php echo (100*getQuadClimbPercent($team3Blue)); ?>%</td>
+                            <td><?php echo (100 * getQuadClimbPercent($team1Blue)); ?>%</td>
+                            <td><?php echo (100 * getQuadClimbPercent($team2Blue)); ?>%</td>
+                            <td><?php echo (100 * getQuadClimbPercent($team3Blue)); ?>%</td>
                             <td></td>
                         </tr>
                         <tr class="info">
                             <td>High Climb Percentage</td>
-                            <td><?php echo (100*getTripleClimbPercent($team1Blue)); ?>%</td>
-                            <td><?php echo (100*getTripleClimbPercent($team2Blue)); ?>%</td>
-                            <td><?php echo (100*getTripleClimbPercent($team3Blue)); ?>%</td>
+                            <td><?php echo (100 * getTripleClimbPercent($team1Blue)); ?>%</td>
+                            <td><?php echo (100 * getTripleClimbPercent($team2Blue)); ?>%</td>
+                            <td><?php echo (100 * getTripleClimbPercent($team3Blue)); ?>%</td>
                             <td></td>
                         </tr>
                         <tr class="info">
                             <td>Med Climb Percentage</td>
-                            <td><?php echo (100*getDoubleClimbPercent($team1Blue)); ?>%</td>
-                            <td><?php echo (100*getDoubleClimbPercent($team2Blue)); ?>%</td>
-                            <td><?php echo (100*getDoubleClimbPercent($team3Blue)); ?>%</td>
+                            <td><?php echo (100 * getDoubleClimbPercent($team1Blue)); ?>%</td>
+                            <td><?php echo (100 * getDoubleClimbPercent($team2Blue)); ?>%</td>
+                            <td><?php echo (100 * getDoubleClimbPercent($team3Blue)); ?>%</td>
                             <td></td>
                         </tr>
                         <tr class="info">
                             <td>Low Climb Percentage</td>
-                            <td><?php echo (100*getSingleClimbPercent($team1Blue)); ?>%</td>
-                            <td><?php echo (100*getSingleClimbPercent($team2Blue)); ?>%</td>
-                            <td><?php echo (100*getSingleClimbPercent($team3Blue)); ?>%</td>
+                            <td><?php echo (100 * getSingleClimbPercent($team1Blue)); ?>%</td>
+                            <td><?php echo (100 * getSingleClimbPercent($team2Blue)); ?>%</td>
+                            <td><?php echo (100 * getSingleClimbPercent($team3Blue)); ?>%</td>
                             <td></td>
                         </tr>
                     </table>
@@ -311,45 +350,6 @@ if (
     </div>
 </body>
 
-
-<script>
-    function postwith(to) {
-
-        var myForm = document.createElement("form");
-        myForm.method = "post";
-        myForm.action = to;
-
-        var names = [
-            'team1Blue',
-            'team2Blue',
-            'team3Blue',
-            'team1Red',
-            'team2Red',
-            'team3Red'
-        ];
-
-        var nums = [
-            document.getElementById('team1Blue').value,
-            document.getElementById('team2Blue').value,
-            document.getElementById('team3Blue').value,
-            document.getElementById('team1Red').value,
-            document.getElementById('team2Red').value,
-            document.getElementById('team3Red').value
-        ];
-
-
-        for (var i = 0; i != names.length; i++) {
-            var myInput = document.createElement("input");
-            myInput.setAttribute("name", names[i]);
-            myInput.setAttribute("value", nums[i]);
-            myForm.appendChild(myInput);
-        }
-
-        document.body.appendChild(myForm);
-        myForm.submit();
-        document.body.removeChild(myForm);
-    }
-</script>
 
 <style>
     .column1 {
