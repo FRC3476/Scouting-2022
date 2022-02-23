@@ -937,6 +937,21 @@ function getTotalSingleClimb($teamNumber)
 	return ($climbCount);
 }
 
+function getSingleClimbPercent($teamNumber)
+{
+	$teamData = getTeamData($teamNumber);
+	$climbCount = 0;
+	$matchCount  = 0;
+	if ($teamData[8] != null){
+		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+			$climbCount = $climbCount + $teamData[8][$i][15];
+			$matchCount++;
+		}
+	}
+
+	return (($climbCount / $matchCount));
+}
+
 function getTotalDoubleClimb($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);
@@ -946,6 +961,21 @@ function getTotalDoubleClimb($teamNumber)
 	}
 	
 	return ($climbCount);
+}
+
+function getDoubleClimbPercent($teamNumber)
+{
+	$teamData = getTeamData($teamNumber);
+	$climbCount = 0;
+	$matchCount  = 0;
+	if ($teamData[8] != null){
+		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+			$climbCount = $climbCount + $teamData[8][$i][16];
+			$matchCount++;
+		}
+	}
+
+	return (($climbCount / $matchCount));
 }
 
 function getTotalTripleClimb($teamNumber)
@@ -959,6 +989,21 @@ function getTotalTripleClimb($teamNumber)
 	return ($climbCount);
 }
 
+function getTripleClimbPercent($teamNumber)
+{
+	$teamData = getTeamData($teamNumber);
+	$climbCount = 0;
+	$matchCount  = 0;
+	if ($teamData[8] != null){
+		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+			$climbCount = $climbCount + $teamData[8][$i][17];
+			$matchCount++;
+		}
+	}
+
+	return (($climbCount / $matchCount));
+}
+
 function getTotalQuadClimb($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);
@@ -968,6 +1013,21 @@ function getTotalQuadClimb($teamNumber)
 	}
 	
 	return ($climbCount);
+}
+
+function getQuadClimbPercent($teamNumber)
+{
+	$teamData = getTeamData($teamNumber);
+	$climbCount = 0;
+	$matchCount  = 0;
+	if ($teamData[8] != null){
+		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+			$climbCount = $climbCount + $teamData[8][$i][18];
+			$matchCount++;
+		}
+	}
+
+	return (($climbCount / $matchCount));
 }
 
 function getHighestClimb($teamNumber)
@@ -1204,6 +1264,23 @@ function getCorrectData($match, $alliance, $detail)
 	$data = json_decode($json,true);
 
 	return $data["score_breakdown"]["$alliance"]["$detail"];
+	
+	
+}
+
+function getMatchAlliance($match, $alliance, $team)
+{
+	// ************* Call API:
+	
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, "https://www.thebluealliance.com/api/v3/match/" . $match . "?X-TBA-Auth-Key=VPexr6soymZP0UMtFw2qZ11pLWcaDSxCMUYOfMuRj5CQT3bzoExsUGHuO1JvyCyU");
+	curl_setopt($ch, CURLOPT_HEADER, 0);  
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+	$json = curl_exec($ch);
+	curl_close ($ch);
+	$data = json_decode($json,true);
+
+	return substr($data["alliances"]["$alliance"]["team_keys"]["$team"],3);
 	
 	
 }
