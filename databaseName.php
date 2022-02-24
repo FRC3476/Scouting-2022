@@ -5,6 +5,6 @@
 	$dbname = "scouting";
 	$charset = "utf8";
 
-	$pitScoutTable = "20template_pitscout";
-	$matchScoutTable = "20template_matchscout";
-	$leadScoutTable = "20template_leadscout";
+	$pitScoutTable = "22template_pitscout";
+	$matchScoutTable = "22template_matchscout";
+	$leadScoutTable = "22template_leadscout";

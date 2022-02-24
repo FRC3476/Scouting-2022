@@ -16,7 +16,8 @@ include("navBar.php");
             'team3Blue',
             'team1Red',
             'team2Red',
-            'team3Red'
+            'team3Red',
+            'match'
         ];
 
         var nums = [
@@ -25,7 +26,8 @@ include("navBar.php");
             document.getElementById('team3Blue').value,
             document.getElementById('team1Red').value,
             document.getElementById('team2Red').value,
-            document.getElementById('team3Red').value
+            document.getElementById('team3Red').value,
+            document.getElementById('match').value
         ];
 
 
@@ -50,8 +52,8 @@ function filter($str)
     return filter_var($str, FILTER_UNSAFE_RAW);
 }
 if (
-    isset($_POST['team1Blue']) && isset($_POST['team2Blue']) && isset($_POST['team3Blue'])
-    && isset($_POST['team1Red']) && isset($_POST['team2Red']) && isset($_POST['team3Red'])
+    (isset($_POST['team1Blue']) && isset($_POST['team2Blue']) && isset($_POST['team3Blue'])
+    && isset($_POST['team1Red']) && isset($_POST['team2Red']) && isset($_POST['team3Red'])) || isset($_POST['match'])
 ) {
     include("databaseLibrary.php");
     $team1Blue = filter($_POST['team1Blue']);
@@ -60,6 +62,10 @@ if (
     $team1Red = filter($_POST['team1Red']);
     $team2Red = filter($_POST['team2Red']);
     $team3Red = filter($_POST['team3Red']);
+    $matchNum = filter($_POST['match']);
+    if($matchNum != null){
+        
+    }
     $blue1Estimate = getAvgscore($team1Blue);
     $blue2Estimate = getAvgscore($team2Blue);
     $blue3Estimate = getAvgscore($team3Blue);
@@ -94,6 +100,14 @@ if (
     $blueAuto = getAutoValue($team1Blue) + getAutoValue($team2Blue) + getAutoValue($team3Blue);
     $blueEstimate += getAvgPenalties($team1Red) + getAvgPenalties($team2Red) + getAvgPenalties($team3Red);
     $redEstimate += getAvgPenalties($team1Blue) + getAvgPenalties($team2Blue) + getAvgPenalties($team3Blue);
+    $redAutoTotal = getAvgUpperGoalT($team1Red) + getAvgUpperGoalT($team2Red) + getAvgUpperGoalT($team3Red);
+    if($redAutoTotal >= 8){
+        $redAutoTotal = 8;
+    }
+    $blueAutoTotal = (getAvgUpperGoal($team1Blue) + getAvgUpperGoal($team2Blue) + getAvgUpperGoal($team3Blue));
+    if($blueAutoTotal >= 8){
+        $blueAutoTotal = 8;
+    }
 }
 ?>
 
@@ -142,6 +156,8 @@ if (
             </div>
         </div>
         <div class="col-md-4">
+            or Enter Match Number:
+            <input type="text" name="match" id="match" size="8" class="form-control">
             <br />
             <button id="submit" class="btn btn-primary" onclick="postwith('');">Submit Data</button>
             <br />
@@ -179,7 +195,7 @@ if (
                             <td><?php echo (getAvgUpperGoal($team1Red)); ?></td>
                             <td><?php echo (getAvgUpperGoal($team2Red)); ?></td>
                             <td><?php echo (getAvgUpperGoal($team3Red)); ?></td>
-                            <td><?php echo (getAvgUpperGoal($team1Red) + getAvgUpperGoal($team2Red) + getAvgUpperGoal($team3Red)); ?></td>
+                            <td><?php echo ($redAutoTotal); ?></td>
                         </tr>
                         <tr class="danger">
                             <td>Est Auto Lower</td>
@@ -208,7 +224,8 @@ if (
                             <td><?php echo round(getAvgUpperShotPercentage($team1Red)); ?>%</td>
                             <td><?php echo round(getAvgUpperShotPercentage($team2Red)); ?>%</td>
                             <td><?php echo round(getAvgUpperShotPercentage($team3Red)); ?>%</td>
-                            <td></td>
+                            <td><?php echo round((getAvgUpperShotPercentage($team3Red)+getAvgUpperShotPercentage($team1Red)+getAvgUpperShotPercentage($team2Red))/3); ?>%</td>
+
                         <tr class="danger">
                             <td>Cycle Count</td>
                             <td><?php echo (getAvgCycleCount($team1Red)); ?></td>
@@ -221,28 +238,28 @@ if (
                             <td><?php echo (100 * getQuadClimbPercent($team1Red)); ?>%</td>
                             <td><?php echo (100 * getQuadClimbPercent($team2Red)); ?>%</td>
                             <td><?php echo (100 * getQuadClimbPercent($team3Red)); ?>%</td>
-                            <td></td>
+                            <td><?php echo 100*(1-((1-getQuadClimbPercent($team3Red))*(1-getQuadClimbPercent($team2Red))*(1-getQuadClimbPercent($team1Red)))); ?>%</td>
                         </tr>
                         <tr class="danger">
                             <td>High Climb Percentage</td>
                             <td><?php echo (100 * getTripleClimbPercent($team1Red)); ?>%</td>
                             <td><?php echo (100 * getTripleClimbPercent($team2Red)); ?>%</td>
                             <td><?php echo (100 * getTripleClimbPercent($team3Red)); ?>%</td>
-                            <td></td>
+                            <td><?php echo 100*(1-((1-getTripleClimbPercent($team3Red))*(1-getTripleClimbPercent($team2Red))*(1-getTripleClimbPercent($team1Red)))); ?>%</td>
                         </tr>
                         <tr class="danger">
                             <td>Med Climb Percentage</td>
                             <td><?php echo (100 * getDoubleClimbPercent($team1Red)); ?>%</td>
                             <td><?php echo (100 * getDoubleClimbPercent($team2Red)); ?>%</td>
                             <td><?php echo (100 * getDoubleClimbPercent($team3Red)); ?>%</td>
-                            <td></td>
+                            <td><?php echo 100*(1-((1-getDoubleClimbPercent($team3Red))*(1-getDoubleClimbPercent($team2Red))*(1-getDoubleClimbPercent($team1Red)))); ?>%</td>
                         </tr>
                         <tr class="danger">
                             <td>Low Climb Percentage</td>
                             <td><?php echo (100 * getSingleClimbPercent($team1Red)); ?>%</td>
                             <td><?php echo (100 * getSingleClimbPercent($team2Red)); ?>%</td>
                             <td><?php echo (100 * getSingleClimbPercent($team3Red)); ?>%</td>
-                            <td></td>
+                            <td><?php echo 100*(1-((1-getSingleClimbPercent($team3Red))*(1-getSingleClimbPercent($team2Red))*(1-getSingleClimbPercent($team1Red)))); ?>%</td>
                         </tr>
                     </table>
                 </div>
@@ -278,7 +295,7 @@ if (
                             <td><?php echo (getAvgUpperGoal($team1Blue)); ?></td>
                             <td><?php echo (getAvgUpperGoal($team2Blue)); ?></td>
                             <td><?php echo (getAvgUpperGoal($team3Blue)); ?></td>
-                            <td><?php echo (getAvgUpperGoal($team1Blue) + getAvgUpperGoal($team2Blue) + getAvgUpperGoal($team3Blue)); ?></td>
+                            <td><?php echo ($blueAutoTotal); ?></td>
                         </tr>
                         <tr class="info">
                             <td>Est Auto Lower</td>
@@ -306,7 +323,7 @@ if (
                             <td><?php echo round(getAvgUpperShotPercentage($team1Blue)); ?>%</td>
                             <td><?php echo round(getAvgUpperShotPercentage($team2Blue)); ?>%</td>
                             <td><?php echo round(getAvgUpperShotPercentage($team3Blue)); ?>%</td>
-                            <td></td>
+                            <td><?php echo round((getAvgUpperShotPercentage($team3Blue)+getAvgUpperShotPercentage($team2Blue)+getAvgUpperShotPercentage($team1Blue))/3); ?>%</td>
                         </tr>
                         <tr class="info">
                             <td>Cycle Count</td>
@@ -320,28 +337,28 @@ if (
                             <td><?php echo (100 * getQuadClimbPercent($team1Blue)); ?>%</td>
                             <td><?php echo (100 * getQuadClimbPercent($team2Blue)); ?>%</td>
                             <td><?php echo (100 * getQuadClimbPercent($team3Blue)); ?>%</td>
-                            <td></td>
+                            <td><?php echo 100*(1-((1-getQuadClimbPercent($team3Blue))*(1-getQuadClimbPercent($team2Blue))*(1-getQuadClimbPercent($team1Blue)))); ?>%</td>
                         </tr>
                         <tr class="info">
                             <td>High Climb Percentage</td>
                             <td><?php echo (100 * getTripleClimbPercent($team1Blue)); ?>%</td>
                             <td><?php echo (100 * getTripleClimbPercent($team2Blue)); ?>%</td>
                             <td><?php echo (100 * getTripleClimbPercent($team3Blue)); ?>%</td>
-                            <td></td>
+                            <td><?php echo 100*(1-((1-getTripleClimbPercent($team3Blue))*(1-getTripleClimbPercent($team2Blue))*(1-getTripleClimbPercent($team1Blue)))); ?>%</td>
                         </tr>
                         <tr class="info">
                             <td>Med Climb Percentage</td>
                             <td><?php echo (100 * getDoubleClimbPercent($team1Blue)); ?>%</td>
                             <td><?php echo (100 * getDoubleClimbPercent($team2Blue)); ?>%</td>
                             <td><?php echo (100 * getDoubleClimbPercent($team3Blue)); ?>%</td>
-                            <td></td>
+                            <td><?php echo 100*(1-((1-getDoubleClimbPercent($team3Blue))*(1-getDoubleClimbPercent($team2Blue))*(1-getDoubleClimbPercent($team1Blue)))); ?>%</td>
                         </tr>
                         <tr class="info">
                             <td>Low Climb Percentage</td>
                             <td><?php echo (100 * getSingleClimbPercent($team1Blue)); ?>%</td>
                             <td><?php echo (100 * getSingleClimbPercent($team2Blue)); ?>%</td>
                             <td><?php echo (100 * getSingleClimbPercent($team3Blue)); ?>%</td>
-                            <td></td>
+                            <td><?php echo 100*(1-((1-getSingleClimbPercent($team3Blue))*(1-getSingleClimbPercent($team2Blue))*(1-getSingleClimbPercent($team1Blue)))); ?>%</td>
                         </tr>
                     </table>
                 </div>
