@@ -889,7 +889,7 @@ function getAuto($teamNumber)
 {
 	$auto = getTotalAuto($teamNumber);
 	if ($auto == 0){
-		return "No/Haven't done Yet";
+		return "No/Not Run";
 	} else{
 		return "Yes";
 	}
