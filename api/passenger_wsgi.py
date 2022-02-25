@@ -7,6 +7,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 import upperOPRCalculator
 import OPRCalculator
+import ballExit
 
 def application(environ, start_response): 
     arguments = urllib.parse.parse_qs(environ['QUERY_STRING'])
@@ -17,6 +18,8 @@ def application(environ, start_response):
         response = json.dumps(upperOPRCalculator.main(arguments["key"]))
     elif arguments["type"] == "OPR":
         response = json.dumps(OPRCalculator.main(arguments["key"]))
+    elif arguments["type"] == "ballExit":
+        response = json.dumps(ballExit.main(arguments["key"]))
     
     start_response('200 OK', [('Content-Type', 'text/plain')])
     return [response.encode()]
