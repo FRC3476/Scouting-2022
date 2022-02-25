@@ -390,7 +390,12 @@ function getTeamData($teamNumber)
 
 
 
+function getEvent()
+{
 
+	return ("2022week0_qm");
+	
+}
 
 function getAutoUpperGoal($teamNumber)
 {

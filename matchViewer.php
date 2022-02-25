@@ -64,7 +64,14 @@ if (
     $team3Red = filter($_POST['team3Red']);
     $matchNum = filter($_POST['match']);
     if($matchNum != null){
-        
+        $event = getEvent();
+        $match = $event . $matchNum;
+        $team1Blue = getMatchAlliance($match,"blue", 0);
+        $team2Blue = getMatchAlliance($match,"blue", 1);
+        $team3Blue = getMatchAlliance($match,"blue", 2);
+        $team1Red = getMatchAlliance($match,"red", 0);
+        $team2Red = getMatchAlliance($match,"red", 1);
+        $team3Red = getMatchAlliance($match,"red", 2);
     }
     $blue1Estimate = getAvgscore($team1Blue);
     $blue2Estimate = getAvgscore($team2Blue);

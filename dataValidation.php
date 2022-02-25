@@ -32,7 +32,8 @@ include("header.php") ?>
                         $totalredAutoLower = 0;
                         $totalredTeleopLower = 0;
                         $climbred = 0;
-                        $match = "2022week0_qm" . $_GET["match"];
+                        $event = getEvent();
+                        $match = $event . $_GET["match"];
 
                         echo ('<div><table  class="table table-hover" id="RawData" border="1"></div>');
                             foreach ($result as $row_key => $row) {
@@ -153,7 +154,7 @@ include("header.php") ?>
 
 
 
-                    $match = "2022week0_qm" . $_GET["match"];
+                    $match = $event . $_GET["match"];
 
                     $blueClimbCheck = 0;
                     $redClimbCheck = 0;
