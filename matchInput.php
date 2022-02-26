@@ -11,7 +11,7 @@ include("navBar.php");
 		}
 
 		if (document.getElementById('matchNum').value == "" || document.getElementById('teamNum').value == "") {
-			return;
+			alert("Please enter a Team and Match Number");
 		}
 
 		var nums = {
@@ -43,15 +43,11 @@ include("navBar.php");
 			'matchComments': document.getElementById('matchComments').value,
 			'penalties': document.getElementById('penalties').value,
 			'cycleCount': cycleCount,
-			'teleopPath' : JSON.stringify(coordinateList2)
+			'teleopPath': JSON.stringify(coordinateList2)
 		};
 
 		var id = document.getElementById('matchNum').value + "-" + document.getElementById('teamNum').value;
 		console.log(JSON.stringify(nums));
-		console.log("hello");
-		/*
-		orangePersist.collection("avr").doc(id).set(nums);
-		*/
 		$.post("dataHandler.php", nums).done(function(data) {}).done(function() {
 			alert("Submission Succeeded! Form Reloading.");
 			location.reload(true);
@@ -142,12 +138,12 @@ include("navBar.php");
 				</a>
 				<div>
 					<div class="row">
-							<canvas id="myCanvas2" width=600px height=300px style="border:0px solid #d3d3d3;">
-								<script src="Drawing2.js"></script>
-							</canvas>
-						</div>
-
+						<canvas id="myCanvas2" width=600px height=300px style="border:0px solid #d3d3d3;">
+							<script src="Drawing2.js"></script>
+						</canvas>
 					</div>
+
+				</div>
 
 				<script>
 					function updatelowerGoalMiss() {
@@ -257,22 +253,24 @@ include("navBar.php");
 
 					}
 
-					function check(){
-						cycleCount = cycleCount.substring(0, cycleCount.length -2);
+					function check() {
+						cycleCount = cycleCount.substring(0, cycleCount.length - 2);
 						cycleCount += ("]");
 					}
 
-					function addCoordinate2(){
-  						coordinateList2.push(tempCoordinateList2[tempCoordinateList2.length - 1]);
-  						tempCoordinateList2 = [];
+					function addCoordinate2() {
+						coordinateList2.push(tempCoordinateList2[tempCoordinateList2.length - 1]);
+						tempCoordinateList2 = [];
 					}
 
 					function okButton() {
-						
+
 
 						if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) == 0) {
-
-						} else if(tempCoordinateList2 != 0){
+							alert("No Data Entered");
+						}else if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) > 9){
+							alert(":| Did a team really do that? :|");
+						}else if (tempCoordinateList2 != 0) {
 
 							lowerGoalT += lowerGoalTemp;
 							upperGoalT += upperGoalTemp;
@@ -280,9 +278,9 @@ include("navBar.php");
 							upperGoalMissT += upperGoalMissTemp;
 
 							cycleNumber += 1;
-							cycleCount += ("["+cycleNumber + ", " + upperGoalTemp + ", " + upperGoalMissTemp + ", " + lowerGoalTemp + "], ");
+							cycleCount += ("[" + cycleNumber + ", " + upperGoalTemp + ", " + upperGoalMissTemp + ", " + lowerGoalTemp + "], ");
 							lowerMissTemp = lowerGoalMissTemp;
-						
+
 							console.log(cycleCount);
 							console.log(cycleNumber);
 							console.log(coordinateList2);
@@ -299,7 +297,7 @@ include("navBar.php");
 							document.getElementById("lowerGoalMissTemp").innerHTML = lowerGoalMissTemp;
 							document.getElementById("upperGoalTemp").innerHTML = upperGoalTemp;
 							document.getElementById("upperGoalMissTemp").innerHTML = upperGoalMissTemp;
-						}else{
+						} else {
 							alert("You haven't selected a shot location");
 							exit();
 						}
@@ -308,37 +306,37 @@ include("navBar.php");
 
 
 					function undoSave() {
-						
-						if (cycleNumber == 0){
+
+						if (cycleNumber == 0) {
 							console.log("continue");
-						}else{
+						} else {
 							cycleNumber -= 1;
-							lowerGoalTemp = parseInt(cycleCount.substring(cycleCount.length -4, cycleCount.length -3));
-							upperGoalTemp = parseInt(cycleCount.substring(cycleCount.length -10, cycleCount.length -9));
-							upperGoalMissTemp = parseInt(cycleCount.substring(cycleCount.length -7, cycleCount.length -6));
+							lowerGoalTemp = parseInt(cycleCount.substring(cycleCount.length - 4, cycleCount.length - 3));
+							upperGoalTemp = parseInt(cycleCount.substring(cycleCount.length - 10, cycleCount.length - 9));
+							upperGoalMissTemp = parseInt(cycleCount.substring(cycleCount.length - 7, cycleCount.length - 6));
 							lowerGoalMissTemp = lowerMissTemp;
 
 							lowerGoalT -= lowerGoalTemp;
 							upperGoalT -= upperGoalTemp;
 							upperGoalMissT -= upperGoalMissTemp;
-							
+
 							console.log(cycleCount);
 							console.log(cycleNumber);
 							console.log(coordinateList2);
 							popped = [];
 							popped = coordinateList2[coordinateList2.length - 1];
-  							coordinateList2 = coordinateList2.slice(0,-1);
+							coordinateList2 = coordinateList2.slice(0, -1);
 							drawPoint2(context2, popped[0], popped[1]);
 							popped = [];
 							console.log(coordinateList2);
 						}
-						
-						cycleCount = cycleCount.substring(0, cycleCount.length -14);
+
+						cycleCount = cycleCount.substring(0, cycleCount.length - 14);
 
 						document.getElementById("lowerGoalTemp").innerHTML = lowerGoalTemp;
 						document.getElementById("upperGoalTemp").innerHTML = upperGoalTemp;
-						document.getElementById("upperGoalMissTemp").innerHTML = upperGoalMissTemp;	
-						document.getElementById("lowerGoalMissTemp").innerHTML = lowerGoalMissTemp;					
+						document.getElementById("upperGoalMissTemp").innerHTML = upperGoalMissTemp;
+						document.getElementById("lowerGoalMissTemp").innerHTML = lowerGoalMissTemp;
 
 					}
 
@@ -360,8 +358,8 @@ include("navBar.php");
 									climb = 0;
 									climbTwo = 0;
 									climbFour = 0;
-								}else{
-									if (climbType == 4){
+								} else {
+									if (climbType == 4) {
 										climbThree = 0;
 										climb = 0;
 										climbTwo = 0;
