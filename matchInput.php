@@ -383,7 +383,7 @@ include("navBar.php");
 					var lowerGoalT = 0;
 					var lowerGoalMissT = 0;
 					var cycleNumber = 0;
-					var cycleCount = document.getElementById("[");;
+					var cycleCount = document.getElementById("[");
 					cycleCount = "[";
 				</script>
 
