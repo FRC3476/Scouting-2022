@@ -160,7 +160,9 @@ if (
             <br />
 
             <div class="col-md-2">
-                or Enter Match Number:
+            <a>
+                 <b>OR</b> <h3><b><u>Enter Match Number:</u></b></h3>
+            </a>
                 <input type="text" name="match" id="match" size="8" class="form-control">
                 <br />
                 <button id="submit" class="btn btn-primary" onclick="postwith('');">Submit Data</button>
@@ -197,21 +199,21 @@ if (
                                 <td><?php echo ($redAuto); ?></td>
                             </tr>
                             <tr class="danger">
-                                <td>Est Auto Upper</td>
+                                <td>Avg Auto Upper</td>
                                 <td><?php echo (getAvgUpperGoal($team1Red)); ?></td>
                                 <td><?php echo (getAvgUpperGoal($team2Red)); ?></td>
                                 <td><?php echo (getAvgUpperGoal($team3Red)); ?></td>
                                 <td><?php echo ($redAutoTotal); ?></td>
                             </tr>
                             <tr class="danger">
-                                <td>Est Auto Lower</td>
+                                <td>Avg Auto Lower</td>
                                 <td><?php echo (getAvgLowerGoal($team1Red)); ?></td>
                                 <td><?php echo (getAvgLowerGoal($team2Red)); ?></td>
                                 <td><?php echo (getAvgLowerGoal($team3Red)); ?></td>
                                 <td><?php echo (getAvgLowerGoal($team1Red) + getAvgLowerGoal($team2Red) + getAvgLowerGoal($team3Red)); ?></td>
                             </tr>
                             <tr class="danger">
-                                <td>Est Teleop Upper</td>
+                                <td>Avg Teleop Upper</td>
                                 <td><?php echo (getAvgUpperGoalT($team1Red)); ?></td>
                                 <td><?php echo (getAvgUpperGoalT($team2Red)); ?></td>
                                 <td><?php echo (getAvgUpperGoalT($team3Red)); ?></td>
@@ -219,14 +221,14 @@ if (
                             </tr>
                             </tr>
                             <tr class="danger">
-                                <td>Est Teleop Lower</td>
+                                <td>Avg Teleop Lower</td>
                                 <td><?php echo (getAvgLowerGoalT($team1Red)); ?></td>
                                 <td><?php echo (getAvgLowerGoalT($team2Red)); ?></td>
                                 <td><?php echo (getAvgLowerGoalT($team3Red)); ?></td>
                                 <td><?php echo (getAvgLowerGoalT($team1Red) + getAvgLowerGoalT($team2Red) + getAvgLowerGoalT($team3Red)); ?></td>
                             </tr>
                             <tr class="danger">
-                                <td>Est Upper Shot Percentage</td>
+                                <td>Avg Upper Shot Percentage</td>
                                 <td><?php echo round(getAvgUpperShotPercentage($team1Red)); ?>%</td>
                                 <td><?php echo round(getAvgUpperShotPercentage($team2Red)); ?>%</td>
                                 <td><?php echo round(getAvgUpperShotPercentage($team3Red)); ?>%</td>
@@ -297,35 +299,35 @@ if (
                                 <td><?php echo ($blueAuto); ?></td>
                             </tr>
                             <tr class="info">
-                                <td>Est Auto Upper</td>
+                                <td>Avg Auto Upper</td>
                                 <td><?php echo (getAvgUpperGoal($team1Blue)); ?></td>
                                 <td><?php echo (getAvgUpperGoal($team2Blue)); ?></td>
                                 <td><?php echo (getAvgUpperGoal($team3Blue)); ?></td>
                                 <td><?php echo ($blueAutoTotal); ?></td>
                             </tr>
                             <tr class="info">
-                                <td>Est Auto Lower</td>
+                                <td>Avg Auto Lower</td>
                                 <td><?php echo (getAvgLowerGoal($team1Blue)); ?></td>
                                 <td><?php echo (getAvgLowerGoal($team2Blue)); ?></td>
                                 <td><?php echo (getAvgLowerGoal($team3Blue)); ?></td>
                                 <td><?php echo (getAvgLowerGoal($team1Blue) + getAvgLowerGoal($team2Blue) + getAvgLowerGoal($team3Blue)); ?></td>
                             </tr>
                             <tr class="info">
-                                <td>Est Teleop Upper</td>
+                                <td>Avg Teleop Upper</td>
                                 <td><?php echo (getAvgUpperGoalT($team1Blue)); ?></td>
                                 <td><?php echo (getAvgUpperGoalT($team2Blue)); ?></td>
                                 <td><?php echo (getAvgUpperGoalT($team3Blue)); ?></td>
                                 <td><?php echo (getAvgUpperGoalT($team1Blue) + getAvgUpperGoalT($team2Blue) + getAvgUpperGoalT($team3Blue)); ?></td>
                             </tr>
                             <tr class="info">
-                                <td>Est Teleop Lower</td>
+                                <td>Avg Teleop Lower</td>
                                 <td><?php echo (getAvgLowerGoalT($team1Blue)); ?></td>
                                 <td><?php echo (getAvgLowerGoalT($team2Blue)); ?></td>
                                 <td><?php echo (getAvgLowerGoalT($team3Blue)); ?></td>
                                 <td><?php echo (getAvgLowerGoalT($team1Blue) + getAvgLowerGoalT($team2Blue) + getAvgLowerGoalT($team3Blue)); ?></td>
                             </tr>
                             <tr class="info">
-                                <td>Est Upper Shot Percentage</td>
+                                <td>Avg Upper Shot Percentage</td>
                                 <td><?php echo round(getAvgUpperShotPercentage($team1Blue)); ?>%</td>
                                 <td><?php echo round(getAvgUpperShotPercentage($team2Blue)); ?>%</td>
                                 <td><?php echo round(getAvgUpperShotPercentage($team3Blue)); ?>%</td>

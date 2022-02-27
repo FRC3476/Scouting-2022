@@ -44,67 +44,67 @@
 	<input style="display: inline-block; border:none; border-bottom: solid; border-color: rgba(120,120,120,50); border-width: 2px;width: 30%; margin-left: 30px; font-size: 16px; outline: none;" type="text" placeholder="Match Number" id="matchNum">
 
 
-	<h3 style="font-size: 19px; font-family: sans-serif;font-weight: lighter;  padding-left: 30px; padding-bottom: 7px">Offense Rank:</h3>
+
+<div id="divCheckbox" style="display: none;">
+	<div id="inBox">
+	<!--Team 1-->
+		<input id="team1Off" id="team1"  type="text" placeholder="Team 1 Offense Rank">
 
 
-<div id="inBox">
-<!--Team 1-->
-	<input id="team1Off" id="team1"  type="text" placeholder="Team 1 Offense Rank">
+	<br/>
+	<br>
+	<br/>
+
+	<!--Team 2-->
+
+	<input id="team2Off"  type="text" placeholder="Team 2 Offense Rank">
 
 
-<br/>
-<br>
-<br/>
+	<br/>
+	<br/>
+	<br/>
 
-<!--Team 2-->
+	<!--Team 3-->
 
-<input id="team2Off"  type="text" placeholder="Team 2 Offense Rank">
-
-
-<br/>
-<br/>
-<br/>
-
-<!--Team 3-->
-
-<input id="team3Off"  type="text" placeholder="Team 3 Offense Rank">
+	<input id="team3Off"  type="text" placeholder="Team 3 Offense Rank">
 
 
-<br/>
-<br/>
-<br/>
+	<br/>
+	<br/>
+	<br/>
 
-<h3 style="font-size: 19px; font-family: sans-serif;font-weight: lighter;  padding-left: 30px; padding-bottom: 7px">Defense Rank:</h3>
+	<h3 style="font-size: 19px; font-family: sans-serif;font-weight: lighter;  padding-left: 30px; padding-bottom: 7px">Defense Rank:</h3>
 
-<!--Team 1-->
+	<!--Team 1-->
 
 
 
-<input id="team1Def"  type="text" placeholder="Team 1 Defense Rank">
+	<input id="team1Def"  type="text" placeholder="Team 1 Defense Rank">
 
 
-<br/>
-<br/>
-<br/>
+	<br/>
+	<br/>
+	<br/>
 
-<!--Team 2-->
+	<!--Team 2-->
 
-<input id="team2Def"  type="text" placeholder="Team 2 Defense Rank">
+	<input id="team2Def"  type="text" placeholder="Team 2 Defense Rank">
 
 
-<br/>
-<br/>
-<br/>
+	<br/>
+	<br/>
+	<br/>
 
-<!--Team 3-->
+	<!--Team 3-->
 
-<input id="team3Def" type="text" placeholder="Team 3 Defense Rank">
+	<input id="team3Def" type="text" placeholder="Team 3 Defense Rank">
 
+
+	</div>
+	<br/>
+	<br/>
 
 </div>
-<br/>
-<br/>
-
 <h3 style="font-size: 19px; font-family: sans-serif;font-weight: lighter;  padding-left: 30px; padding-bottom: 7px">Drive Rank:</h3>
 
 <!--Team 1-->

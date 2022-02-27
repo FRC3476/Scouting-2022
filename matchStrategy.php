@@ -666,16 +666,6 @@ include("navBar.php"); ?>
 									</tr>
 
 									<tr class="info">
-										<td>Avg Offense Ranking</td>
-										<td><?php echo (getAvgOffenseRank($teamNumber)); ?></td>
-									</tr>
-
-									<tr class="success">
-										<td>Avg Defense Ranking</td>
-										<td><?php echo (getAvgDefenseRank($teamNumber)); ?></td>
-									</tr>
-
-									<tr class="danger">
 										<td>Total Defense</td>
 										<td><?php echo (getTotalDefense($teamNumber)); ?></td>
 									</tr>
