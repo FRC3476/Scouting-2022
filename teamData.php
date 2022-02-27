@@ -305,27 +305,17 @@ include("navBar.php"); ?>
 											} ?></td>
 									</tr>
 
-									<tr class="success">
+									<tr class="danger">
 										<td>Average Penalties</td>
 										<td><?php echo (getAvgPenalties($teamNumber)); ?></td>
 									</tr>
 
-									<tr class="danger">
+									<tr class="success">
 										<td>Avg Drive Ranking</td>
 										<td><?php echo (getAvgDriveRank($teamNumber)); ?></td>
 									</tr>
 
 									<tr class="info">
-										<td>Avg Offense Ranking</td>
-										<td><?php echo (getAvgOffenseRank($teamNumber)); ?></td>
-									</tr>
-
-									<tr class="success">
-										<td>Avg Defense Ranking</td>
-										<td><?php echo (getAvgDefenseRank($teamNumber)); ?></td>
-									</tr>
-
-									<tr class="danger">
 										<td>Total Defense</td>
 										<td><?php echo (getTotalDefense($teamNumber)); ?></td>
 									</tr>

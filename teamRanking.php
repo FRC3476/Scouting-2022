@@ -20,8 +20,6 @@ include("header.php") ?>
 					<th>Avg Auto Upper Goal</th>
 					<th>Avg Auto Lower Goal</th>
 					<th>Avg Drive Rank</th>
-					<th>Avg Offense Rank</th>
-					<th>Avg Defense Rank</th>
 					<th>Max Teleop Upper Goal</th>
 					<th>Max Teleop Lower Goal</th>
 					<th>Max Auto Upper Goal</th>
@@ -45,8 +43,6 @@ include("header.php") ?>
 					$avgAutoUpper = getAvgUpperGoal($teamNumber);
 					$avgAutoLower = getAvgLowerGoal($teamNumber);
 					$avgDriveRank = getAvgDriveRank($teamNumber);
-					$avgOffenseRank = getAvgOffenseRank($teamNumber);
-					$avgDefenseRank = getAvgDefenseRank($teamNumber);
 					$maxTeleopUpper = getMaxUpperGoalT($teamNumber);
 					$maxTeleopLower = getMaxLowerGoalT($teamNumber);
 					$maxAutoUpper = getMaxUpperGoal($teamNumber);
@@ -70,8 +66,6 @@ include("header.php") ?>
 					<th>" . round($avgAutoUpper,3) . "</th>
 					<th>" . round($avgAutoLower,3) . "</th>
 					<th>" . round($avgDriveRank,3) . "</th>
-					<th>" . round($avgOffenseRank,3) . "</th>
-					<th>" . round($avgDefenseRank,3) . "</th>
 					<th>" . $maxTeleopUpper . "</th>
 					<th>" . $maxTeleopLower . "</th>
 					<th>" . $maxAutoUpper . "</th>
