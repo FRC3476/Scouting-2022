@@ -1117,6 +1117,67 @@ function getAvgDriveRank($teamNumber)
 	return ($driveRankSum / $matchCount);
 }
 
+function getAvgDefenseRank($teamNumber)
+{
+	$result = getAllLeadScoutData();
+	$defenseRankSum = 0;
+	$matchCount = 0;
+	foreach ($result as $row_key => $row) {
+		foreach ($row as $key => $value) {
+			$num = $key;
+			if ($value == $teamNumber) {
+				if ($key == "team1Def") {
+					$defenseRankSum += 1;
+					$matchCount++;
+				} else if ($key == "team2Def") {
+					$defenseRankSum += 2;
+					$matchCount++;
+				} else if ($key == "team3Def") {
+					$defenseRankSum += 3;
+					$matchCount++;
+				}
+			}
+		}
+	}
+	if ($matchCount == 0) {
+		$matchCount = 1;
+	} else {
+		$matchCount = $matchCount;
+	}
+
+	return ($defenseRankSum / $matchCount);
+}
+
+function getAvgOffenseRank($teamNumber)
+{
+	$result = getAllLeadScoutData();
+	$offenseRankSum = 0;
+	$matchCount = 0;
+	foreach ($result as $row_key => $row) {
+		foreach ($row as $key => $value) {
+			$num = $key;
+			if ($value == $teamNumber) {
+				if ($key == "team1Off") {
+					$offenseRankSum += 1;
+					$matchCount++;
+				} else if ($key == "team2Off") {
+					$offenseRankSum += 2;
+					$matchCount++;
+				} else if ($key == "team3Off") {
+					$offenseRankSum += 3;
+					$matchCount++;
+				}
+			}
+		}
+	}
+	if ($matchCount == 0) {
+		$matchCount = 1;
+	} else {
+		$matchCount = $matchCount;
+	}
+
+	return ($offenseRankSum / $matchCount);
+}
 
 
 

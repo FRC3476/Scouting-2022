@@ -267,7 +267,6 @@ include("navBar.php");
 
 
 						if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) == 0) {
-							alert("No Data Entered");
 						}else if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) > 9){
 							alert(":| Did a team really do that? :|");
 						}else if (tempCoordinateList2 != 0) {
