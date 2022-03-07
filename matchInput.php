@@ -12,6 +12,7 @@ include("navBar.php");
 
 		if (document.getElementById('matchNum').value == "" || document.getElementById('teamNum').value == "") {
 			alert("Please enter a Team and Match Number");
+			exit("Please enter a Team and Match Number");
 		}
 
 		var nums = {
@@ -208,6 +209,7 @@ include("navBar.php");
 					climbTwo = 0;
 					climbThree = 0;
 					climbFour = 0;
+					increment = 1;
 
 
 					function updateupperGoalT() {
@@ -264,6 +266,47 @@ include("navBar.php");
 					}
 
 					function okButton() {
+
+
+						if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) == 0) {
+							alert("You haven't entered any data");
+						}else if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) > 9){
+							alert(":| Did a team really do that? :|");
+						}else if (tempCoordinateList2 != 0) {
+
+							lowerGoalT += lowerGoalTemp;
+							upperGoalT += upperGoalTemp;
+							lowerGoalMissT += lowerGoalMissTemp;
+							upperGoalMissT += upperGoalMissTemp;
+
+							cycleNumber += 1;
+							cycleCount += ("[" + cycleNumber + ", " + upperGoalTemp + ", " + upperGoalMissTemp + ", " + lowerGoalTemp + "], ");
+							lowerMissTemp = lowerGoalMissTemp;
+
+							console.log(cycleCount);
+							console.log(cycleNumber);
+							console.log(coordinateList2);
+							addCoordinate2();
+							clearPath3();
+							console.log(coordinateList2);
+
+							lowerGoalTemp = 0;
+							upperGoalTemp = 0;
+							lowerGoalMissTemp = 0;
+							upperGoalMissTemp = 0;
+
+							document.getElementById("lowerGoalTemp").innerHTML = lowerGoalTemp;
+							document.getElementById("lowerGoalMissTemp").innerHTML = lowerGoalMissTemp;
+							document.getElementById("upperGoalTemp").innerHTML = upperGoalTemp;
+							document.getElementById("upperGoalMissTemp").innerHTML = upperGoalMissTemp;
+						} else {
+							alert("You haven't selected a shot location");
+							exit();
+						}
+
+					}
+
+					function okButton1() {
 
 
 						if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) == 0) {
@@ -454,7 +497,7 @@ include("navBar.php");
 
 				<br> <br>
 				<div style="padding: 5px; padding-bottom: 10;">
-					<input type="button" value="Submit Data" id="submitButton" class="btn btn-primary" onclick="okButton(''); check(); postwith('')" />
+					<input type="button" value="Submit Data" id="submitButton" class="btn btn-primary" onclick="okButton1(''); check(); postwith('')" />
 
 
 				</div>
