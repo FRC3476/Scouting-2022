@@ -258,6 +258,9 @@ include("navBar.php");
 					function check() {
 						cycleCount = cycleCount.substring(0, cycleCount.length - 2);
 						cycleCount += ("]");
+						if (cycleCount == "]"){
+							cycleCount = "[]";
+						}
 					}
 
 					function addCoordinate2() {
