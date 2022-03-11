@@ -115,6 +115,20 @@ include("navBar.php"); ?>
 										}
 										$index++;
 									}
+
+									$index = 0;
+									while (file_exists("uploads/" . $_GET["team"] . "-" . $index . ".jpeg") == 1) {
+										if ($index == 0) {
+											echo ('<div class="item active" >
+											<img   id="' . $_GET["team"] . '-' . $index . '" src="uploads/' . $_GET["team"] . '-' . $index . '.jpeg" >
+										 </div>');
+										} else {
+											echo ('<div class="item" >
+											<img   id="' . $_GET["team"] . '-' . $index . '" src="uploads/' . $_GET["team"] . '-' . $index . '.jpeg" >
+										 </div>');
+										}
+										$index++;
+									}
 									?>
 								</div>
 								<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
