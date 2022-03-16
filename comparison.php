@@ -366,20 +366,20 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                             for (var i = 0; i != a.length; i++) {
                                 if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.9)) {
                                     context.fillStyle = "#3cff00";
-                                    context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                    context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                     console.log(b[i][1]);
                                 } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
                                     context.fillStyle = "#fff200";
-                                    context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                    context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                 } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
                                     context.fillStyle = "#ff9100";
-                                    context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                    context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                 } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
                                     context.fillStyle = "#ff0000";
-                                    context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                    context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                 } else {
                                     context.fillStyle = "#000000";
-                                    context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                    context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                 }
                             }
                         }
@@ -393,20 +393,20 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                                     for (var i = 0; i != a.length; i++) {
                                         if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.9)) {
                                             context.fillStyle = "#3cff00";
-                                            context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                            context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                             console.log(b[i][1]);
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
                                             context.fillStyle = "#fff200";
-                                            context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                            context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
                                             context.fillStyle = "#ff9100";
-                                            context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                            context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
                                             context.fillStyle = "#ff0000";
-                                            context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                            context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                         } else {
                                             context.fillStyle = "#000000";
-                                            context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                            context.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                         }
                                     }
                                 } else {
@@ -857,20 +857,20 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                             for (var i = 0; i != a.length; i++) {
                                 if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.9)) {
                                     context2.fillStyle = "#3cff00";
-                                    context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                    context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                     console.log(b[i][1]);
                                 } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
                                     context2.fillStyle = "#fff200";
-                                    context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                    context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                 } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
                                     context2.fillStyle = "#ff9100";
-                                    context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                    context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                 } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
                                     context2.fillStyle = "#ff0000";
-                                    context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                    context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                 } else {
                                     context2.fillStyle = "#000000";
-                                    context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                    context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                 }
                             }
                         }
@@ -884,20 +884,20 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                                     for (var i = 0; i != a.length; i++) {
                                         if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.9)) {
                                             context2.fillStyle = "#3cff00";
-                                            context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                            context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                             console.log(b[i][1]);
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
                                             context2.fillStyle = "#fff200";
-                                            context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                            context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
                                             context2.fillStyle = "#ff9100";
-                                            context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                            context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
                                             context2.fillStyle = "#ff0000";
-                                            context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                            context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                         } else {
                                             context2.fillStyle = "#000000";
-                                            context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 3, 3);
+                                            context2.fillRect((5 / 6) * (a[i][0]), (5 / 6) * (a[i][1]), 5, 5);
                                         }
                                     }
                                 } else {
