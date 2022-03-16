@@ -44,7 +44,8 @@ include("navBar.php");
 			'matchComments': document.getElementById('matchComments').value,
 			'penalties': document.getElementById('penalties').value,
 			'cycleCount': cycleCount,
-			'teleopPath': JSON.stringify(coordinateList2)
+			'teleopPath': JSON.stringify(coordinateList2),
+			'doNotPick': document.getElementById('doNotPick').checked ? 1 : 0
 		};
 
 		var id = document.getElementById('matchNum').value + "-" + document.getElementById('teamNum').value;
@@ -493,6 +494,12 @@ include("navBar.php");
 					<option value="fell over">Fell Over</option>
 				</select>
 
+				<div class="togglebutton" id="reach">
+					<h4><b>DNP?</b></h4>
+					<label>
+						<input id="doNotPick" type="checkbox">
+					</label>
+				</div>
 
 				<h4><b><u>Comments / Strategy: </u></b></h4>
 				<textarea placeholder="Please write strategy of the robot or interesting observations of the robot" type="text" id="matchComments" class="form-control md-textarea" rows="6"></textarea>

@@ -42,6 +42,8 @@ if (isset($_POST['matchNum'])) {
 	$penalties = filter($_POST['penalties']);
 	$cycleCount = filter($_POST['cycleCount']);
 	$teleopPath = filter($_POST['teleopPath']);
+	$doNotPick = filter($_POST['doNotPick']);
+
 
 	matchInput(
 		$user,
@@ -69,7 +71,8 @@ if (isset($_POST['matchNum'])) {
 		$matchComments,
 		$penalties,
 		$cycleCount,
-		$teleopPath
+		$teleopPath,
+		$doNotPick
 	);
 }
 

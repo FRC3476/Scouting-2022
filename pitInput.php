@@ -59,6 +59,13 @@ if (isset($_POST['teamNumber'])) {
 			<a>
 				<h2><b><u>Pit Scout Form:</u></b></h2>
 			</a>
+
+			<a href='http://teamcodeorange.com/dugthescout/pitCheck.php'>
+        		<button class="btn btn-primary">
+            		Pit Check
+        		</button>
+    		</a>
+
 			<form action="" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<b><text class="col-lg-2 control-label">Team Number: </text></b>

@@ -132,7 +132,8 @@ function createTables()
 			matchComments LONGTEXT NOT NULL,
 			penalties INT(11) NOT NULL,
 			cycleCount LONGTEXT NOT NULL,
-			teleopPath LONGTEXT NOT NULL
+			teleopPath LONGTEXT NOT NULL,
+			doNotPick INT(11) NOT NULL
 		)";
 	$statement = $conn->prepare($query);
 	if (!$statement->execute()) {
@@ -155,7 +156,6 @@ function createTables()
 	if (!$statement->execute()) {
 		throw new Exception("constructDatabase Error: CREATE TABLE leadScoutTable query failed.");
 	}
-
 }
 
 //Input- pitScoutInput, Data from pit scout form is assigned to columns in 17template_pitscout.
@@ -215,7 +215,8 @@ function matchInput(
 	$matchComments,
 	$penalties,
 	$cycleCount,
-	$teleopPath
+	$teleopPath,
+	$doNotPick
 ) {
 
 	global $servername;
@@ -248,7 +249,8 @@ function matchInput(
 															 `matchComments`,
 															 `penalties`,
 															 `cycleCount`,
-															 `teleopPath`)
+															 `teleopPath`,
+															 `doNotPick`)
 													VALUES ( "' . $user . '",
 															 "' . $ID . '",
 															 "' . $matchNum . '",
@@ -274,7 +276,8 @@ function matchInput(
 															 "' . $matchComments . '",
 															 "' . $penalties . '",
 															 "' . $cycleCount . '",
-															 "' . $teleopPath . '")';
+															 "' . $teleopPath . '",
+															 "' . $doNotPick . '")';
 	$queryOutput = runQuery($queryString);
 }
 
@@ -365,7 +368,7 @@ function getTeamData($teamNumber)
 				$row["lowerGoal"], $row["lowerGoalMiss"], $row["upperGoalT"],
 				$row["upperGoalMissT"],  $row["lowerGoalT"], $row["lowerGoalMissT"],
 				$row["climb"], $row["climbTwo"], $row["climbThree"], $row["climbFour"], $row["issues"], $row["defenseBot"],
-				$row["defenseComments"], $row["matchComments"], $row["penalties"], $row["cycleCount"], $row["teleopPath"]
+				$row["defenseComments"], $row["matchComments"], $row["penalties"], $row["cycleCount"], $row["teleopPath"], $row["doNotPick"]
 			));
 		}
 	}
@@ -394,7 +397,14 @@ function getEvent()
 {
 
 	return ("2022caoc_qm");
-	
+}
+
+function getEventRaw()
+{
+
+	$event = getEvent();
+	$event = substr($event, 0, -3);
+	return $event;
 }
 
 function getAutoUpperGoal($teamNumber)
@@ -402,9 +412,9 @@ function getAutoUpperGoal($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$matchN = matchNum($teamNumber);
 	$cubeGraphT = array();
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][7];
-		}
+	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][7];
+	}
 
 	$out = array();
 	for ($i = 0; $i != sizeof($matchN); $i++) {
@@ -418,9 +428,9 @@ function getAutoLowerGoal($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$matchN = matchNum($teamNumber);
 	$cubeGraphT = array();
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][9];
-		}
+	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][9];
+	}
 
 	$out = array();
 	for ($i = 0; $i != sizeof($matchN); $i++) {
@@ -436,9 +446,9 @@ function getAutoUpperGoalMiss($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$matchN = matchNum($teamNumber);
 	$cubeGraphT = array();
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][8];
-		}
+	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][8];
+	}
 
 	$out = array();
 	for ($i = 0; $i != sizeof($matchN); $i++) {
@@ -453,9 +463,9 @@ function getTeleopUpperGoal($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$matchN = matchNum($teamNumber);
 	$cubeGraphT = array();
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][11];
-		}
+	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][11];
+	}
 
 	$out = array();
 	for ($i = 0; $i != sizeof($matchN); $i++) {
@@ -470,11 +480,11 @@ function getTeleopLowerGoal($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$matchN = matchNum($teamNumber);
 	$cubeGraphT = array();
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][13];
 		}
-	} 
+	}
 
 	$out = array();
 	for ($i = 0; $i != sizeof($matchN); $i++) {
@@ -489,9 +499,9 @@ function getTeleopUpperGoalMiss($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$matchN = matchNum($teamNumber);
 	$cubeGraphT = array();
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][12];
-		}
+	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][12];
+	}
 
 	$out = array();
 	for ($i = 0; $i != sizeof($matchN); $i++) {
@@ -506,9 +516,9 @@ function getLowerGoal($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$matchN = matchNum($teamNumber);
 	$cubeGraphT = array();
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][9] + $teamData[8][$i][13];
-		}
+	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][9] + $teamData[8][$i][13];
+	}
 
 	$out = array();
 	for ($i = 0; $i != sizeof($matchN); $i++) {
@@ -522,9 +532,9 @@ function getClimb($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$matchN = matchNum($teamNumber);
 	$cubeGraphT = array();
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][15] + 2*$teamData[8][$i][16] + 3*$teamData[8][$i][17] + 4*$teamData[8][$i][18];
-		}
+	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][15] + 2 * $teamData[8][$i][16] + 3 * $teamData[8][$i][17] + 4 * $teamData[8][$i][18];
+	}
 
 	$out = array();
 	for ($i = 0; $i != sizeof($matchN); $i++) {
@@ -539,13 +549,13 @@ function getUpperShotPercentage($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$matchN = matchNum($teamNumber);
 	$cubeGraphT = array();
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			if ((($teamData[8][$i][12]) + (($teamData[8][$i][11]) + ($teamData[8][$i][7]) + ($teamData[8][$i][8]))) != 0){
-				$cubeGraphT[$teamData[8][$i][2]] = (100 * ((($teamData[8][$i][11]) + ($teamData[8][$i][7])) / (($teamData[8][$i][12]) + (($teamData[8][$i][11]) + ($teamData[8][$i][7]) + ($teamData[8][$i][8])))));
-			} else {
-				$cubeGraphT[$teamData[8][$i][2]] = 0;
-			}
+	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+		if ((($teamData[8][$i][12]) + (($teamData[8][$i][11]) + ($teamData[8][$i][7]) + ($teamData[8][$i][8]))) != 0) {
+			$cubeGraphT[$teamData[8][$i][2]] = (100 * ((($teamData[8][$i][11]) + ($teamData[8][$i][7])) / (($teamData[8][$i][12]) + (($teamData[8][$i][11]) + ($teamData[8][$i][7]) + ($teamData[8][$i][8])))));
+		} else {
+			$cubeGraphT[$teamData[8][$i][2]] = 0;
 		}
+	}
 
 	$out = array();
 	for ($i = 0; $i != sizeof($matchN); $i++) {
@@ -561,9 +571,9 @@ function getAutoUpperShotPercentage($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$matchN = matchNum($teamNumber);
 	$cubeGraphT = array();
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$cubeGraphT[$teamData[8][$i][2]] = (($teamData[8][$i][7]) / (($teamData[8][$i][8])+($teamData[8][$i][7])));
+			$cubeGraphT[$teamData[8][$i][2]] = (($teamData[8][$i][7]) / (($teamData[8][$i][8]) + ($teamData[8][$i][7])));
 		}
 	}
 
@@ -579,7 +589,7 @@ function getScore($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$matchN = matchNum($teamNumber);
 	$cubeGraphT = array();
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			$cubeGraphT[$teamData[8][$i][2]] = ((4 * ($teamData[8][$i][7])) + (2 * ($teamData[8][$i][9])) + (2 * ($teamData[8][$i][11])) + ($teamData[8][$i][13]) + (4 * ($teamData[8][$i][15])) + (6 * ($teamData[8][$i][16])) + (10 * ($teamData[8][$i][17])) + (15 * ($teamData[8][$i][18])) + (5 * ($teamData[8][$i][6])));
 		}
@@ -608,7 +618,7 @@ function getAvgUpperShotPercentage($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$upperGoalCount = 0;
 	$upperGoalMissCount = 0;
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			$upperGoalCount = $upperGoalCount + $teamData[8][$i][11] + $teamData[8][$i][7];
 		}
@@ -618,7 +628,7 @@ function getAvgUpperShotPercentage($teamNumber)
 		if (($upperGoalCount + $upperGoalMissCount) == 0) {
 			return (0);
 		}
-	} 
+	}
 
 	return (round((100 * ($upperGoalCount / ($upperGoalCount + $upperGoalMissCount))), 3));
 }
@@ -628,12 +638,12 @@ function getAvgUpperGoalT($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$upperGoalCountT = 0;
 	$matchCount  = 0;
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			$upperGoalCountT = $upperGoalCountT + $teamData[8][$i][11];
 			$matchCount++;
 		}
-	} 
+	}
 
 	return (round(($upperGoalCountT / $matchCount), 3));
 }
@@ -643,12 +653,12 @@ function getAvgLowerGoalT($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$lowerGoalCountT = 0;
 	$matchCount  = 0;
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			$lowerGoalCountT = $lowerGoalCountT + $teamData[8][$i][13];
 			$matchCount++;
 		}
-	} 
+	}
 
 	return ($lowerGoalCountT / $matchCount);
 }
@@ -658,12 +668,12 @@ function getAvgUpperGoalMissT($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$upperGoalMissCountT = 0;
 	$matchCount  = 0;
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			$upperGoalMissCountT = $upperGoalMissCountT + $teamData[8][$i][12];
 			$matchCount++;
 		}
-	} 
+	}
 
 	return (round(($upperGoalMissCountT / $matchCount), 3));
 }
@@ -717,7 +727,7 @@ function getAvgPenalties($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$penalCount = 0;
 	$matchCount  = 0;
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			$penalCount = $penalCount + $teamData[8][$i][23];
 			$matchCount++;
@@ -735,14 +745,14 @@ function getAvgCycleCount($teamNumber)
 	$cycleCount = 0;
 	$array = [];
 	$matchCount  = 0;
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$cycleCount = $cycleCount + (strlen($teamData[8][$i][24])/14);
+			$cycleCount = $cycleCount + (strlen($teamData[8][$i][24]) / 14);
 			$matchCount++;
 		}
-	} 
+	}
 
-	return ($cycleCount/$matchCount);
+	return ($cycleCount / $matchCount);
 }
 
 function getAvgScore($teamNumber)
@@ -750,12 +760,12 @@ function getAvgScore($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$matchCount  = 0;
 	$Score = 0;
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			$Score = $Score + ((4 * ($teamData[8][$i][7])) + (2 * ($teamData[8][$i][9])) + (2 * ($teamData[8][$i][11])) + ($teamData[8][$i][13]) + (4 * ($teamData[8][$i][15])) + (6 * ($teamData[8][$i][16])) + (10 * ($teamData[8][$i][17])) + (15 * ($teamData[8][$i][18])) + (5 * ($teamData[8][$i][6])));
 			$matchCount++;
 		}
-	} 
+	}
 
 	return ($Score / $matchCount);
 }
@@ -829,7 +839,7 @@ function matchNum($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);
 	$matchNum = array();
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			array_push($matchNum, $teamData[8][$i][2]);
 		}
@@ -879,18 +889,17 @@ function getTotalAuto($teamNumber)
 	$auto = 0;
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 		$auto = $auto + $teamData[8][$i][6];
-
 	}
-	
+
 	return ($auto);
 }
 
 function getAuto($teamNumber)
 {
 	$auto = getTotalAuto($teamNumber);
-	if ($auto == 0){
+	if ($auto == 0) {
 		return "No/Not Run";
-	} else{
+	} else {
 		return "Yes";
 	}
 }
@@ -898,20 +907,47 @@ function getAuto($teamNumber)
 function getAutoValue($teamNumber)
 {
 	$auto = getTotalAuto($teamNumber);
-	if ($auto == 0){
+	if ($auto == 0) {
 		return 0;
-	} else{
+	} else {
 		return 1;
 	}
 }
 
+function getPit($teamNumber)
+{
+	global $pitScoutTable;
+	$qs1 = "SELECT * FROM `" . $pitScoutTable . "` WHERE teamNumber = " . $teamNumber . "";
+	$result = runQuery($qs1);
+	$pitExists = False;
+	if ($result != FALSE) {
+		$pitExists = True;
+		return ("Yes");
+	}
+	if (!$pitExists) {
+		return ("No");
+	}
+}
+
+function getPicture($teamNumber)
+{
+	if (file_exists("uploads/" . $teamNumber . "-0.jpg")) {
+		return ("Yes");
+	} else if (file_exists("uploads/" . $teamNumber . "-0.png")) {
+		return ("Yes");
+	} else if (file_exists("uploads/" . $teamNumber . "-0.jpeg")) {
+		return ("Yes");
+	} else {
+		return ("No");
+	}
+}
 
 function getClimbAbility($teamNumber)
 {
 	$climbCount = getTotalSingleClimb($teamNumber) + getTotalDoubleClimb($teamNumber) + getTotalTripleClimb($teamNumber) + getTotalQuadClimb($teamNumber);
-	if ($climbCount == 0){
+	if ($climbCount == 0) {
 		return "No/Haven't done Yet";
-	} else{
+	} else {
 		return "Yes";
 	}
 }
@@ -925,7 +961,7 @@ function getTotalUpperGoal($teamNumber)
 		$upperGoal = $upperGoal + $teamData[8][$i][7];
 		$upperGoal = $upperGoal + $teamData[8][$i][11];
 	}
-	
+
 	return ($upperGoal);
 }
 
@@ -938,7 +974,7 @@ function getTotalSingleClimb($teamNumber)
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 		$climbCount = $climbCount + $teamData[8][$i][15];
 	}
-	
+
 	return ($climbCount);
 }
 
@@ -947,7 +983,7 @@ function getSingleClimbPercent($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$climbCount = 0;
 	$matchCount  = 0;
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			$climbCount = $climbCount + $teamData[8][$i][15];
 			$matchCount++;
@@ -964,7 +1000,7 @@ function getTotalDoubleClimb($teamNumber)
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 		$climbCount = $climbCount + $teamData[8][$i][16];
 	}
-	
+
 	return ($climbCount);
 }
 
@@ -973,7 +1009,7 @@ function getDoubleClimbPercent($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$climbCount = 0;
 	$matchCount  = 0;
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			$climbCount = $climbCount + $teamData[8][$i][16];
 			$matchCount++;
@@ -990,7 +1026,7 @@ function getTotalTripleClimb($teamNumber)
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 		$climbCount = $climbCount + $teamData[8][$i][17];
 	}
-	
+
 	return ($climbCount);
 }
 
@@ -999,7 +1035,7 @@ function getTripleClimbPercent($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$climbCount = 0;
 	$matchCount  = 0;
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			$climbCount = $climbCount + $teamData[8][$i][17];
 			$matchCount++;
@@ -1016,7 +1052,7 @@ function getTotalQuadClimb($teamNumber)
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 		$climbCount = $climbCount + $teamData[8][$i][18];
 	}
-	
+
 	return ($climbCount);
 }
 
@@ -1025,7 +1061,7 @@ function getQuadClimbPercent($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$climbCount = 0;
 	$matchCount  = 0;
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			$climbCount = $climbCount + $teamData[8][$i][18];
 			$matchCount++;
@@ -1037,18 +1073,17 @@ function getQuadClimbPercent($teamNumber)
 
 function getHighestClimb($teamNumber)
 {
-	if(getTotalQuadClimb($teamNumber) != 0){
+	if (getTotalQuadClimb($teamNumber) != 0) {
 		return ("Traversal");
-	} else if(getTotalTripleClimb($teamNumber) != 0){
+	} else if (getTotalTripleClimb($teamNumber) != 0) {
 		return ("High");
-	} else if(getTotalDoubleClimb($teamNumber) != 0){
+	} else if (getTotalDoubleClimb($teamNumber) != 0) {
 		return ("Medium");
-	} else if(getTotalSingleClimb($teamNumber) != 0){
+	} else if (getTotalSingleClimb($teamNumber) != 0) {
 		return ("Medium");
-	} else{
+	} else {
 		return ("No Climb");
 	}
-	
 }
 
 
@@ -1057,12 +1092,12 @@ function getTotalScore($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$matchCount  = 0;
 	$Score = 0;
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			$Score = $Score + ((4 * ($teamData[8][$i][7])) + (2 * ($teamData[8][$i][9])) + (2 * ($teamData[8][$i][11])) + ($teamData[8][$i][13]) + (4 * ($teamData[8][$i][15])) + (6 * ($teamData[8][$i][16])) + (10 * ($teamData[8][$i][17])) + (15 * ($teamData[8][$i][18])) + (5 * ($teamData[8][$i][6])));
 			$matchCount++;
 		}
-	} 
+	}
 
 	return ($Score);
 }
@@ -1071,15 +1106,25 @@ function getTotalDefense($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);
 	$defenseCount = 0;
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			$defenseCount = $defenseCount + $teamData[8][$i][20];
 		}
-	} 
+	}
 
 	return ($defenseCount);
 }
 
+function getTotalDNP($teamNumber)
+{
+	$teamData = getTeamData($teamNumber);
+	$dnp = 0;
+	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+		$dnp = $dnp + $teamData[8][$i][26];
+	}
+
+	return ($dnp);
+}
 
 // Ranks
 
@@ -1128,7 +1173,7 @@ function defenseComments($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);
 	$defenseComments = array();
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			array_push($defenseComments, $teamData[8][$i][21]);
 		}
@@ -1141,7 +1186,7 @@ function matchComments($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);
 	$matchComments = array();
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			array_push($matchComments, $teamData[8][$i][22]);
 		}
@@ -1162,7 +1207,7 @@ function getPickList($teamNumber)
 	$teamData = getTeamData($teamNumber);
 	$pointCal = 0;
 	$matchCount = 0;
-	if ($teamData[8] != null){
+	if ($teamData[8] != null) {
 		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 			$pointCal = ($pointCal - (0.125 * ($teamData[8][$i][8])));
 			$pointCal = ($pointCal - (0.25 * ($teamData[8][$i][10])));
@@ -1198,35 +1243,50 @@ function getPickList($teamNumber)
 function getCorrectData($match, $alliance, $detail)
 {
 	// ************* Call API:
-	
+
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, "https://www.thebluealliance.com/api/v3/match/" . $match . "?X-TBA-Auth-Key=VPexr6soymZP0UMtFw2qZ11pLWcaDSxCMUYOfMuRj5CQT3bzoExsUGHuO1JvyCyU");
-	curl_setopt($ch, CURLOPT_HEADER, 0);  
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+	curl_setopt($ch, CURLOPT_HEADER, 0);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$json = curl_exec($ch);
-	curl_close ($ch);
-	$data = json_decode($json,true);
+	curl_close($ch);
+	$data = json_decode($json, true);
 
 	return $data["score_breakdown"]["$alliance"]["$detail"];
-	
-	
 }
 
 function getMatchAlliance($match, $alliance, $team)
 {
 	// ************* Call API:
-	
+
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, "https://www.thebluealliance.com/api/v3/match/" . $match . "?X-TBA-Auth-Key=VPexr6soymZP0UMtFw2qZ11pLWcaDSxCMUYOfMuRj5CQT3bzoExsUGHuO1JvyCyU");
-	curl_setopt($ch, CURLOPT_HEADER, 0);  
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+	curl_setopt($ch, CURLOPT_HEADER, 0);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$json = curl_exec($ch);
-	curl_close ($ch);
-	$data = json_decode($json,true);
+	curl_close($ch);
+	$data = json_decode($json, true);
 
-	return substr($data["alliances"]["$alliance"]["team_keys"]["$team"],3);
-	
-	
+	return substr($data["alliances"]["$alliance"]["team_keys"]["$team"], 3);
+}
+
+function getEventTeams()
+{
+	// ************* Call API:
+	$match = getEventRaw();
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, "https://www.thebluealliance.com/api/v3/event/" . $match . "/teams/keys?X-TBA-Auth-Key=VPexr6soymZP0UMtFw2qZ11pLWcaDSxCMUYOfMuRj5CQT3bzoExsUGHuO1JvyCyU");
+	curl_setopt($ch, CURLOPT_HEADER, 0);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$json = curl_exec($ch);
+	curl_close($ch);
+	$data = json_decode($json, true);
+	$array = array();
+	for ($i = 0; $i < count($data); $i++) {
+		array_push($array, substr($data[$i],3));
+	}
+
+	return $array;
 }
 
 function getThreePointNew($teamNumber)
@@ -1235,16 +1295,16 @@ function getThreePointNew($teamNumber)
 	$output = shell_exec($command);
 
 	$csvFile = file('ThreeOPR.txt');
-    $data = array();
-    foreach ($csvFile as $line) {
-        $data[] = str_getcsv($line);
-    }
+	$data = array();
+	foreach ($csvFile as $line) {
+		$data[] = str_getcsv($line);
+	}
 
-	for($x = 0; $x < sizeof($data); $x++){
+	for ($x = 0; $x < sizeof($data); $x++) {
 		$word = $data[$x][0];
 		$word = substr($word, 3);
-		if ($word == $teamNumber){
-			return round($data[$x][1],2);
+		if ($word == $teamNumber) {
+			return round($data[$x][1], 2);
 		}
 	}
 }
@@ -1255,16 +1315,16 @@ function getUpperTotal($teamNumber)
 	$output = shell_exec($command);
 
 	$csvFile = file('upperOPR.txt');
-    $data = array();
-    foreach ($csvFile as $line) {
-        $data[] = str_getcsv($line);
-    }
+	$data = array();
+	foreach ($csvFile as $line) {
+		$data[] = str_getcsv($line);
+	}
 
-	for($x = 0; $x < sizeof($data); $x++){
+	for ($x = 0; $x < sizeof($data); $x++) {
 		$word = $data[$x][0];
 		$word = substr($word, 3);
-		if ($word == $teamNumber){
-			return round($data[$x][1],2);
+		if ($word == $teamNumber) {
+			return round($data[$x][1], 2);
 		}
 	}
 }
@@ -1276,16 +1336,16 @@ function getOPR($teamNumber)
 	$output = shell_exec($command);
 
 	$csvFile = file('OPR.txt');
-    $data = array();
-    foreach ($csvFile as $line) {
-        $data[] = str_getcsv($line);
-    }
+	$data = array();
+	foreach ($csvFile as $line) {
+		$data[] = str_getcsv($line);
+	}
 
-	for($x = 0; $x < sizeof($data); $x++){
+	for ($x = 0; $x < sizeof($data); $x++) {
 		$word = $data[$x][0];
 		$word = substr($word, 3);
-		if ($word == $teamNumber){
-			return round($data[$x][1],2);
+		if ($word == $teamNumber) {
+			return round($data[$x][1], 2);
 		}
 	}
 }

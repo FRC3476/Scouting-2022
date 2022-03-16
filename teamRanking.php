@@ -12,11 +12,9 @@ include("header.php") ?>
 				<tr>
 					<th>Team Number</th>
 					<th>Weighted Score</th>
-					<th>Avg Score Contribution</th>
 					<th>Avg Upper Shot Percentage</th>
 					<th>Avg Teleop Upper Goal</th>
 					<th>Avg Teleop Lower Goal</th>
-					<th>Avg Teleop Upper Goal Miss</th>
 					<th>Avg Auto Upper Goal</th>
 					<th>Avg Auto Lower Goal</th>
 					<th>Avg Drive Rank</th>
@@ -35,11 +33,9 @@ include("header.php") ?>
 
 					$i = 0;
 					$picklist = (getPickList($teamNumber) - getAvgDriveRank($teamNumber));
-					$avgPredictedScore = getAvgScore($teamNumber);
 					$UpperShotPercentage = getAvgUpperShotPercentage($teamNumber);
 					$avgTeleopUpper = getAvgUpperGoalT($teamNumber);
 					$avgTeleopLower = getAvgLowerGoalT($teamNumber);
-					$avgTeleopUpperMiss = getAvgUpperGoalMissT($teamNumber);
 					$avgAutoUpper = getAvgUpperGoal($teamNumber);
 					$avgAutoLower = getAvgLowerGoal($teamNumber);
 					$avgDriveRank = getAvgDriveRank($teamNumber);
@@ -56,13 +52,11 @@ include("header.php") ?>
 
 
 					echo ("<tr>
-					<td><a href='teamData.php?team=" . $teamNumber . "'>" . $teamNumber . "</a></td>
+					<td><a href='matchStrategy.php?team=" . $teamNumber . "'>" . $teamNumber . "</a></td>
 					<th>" . $picklist . "</th>
-					<th>" . $avgPredictedScore . "</th>
 					<th>" . $UpperShotPercentage . "</th>
 					<th>" . round($avgTeleopUpper,3) . "</th>
 					<th>" . round($avgTeleopLower,3) . "</th>
-					<th>" . round($avgTeleopUpperMiss,3) . "</th>
 					<th>" . round($avgAutoUpper,3) . "</th>
 					<th>" . round($avgAutoLower,3) . "</th>
 					<th>" . round($avgDriveRank,3) . "</th>
