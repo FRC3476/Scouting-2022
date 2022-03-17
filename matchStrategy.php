@@ -142,10 +142,8 @@ include("navBar.php"); ?>
 							</div>
 						</div>
 						<button class=" btn btn-material-purple">Auto Upper Made</button>
-						<button class=" btn btn-material-brown"> Auto Upper Miss</button>
 						<button class=" btn btn-material-red">Auto Lower Made</button>
 						<button class=" btn btn-material-green">Teleop Upper Made</button>
-						<button class=" btn btn-material-yellow">Teleop Upper Miss</button>
 						<button class=" btn btn-material-blue">Teleop Lower Made</button>
 						<button class=" btn btn-material-orange">Climb</button>
 
@@ -174,17 +172,6 @@ include("navBar.php"); ?>
 									},
 
 									{
-										label: "Auto Upper Goal Miss",
-										fillColor: "rgba(220,220,220,0.1)",
-										strokeColor: "brown",
-										pointColor: "rgba(107, 75, 26,1)",
-										pointStrokeColor: "#ffff00",
-										pointHighlightFill: "#fff",
-										pointHighlightStroke: "rgba(220,220,220,1)",
-										data: <?php echo (json_encode(getAutoUpperGoalMiss($teamNumber))); ?>
-									},
-
-									{
 										label: "Auto Lower Goal",
 										fillColor: "rgba(220,220,220,0.1)",
 										strokeColor: "red",
@@ -204,18 +191,6 @@ include("navBar.php"); ?>
 										pointHighlightFill: "#fff",
 										pointHighlightStroke: "rgba(220,220,220,1)",
 										data: <?php echo (json_encode(getTeleopUpperGoal($teamNumber))); ?>
-									},
-
-
-									{
-										label: "Teleop Upper Goal Miss",
-										fillColor: "rgba(220,220,220,0.1)",
-										strokeColor: "yellow",
-										pointColor: "rgba(215,222,16,1)",
-										pointStrokeColor: "#ffff00",
-										pointHighlightFill: "#fff",
-										pointHighlightStroke: "rgba(220,220,220,1)",
-										data: <?php echo (json_encode(getTeleopUpperGoalMiss($teamNumber))); ?>
 									},
 
 									{
@@ -644,37 +619,23 @@ include("navBar.php"); ?>
 							</tr>
 							<tr class="info">
 								<td>Average Auto Upper Goal</td>
-								<td><?php echo (getAvgUpperGoal($teamNumber)); ?></td>
+								<td><?php echo round(getAvgUpperGoal($teamNumber),2); ?></td>
 							</tr>
 							<tr class="success">
 								<td>Average Auto Lower Goal</td>
-								<td><?php echo (getAvgLowerGoal($teamNumber)); ?></td>
+								<td><?php echo round(getAvgLowerGoal($teamNumber),2); ?></td>
 							</tr>
 							<tr class="danger">
 								<td>Average Teleop Upper Goal</td>
-								<td><?php echo (getAvgUpperGoalT($teamNumber)); ?></td>
+								<td><?php echo round(getAvgUpperGoalT($teamNumber),2); ?></td>
 							</tr>
 							<tr class="info">
 								<td>Average Teleop Lower Goal</td>
-								<td><?php echo (getAvgLowerGoalT($teamNumber)); ?></td>
+								<td><?php echo round(getAvgLowerGoalT($teamNumber),2); ?></td>
 							</tr>
 							<tr class="success">
 								<td>Average Cycle Count</td>
-								<td><?php echo (getAvgCycleCount($teamNumber)); ?></td>
-							</tr>
-							<tr class="danger">
-								<td>Average Penalties</td>
-								<td><?php echo (getAvgPenalties($teamNumber)); ?></td>
-							</tr>
-
-							<tr class="info">
-								<td>Avg Drive Ranking</td>
-								<td><?php echo (getAvgDriveRank($teamNumber)); ?></td>
-							</tr>
-
-							<tr class="success">
-								<td>Total Defense</td>
-								<td><?php echo (getTotalDefense($teamNumber)); ?></td>
+								<td><?php echo round(getAvgCycleCount($teamNumber),2); ?></td>
 							</tr>
 						</tbody>
 					</table>
@@ -738,17 +699,17 @@ include("navBar.php"); ?>
 
 									<tr class="danger">
 										<td>Average Penalties</td>
-										<td><?php echo (getAvgPenalties($teamNumber)); ?></td>
+										<td><?php echo round(getAvgPenalties($teamNumber),2); ?></td>
 									</tr>
 
 									<tr class="success">
 										<td>Avg Drive Ranking</td>
-										<td><?php echo (getAvgDriveRank($teamNumber)); ?></td>
+										<td><?php echo round(getAvgDriveRank($teamNumber),2); ?></td>
 									</tr>
 
 									<tr class="info">
 										<td>Total Defense</td>
-										<td><?php echo (getTotalDefense($teamNumber)); ?></td>
+										<td><?php echo round(getTotalDefense($teamNumber),2); ?></td>
 									</tr>
 
 								</tbody>
@@ -765,27 +726,27 @@ include("navBar.php"); ?>
 								<tbody>
 									<tr class="info">
 										<td>Average Climbs</td>
-										<td><?php echo (getAvgClimb($teamNumber)); ?></td>
+										<td><?php echo round(getAvgClimb($teamNumber),2); ?></td>
 									</tr>
 									<tr class="success">
 										<td>Total Climbs</td>
-										<td><?php echo (getTotalClimb($teamNumber)); ?></td>
+										<td><?php echo round(getTotalClimb($teamNumber),2); ?></td>
 									</tr>
 									<tr class="danger">
 										<td>Total Low Climbs</td>
-										<td><?php echo (getTotalSingleClimb($teamNumber)); ?></td>
+										<td><?php echo round(getTotalSingleClimb($teamNumber),2); ?></td>
 									</tr>
 									<tr class="info">
 										<td>Total Med Climbs</td>
-										<td><?php echo (getTotalDoubleClimb($teamNumber)); ?></td>
+										<td><?php echo round(getTotalDoubleClimb($teamNumber),2); ?></td>
 									</tr>
 									<tr class="success">
 										<td>Total High Climbs</td>
-										<td><?php echo (getTotalTripleClimb($teamNumber)); ?></td>
+										<td><?php echo round(getTotalTripleClimb($teamNumber),2); ?></td>
 									</tr>
 									<tr class="danger">
 										<td>Total Traversal Climbs</td>
-										<td><?php echo (getTotalQuadClimb($teamNumber)); ?></td>
+										<td><?php echo round(getTotalQuadClimb($teamNumber),2); ?></td>
 									</tr>
 								</tbody>
 							</table>

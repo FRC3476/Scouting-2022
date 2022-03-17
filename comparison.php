@@ -206,7 +206,6 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                     <button class=" btn btn-material-purple">Auto Upper Made</button>
                     <button class=" btn btn-material-red">Auto Lower Made</button>
                     <button class=" btn btn-material-green">Teleop Upper Made</button>
-                    <button class=" btn btn-material-yellow">Teleop Upper Miss</button>
                     <button class=" btn btn-material-blue">Teleop Lower Made</button>
                     <button class=" btn btn-material-orange">Climb</button>
 
@@ -227,8 +226,8 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                                     fillColor: "rgba(220,220,220,0.1)",
                                     strokeColor: "purple",
                                     pointColor: "rgba(146, 16, 222,1)",
-                                    pointStrokeColor: "#ee00ff",
-                                    pointHighlightFill: "#ee00ff",
+                                    pointStrokeColor: "#ffff00",
+                                    pointHighlightFill: "#fff",
                                     pointHighlightStroke: "rgba(220,220,220,1)",
                                     data: <?php echo (json_encode(getAutoUpperGoal($teamNumber))); ?>
                                 },
@@ -253,18 +252,6 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                                     pointHighlightFill: "#fff",
                                     pointHighlightStroke: "rgba(220,220,220,1)",
                                     data: <?php echo (json_encode(getTeleopUpperGoal($teamNumber))); ?>
-                                },
-
-
-                                {
-                                    label: "Teleop Upper Goal Miss",
-                                    fillColor: "rgba(220,220,220,0.1)",
-                                    strokeColor: "yellow",
-                                    pointColor: "rgba(215,222,16,1)",
-                                    pointStrokeColor: "#ffff00",
-                                    pointHighlightFill: "#fff",
-                                    pointHighlightStroke: "rgba(220,220,220,1)",
-                                    data: <?php echo (json_encode(getTeleopUpperGoalMiss($teamNumber))); ?>
                                 },
 
                                 {
@@ -345,6 +332,8 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                         ?>
                         imageObj.onload = function() {
                             makeCanvasReady();
+                            drawPoint4();
+                            printTeleop3();
                             var ctx2 = document.getElementById("dataChart3").getContext("2d");
                             window.myLine = new Chart(ctx2).Line(lineChartData, {
                                 responsive: true
@@ -698,7 +687,6 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                     <button class=" btn btn-material-purple">Auto Upper Made</button>
                     <button class=" btn btn-material-red">Auto Lower Made</button>
                     <button class=" btn btn-material-green">Teleop Upper Made</button>
-                    <button class=" btn btn-material-yellow">Teleop Upper Miss</button>
                     <button class=" btn btn-material-blue">Teleop Lower Made</button>
                     <button class=" btn btn-material-orange">Climb</button>
 
@@ -719,8 +707,8 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                                     fillColor: "rgba(220,220,220,0.1)",
                                     strokeColor: "purple",
                                     pointColor: "rgba(146, 16, 222,1)",
-                                    pointStrokeColor: "#ee00ff",
-                                    pointHighlightFill: "#ee00ff",
+                                    pointStrokeColor: "#ffff00",
+                                    pointHighlightFill: "#fff",
                                     pointHighlightStroke: "rgba(220,220,220,1)",
                                     data: <?php echo (json_encode(getAutoUpperGoal($teamNumber2))); ?>
                                 },
@@ -747,17 +735,6 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                                     data: <?php echo (json_encode(getTeleopUpperGoal($teamNumber2))); ?>
                                 },
 
-
-                                {
-                                    label: "Teleop Upper Goal Miss",
-                                    fillColor: "rgba(220,220,220,0.1)",
-                                    strokeColor: "yellow",
-                                    pointColor: "rgba(215,222,16,1)",
-                                    pointStrokeColor: "#ffff00",
-                                    pointHighlightFill: "#fff",
-                                    pointHighlightStroke: "rgba(220,220,220,1)",
-                                    data: <?php echo (json_encode(getTeleopUpperGoalMiss($teamNumber2))); ?>
-                                },
 
                                 {
                                     label: "Teleop Lower Goal",
@@ -836,6 +813,8 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                         ?>
                         imageObj2.onload = function() {
                             makeCanvasReady2();
+                            drawPoint3();
+                            printTeleop1();
                             var ctx2 = document.getElementById("dataChart3").getContext("2d");
                             window.myLine = new Chart(ctx2).Line(lineChartData, {
                                 responsive: true

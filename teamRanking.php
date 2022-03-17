@@ -24,6 +24,9 @@ include("header.php") ?>
 					<th>Max Auto Lower Goal</th>
 					<th>Avg Climb</th>
 					<th>Total Defense</th>
+					<th>TBA OPR</th>
+					<th>TBA CCWM</th>
+					<th>TBA DPR</th>
 					
 				</tr>
 				<?php
@@ -45,6 +48,10 @@ include("header.php") ?>
 					$maxAutoLower = getMaxLowerGoal($teamNumber);
 					$avgClimb = getAvgClimb($teamNumber);
 					$totalDefense = getTotalDefense($teamNumber);
+					$OPR = getOPR($teamNumber);
+					$CCWM = getCCWM($teamNumber);
+					$DPR = getDPR($teamNumber);
+
 					
 
 
@@ -66,6 +73,9 @@ include("header.php") ?>
 					<th>" . $maxAutoLower . "</th>
 					<th>" . round($avgClimb,3) . "</th>
 					<th>" . $totalDefense . "</th>
+					<th>" . round($OPR,3) . "</th>
+					<th>" . round($CCWM,3) . "</th>
+					<th>" . round($DPR,3) . "</th>
 					</tr>");
 				}
 

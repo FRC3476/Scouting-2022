@@ -22,22 +22,15 @@
 		<!-- What goes under the drop down button/rest of navbar -->
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-left">
-				<!--<li class = "dropdown">
-					<a  class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="color:Black;" >Forms<b class="caret"></b></a>
-	                    <ul class="dropdown-menu">-->
 				<li><a href="matchInput.php" style="color:Black;">Match Form</a></li>
 				<li><a href="pitInput.php" style="color:Black;">PS Form</a></li>
 				<li><a href="leadScoutInput.php" style="color:Black;">LS Input</a></li>
 				<li><a href="pictureUpload.php" style="color:Black;">Picture Upload</a></li>
-				<!--<li><a href="databaseOperations.php" style="color:Black;">Database Op</a></li>-->
-				<!--        </ul>
-				</li>-->
-				<!--<li><a href="userRegistration.php" style="color:Black;">User Registration</a></li>-->
 				<li><a href="matchStrategy.php" style="color:Black;">Team Data</a></li>
+				<li><a href="comparison.php" style="color:Black;">Comparison</a></li>
 				<li><a href="teamRanking.php" style="color:Black;">Ranking</a></li>
 				<li><a href="dataValidation.php" style="color:Black;">Validate</a></li>
 				<li><a href="matchViewer.php" style="color:Black;">Match View</a></li>
-				<li><a href="comparison.php" style="color:Black;">Comparison</a></li>
 				<!--<li><a href="teamFilter.php" style="color:Black;">Team Filter</a></li>-->
 
 			</ul>

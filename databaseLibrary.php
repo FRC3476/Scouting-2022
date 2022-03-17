@@ -92,6 +92,7 @@ function createTables()
 	global $pitScoutTable;
 	global $matchScoutTable;
 	global $leadScoutTable;
+	global $$sorting_items;
 	$conn = connectToDB();
 	$query = "CREATE TABLE " . $dbname . "." . $pitScoutTable . " (
 			teamNumber VARCHAR(50) NOT NULL PRIMARY KEY,
@@ -448,6 +449,22 @@ function getAutoUpperGoalMiss($teamNumber)
 	$cubeGraphT = array();
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][8];
+	}
+
+	$out = array();
+	for ($i = 0; $i != sizeof($matchN); $i++) {
+		array_push($out, $cubeGraphT[$matchN[$i]]);
+	}
+	return ($out);
+}
+
+function Standardize($teamNumber)
+{
+	$teamData = getTeamData($teamNumber);
+	$matchN = matchNum($teamNumber);
+	$cubeGraphT = array();
+	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+		$cubeGraphT[$teamData[8][$i][2]] = 20;
 	}
 
 	$out = array();
@@ -1283,7 +1300,7 @@ function getEventTeams()
 	$data = json_decode($json, true);
 	$array = array();
 	for ($i = 0; $i < count($data); $i++) {
-		array_push($array, substr($data[$i],3));
+		array_push($array, substr($data[$i], 3));
 	}
 
 	return $array;
@@ -1332,20 +1349,51 @@ function getUpperTotal($teamNumber)
 
 function getOPR($teamNumber)
 {
-	$command = escapeshellcmd('python3 oprcalcufinal.py');
-	$output = shell_exec($command);
+	// ************* Call API:
+	$match = getEventRaw();
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, "https://www.thebluealliance.com/api/v3/event/" . $match . "/oprs?X-TBA-Auth-Key=VPexr6soymZP0UMtFw2qZ11pLWcaDSxCMUYOfMuRj5CQT3bzoExsUGHuO1JvyCyU");
+	curl_setopt($ch, CURLOPT_HEADER, 0);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$json = curl_exec($ch);
+	curl_close($ch);
+	$data = json_decode($json, true);
+	$teamNum = (string) $teamNumber;
+	$teamNum = "frc" . $teamNumber;
 
-	$csvFile = file('OPR.txt');
-	$data = array();
-	foreach ($csvFile as $line) {
-		$data[] = str_getcsv($line);
-	}
+	return ($data["oprs"][$teamNum]);
+}
 
-	for ($x = 0; $x < sizeof($data); $x++) {
-		$word = $data[$x][0];
-		$word = substr($word, 3);
-		if ($word == $teamNumber) {
-			return round($data[$x][1], 2);
-		}
-	}
+function getCCWM($teamNumber)
+{
+	// ************* Call API:
+	$match = getEventRaw();
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, "https://www.thebluealliance.com/api/v3/event/" . $match . "/oprs?X-TBA-Auth-Key=VPexr6soymZP0UMtFw2qZ11pLWcaDSxCMUYOfMuRj5CQT3bzoExsUGHuO1JvyCyU");
+	curl_setopt($ch, CURLOPT_HEADER, 0);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$json = curl_exec($ch);
+	curl_close($ch);
+	$data = json_decode($json, true);
+	$teamNum = (string) $teamNumber;
+	$teamNum = "frc" . $teamNumber;
+
+	return ($data["ccwms"][$teamNum]);
+}
+
+function getDPR($teamNumber)
+{
+	// ************* Call API:
+	$match = getEventRaw();
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, "https://www.thebluealliance.com/api/v3/event/" . $match . "/oprs?X-TBA-Auth-Key=VPexr6soymZP0UMtFw2qZ11pLWcaDSxCMUYOfMuRj5CQT3bzoExsUGHuO1JvyCyU");
+	curl_setopt($ch, CURLOPT_HEADER, 0);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$json = curl_exec($ch);
+	curl_close($ch);
+	$data = json_decode($json, true);
+	$teamNum = (string) $teamNumber;
+	$teamNum = "frc" . $teamNumber;
+
+	return ($data["dprs"][$teamNum]);
 }
