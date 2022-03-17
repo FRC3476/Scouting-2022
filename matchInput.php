@@ -80,7 +80,7 @@ include("navBar.php");
 					Alliance Color:
 					<select id="allianceColor" class="form-control">
 						<option value='blue'>Blue</option>
-						<option value='red'>Red</option>
+						<option value='red' >Red</option>
 					</select>
 				</div>
 				<div class="col-md-3">

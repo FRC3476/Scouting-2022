@@ -34,7 +34,7 @@ include("header.php");
                         foreach ($row as $key => $value){
                                 if(!is_numeric($key) && (($key != "autoPath") || ($key != "teleopPath"))){
                                         if($key == "teamNum"){
-                                                $value= '<a href="teamData.php?team='.$value.'">'.$value.'</a>';
+                                                $value= '<a href="matchStrategy.php?team='.$value.'">'.$value.'</a>';
                                                 }
                                         if($key == "matchNum"){
                                                 $value= '<a href="matchData.php?match='.$value.'">'.$value.'</a>';

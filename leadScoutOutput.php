@@ -38,31 +38,31 @@
                                             $value= '<a href="matchData.php?match=".$value."">'.$value.'</a>';
 									}
                                                                         if($key == "team1Off"){
-                                            $value= '<a href="teamData.php?team='.$value.'">'.$value.'</a>';
+                                            $value= '<a href="matchStrategy.php?team='.$value.'">'.$value.'</a>';
 									}
 									if($key == "team2Off"){
-                                            $value= '<a href="teamData.php?team='.$value.'">'.$value.'</a>';
+                                            $value= '<a href="matchStrategy.php?team='.$value.'">'.$value.'</a>';
 									}
 									if($key == "team3Off"){
-                                            $value= '<a href="teamData.php?team='.$value.'">'.$value.'</a>';
+                                            $value= '<a href="matchStrategy.php?team='.$value.'">'.$value.'</a>';
 									}
 									if($key == "team1Def"){
-                                            $value= '<a href="teamData.php?team='.$value.'">'.$value.'</a>';
+                                            $value= '<a href="matchStrategy.php?team='.$value.'">'.$value.'</a>';
 									}
 									if($key == "team2Def"){
-                                            $value= '<a href="teamData.php?team='.$value.'">'.$value.'</a>';
+                                            $value= '<a href="matchStrategy.php?team='.$value.'">'.$value.'</a>';
 									}
 									if($key == "team3Def"){
-                                            $value= '<a href="teamData.php?team='.$value.'">'.$value.'</a>';
+                                            $value= '<a href="matchStrategy.php?team='.$value.'">'.$value.'</a>';
 									}
                                                                         if($key == "team1Dri"){
-                                            $value= '<a href="teamData.php?team='.$value.'">'.$value.'</a>';
+                                            $value= '<a href="matchStrategy.php?team='.$value.'">'.$value.'</a>';
                                                                         }
                                                                         if($key == "team2Dri"){
-                                            $value= '<a href="teamData.php?team='.$value.'">'.$value.'</a>';
+                                            $value= '<a href="matchStrategy.php?team='.$value.'">'.$value.'</a>';
                                                                         }
                                                                         if($key == "team3Dri"){
-                                            $value= '<a href="teamData.php?team='.$value.'">'.$value.'</a>';
+                                            $value= '<a href="matchStrategy.php?team='.$value.'">'.$value.'</a>';
                                                                                                             }
                                echo("<td align='center'>".$value."</td>");
                        }

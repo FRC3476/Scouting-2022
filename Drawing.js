@@ -17,11 +17,16 @@ $(document).ready(function(){
   orangePersist.initializeApp();
   console.log("GETTING USERNAME");
   $("#userName").val(localStorage.getItem("userName"));
+  $("#allianceColor").val(localStorage.getItem("allianceColor"));
 });
 
 function saveUserName(){
   console.log("SETTING USERNAME");
   localStorage.setItem("userName", $("#userName").val());
+}
+
+function saveAllianceColor(){
+  localStorage.setItem("allianceColor", $("#allianceColor").val());
 }
 
 function clearPath(){

@@ -18,15 +18,32 @@ include("header.php") ?>
 				include("databaseLibrary.php");
 				$teamList = getEventTeams();
 				foreach ($teamList as $teamNumber) {
-
 					$i = 0;
 					$pitScouted = (getPit($teamNumber));
 					$pictureTaken = getPicture($teamNumber);
 					
+					if($pitScouted == "Yes"){
+						$Pitcolor = "lightgreen";
+					}else{
+						$Pitcolor = "White";
+					}
+
+					if($pictureTaken == "Yes"){
+						$Piccolor = "lightgreen";
+					}else{
+						$Piccolor = "White";
+					}
+
+					if(($pictureTaken == "Yes")&&($pitScouted == "Yes")){
+						$color = "lightgreen";
+					}else{
+						$color = "White";
+					}
+
 					echo ("<tr>
-					<td><a href='matchStrategy.php?team=" . $teamNumber . "'>" . $teamNumber . "</a></td>
-					<th>" . $pitScouted . "</th>
-					<th>" . $pictureTaken . "</th>
+					<td bgcolor=".$color."><a href='matchStrategy.php?team=" . $teamNumber . "'>" . $teamNumber . "</a></td>
+					<th bgcolor=".$Pitcolor.">" . $pitScouted . "</th>
+					<th bgcolor=".$Piccolor.">" . $pictureTaken . "</th>
 					</tr>");
 				}
 

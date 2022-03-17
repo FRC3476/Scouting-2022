@@ -41,7 +41,6 @@ include("navBar.php"); ?>
 				$teamNumber = $_GET["team"];
 				include("databaseName.php");
 				include("databaseLibrary.php");
-				//getTeamData($_GET["team"]);
 				$teamData = getTeamData($teamNumber);
 			}
 			?>

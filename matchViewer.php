@@ -4,6 +4,7 @@ include("header.php");
 include("navBar.php");
 ?>
 <script>
+
     function postwith(to) {
 
         var myForm = document.createElement("form");
@@ -11,10 +12,12 @@ include("navBar.php");
         myForm.action = to;
 
         var names = [
+            'match_type',
             'match'
         ];
 
         var nums = [
+            document.getElementById('match_type').value,
             document.getElementById('match').value
         ];
 
@@ -39,14 +42,17 @@ function filter($str)
 {
     return filter_var($str, FILTER_UNSAFE_RAW);
 }
+include("databaseLibrary.php");
+$ourMatches = getOurMatches();
 if (
-    isset($_POST['match'])
+    isset($_POST['match']) && isset($_POST['match_type'])
 ) {
-    include("databaseLibrary.php");
     $matchNum = filter($_POST['match']);
+    $matchNum = "m" . $matchNum;
+    $matchType = filter($_POST['match_type']);
     if ($matchNum != null) {
-        $event = getEvent();
-        $match = $event . $matchNum;
+        $event = getEventRaw();
+        $match = $event . "_" . $matchType . $matchNum;
         $team1Blue = getMatchAlliance($match, "blue", 0);
         $team2Blue = getMatchAlliance($match, "blue", 1);
         $team3Blue = getMatchAlliance($match, "blue", 2);
@@ -94,17 +100,114 @@ if (
 ?>
 
 <body>
-
     <div class="container row-offcanvas row-offcanvas-left">
         <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
 
-                <a>
-                    <h3><b><u>Match Number:</u></b></h3>
-                </a>
-                <input type="text" name="match" id="match" size="8" class="form-control">
-                <br />
-                <button id="submit" class="btn btn-primary" onclick="postwith('');">Submit</button>
-                <br />
+            <a>
+                <h3><b><u>Our Matches:</u></b></h3>
+                <h10><?php 
+                    for ($i = 0; $i < count($ourMatches); $i++) {
+                        if (substr($ourMatches[$i],0,2) == "f1"){
+                            $matchType1 = "f1";
+                            if(substr($ourMatches[$i],2,4) == "m1"){
+                                $match1 = "1";
+                            }else if(substr($ourMatches[$i],2,4) == "m2"){
+                                $match1 = "2";
+                            }else{
+                                $match1 = "3";
+                            }
+                        }
+                        if (substr($ourMatches[$i],0,3) == "sf1"){
+                            $matchType1 = "sf1";
+                            if(substr($ourMatches[$i],3,5) == "m1"){
+                                $match1 = "1";
+                            }else if(substr($ourMatches[$i],3,5) == "m2"){
+                                $match1 = "2";
+                            }else{
+                                $match1 = "3";
+                            }
+                        }
+                        if (substr($ourMatches[$i],0,3) == "sf2"){
+                            $matchType1 = "sf2";
+                            if(substr($ourMatches[$i],3,5) == "m1"){
+                                $match1 = "1";
+                            }else if(substr($ourMatches[$i],3,5) == "m2"){
+                                $match1 = "2";
+                            }else{
+                                $match1 = "3";
+                            }
+                        }
+
+                        if (substr($ourMatches[$i],0,3) == "qf1"){
+                            $matchType1 = "qf1";
+                            if(substr($ourMatches[$i],3,5) == "m1"){
+                                $match1 = "1";
+                            }else if(substr($ourMatches[$i],3,5) == "m2"){
+                                $match1 = "2";
+                            }else{
+                                $match1 = "3";
+                            }
+                        }
+                        if (substr($ourMatches[$i],0,3) == "qf2"){
+                            $matchType1 = "qf2";
+                            if(substr($ourMatches[$i],3,5) == "m1"){
+                                $match1 = "1";
+                            }else if(substr($ourMatches[$i],3,5) == "m2"){
+                                $match1 = "2";
+                            }else{
+                                $match1 = "3";
+                            }
+                        }
+                        if (substr($ourMatches[$i],0,3) == "qf3"){
+                            $matchType1 = "qf3";
+                            if(substr($ourMatches[$i],3,5) == "m1"){
+                                $match1 = "1";
+                            }else if(substr($ourMatches[$i],3,5) == "m2"){
+                                $match1 = "2";
+                            }else{
+                                $match1 = "3";
+                            }
+                        }
+                        if (substr($ourMatches[$i],0,3) == "qf4"){
+                            $matchType1 = "qf4";
+                            if(substr($ourMatches[$i],3,5) == "m1"){
+                                $match1 = "1";
+                            }else if(substr($ourMatches[$i],3,5) == "m2"){
+                                $match1 = "2";
+                            }else{
+                                $match1 = "3";
+                            }
+                        }
+                        if (substr($ourMatches[$i],0,2) == "qm"){
+                            $matchType1 = "q";
+                            $match1 = substr($ourMatches[$i],2);
+                        }
+
+
+                        echo ' - <a href="matchViewer.php?match='.$match1.'&match_type='.$matchType1.'">'. $ourMatches[$i] . '</a> - ';
+                    }
+                    ?></h10>
+            </a>
+            <a>
+                <h3><b><u>Match Number:</u></b></h3>
+            </a>
+            <select id="match_type" value="<?php $types = ((isset($_GET["match_type"]))?htmlspecialchars($_GET["match_type"]):""); ?>">
+                <option <?php if ($types == "q"): ?>selected="selected"<?php endif; ?> value="q">Qual</option>
+                <option <?php if ($types == "qf1"): ?>selected="selected"<?php endif; ?> value="qf1">QF 1</option>
+                <option <?php if ($types == "qf2"): ?>selected="selected"<?php endif; ?> value="qf2">QF 2</option>
+                <option <?php if ($types == "qf3"): ?>selected="selected"<?php endif; ?> value="qf3">QF 3</option>
+                <option <?php if ($types == "qf4"): ?>selected="selected"<?php endif; ?> value="qf4">QF 4</option>
+                <option <?php if ($types == "sf1"): ?>selected="selected"<?php endif; ?> value="sf1">SF 1</option>
+                <option <?php if ($types == "sf2"): ?>selected="selected"<?php endif; ?> value="sf2">SF 2</option>
+                <option <?php if ($types == "f1"): ?>selected="selected"<?php endif; ?> value="f1">Final</option>
+            </select>
+            <input type="text" name="match" id="match" value="<?php echo ((isset($_GET["match"]))?htmlspecialchars($_GET["match"]):"");?>" size="8" class="form-control">
+            <br />
+            <script>
+                window.history.pushState('','','matchViewer.php');
+            </script>
+            <button id="submit" class="btn btn-primary"  onclick="postwith('');">Submit</button>
+            <br />
         </div>
     </div>
 
