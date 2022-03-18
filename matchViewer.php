@@ -184,7 +184,7 @@ if (
                         }
 
 
-                        echo ' - <a href="matchViewer.php?match='.$match1.'&match_type='.$matchType1.'">'. $ourMatches[$i] . '</a> - ';
+                        echo '  <a href="matchViewer.php?match='.$match1.'&match_type='.$matchType1.'">'. $ourMatches[$i] . '</a>,  ';
                     }
                     ?></h10>
             </a>
@@ -213,6 +213,9 @@ if (
 
     <div class="container row-offcanvas row-offcanvas-left">
         <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
+                <?php 
+                    echo("<a><h3><b>"."Match: ".$matchType . $matchNum."</b></h3></a>");
+                ?>
             <div class="row">
                 <div class="column1">
                     <div class="table-responsive">
