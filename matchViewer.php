@@ -101,6 +101,15 @@ if (
     $redEstimate += getAvgPenalties($team1Blue) + getAvgPenalties($team2Blue) + getAvgPenalties($team3Blue);
     $redAutoTotal = getAvgUpperGoalT($team1Red) + getAvgUpperGoalT($team2Red) + getAvgUpperGoalT($team3Red);
     $blueAutoTotal = (getAvgUpperGoal($team1Blue) + getAvgUpperGoal($team2Blue) + getAvgUpperGoal($team3Blue));
+    $red1ClimbScore = (getQuadClimbPercent($team1Red)*15) + (getTripleClimbPercent($team1Red)*10) + (getDoubleClimbPercent($team1Red)*6) + (getSingleClimbPercent($team1Red)*4);
+    $red2ClimbScore = (getQuadClimbPercent($team2Red)*15) + (getTripleClimbPercent($team2Red)*10) + (getDoubleClimbPercent($team2Red)*6) + (getSingleClimbPercent($team2Red)*4);
+    $red3ClimbScore = (getQuadClimbPercent($team3Red)*15) + (getTripleClimbPercent($team3Red)*10) + (getDoubleClimbPercent($team3Red)*6) + (getSingleClimbPercent($team3Red)*4);
+    $redTotalClimb = ($red1ClimbScore + $red2ClimbScore + $red3ClimbScore);
+    $blue1ClimbScore = (getQuadClimbPercent($team1Blue)*15) + (getTripleClimbPercent($team1Blue)*10) + (getDoubleClimbPercent($team1Blue)*6) + (getSingleClimbPercent($team1Blue)*4);
+    $blue2ClimbScore = (getQuadClimbPercent($team2Blue)*15) + (getTripleClimbPercent($team2Blue)*10) + (getDoubleClimbPercent($team2Blue)*6) + (getSingleClimbPercent($team2Blue)*4);
+    $blue3ClimbScore = (getQuadClimbPercent($team3Blue)*15) + (getTripleClimbPercent($team3Blue)*10) + (getDoubleClimbPercent($team3Blue)*6) + (getSingleClimbPercent($team3Blue)*4);
+    $blueTotalClimb = ($blue1ClimbScore + $blue2ClimbScore + $blue3ClimbScore);
+    $redTotalScore = getTotalScore($team1Red) + getTotalScore($team2Red) + getTotalScore($team3Red);
 }
 ?>
 
@@ -225,6 +234,38 @@ if (
             <?php
             echo ("<a><h3><b>" . "Match: " . $matchType . $matchNum . "</b></h3></a>");
             ?>
+            <div class="row">
+                <table class="table" style="width:100%">
+                    <tr>
+                        <th>
+                            <th></th>
+                            <th>Red Alliance</th>
+                            <th>Blue Alliance</th>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <th>Avg Total Points</th>
+                            <th><?php echo (($redTotalScore)); ?></th>
+                            <th>AVG</th>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <th>Avg Total Cargo</th>
+                            <th>AVG</th>
+                            <th>AVG</th>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <th>Avg Climb Points</th>
+                            <th><?php echo (($redTotalClimb)); ?></th>
+                            <th><?php echo (($blueTotalClimb)); ?></th>
+                        </th>
+                    </tr>
+                </table>
+            </div>
             <div class="row">
                 <div class="column1">
                     <div class="table-responsive">
