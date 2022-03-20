@@ -195,9 +195,6 @@ include("header.php") ?>
 
 
 
-
-
-
             echo ("<tr>
 					<td><a href='matchStrategy.php?team=" . $teamNumber . "'>" . $teamNumber . "</a></td>
 					<th>" . $picklist . "</th>
