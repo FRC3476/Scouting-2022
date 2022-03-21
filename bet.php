@@ -17,6 +17,7 @@ if (isset($_POST['matchNum'])) {
         $TotalAutoBlue = filter($_POST['TotalAutoBlue']);
         $Winner = filter($_POST['Winner']);
         $name = filter($_POST['name']);
+        $ID = $matchNum . "-" . $name;
 
 
 
@@ -28,7 +29,8 @@ if (isset($_POST['matchNum'])) {
             $TotalAutoRed,
             $TotalAutoBlue,
             $Winner,
-            $name
+            $name,
+            $ID
         );
     }
 }

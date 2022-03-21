@@ -163,11 +163,12 @@ function createTables()
 	$query = "CREATE TABLE " . $dbname . "." . $betTable . " (
 		matchNum INT(11) NOT NULL,
 		RedScorePredict TEXT NOT NULL,
-		BlueScorePredict TEXT NULL,
-		TotalAutoRed TEXT NULL,
-		TotalAutoBlue TEXT NULL,
-		Winner TEXT NULL,
-		name VARCHAR(50) NULL PRIMARY KEY
+		BlueScorePredict TEXT NOT NULL,
+		TotalAutoRed TEXT NOT NULL,
+		TotalAutoBlue TEXT NOT NULL,
+		Winner TEXT NOT NULL,
+		name TEXT NOT NULL,
+		ID VARCHAR(50) NOT NULL PRIMARY KEY
 	)";
 	$statement = $conn->prepare($query);
 	if (!$statement->execute()) {
@@ -186,11 +187,11 @@ function pitScoutInput($teamNumber, $teamName, $numBatteries, $chargedBatteries,
 	$queryOutput = runQuery($queryString);
 }
 
-function betInput($matchNum, $RedScorePredict, $BlueScorePredict, $TotalAutoRed, $TotalAutoBlue, $Winner, $name)
+function betInput($matchNum, $RedScorePredict, $BlueScorePredict, $TotalAutoRed, $TotalAutoBlue, $Winner, $name, $ID)
 {
 	global $betTable;
-	$queryString = "REPLACE INTO `" . $betTable . "` (`matchNum`, `RedScorePredict`, `BlueScorePredict`,`TotalAutoRed`, `TotalAutoBlue`, `Winner`, `name`)";
-	$queryString = $queryString . ' VALUES ("' . $matchNum . '", "' . $RedScorePredict . '", "' . $BlueScorePredict . '", "' . $TotalAutoRed . '", "' . $TotalAutoBlue . '", "' . $Winner . '", "' . $name . '")';
+	$queryString = "REPLACE INTO `" . $betTable . "` (`matchNum`, `RedScorePredict`, `BlueScorePredict`,`TotalAutoRed`, `TotalAutoBlue`, `Winner`, `name`, `ID`)";
+	$queryString = $queryString . ' VALUES ("' . $matchNum . '", "' . $RedScorePredict . '", "' . $BlueScorePredict . '", "' . $TotalAutoRed . '", "' . $TotalAutoBlue . '", "' . $Winner . '", "' . $name . '", "' . $ID . '")';
 	$queryOutput = runQuery($queryString);
 }
 
