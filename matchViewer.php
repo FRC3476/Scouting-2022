@@ -96,6 +96,8 @@ if (
     $blueAuto1 = getAuto($team1Blue);
     $blueAuto2 = getAuto($team2Blue);
     $blueAuto3 = getAuto($team3Blue);
+    $totalBlueCargo = getAvgUpperGoal($team1Blue)+getAvgUpperGoalT($team1Blue)+getAvgLowerGoal($team1Blue)+getAvgLowerGoalT($team1Blue)+getAvgUpperGoal($team2Blue)+getAvgUpperGoalT($team2Blue)+getAvgLowerGoal($team2Blue)+getAvgLowerGoalT($team2Blue)+getAvgUpperGoal($team3Blue)+getAvgUpperGoalT($team3Blue)+getAvgLowerGoal($team3Blue)+getAvgLowerGoalT($team3Blue);
+    $totalRedCargo = getAvgUpperGoal($team1Red)+getAvgUpperGoalT($team1Red)+getAvgLowerGoal($team1Red)+getAvgLowerGoalT($team1Red)+getAvgUpperGoal($team2Red)+getAvgUpperGoalT($team2Red)+getAvgLowerGoal($team2Red)+getAvgLowerGoalT($team2Red)+getAvgUpperGoal($team3Red)+getAvgUpperGoalT($team3Red)+getAvgLowerGoal($team3Red)+getAvgLowerGoalT($team3Red);
     $blueAuto = getAutoValue($team1Blue) + getAutoValue($team2Blue) + getAutoValue($team3Blue);
     $blueEstimate += getAvgPenalties($team1Red) + getAvgPenalties($team2Red) + getAvgPenalties($team3Red);
     $redEstimate += getAvgPenalties($team1Blue) + getAvgPenalties($team2Blue) + getAvgPenalties($team3Blue);
@@ -109,7 +111,8 @@ if (
     $blue2ClimbScore = (getQuadClimbPercent($team2Blue)*15) + (getTripleClimbPercent($team2Blue)*10) + (getDoubleClimbPercent($team2Blue)*6) + (getSingleClimbPercent($team2Blue)*4);
     $blue3ClimbScore = (getQuadClimbPercent($team3Blue)*15) + (getTripleClimbPercent($team3Blue)*10) + (getDoubleClimbPercent($team3Blue)*6) + (getSingleClimbPercent($team3Blue)*4);
     $blueTotalClimb = ($blue1ClimbScore + $blue2ClimbScore + $blue3ClimbScore);
-    $redTotalScore = getTotalScore($team1Red) + getTotalScore($team2Red) + getTotalScore($team3Red);
+    $redTotalScore = getAvgscore($team1Red) + getAvgscore($team2Red) + getAvgscore($team3Red);
+    $blueTotalScore = getAvgscore($team1Blue) + getAvgscore($team2Blue) + getAvgscore($team3Blue);
 }
 ?>
 
@@ -247,14 +250,14 @@ if (
                         <th>
                             <th>Avg Total Points</th>
                             <th><?php echo (($redTotalScore)); ?></th>
-                            <th>AVG</th>
+                            <th><?php echo (($blueTotalScore)); ?></th>
                         </th>
                     </tr>
                     <tr>
                         <th>
                             <th>Avg Total Cargo</th>
-                            <th>AVG</th>
-                            <th>AVG</th>
+                            <th><?php echo($totalRedCargo);?></th>
+                            <th><?php echo($totalBlueCargo);?></th>
                         </th>
                     </tr>
                     <tr>
