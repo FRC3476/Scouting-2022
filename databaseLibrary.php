@@ -167,7 +167,7 @@ function createTables()
 		TotalAutoRed TEXT NULL,
 		TotalAutoBlue TEXT NULL,
 		Winner TEXT NULL,
-		name TEXT NULL PRIMARY KEY
+		name VARCHAR(50) NULL PRIMARY KEY
 	)";
 	$statement = $conn->prepare($query);
 	if (!$statement->execute()) {
