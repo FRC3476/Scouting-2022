@@ -37,15 +37,6 @@ if (isset($_POST['matchNum'])) {
 
 ?>
 
-<script>
-    /*
-    function getMatch() {
-        $match = document.getElementById('matchNum').value;
-        window.location.assign("bet.php?matchNum=" + $match);
-    }
-    */
-</script>
-
 <head>
 
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -76,7 +67,7 @@ if (isset($_POST['matchNum'])) {
                 <div class="form-group">
                     <b><text class="col-lg-2 control-label">Match Number: </text></b>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="matchNum" name="matchNum" placeholder=" " value="<?php echo ((isset($_GET["matchNum"])) ? htmlspecialchars($_GET["matchNum"]) : ""); ?>" onkeyup="getMatch()">
+                        <input type="text" class="form-control" id="matchNum" name="matchNum" placeholder=" " value="<?php echo ((isset($_GET["matchNum"])) ? htmlspecialchars($_GET["matchNum"]) : ""); ?>">
                     </div>
                 </div>
 
@@ -106,6 +97,18 @@ if (isset($_POST['matchNum'])) {
                 </div>
 
                 <div class="col-lg-2">
+                    <b><br>Which Alliance will get more climb points:</b>
+                </div>
+                <div class="col-lg-10">
+                    <select name="BlueScorePredict" class="form-control">
+                        <option value="" disabled selected>Choose option</option>
+                        <option value='Blue'>Blue</option>
+                        <option value='Red'>Red</option>
+                        <option value='Equal'>Equal</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-2">
                     <b><br>Which Alliance will Win: </b>
                 </div>
                 <div class="col-lg-10">
@@ -118,29 +121,10 @@ if (isset($_POST['matchNum'])) {
                 </div>
 
                 <div class="col-lg-2">
-                    <b><br>Will the Winning Alliance Win by More or Less than 15:</b>
+                    <b><br>Margin of Victory:</b>
                 </div>
                 <div class="col-lg-10">
-                    <select name="RedScorePredict" class="form-control">
-                        <option value="" disabled selected>Choose option</option>
-                        <option value='More'>More</option>
-                        <option value='Less'>Less</option>
-                        <option value='Equal'>Equal</option>
-                    </select>
-                </div>
-
-                <div class="col-lg-2">
-                    <b><br>Will Blue Alliance Score More, Less, or Equal to:</b>
-                </div>
-                <div class="col-lg-10">
-                    <select name="BlueScorePredict" class="form-control">
-                        <option value="" disabled selected>Choose option</option>
-                        <option value='More'>More</option>
-                        <option value='Less'>Less</option>
-                        <option value='Equal'>Equal</option>
-                    </select>
-                    <br>
-                    <br>
+                    <input type="text" class="form-control" id="RedScorePredict" name="RedScorePredict" placeholder=" ">
                 </div>
 
                 <div class="col-lg-12 col-sm-12 col-xs-12">

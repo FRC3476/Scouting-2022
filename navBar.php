@@ -29,11 +29,10 @@
 				<li><a href="matchStrategy.php" style="color:Black;">Team Data</a></li>
 				<li><a href="comparison.php" style="color:Black;">Comparison</a></li>
 				<li><a href="teamRanking.php" style="color:Black;">Ranking</a></li>
-				<li><a href="dataValidation.php" style="color:Black;">Validate</a></li>
 				<li><a href="matchViewer.php" style="color:Black;">Match View</a></li>
-				<li><a href="matchData.php" style="color:Black;">Match Data</a></li>
 				<li><a href="bet.php" style="color:Black;">Bet</a></li>
-				<!--<li><a href="teamFilter.php" style="color:Black;">Team Filter</a></li>-->
+				<li><a href="dataValidation.php" style="color:Black;">Validate</a></li>
+				<li><a href="matchData.php" style="color:Black;">Match Data</a></li>
 
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
