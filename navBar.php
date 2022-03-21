@@ -32,6 +32,7 @@
 				<li><a href="dataValidation.php" style="color:Black;">Validate</a></li>
 				<li><a href="matchViewer.php" style="color:Black;">Match View</a></li>
 				<li><a href="matchData.php" style="color:Black;">Match Data</a></li>
+				<li><a href="bet.php" style="color:Black;">Bet</a></li>
 				<!--<li><a href="teamFilter.php" style="color:Black;">Team Filter</a></li>-->
 
 			</ul>
