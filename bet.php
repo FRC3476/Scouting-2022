@@ -64,58 +64,58 @@ if (isset($_POST['matchNum'])) {
 				<div class="form-group">
 					<b><text class="col-lg-2 control-label">Name: </text></b>
 					<div class="col-lg-10">
-						<input type="text" class="form-control" id="teamNumber" name="teamNumber" placeholder=" ">
+						<input type="text" class="form-control" id="name" name="name" placeholder=" ">
 					</div>
 				</div>
 
 				<div class="col-lg-2">
-					<b><br>Team Name: </b>
+					<b><br>Match Number: </b>
 				</div>
 				<div class="col-lg-10">
-					<input type="text" class="form-control" id="teamName" name="teamName" placeholder=" ">
+					<input type="text" class="form-control" id="matchNum" name="matchNum" placeholder=" ">
 				</div>
 
 				<div class="col-lg-2">
-					<b><br>Batteries and how many can be charged at once: </b>
+					<b><br>Will Red Alliance Score More or Less than: </b>
 				</div>
 				<div class="col-lg-10">
-					<input type="text" class="form-control" id="numBatteries" name="numBatteries" placeholder=" ">
+					<input type="text" class="form-control" id="RedScorePredict" name="RedScorePredict" placeholder=" ">
 				</div>
 
 				<div class="col-lg-2">
-					<b><br>Did they locktite their Falcons: </b>
+					<b><br>Will Blue Alliance Score More or Less than: </b>
 				</div>
 				<div class="col-lg-10">
-					<input type="text" class="form-control" id="chargedBatteries" name="chargedBatteries" placeholder=" ">
+					<input type="text" class="form-control" id="BlueScorePredict" name="BlueScorePredict" placeholder=" ">
 					<br>
 				</div>
 
 				<div class="col-lg-2">
-					<b><br>Code Language: </b>
+					<b><br>Auto Balls Scored by Red Alliance: </b>
 				</div>
 				<div class="col-lg-10">
-					<input type="text" class="form-control" id="codeLanguage" name="codeLanguage" placeholder=" ">
+					<input type="text" class="form-control" id="TotalAutoRed" name="TotalAutoRed" placeholder=" ">
 					<br>
 				</div>
 
 				<div class="col-lg-2">
-					<b><br> If they have a Climber, what is their highest climb level: </b>
+					<b><br>Auto Balls Scored by Blue Alliance: </b>
 				</div>
 				<div class="col-lg-10">
-					<input type="text" class="form-control" id="climbHelp" name="climbHelp" placeholder=" ">
+					<input type="text" class="form-control" id="TotalAutoBlue" name="TotalAutoBlue" placeholder=" ">
 					<br>
 				</div>
 
 				<div class="col-lg-2">
-					<b><br>Auto Paths and Comments:</b>
+					<b><br>Which Alliance will Win: </b>
 				</div>
 				<div class="col-lg-10">
-					<input type="text" class="form-control" id="pitComments" name="pitComments" placeholder=" ">
+					<input type="text" class="form-control" id="Winner" name="Winner" placeholder=" ">
 					<br>
 				</div>
 
 				<div class="col-lg-12 col-sm-12 col-xs-12">
-					<input id="PitScouting" type="submit" class="btn btn-primary" value="Submit Data" onclick="">
+					<input id="Bet" type="submit" class="btn btn-primary" value="Submit Data" onclick="">
 			</form>
 		</div>
 		<br>
