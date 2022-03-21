@@ -5,11 +5,33 @@ function filter($str)
 {
     return filter_var($str, FILTER_SANITIZE_STRING);
 }
+
+function match1($match)
+{
+    $event = getEvent();
+    $match1 = $event + $match;
+    $team1Blue = getMatchAlliance($match1, "blue", 0);
+    $team2Blue = getMatchAlliance($match1, "blue", 1);
+    $team3Blue = getMatchAlliance($match1, "blue", 2);
+    $team1Red = getMatchAlliance($match1, "red", 0);
+    $team2Red = getMatchAlliance($match1, "red", 1);
+    $team3Red = getMatchAlliance($match1, "red", 2);
+    $blue1Estimate = getAvgscore($team1Blue);
+    $blue2Estimate = getAvgscore($team2Blue);
+    $blue3Estimate = getAvgscore($team3Blue);
+    $red1Estimate = getAvgscore($team1Red);
+    $red2Estimate = getAvgscore($team2Red);
+    $red3Estimate = getAvgscore($team3Red);
+    $blueEstimate = round($blue1Estimate + $blue2Estimate + $blue3Estimate);
+    $redEstimate = round($red1Estimate + $red2Estimate + $red3Estimate);
+}
+
 if (isset($_POST['matchNum'])) {
     if ($_POST['matchNum'] != "") {
 
 
         include("databaseLibrary.php");
+
         $matchNum = filter($_POST['matchNum']);
         $RedScorePredict = filter($_POST['RedScorePredict']);
         $BlueScorePredict = filter($_POST['BlueScorePredict']);
@@ -18,8 +40,6 @@ if (isset($_POST['matchNum'])) {
         $Winner = filter($_POST['Winner']);
         $name = filter($_POST['name']);
         $ID = $matchNum . "-" . $name;
-
-
 
 
         betInput(
@@ -34,7 +54,15 @@ if (isset($_POST['matchNum'])) {
         );
     }
 }
+
 ?>
+
+<script>
+    function getMatch() {
+        $match = document.getElementById('matchNum').value;
+        window.location.assign("bet.php?matchNum=" + $match);
+    }
+</script>
 
 <head>
 
@@ -64,6 +92,15 @@ if (isset($_POST['matchNum'])) {
 
             <form action="" method="post" enctype="multipart/form-data">
                 <div class="form-group">
+                    <b><text class="col-lg-2 control-label">Match Number: </text></b>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="matchNum" name="matchNum" placeholder=" " value="<?php echo ((isset($_GET["matchNum"])) ? htmlspecialchars($_GET["matchNum"]) : ""); ?>" onkeyup="getMatch()">
+                    </div>
+                </div>
+
+                <br></br>
+
+                <div class="form-group">
                     <b><text class="col-lg-2 control-label">Name: </text></b>
                     <div class="col-lg-10">
                         <input type="text" class="form-control" id="name" name="name" placeholder=" ">
@@ -71,17 +108,11 @@ if (isset($_POST['matchNum'])) {
                 </div>
 
                 <div class="col-lg-2">
-                    <b><br>Match Number: </b>
+                    <b><br>Will Red Alliance Score More or Less than:</b>
                 </div>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="matchNum" name="matchNum" placeholder=" ">
-                </div>
-
-                <div class="col-lg-2">
-                    <b><br>Will Red Alliance Score More or Less than: </b>
-                </div>
-                <div class="col-lg-10">
-                    <select id="RedScorePredict" class="form-control">
+                    <select name="RedScorePredict" class="form-control">
+                        <option value="" disabled selected>Choose option</option>
                         <option value='More'>More</option>
                         <option value='Less'>Less</option>
                         <option value='Equal'>Equal</option>
@@ -89,10 +120,11 @@ if (isset($_POST['matchNum'])) {
                 </div>
 
                 <div class="col-lg-2">
-                    <b><br>Will Blue Alliance Score More, Less, or Equal to: </b>
+                    <b><br>Will Blue Alliance Score More, Less, or Equal to:</b>
                 </div>
                 <div class="col-lg-10">
-                    <select id="BlueScorePredict" class="form-control">
+                    <select name="BlueScorePredict" class="form-control">
+                        <option value="" disabled selected>Choose option</option>
                         <option value='More'>More</option>
                         <option value='Less'>Less</option>
                         <option value='Equal'>Equal</option>
@@ -121,7 +153,8 @@ if (isset($_POST['matchNum'])) {
                     <b><br>Which Alliance will Win: </b>
                 </div>
                 <div class="col-lg-10">
-                    <select id="Winner" class="form-control">
+                    <select name="Winner" class="form-control">
+                        <option value="" disabled selected>Choose Winner</option>
                         <option value='Blue'>Blue</option>
                         <option value='Red'>Red</option>
                     </select>
