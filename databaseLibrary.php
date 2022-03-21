@@ -12,6 +12,7 @@ function runQuery($queryString)
 	global $dbname;
 	global $pitScoutTable;
 	global $matchScoutTable;
+	global $betTable;
 	global $leadScoutTable;
 	//Establish Connection
 	try {
@@ -91,6 +92,7 @@ function createTables()
 	global $dbname;
 	global $pitScoutTable;
 	global $matchScoutTable;
+	global $betTable;
 	global $leadScoutTable;
 	global $$sorting_items;
 	$conn = connectToDB();
@@ -157,6 +159,19 @@ function createTables()
 	if (!$statement->execute()) {
 		throw new Exception("constructDatabase Error: CREATE TABLE leadScoutTable query failed.");
 	}
+
+	$query = "CREATE TABLE " . $dbname . "." . $betTable . " (
+		matchNum INT(11) NOT NULL PRIMARY KEY,
+		RedScorePredict TEXT NOT NULL,
+		BlueScorePredict TEXT NULL,
+		TotalAutoRed TEXT NULL,
+		TotalAutoBlue TEXT NULL,
+		Winner TEXT NULL
+	)";
+	$statement = $conn->prepare($query);
+	if (!$statement->execute()) {
+		throw new Exception("constructDatabase Error: CREATE TABLE Bet Table query failed.");
+	}
 }
 
 //Input- pitScoutInput, Data from pit scout form is assigned to columns in 17template_pitscout.
@@ -167,6 +182,14 @@ function pitScoutInput($teamNumber, $teamName, $numBatteries, $chargedBatteries,
 	global $pitScoutTable;
 	$queryString = "REPLACE INTO `" . $pitScoutTable . "` (`teamNumber`, `teamName`, `numBatteries`,`chargedBatteries`, `codeLanguage`, `pitComments`, `climbHelp`)";
 	$queryString = $queryString . ' VALUES ("' . $teamNumber . '", "' . $teamName . '", "' . $numBatteries . '", "' . $chargedBatteries . '", "' . $codeLanguage . '", "' . $pitComments . '", "' . $climbHelp . '")';
+	$queryOutput = runQuery($queryString);
+}
+
+function betInput($matchNum, $RedScorePredict, $BlueScorePredict, $TotalAutoRed, $TotalAutoBlue, $Winner)
+{
+	global $betTable;
+	$queryString = "REPLACE INTO `" . $betTable . "` (`matchNum`, `RedScorePredict`, `BlueScorePredict`,`TotalAutoRed`, `TotalAutoBlue`, `Winner`)";
+	$queryString = $queryString . ' VALUES ("' . $matchNum . '", "' . $RedScorePredict . '", "' . $BlueScorePredict . '", "' . $TotalAutoRed . '", "' . $TotalAutoBlue . '", "' . $Winner . '")';
 	$queryOutput = runQuery($queryString);
 }
 
