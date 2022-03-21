@@ -33,28 +33,6 @@ if (isset($_POST['matchNum'])) {
     }
 }
 ?>
-<script>
-	function postwith(to) {
-
-		var nums = {
-			'matchNum': document.getElementById('matchNum').value,
-			'RedScorePredict': document.getElementById('RedScorePredict').value,
-			'BlueScorePredict': document.getElementById('BlueScorePredict').value,
-			'TotalAutoRed': document.getElementById('TotalAutoRed').value,
-			'TotalAutoBlue': document.getElementById('TotalAutoBlue').value,
-			'Winner': document.getElementById('Winner').value,
-			'name': document.getElementById('name').value
-		};
-
-		console.log(JSON.stringify(nums));
-		$.post("betHandler.php", nums).done(function(data) {}).done(function() {
-			alert("Submission Succeeded! Form Reloading.");
-			location.reload(true);
-		}).fail(function() {
-			alert("Submission Failed! Please alert your head or lead scout!");
-		});
-	}
-</script>
 
 <head>
 
@@ -149,7 +127,7 @@ if (isset($_POST['matchNum'])) {
                 </div>
 
                 <div class="col-lg-12 col-sm-12 col-xs-12">
-                    <input id="Bet" type="submit" class="btn btn-primary" value="Submit Data" onclick="postwith('')">
+                    <input id="Bet" type="submit" class="btn btn-primary" value="Submit Data" onclick="">
             </form>
         </div>
         <br>
