@@ -108,32 +108,6 @@ if (isset($_POST['matchNum'])) {
                 </div>
 
                 <div class="col-lg-2">
-                    <b><br>Will Red Alliance Score More or Less than:</b>
-                </div>
-                <div class="col-lg-10">
-                    <select name="RedScorePredict" class="form-control">
-                        <option value="" disabled selected>Choose option</option>
-                        <option value='More'>More</option>
-                        <option value='Less'>Less</option>
-                        <option value='Equal'>Equal</option>
-                    </select>
-                </div>
-
-                <div class="col-lg-2">
-                    <b><br>Will Blue Alliance Score More, Less, or Equal to:</b>
-                </div>
-                <div class="col-lg-10">
-                    <select name="BlueScorePredict" class="form-control">
-                        <option value="" disabled selected>Choose option</option>
-                        <option value='More'>More</option>
-                        <option value='Less'>Less</option>
-                        <option value='Equal'>Equal</option>
-                    </select>
-                    <br>
-                    <br>
-                </div>
-
-                <div class="col-lg-2">
                     <b><br>Auto Balls Scored by Red Alliance: </b>
                 </div>
                 <div class="col-lg-10">
@@ -158,6 +132,32 @@ if (isset($_POST['matchNum'])) {
                         <option value='Blue'>Blue</option>
                         <option value='Red'>Red</option>
                     </select>
+                    <br>
+                </div>
+
+                <div class="col-lg-2">
+                    <b><br>Will the Winning Alliance Win by More or Less than 15:</b>
+                </div>
+                <div class="col-lg-10">
+                    <select name="RedScorePredict" class="form-control">
+                        <option value="" disabled selected>Choose option</option>
+                        <option value='More'>More</option>
+                        <option value='Less'>Less</option>
+                        <option value='Equal'>Equal</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-2">
+                    <b><br>Will Blue Alliance Score More, Less, or Equal to:</b>
+                </div>
+                <div class="col-lg-10">
+                    <select name="BlueScorePredict" class="form-control">
+                        <option value="" disabled selected>Choose option</option>
+                        <option value='More'>More</option>
+                        <option value='Less'>Less</option>
+                        <option value='Equal'>Equal</option>
+                    </select>
+                    <br>
                     <br>
                 </div>
 
