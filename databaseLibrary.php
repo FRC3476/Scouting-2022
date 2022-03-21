@@ -410,8 +410,28 @@ function getTeamData($teamNumber)
 	return ($teamData);
 }
 
+function getBetData($user)
+{
+	global $servername;
+	global $username;
+	global $password;
+	global $dbname;
+	global $betTable;
+	$qs1 = "SELECT * FROM `" . $betTable . "` WHERE name = " . $user . "";
 
-
+	$result = runQuery($qs1);
+	$betData = array();
+	if ($result != FALSE) {
+		foreach ($result as $row_key => $row) {
+			array_push($betData, array(
+				$row["matchNum"], $row["RedScorePredict"], $row["BlueScorePredict"],
+				$row["TotalAutoRed"], $row["TotalAutoBlue"], $row["Winner"],
+				$row["name"], $row["ID"]
+			));
+		}
+	}
+	return ($betData);
+}
 
 
 // The functions below output data per match

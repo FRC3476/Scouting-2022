@@ -6,8 +6,8 @@ function filter($str)
     return filter_var($str, FILTER_SANITIZE_STRING);
 }
 
-if (isset($_POST['matchNum'])) {
-    if ($_POST['matchNum'] != "") {
+if (isset($_POST['matchNum']) && isset($_POST['name'])) {
+    if (($_POST['matchNum'] != "") && ($_POST['name'] != "")){
 
 
         include("databaseLibrary.php");
