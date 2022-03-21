@@ -25,7 +25,6 @@ include("header.php") ?>
 					<th>Avg Climb</th>
 					<th>Total Defense</th>
 					<th>TBA OPR</th>
-					<th>TBA DPR</th>
 					
 				</tr>
 				<?php
@@ -48,7 +47,6 @@ include("header.php") ?>
 					$avgClimb = getAvgClimb($teamNumber);
 					$totalDefense = getTotalDefense($teamNumber);
 					$OPR = getOPR($teamNumber);
-					$DPR = getDPR($teamNumber);
 
 					
 
@@ -72,7 +70,6 @@ include("header.php") ?>
 					<th>" . round($avgClimb,3) . "</th>
 					<th>" . $totalDefense . "</th>
 					<th>" . round($OPR,3) . "</th>
-					<th>" . round($DPR,3) . "</th>
 					</tr>");
 				}
 

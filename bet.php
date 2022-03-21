@@ -6,26 +6,6 @@ function filter($str)
     return filter_var($str, FILTER_SANITIZE_STRING);
 }
 
-function match1($match)
-{
-    $event = getEvent();
-    $match1 = $event + $match;
-    $team1Blue = getMatchAlliance($match1, "blue", 0);
-    $team2Blue = getMatchAlliance($match1, "blue", 1);
-    $team3Blue = getMatchAlliance($match1, "blue", 2);
-    $team1Red = getMatchAlliance($match1, "red", 0);
-    $team2Red = getMatchAlliance($match1, "red", 1);
-    $team3Red = getMatchAlliance($match1, "red", 2);
-    $blue1Estimate = getAvgscore($team1Blue);
-    $blue2Estimate = getAvgscore($team2Blue);
-    $blue3Estimate = getAvgscore($team3Blue);
-    $red1Estimate = getAvgscore($team1Red);
-    $red2Estimate = getAvgscore($team2Red);
-    $red3Estimate = getAvgscore($team3Red);
-    $blueEstimate = round($blue1Estimate + $blue2Estimate + $blue3Estimate);
-    $redEstimate = round($red1Estimate + $red2Estimate + $red3Estimate);
-}
-
 if (isset($_POST['matchNum'])) {
     if ($_POST['matchNum'] != "") {
 
@@ -58,10 +38,12 @@ if (isset($_POST['matchNum'])) {
 ?>
 
 <script>
+    /*
     function getMatch() {
         $match = document.getElementById('matchNum').value;
         window.location.assign("bet.php?matchNum=" + $match);
     }
+    */
 </script>
 
 <head>
