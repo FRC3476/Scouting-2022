@@ -213,6 +213,21 @@ function getTeamList()
 	return ($teams);
 }
 
+function getUserList()
+{
+	global $betTable;
+	$queryStringTwo = "SELECT `name` FROM `" . $betTable . "`";
+	$resultTwo = runQuery($queryStringTwo);
+	$names = array();
+
+	foreach ($resultTwo as $row_key => $row) {
+		if (!in_array($row["name"], $names)) {
+			array_push($names, $row["name"]);
+		}
+	}
+	return ($names);
+}
+
 
 
 function matchInput(
@@ -1162,6 +1177,59 @@ function getTotalScore($teamNumber)
 	}
 
 	return ($Score);
+}
+
+function getBetScore($user)
+{
+	//$bet = getBetData("Mihir");
+	$event = getEvent();
+	$Score = 0;
+	/*
+	if ($bet != null) {
+		for ($i = 0; $i != sizeof($bet); $i++) {
+			$match = $bet[$i][0];
+			$eventMatch = $event . $match;
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, "https://www.thebluealliance.com/api/v3/match/" . $eventMatch . "?X-TBA-Auth-Key=VPexr6soymZP0UMtFw2qZ11pLWcaDSxCMUYOfMuRj5CQT3bzoExsUGHuO1JvyCyU");
+			curl_setopt($ch, CURLOPT_HEADER, 0);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			$json = curl_exec($ch);
+			curl_close($ch);
+			$data = json_decode($json, true);
+			$blueAuto = $data["score_breakdown"]["blue"]["autoCargoTotal"];
+			$redAuto = $data["score_breakdown"]["red"]["autoCargoTotal"];
+			$alliance = $data["winning_alliance"];
+			$blueEndgame = $data["score_breakdown"]["blue"]["endgamePoints"];
+			$redEndgame = $data["score_breakdown"]["red"]["endgamePoints"];
+			if($blueEndgame == $redEndgame){
+				$endgameWinner = "equal";
+			}else if($blueEndgame > $redEndgame){
+				$endgameWinner = "blue";
+			}else if($blueEndgame < $redEndgame){
+				$endgameWinner = "red";
+			}
+			$bluePoints = $data["score_breakdown"]["blue"]["totalPoints"];
+			$redPoints = $data["score_breakdown"]["red"]["totalPoints"];
+			$margin = abs($redPoints-$bluePoints);
+			if($bet[$i][1]==$margin){
+				$Score+=2;
+			}
+			if($bet[$i][2]==$endgameWinner){
+				$Score+=1;
+			}
+			if($bet[$i][3]==$redAuto){
+				$Score+=1;
+			}
+			if($bet[$i][4]==$blueAuto){
+				$Score+=1;
+			}
+			if($bet[$i][5]==$alliance){
+				$Score+=1;
+			}
+		}
+	}
+	*/
+	return($Score);
 }
 
 function getTotalDefense($teamNumber)

@@ -102,9 +102,9 @@ if (isset($_POST['matchNum']) && isset($_POST['name'])) {
                 <div class="col-lg-10">
                     <select name="BlueScorePredict" class="form-control">
                         <option value="" disabled selected>Choose option</option>
-                        <option value='Blue'>Blue</option>
-                        <option value='Red'>Red</option>
-                        <option value='Equal'>Equal</option>
+                        <option value='blue'>Blue</option>
+                        <option value='red'>Red</option>
+                        <option value='equal'>Equal</option>
                     </select>
                 </div>
 
@@ -114,8 +114,8 @@ if (isset($_POST['matchNum']) && isset($_POST['name'])) {
                 <div class="col-lg-10">
                     <select name="Winner" class="form-control">
                         <option value="" disabled selected>Choose Winner</option>
-                        <option value='Blue'>Blue</option>
-                        <option value='Red'>Red</option>
+                        <option value='blue'>Blue</option>
+                        <option value='red'>Red</option>
                     </select>
                     <br>
                 </div>
