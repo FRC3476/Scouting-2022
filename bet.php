@@ -22,13 +22,13 @@ if (isset($_POST['matchNum'])) {
 
 
 		betInput(
-			$teamNumber,
-			$teamName,
-			$numBatteries,
-			$chargedBatteries,
-			$codeLanguage,
-			$pitComments,
-			$climbHelp
+			$matchNum,
+			$RedScorePredict,
+			$BlueScorePredict,
+			$TotalAutoRed,
+			$TotalAutoBlue,
+			$Winner,
+			$name
 		);
 	}
 }
@@ -57,18 +57,12 @@ if (isset($_POST['matchNum'])) {
 	<div class="container row-offcanvas row-offcanvas-left">
 		<div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
 			<a>
-				<h2><b><u>Pit Scout Form:</u></b></h2>
+				<h2><b><u>Bet Page:</u></b></h2>
 			</a>
-
-			<a href='http://teamcodeorange.com/dugthescout/pitCheck.php'>
-        		<button class="btn btn-primary">
-            		Pit Check
-        		</button>
-    		</a>
 
 			<form action="" method="post" enctype="multipart/form-data">
 				<div class="form-group">
-					<b><text class="col-lg-2 control-label">Team Number: </text></b>
+					<b><text class="col-lg-2 control-label">Name: </text></b>
 					<div class="col-lg-10">
 						<input type="text" class="form-control" id="teamNumber" name="teamNumber" placeholder=" ">
 					</div>
