@@ -161,13 +161,13 @@ function createTables()
 	}
 
 	$query = "CREATE TABLE " . $dbname . "." . $betTable . " (
-		matchNum INT(11) NOT NULL PRIMARY KEY,
+		matchNum INT(11) NOT NULL,
 		RedScorePredict TEXT NOT NULL,
 		BlueScorePredict TEXT NULL,
 		TotalAutoRed TEXT NULL,
 		TotalAutoBlue TEXT NULL,
 		Winner TEXT NULL,
-		name TEXT NULL
+		name TEXT NULL PRIMARY KEY
 	)";
 	$statement = $conn->prepare($query);
 	if (!$statement->execute()) {
