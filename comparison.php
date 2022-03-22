@@ -526,7 +526,7 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                                 </tr>
 
                                 <tr class="info">
-                                    <td>Avg Drive Ranking</td>
+                                    <td>Avg Alliance Ranking</td>
                                     <td><?php echo (getAvgDriveRank($teamNumber)); ?></td>
                                 </tr>
 

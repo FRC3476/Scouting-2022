@@ -702,7 +702,7 @@ include("navBar.php"); ?>
 									</tr>
 
 									<tr class="success">
-										<td>Avg Drive Ranking</td>
+										<td>Avg Alliance Ranking</td>
 										<td><?php echo round(getAvgDriveRank($teamNumber),2); ?></td>
 									</tr>
 

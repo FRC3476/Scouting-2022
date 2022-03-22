@@ -110,13 +110,13 @@ if (isset($_POST['matchNum'])) {
 			<br />
 
 		</div>
-		<h3 style="font-size: 19px; font-family: sans-serif;font-weight: lighter;  padding-left: 30px; padding-bottom: 7px">Drive Rank:</h3>
+		<h3 style="font-size: 19px; font-family: sans-serif;font-weight: lighter;  padding-left: 30px; padding-bottom: 7px">Team Rank:</h3>
 
 		<!--Team 1-->
 
 
 
-		<input id="team1Dri" type="text" placeholder="Team 1 Drive Rank">
+		<input id="team1Dri" type="text" placeholder="Team 1">
 
 
 		<br />
@@ -125,7 +125,7 @@ if (isset($_POST['matchNum'])) {
 
 		<!--Team 2-->
 
-		<input id="team2Dri" type="text" placeholder="Team 2 Drive Rank">
+		<input id="team2Dri" type="text" placeholder="Team 2">
 
 
 		<br />
@@ -134,7 +134,7 @@ if (isset($_POST['matchNum'])) {
 
 		<!--Team 3-->
 
-		<input id="team3Dri" type="text" placeholder="Team 3 Drive Rank">
+		<input id="team3Dri" type="text" placeholder="Team 3">
 
 		<input style="background-color: rgb(15,129,120); padding-left: 25px; padding-right: 25px; padding-top: 8px; padding-bottom: 8px; font-size: 15px; font-weight: medium; color: white; margin-left: 30px; border-radius: 5px; margin-top: 5px;" type="submit" name="submit" value="Submit data" onclick="postwith('');">
 

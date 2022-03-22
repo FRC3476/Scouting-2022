@@ -160,7 +160,7 @@ include("header.php") ?>
             <th>Avg Teleop Lower Goal</th>
             <th>Avg Auto Upper Goal</th>
             <th>Avg Auto Lower Goal</th>
-            <th>Avg Drive Rank</th>
+            <th>Avg Alliance Rank</th>
             <th>Max Teleop Upper Goal</th>
             <th>Max Teleop Lower Goal</th>
             <th>Max Auto Upper Goal</th>
