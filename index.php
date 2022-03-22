@@ -32,13 +32,29 @@ include('navBar.php');
         <section class="view intro-1 hm-black-strong">
             <div style="background-color: rgba(0,0,0,.3);" class="full-bg-img flex-center">
                 <div class="container">
-                    <ul>
-                        <li>
-                            <h1 class="h1-responsive font-bold wow fadeInDown" data-wow-delay="0.2s">Welcome to Scouting!</h1>
-                        </li>
-                        <li>
-                        </li>
-                    </ul>
+                    <div class="col-lg-2 mb-r">
+                        <a href="MatchInput.php" class="btn btn-warning">Match Scout Input</a>
+                    </div>
+
+                    <div class="col-lg-2 mb-r">
+                        <a href="pitInput.php" class="btn btn-warning">Pit Scout Form</a>
+                    </div>
+
+                    <div class="col-lg-2 mb-r">
+                        <a href="pictureUpload.php" class="btn btn-warning">Picture Upload</a>
+                    </div>
+
+                    <div class="col-lg-2 mb-r">
+                        <a href="leadScoutInput.php" class="btn btn-warning">Lead Scout Form</a>
+                    </div>
+
+                    <div class="col-lg-2 mb-r">
+                        <a href="scoutGenPicklist.php" class="btn btn-warning">Team Rank Form</a>
+                    </div>
+
+                    <div class="col-lg-2 mb-r">
+                        <a href="bet.php" class="btn btn-warning">Betting Page</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -47,7 +63,7 @@ include('navBar.php');
     <div class="container">
 
         <div class="divider-new pt-5">
-            <h2 style="color:White;"><b>Quick Links<b></h2>
+            <h2 style="color:White;"><b>Other Pages<b></h2>
         </div>
 
         <!--Section: Best features-->
@@ -56,15 +72,15 @@ include('navBar.php');
             <div class="row pt-3">
 
                 <div class="col-lg-3 mb-r">
-                    <a href="matchInput.php" class="btn btn-warning">Match Form</a>
+                    <a href="http://teamcodeorange.com/api/?key=2022caoc&type=OPR" class="btn btn-warning">OPR</a>
                 </div>
 
                 <div class="col-lg-3 mb-r">
-                    <a href="pitInput.php" class="btn btn-warning">Pit Scout Form</a>
+                    <a href="http://teamcodeorange.com/api/?key=2022caoc&type=upperOPR" class="btn btn-warning">Upper OPR</a>
                 </div>
 
                 <div class="col-lg-3 mb-r">
-                    <a href="leadScoutInput.php" class="btn btn-warning">Lead Scout Form</a>
+                    <a href="http://teamcodeorange.com/api/?key=2022caoc&type=ballExit" class="btn btn-warning">Ball Exit</a>
                 </div>
 
             </div>
