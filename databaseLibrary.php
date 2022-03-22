@@ -1360,9 +1360,9 @@ function getScoutGeneratedPicklist($teamNumber)
 			$num = $key;
 			if ($value == $teamNumber) {
 				if ($key == "team1") {
-					$score += 2;
-				} else if ($key == "team2") {
 					$score += 1;
+				} else if ($key == "team2") {
+					$score -= 1;
 				}
 			}
 		}
