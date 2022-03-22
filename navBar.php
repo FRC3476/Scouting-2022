@@ -31,6 +31,7 @@
 				<li><a href="teamRanking.php" style="color:Black;">Ranking</a></li>
 				<li><a href="matchViewer.php" style="color:Black;">Match View</a></li>
 				<li><a href="bet.php" style="color:Black;">Bet</a></li>
+				<li><a href="betRanking.php" style="color:Black;">Bet Ranking</a></li>
 				<li><a href="dataValidation.php" style="color:Black;">Validate</a></li>
 				<li><a href="matchData.php" style="color:Black;">Match Data</a></li>
 

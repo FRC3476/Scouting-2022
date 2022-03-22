@@ -432,7 +432,7 @@ function getBetData($user)
 	global $password;
 	global $dbname;
 	global $betTable;
-	$qs1 = "SELECT * FROM `" . $betTable . "` WHERE name = " . $user . "";
+	$qs1 = "SELECT * FROM " . $betTable . " WHERE name = '" . $user . "'";
 
 	$result = runQuery($qs1);
 	$betData = array();
@@ -1181,10 +1181,10 @@ function getTotalScore($teamNumber)
 
 function getBetScore($user)
 {
-	//$bet = getBetData("Mihir");
+	$bet = getbetData($user);
 	$event = getEvent();
 	$Score = 0;
-	/*
+	
 	if ($bet != null) {
 		for ($i = 0; $i != sizeof($bet); $i++) {
 			$match = $bet[$i][0];
@@ -1212,10 +1212,10 @@ function getBetScore($user)
 			$redPoints = $data["score_breakdown"]["red"]["totalPoints"];
 			$margin = abs($redPoints-$bluePoints);
 			if($bet[$i][1]==$margin){
-				$Score+=2;
+				$Score+=5;
 			}
 			if($bet[$i][2]==$endgameWinner){
-				$Score+=1;
+				$Score+=2;
 			}
 			if($bet[$i][3]==$redAuto){
 				$Score+=1;
@@ -1224,11 +1224,11 @@ function getBetScore($user)
 				$Score+=1;
 			}
 			if($bet[$i][5]==$alliance){
-				$Score+=1;
+				$Score+=2;
 			}
 		}
 	}
-	*/
+	
 	return($Score);
 }
 
