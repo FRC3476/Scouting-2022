@@ -7,7 +7,7 @@ include("header.php") ?>
 
 	<div class="container row-offcanvas row-offcanvas-left">
 		<div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
-			<h2>Team Ranking</h2>
+			<h2>Bet Ranking</h2>
 			<table class="sortable table table-hover" id="RawData" border="1">
 				<tr>
 					<th>User</th>
