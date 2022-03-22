@@ -9,8 +9,8 @@ function filter($str)
 }
 if ((isset($_POST['team1']))&&(isset($_POST['team2']))) {
 	include("databaseLibrary.php");
-	$matchNum = filter($_POST['team1']);
-	$team1Off = filter($_POST['team2']);
+	$team1 = filter($_POST['team1']);
+	$team2 = filter($_POST['team2']);
 
 	pickListInput(
 		$team1,
