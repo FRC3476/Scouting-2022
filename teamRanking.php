@@ -36,7 +36,7 @@ include("header.php") ?>
 
 					$i = 0;
 					$picklist = (getPickList($teamNumber) - getAvgDriveRank($teamNumber));
-					$scoutPick = getAllianceRankPoints($teamNumber) + getScoutGeneratedPicklist($teamNumber);
+					$scoutPick = getScoutGeneratedPicklist($teamNumber);
 					$UpperShotPercentage = getAvgUpperShotPercentage($teamNumber);
 					$avgClimb = getAvgClimb($teamNumber);
 					$allianceRank = getAvgDriveRank($teamNumber);
