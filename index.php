@@ -71,16 +71,12 @@ include('navBar.php');
 
             <div class="row pt-3">
 
-                <div class="col-lg-3 mb-r">
-                    <a href="http://teamcodeorange.com/api/?key=2022caoc&type=OPR" class="btn btn-warning">OPR</a>
+                <div class="col-lg-4">
+                    <a href="https://www.thebluealliance.com/event/2022cala" class="btn btn-warning">The Blue Alliance</a>
                 </div>
 
-                <div class="col-lg-3 mb-r">
-                    <a href="http://teamcodeorange.com/api/?key=2022caoc&type=upperOPR" class="btn btn-warning">Upper OPR</a>
-                </div>
-
-                <div class="col-lg-3 mb-r">
-                    <a href="http://teamcodeorange.com/api/?key=2022caoc&type=ballExit" class="btn btn-warning">Ball Exit</a>
+                <div class="col-lg-4">
+                    <a href="http://teamcodeorange.com/api/?key=2022cala&type=OPR" class="btn btn-warning">OPR</a>
                 </div>
 
             </div>
