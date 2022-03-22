@@ -60,7 +60,7 @@ if (isset($_POST['teamNumber'])) {
 				<h2><b><u>Pit Scout Form:</u></b></h2>
 			</a>
 
-			<a href='http://teamcodeorange.com/dugthescout/pitCheck.php'>
+			<a href='pitCheck.php'>
         		<button class="btn btn-primary">
             		Pit Check
         		</button>

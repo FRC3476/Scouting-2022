@@ -31,8 +31,14 @@
 				<li><a href="comparison.php" style="color:Black;">Comparison</a></li>
 				<li><a href="teamRanking.php" style="color:Black;">Ranking</a></li>
 				<li><a href="matchViewer.php" style="color:Black;">Match View</a></li>
-				<li><a href="bet.php" style="color:Black;">Bet</a></li>
-				<li><a href="betRanking.php" style="color:Black;">Bet Ranking</a></li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="color:Black;">Bets<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="bet.php" style="color:Black;">Bet</a></li>
+						<li><a href="betRanking.php" style="color:Black;">Bet Ranking</a></li>
+					</ul>
+					</a>
+				</li>
 				<li class="dropdown">
 					<a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="color:Black;">Checks<b class="caret"></b></a>
 					<ul class="dropdown-menu">
