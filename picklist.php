@@ -152,70 +152,71 @@ include("header.php") ?>
     </div>
 
     <table class="sortable table table-hover" id="RawData" border="1">
-        <tr>
-            <th>Team Number</th>
-            <th>Weighted Score</th>
-            <th>Avg Upper Shot Percentage</th>
-            <th>Avg Teleop Upper Goal</th>
-            <th>Avg Teleop Lower Goal</th>
-            <th>Avg Auto Upper Goal</th>
-            <th>Avg Auto Lower Goal</th>
-            <th>Avg Alliance Rank</th>
-            <th>Max Teleop Upper Goal</th>
-            <th>Max Teleop Lower Goal</th>
-            <th>Max Auto Upper Goal</th>
-            <th>Max Auto Lower Goal</th>
-            <th>Avg Climb</th>
-            <th>Total Defense</th>
-            <th>TBA OPR</th>
-            <th>TBA DPR</th>
+    <tr>
+					<th>Team Number</th>
+					<th>Weighted Score</th>
+					<th>Scouter Gen Picklist</th>
+					<th>Avg Upper Shot Percentage</th>
+					<th>Avg Climb</th>
+					<th>Avg Alliance Rank</th>
+					<th>Avg Teleop Upper Goal</th>
+					<th>Avg Teleop Lower Goal</th>
+					<th>Avg Auto Upper Goal</th>
+					<th>Avg Auto Lower Goal</th>
+					<th>Max Teleop Upper Goal</th>
+					<th>Max Teleop Lower Goal</th>
+					<th>Max Auto Upper Goal</th>
+					<th>Max Auto Lower Goal</th>
+					<th>Total Defense</th>
+					<th>OPR</th>
+					
+				</tr>
+				<?php
+				include("databaseLibrary.php");
+				$teamList = getTeamList();
+				foreach ($teamList as $teamNumber) {
 
-        </tr>
-        <?php
-        include("databaseLibrary.php");
-        $teamList = getTeamList();
-        foreach ($teamList as $teamNumber) {
+					$i = 0;
+					$picklist = (getPickList($teamNumber) - getAvgDriveRank($teamNumber));
+					$scoutPick = getAllianceRankPoints($teamNumber) + getScoutGeneratedPicklist($teamNumber);
+					$UpperShotPercentage = getAvgUpperShotPercentage($teamNumber);
+					$avgClimb = getAvgClimb($teamNumber);
+					$allianceRank = getAvgDriveRank($teamNumber);
+					$avgTeleopUpper = getAvgUpperGoalT($teamNumber);
+					$avgTeleopLower = getAvgLowerGoalT($teamNumber);
+					$avgAutoUpper = getAvgUpperGoal($teamNumber);
+					$avgAutoLower = getAvgLowerGoal($teamNumber);
+					$maxTeleopUpper = getMaxUpperGoalT($teamNumber);
+					$maxTeleopLower = getMaxLowerGoalT($teamNumber);
+					$maxAutoUpper = getMaxUpperGoal($teamNumber);
+					$maxAutoLower = getMaxLowerGoal($teamNumber);
+					$totalDefense = getTotalDefense($teamNumber);
+					$OPR = getOPR($teamNumber);
 
-            $i = 0;
-            $picklist = (getPickList($teamNumber) - getAvgDriveRank($teamNumber));
-            $UpperShotPercentage = getAvgUpperShotPercentage($teamNumber);
-            $avgTeleopUpper = getAvgUpperGoalT($teamNumber);
-            $avgTeleopLower = getAvgLowerGoalT($teamNumber);
-            $avgAutoUpper = getAvgUpperGoal($teamNumber);
-            $avgAutoLower = getAvgLowerGoal($teamNumber);
-            $avgDriveRank = getAvgDriveRank($teamNumber);
-            $maxTeleopUpper = getMaxUpperGoalT($teamNumber);
-            $maxTeleopLower = getMaxLowerGoalT($teamNumber);
-            $maxAutoUpper = getMaxUpperGoal($teamNumber);
-            $maxAutoLower = getMaxLowerGoal($teamNumber);
-            $avgClimb = getAvgClimb($teamNumber);
-            $totalDefense = getTotalDefense($teamNumber);
-            $OPR = getOPR($teamNumber);
-            $DPR = getDPR($teamNumber);
+					
 
 
 
 
-            echo ("<tr>
+
+					echo ("<tr>
 					<td><a href='matchStrategy.php?team=" . $teamNumber . "'>" . $teamNumber . "</a></td>
 					<th>" . $picklist . "</th>
+					<th>" . ($scoutPick) . "</th>
 					<th>" . $UpperShotPercentage . "</th>
-					<th>" . round($avgTeleopUpper, 3) . "</th>
-					<th>" . round($avgTeleopLower, 3) . "</th>
-					<th>" . round($avgAutoUpper, 3) . "</th>
-					<th>" . round($avgAutoLower, 3) . "</th>
-					<th>" . round($avgDriveRank, 3) . "</th>
+					<th>" . round($avgClimb,3) . "</th>
+					<th>" . round($allianceRank,3) . "</th>
+					<th>" . round($avgTeleopUpper,3) . "</th>
+					<th>" . round($avgTeleopLower,3) . "</th>
+					<th>" . round($avgAutoUpper,3) . "</th>
+					<th>" . round($avgAutoLower,3) . "</th>
 					<th>" . $maxTeleopUpper . "</th>
 					<th>" . $maxTeleopLower . "</th>
 					<th>" . $maxAutoUpper . "</th>
 					<th>" . $maxAutoLower . "</th>
-					<th>" . round($avgClimb, 3) . "</th>
 					<th>" . $totalDefense . "</th>
-					<th>" . round($OPR, 3) . "</th>
-					<th>" . round($DPR, 3) . "</th>
-					</tr>
-                    
-                    ");
+					<th>" . round($OPR,3) . "</th>
+					</tr>");
 
             echo ("
                     <div class='row'>
