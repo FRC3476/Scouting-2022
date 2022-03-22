@@ -2,6 +2,7 @@
 <html>
 <?php
 include("header.php") ?>
+<script src="js/bootstrap.min.js"></script>
 
 <body onload="checkData()">
         <?php include("navBar.php") ?>

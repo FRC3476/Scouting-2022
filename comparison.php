@@ -3,6 +3,22 @@
 include("header.php");
 include("navBar.php");
 ?>
+<script src="js/bootstrap.min.js"></script>
+
+<head>
+
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="bootstrap-material-design-master/dist/css/ripples.min.css" rel="stylesheet">
+<link href="bootstrap-material-design-master/dist/css/material-wfont.min.css" rel="stylesheet">
+<link href="css/bootstrap-material-design.min.css" rel="stylesheet">
+
+<script src="jquery-1.11.2.min.js"></script>
+<script src="sorttable.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
 
 <script src="js/Chart.js"></script>
 <style>

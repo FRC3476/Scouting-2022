@@ -1,6 +1,7 @@
 <html>
 <?php
 include("header.php") ?>
+<script src="js/bootstrap.min.js"></script>
 
 <body>
 	<?php include("navBar.php") ?>

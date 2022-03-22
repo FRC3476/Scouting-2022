@@ -3,6 +3,8 @@
 include('header.php');
 include('navBar.php');
 ?>
+<script src="js/bootstrap.min.js"></script>
+
 <style>
     /* TEMPLATE STYLES */
     .flex-center {
