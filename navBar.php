@@ -25,9 +25,9 @@
 			<ul class="nav navbar-nav navbar-left">
 				<li><a href="matchInput.php" style="color:Black;">Match Form</a></li>
 				<li><a href="pitInput.php" style="color:Black;">PS Form</a></li>
-				<li><a href="leadScoutInput.php" style="color:Black;">LS Input</a></li>
-				<li><a href="pictureUpload.php" style="color:Black;">Picture Upload</a></li>
-				<li><a href="scoutGenPicklist.php" style="color:Black;">Scouter Team Rank</a></li>
+				<li><a href="leadScoutInput.php" style="color:Black;">LS Form</a></li>
+				<li><a href="scoutGenPicklist.php" style="color:Black;">Scouter Ranked</a></li>
+				<li><a href="pictureUpload.php" style="color:Black;">Pic Upload</a></li>
 				<li><a href="matchStrategy.php" style="color:Black;">Team Data</a></li>
 				<li><a href="comparison.php" style="color:Black;">Comparison</a></li>
 				<li><a href="teamRanking.php" style="color:Black;">Ranking</a></li>
