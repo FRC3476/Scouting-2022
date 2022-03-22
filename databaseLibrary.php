@@ -94,6 +94,7 @@ function createTables()
 	global $pitScoutTable;
 	global $matchScoutTable;
 	global $betTable;
+	global $pickListTable;
 	global $leadScoutTable;
 	global $$sorting_items;
 	$conn = connectToDB();
