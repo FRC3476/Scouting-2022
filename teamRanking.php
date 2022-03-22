@@ -24,7 +24,7 @@ include("header.php") ?>
 					<th>Max Auto Lower Goal</th>
 					<th>Avg Climb</th>
 					<th>Total Defense</th>
-					<th>TBA OPR</th>
+					<th>OPR</th>
 					
 				</tr>
 				<?php
