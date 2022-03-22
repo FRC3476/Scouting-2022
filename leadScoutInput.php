@@ -136,6 +136,9 @@ if (isset($_POST['matchNum'])) {
 
 		<input id="team3Dri" type="text" placeholder="Team 3">
 
+		<br>
+		</br>
+
 		<input style="background-color: rgb(15,129,120); padding-left: 25px; padding-right: 25px; padding-top: 8px; padding-bottom: 8px; font-size: 15px; font-weight: medium; color: white; margin-left: 30px; border-radius: 5px; margin-top: 5px;" type="submit" name="submit" value="Submit data" onclick="postwith('');">
 
 	</div>
