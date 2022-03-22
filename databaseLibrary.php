@@ -1292,6 +1292,37 @@ function getAvgDriveRank($teamNumber)
 	return ($driveRankSum / $matchCount);
 }
 
+function getAllianceRankPoints($teamNumber)
+{
+	$result = getAllLeadScoutData();
+	$driveRankSum = 0;
+	$matchCount = 0;
+	foreach ($result as $row_key => $row) {
+		foreach ($row as $key => $value) {
+			$num = $key;
+			if ($value == $teamNumber) {
+				if ($key == "team1Dri") {
+					$driveRankSum += 3;
+					$matchCount++;
+				} else if ($key == "team2Dri") {
+					$driveRankSum += 2;
+					$matchCount++;
+				} else if ($key == "team3Dri") {
+					$driveRankSum += 1;
+					$matchCount++;
+				}
+			}
+		}
+	}
+	if ($matchCount == 0) {
+		$matchCount = 1;
+	} else {
+		$matchCount = $matchCount;
+	}
+
+	return ($driveRankSum);
+}
+
 
 
 
