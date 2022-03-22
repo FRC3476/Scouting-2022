@@ -959,6 +959,14 @@ function getAllLeadScoutData()
 	return runQuery($qs1);
 }
 
+function getAllPicklistData()
+{
+	global $pickListTable;
+	$qs1 = "SELECT * FROM `" . $pickListTable . "`";
+	return runQuery($qs1);
+}
+
+
 
 
 // Get Total/ Ability
@@ -1340,6 +1348,26 @@ function getAllianceRankPoints($teamNumber)
 	}
 
 	return ($driveRankSum);
+}
+
+function getScoutGeneratedPicklist($teamNumber)
+{
+	$result = getAllPicklistData();
+	$score = 0;
+	$matchCount = 0;
+	foreach ($result as $row_key => $row) {
+		foreach ($row as $key => $value) {
+			$num = $key;
+			if ($value == $teamNumber) {
+				if ($key == "team1") {
+					$score += 2;
+				} else if ($key == "team2") {
+					$score += 1;
+				}
+			}
+		}
+	}
+	return ($score);
 }
 
 
