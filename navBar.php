@@ -26,7 +26,7 @@
 				<li><a href="matchInput.php" style="color:Black;">Match Form</a></li>
 				<li><a href="pitInput.php" style="color:Black;">PS Form</a></li>
 				<li><a href="leadScoutInput.php" style="color:Black;">LS Form</a></li>
-				<li><a href="scoutGenPicklist.php" style="color:Black;">Scouter Ranked</a></li>
+				<li><a href="scoutGenPicklist.php" style="color:Black;">Team Ranker</a></li>
 				<li><a href="pictureUpload.php" style="color:Black;">Pic Upload</a></li>
 				<li><a href="matchStrategy.php" style="color:Black;">Team Data</a></li>
 				<li><a href="comparison.php" style="color:Black;">Comparison</a></li>
