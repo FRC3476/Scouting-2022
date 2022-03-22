@@ -9,3 +9,4 @@
 	$matchScoutTable = "22template_matchscout";
 	$leadScoutTable = "22template_leadscout";
 	$betTable = "22template_bet";
+	$pickListTable = "22template_pickList";
