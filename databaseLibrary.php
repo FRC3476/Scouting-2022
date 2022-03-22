@@ -14,6 +14,7 @@ function runQuery($queryString)
 	global $matchScoutTable;
 	global $betTable;
 	global $leadScoutTable;
+	global $pickListTable;
 	//Establish Connection
 	try {
 		$conn = connectToDB();
@@ -174,6 +175,15 @@ function createTables()
 	if (!$statement->execute()) {
 		throw new Exception("constructDatabase Error: CREATE TABLE Bet Table query failed.");
 	}
+
+	$query = "CREATE TABLE " . $dbname . "." . $pickListTable . " (
+		team1 VARCHAR(50) NOT NULL,
+		team2 VARCHAR(50) NOT NULL
+	)";
+	$statement = $conn->prepare($query);
+	if (!$statement->execute()) {
+		throw new Exception("constructDatabase Error: CREATE TABLE pickList Table query failed.");
+	}
 }
 
 //Input- pitScoutInput, Data from pit scout form is assigned to columns in 17template_pitscout.
@@ -192,6 +202,14 @@ function betInput($matchNum, $RedScorePredict, $BlueScorePredict, $TotalAutoRed,
 	global $betTable;
 	$queryString = "REPLACE INTO `" . $betTable . "` (`matchNum`, `RedScorePredict`, `BlueScorePredict`,`TotalAutoRed`, `TotalAutoBlue`, `Winner`, `name`, `ID`)";
 	$queryString = $queryString . ' VALUES ("' . $matchNum . '", "' . $RedScorePredict . '", "' . $BlueScorePredict . '", "' . $TotalAutoRed . '", "' . $TotalAutoBlue . '", "' . $Winner . '", "' . $name . '", "' . $ID . '")';
+	$queryOutput = runQuery($queryString);
+}
+
+function pickListInput($team1, $team2)
+{
+	global $pickListTable;
+	$queryString = "REPLACE INTO `" . $pickListTable . "` (`team1`, `team2`)";
+	$queryString = $queryString . ' VALUES ("' . $team1 . '", "' . $team2 . '")';
 	$queryOutput = runQuery($queryString);
 }
 
