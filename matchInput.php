@@ -12,8 +12,9 @@ include("navBar.php");
 
 		if (document.getElementById('matchNum').value == "" || document.getElementById('teamNum').value == "") {
 			alert("Please enter a Team and Match Number");
-			exit("Please enter a Team or Match Number");
+			return;
 		}
+		check();
 
 		var nums = {
 			'userName': document.getElementById('userName').value,
@@ -81,7 +82,7 @@ include("navBar.php");
 					<select id="allianceColor" class="form-control">
 						<option value="" disabled selected>Choose Alliance</option>
 						<option value='blue'>Blue</option>
-						<option value='red' >Red</option>
+						<option value='red'>Red</option>
 					</select>
 				</div>
 				<div class="col-md-3">
@@ -258,9 +259,21 @@ include("navBar.php");
 					}
 
 					function check() {
-						cycleCount = cycleCount.substring(0, cycleCount.length - 2);
-						cycleCount += ("]");
-						if (cycleCount == "]"){
+
+						alert = false;
+						check = cycleCount.substr(-2);
+						check1 = cycleCount.substr(-1);
+						console.log(check);
+						console.log(check1);
+						if (check == "]]"){
+						}else if (check == ", "){
+							cycleCount = cycleCount.substring(0, cycleCount.length - 2);
+							cycleCount += ("]");
+						}else{
+							alert("There was an error with your Cycle Count");
+
+						}
+						if (check1 == "[") {
 							cycleCount = "[]";
 						}
 					}
@@ -275,9 +288,9 @@ include("navBar.php");
 
 						if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) == 0) {
 							alert("You haven't entered any data");
-						}else if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) > 9){
+						} else if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) > 9) {
 							alert(":| Did a team really do that? :|");
-						}else if (tempCoordinateList2 != 0) {
+						} else if (tempCoordinateList2 != 0) {
 
 							lowerGoalT += lowerGoalTemp;
 							upperGoalT += upperGoalTemp;
@@ -285,7 +298,7 @@ include("navBar.php");
 							upperGoalMissT += upperGoalMissTemp;
 
 							cycleNumber += 1;
-							if(cycleNumber >= 10){
+							if (cycleNumber >= 10) {
 								cycleNumber = 1;
 							}
 							cycleCount += ("[" + cycleNumber + ", " + upperGoalTemp + ", " + upperGoalMissTemp + ", " + lowerGoalTemp + "], ");
@@ -307,6 +320,7 @@ include("navBar.php");
 							document.getElementById("lowerGoalMissTemp").innerHTML = lowerGoalMissTemp;
 							document.getElementById("upperGoalTemp").innerHTML = upperGoalTemp;
 							document.getElementById("upperGoalMissTemp").innerHTML = upperGoalMissTemp;
+							undoSaveCounter = 0;
 						} else {
 							alert("You haven't selected a shot location");
 							exit();
@@ -317,10 +331,9 @@ include("navBar.php");
 					function okButton1() {
 
 
-						if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) == 0) {
-						}else if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) > 9){
+						if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) == 0) {} else if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) > 9) {
 							alert(":| Did a team really do that? :|");
-						}else if (tempCoordinateList2 != 0) {
+						} else if (tempCoordinateList2 != 0) {
 
 							lowerGoalT += lowerGoalTemp;
 							upperGoalT += upperGoalTemp;
@@ -347,6 +360,7 @@ include("navBar.php");
 							document.getElementById("lowerGoalMissTemp").innerHTML = lowerGoalMissTemp;
 							document.getElementById("upperGoalTemp").innerHTML = upperGoalTemp;
 							document.getElementById("upperGoalMissTemp").innerHTML = upperGoalMissTemp;
+							undoSaveCounter = 0;
 						} else {
 							alert("You haven't selected a shot location");
 							exit();
@@ -357,8 +371,11 @@ include("navBar.php");
 
 					function undoSave() {
 
+						undoSaveCounter += 1;
 						if (cycleNumber == 0) {
 							console.log("continue");
+						} else if (undoSaveCounter > 1) {
+							console.log("Save Once");
 						} else {
 							cycleNumber -= 1;
 							lowerGoalTemp = parseInt(cycleCount.substring(cycleCount.length - 4, cycleCount.length - 3));
@@ -379,14 +396,13 @@ include("navBar.php");
 							drawPoint2(context2, popped[0], popped[1]);
 							popped = [];
 							console.log(coordinateList2);
+							cycleCount = cycleCount.substring(0, cycleCount.length - 14);
+
+							document.getElementById("lowerGoalTemp").innerHTML = lowerGoalTemp;
+							document.getElementById("upperGoalTemp").innerHTML = upperGoalTemp;
+							document.getElementById("upperGoalMissTemp").innerHTML = upperGoalMissTemp;
+							document.getElementById("lowerGoalMissTemp").innerHTML = lowerGoalMissTemp;
 						}
-
-						cycleCount = cycleCount.substring(0, cycleCount.length - 14);
-
-						document.getElementById("lowerGoalTemp").innerHTML = lowerGoalTemp;
-						document.getElementById("upperGoalTemp").innerHTML = upperGoalTemp;
-						document.getElementById("upperGoalMissTemp").innerHTML = upperGoalMissTemp;
-						document.getElementById("lowerGoalMissTemp").innerHTML = lowerGoalMissTemp;
 
 					}
 
@@ -435,6 +451,9 @@ include("navBar.php");
 					var cycleNumber = 0;
 					var cycleCount = document.getElementById("[");
 					cycleCount = "[";
+					var undoSaveCounter = 0;
+					var check;
+					var check1;
 				</script>
 
 				<a>
@@ -511,7 +530,7 @@ include("navBar.php");
 
 				<br> <br>
 				<div style="padding: 5px; padding-bottom: 10;">
-					<input type="button" value="Submit Data" id="submitButton" class="btn btn-primary" onclick="okButton1(''); check(); postwith('')" />
+					<input type="button" value="Submit Data" id="submitButton" class="btn btn-primary" onclick="okButton1(''); postwith('')" />
 
 
 				</div>
