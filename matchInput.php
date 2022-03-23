@@ -285,6 +285,9 @@ include("navBar.php");
 							upperGoalMissT += upperGoalMissTemp;
 
 							cycleNumber += 1;
+							if(cycleNumber >= 10){
+								cycleNumber = 1;
+							}
 							cycleCount += ("[" + cycleNumber + ", " + upperGoalTemp + ", " + upperGoalMissTemp + ", " + lowerGoalTemp + "], ");
 							lowerMissTemp = lowerGoalMissTemp;
 
