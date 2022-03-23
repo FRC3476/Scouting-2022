@@ -260,7 +260,6 @@ include("navBar.php");
 
 					function check() {
 
-						alert = false;
 						check = cycleCount.substr(-2);
 						check1 = cycleCount.substr(-1);
 						console.log(check);
@@ -270,7 +269,7 @@ include("navBar.php");
 							cycleCount = cycleCount.substring(0, cycleCount.length - 2);
 							cycleCount += ("]");
 						}else{
-							//alert("There was an error with your Cycle Count");
+							alert("There was an error with your Cycle Count");
 
 						}
 						if (check1 == "[") {
