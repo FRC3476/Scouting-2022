@@ -13,6 +13,7 @@ include("header.php") ?>
 				<tr>
 					<th>User</th>
 					<th>Score</th>
+					<th>Average</th>
 					
 				</tr>
 				<?php
@@ -22,10 +23,13 @@ include("header.php") ?>
 
 					$i = 0;
 					$score = getBetScore($userName);
+					$avg = getBetAvg($userName);
+					
 
 					echo ("<tr>
 					<th>" . $userName . "</th>
 					<th>" . $score . "</th>
+					<th>" . $avg . "</th>
 					</tr>");
 				}
 
