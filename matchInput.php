@@ -270,7 +270,7 @@ include("navBar.php");
 							cycleCount = cycleCount.substring(0, cycleCount.length - 2);
 							cycleCount += ("]");
 						}else{
-							alert("There was an error with your Cycle Count");
+							//alert("There was an error with your Cycle Count");
 
 						}
 						if (check1 == "[") {
