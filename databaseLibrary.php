@@ -15,6 +15,7 @@ function runQuery($queryString)
 	global $betTable;
 	global $leadScoutTable;
 	global $pickListTable;
+	global $eloRanking;
 	//Establish Connection
 	try {
 		$conn = connectToDB();
@@ -97,6 +98,7 @@ function createTables()
 	global $pickListTable;
 	global $leadScoutTable;
 	global $$sorting_items;
+	global $eloRanking;
 	$conn = connectToDB();
 	$query = "CREATE TABLE " . $dbname . "." . $pitScoutTable . " (
 			teamNumber VARCHAR(50) NOT NULL PRIMARY KEY,
@@ -185,6 +187,15 @@ function createTables()
 	if (!$statement->execute()) {
 		throw new Exception("constructDatabase Error: CREATE TABLE pickList Table query failed.");
 	}
+
+	$query = "CREATE TABLE " . $dbname . "." . $eloRanking . " (
+		team VARCHAR(50) NOT NULL PRIMARY KEY,
+		eloScore INT(11) NOT NULL
+	)";
+	$statement = $conn->prepare($query);
+	if (!$statement->execute()) {
+		throw new Exception("constructDatabase Error: CREATE TABLE elo Table query failed.");
+	}
 }
 
 //Input- pitScoutInput, Data from pit scout form is assigned to columns in 17template_pitscout.
@@ -211,6 +222,14 @@ function pickListInput($team1, $team2)
 	global $pickListTable;
 	$queryString = "REPLACE INTO `" . $pickListTable . "` (`team1`, `team2`)";
 	$queryString = $queryString . ' VALUES ("' . $team1 . '", "' . $team2 . '")';
+	$queryOutput = runQuery($queryString);
+}
+
+function eloInput($team, $elo)
+{
+	global $eloRanking;
+	$queryString = "REPLACE INTO `" . $eloRanking . "` (`team`, `elo`)";
+	$queryString = $queryString . ' VALUES ("' . $team . '", "' . $elo . '")';
 	$queryOutput = runQuery($queryString);
 }
 
