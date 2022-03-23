@@ -266,6 +266,27 @@ function getUserList()
 	return ($names);
 }
 
+function getPickListTeamList()
+{
+	global $pickListTable;
+	$queryStringTwo = "SELECT `team1` FROM `" . $pickListTable . "`";
+	$resultTwo = runQuery($queryStringTwo);
+	$queryString = "SELECT `team2` FROM `" . $pickListTable . "`";
+	$result = runQuery($queryString);
+	$names = array();
+
+	foreach ($resultTwo as $row_key => $row) {
+		if (!in_array($row["team1"], $names)) {
+			array_push($names, $row["team1"]);
+		}
+	}
+	foreach ($result as $row_key => $row) {
+		if (!in_array($row["team2"], $names)) {
+			array_push($names, $row["team2"]);
+		}
+	}
+	return ($names);
+}
 
 
 function matchInput(
