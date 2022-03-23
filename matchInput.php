@@ -12,7 +12,7 @@ include("navBar.php");
 
 		if (document.getElementById('matchNum').value == "" || document.getElementById('teamNum').value == "") {
 			alert("Please enter a Team and Match Number");
-			exit("Please enter a Team and Match Number");
+			exit("Please enter a Team or Match Number");
 		}
 
 		var nums = {
