@@ -9,7 +9,7 @@ include("header.php") ?>
     <?php include("navBar.php") ?>
     <div id="content">
         <div class="container row-offcanvas row-offcanvas-left">
-            <div class="well column  col-lg-112  col-sm-12 col-xs-12" id="content">
+            <div class="well column  col-lg-112  col-sm-12 col-xs-12 overflow-auto" id="content">
                 <h1>Data Validation</h1>
                 <form action="" method="get">
                     Enter Match Number:
@@ -36,7 +36,7 @@ include("header.php") ?>
                         $event = getEvent();
                         $match = $event . $_GET["match"];
 
-                        echo ('<div><table  class="table table-hover" id="RawData" border="1"></div>');
+                        echo ('<div class="overflow-auto"><table  class="table table-hover" id="RawData" border="1"></div>');
                             foreach ($result as $row_key => $row) {
                                 if ($i == 0) {
                                     echo ("<tr>");
