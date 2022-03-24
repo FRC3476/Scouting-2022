@@ -1202,7 +1202,7 @@ function getHighestClimb($teamNumber)
 	} else if (getTotalDoubleClimb($teamNumber) != 0) {
 		return ("Medium");
 	} else if (getTotalSingleClimb($teamNumber) != 0) {
-		return ("Medium");
+		return ("Low");
 	} else {
 		return ("No Climb");
 	}
