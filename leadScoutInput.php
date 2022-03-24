@@ -10,24 +10,12 @@ function filter($str)
 if (isset($_POST['matchNum'])) {
 	include("databaseLibrary.php");
 	$matchNum = filter($_POST['matchNum']);
-	$team1Off = filter($_POST['team1Off']);
-	$team2Off = filter($_POST['team2Off']);
-	$team3Off = filter($_POST['team3Off']);
-	$team1Def = filter($_POST['team1Def']);
-	$team2Def = filter($_POST['team2Def']);
-	$team3Def = filter($_POST['team3Def']);
 	$team1Dri = filter($_POST['team1Dri']);
 	$team2Dri = filter($_POST['team2Dri']);
 	$team3Dri = filter($_POST['team3Dri']);
 
 	leadScoutInput(
 		$matchNum,
-		$team1Off,
-		$team2Off,
-		$team3Off,
-		$team1Def,
-		$team2Def,
-		$team3Def,
 		$team1Dri,
 		$team2Dri,
 		$team3Dri
@@ -49,67 +37,6 @@ if (isset($_POST['matchNum'])) {
 		<input style="display: inline-block; border:none; border-bottom: solid; border-color: rgba(120,120,120,50); border-width: 2px;width: 30%; margin-left: 30px; font-size: 16px; outline: none;" type="text" placeholder="Match Number" id="matchNum">
 
 
-
-		<div id="divCheckbox" style="display: none;">
-			<div id="inBox">
-				<!--Team 1-->
-				<input id="team1Off" id="team1" type="text" placeholder="Team 1 Offense Rank">
-
-
-				<br />
-				<br>
-				<br />
-
-				<!--Team 2-->
-
-				<input id="team2Off" type="text" placeholder="Team 2 Offense Rank">
-
-
-				<br />
-				<br />
-				<br />
-
-				<!--Team 3-->
-
-				<input id="team3Off" type="text" placeholder="Team 3 Offense Rank">
-
-
-				<br />
-				<br />
-				<br />
-
-				<h3 style="font-size: 19px; font-family: sans-serif;font-weight: lighter;  padding-left: 30px; padding-bottom: 7px">Defense Rank:</h3>
-
-				<!--Team 1-->
-
-
-
-				<input id="team1Def" type="text" placeholder="Team 1 Defense Rank">
-
-
-				<br />
-				<br />
-				<br />
-
-				<!--Team 2-->
-
-				<input id="team2Def" type="text" placeholder="Team 2 Defense Rank">
-
-
-				<br />
-				<br />
-				<br />
-
-				<!--Team 3-->
-
-				<input id="team3Def" type="text" placeholder="Team 3 Defense Rank">
-
-
-			</div>
-			<br />
-			<br />
-
-		</div>
 		<h3 style="font-size: 19px; font-family: sans-serif;font-weight: lighter;  padding-left: 30px; padding-bottom: 7px">Team Rank:</h3>
 
 		<!--Team 1-->
@@ -280,24 +207,6 @@ if (isset($_POST['matchNum'])) {
 			myForm.method = "post";
 			myForm.action = to;
 
-			if (document.getElementById('team1Off').value == "") {
-				document.getElementById('team1Off').value = 0;
-			}
-			if (document.getElementById('team2Off').value == "") {
-				document.getElementById('team2Off').value = 0;
-			}
-			if (document.getElementById('team3Off').value == "") {
-				document.getElementById('team3Off').value = 0;
-			}
-			if (document.getElementById('team1Def').value == "") {
-				document.getElementById('team1Def').value = 0;
-			}
-			if (document.getElementById('team2Def').value == "") {
-				document.getElementById('team2Def').value = 0;
-			}
-			if (document.getElementById('team3Def').value == "") {
-				document.getElementById('team3Def').value = 0;
-			}
 			if (document.getElementById('team1Dri').value == "") {
 				document.getElementById('team1Dri').value = 0;
 			}
@@ -310,12 +219,6 @@ if (isset($_POST['matchNum'])) {
 
 			var names = [
 				'matchNum',
-				'team1Off',
-				'team2Off',
-				'team3Off',
-				'team1Def',
-				'team2Def',
-				'team3Def',
 				'team1Dri',
 				'team2Dri',
 				'team3Dri'
@@ -323,12 +226,6 @@ if (isset($_POST['matchNum'])) {
 
 			var nums = [
 				document.getElementById('matchNum').value,
-				document.getElementById('team1Off').value,
-				document.getElementById('team2Off').value,
-				document.getElementById('team3Off').value,
-				document.getElementById('team1Def').value,
-				document.getElementById('team2Def').value,
-				document.getElementById('team3Def').value,
 				document.getElementById('team1Dri').value,
 				document.getElementById('team2Dri').value,
 				document.getElementById('team3Dri').value,

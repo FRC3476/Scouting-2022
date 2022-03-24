@@ -24,8 +24,6 @@ function runQuery($queryString)
 		createDB();
 		$conn = connectToDB();
 	}
-	//new mysqli($servername, $username, $password, $dbname);
-	//error_log($queryString);
 	try {
 		$statement = $conn->prepare($queryString);
 	} catch (PDOException $e) {
@@ -41,7 +39,6 @@ function runQuery($queryString)
 		die("Failed!");
 	}
 	try {
-		//error_log("".$statement->fetchAll());
 		return $statement->fetchAll();
 	} catch (Exception $e) {
 		return;
@@ -149,12 +146,6 @@ function createTables()
 
 	$query = "CREATE TABLE " . $dbname . "." . $leadScoutTable . " (
 			matchNum INT(11) NOT NULL PRIMARY KEY,
-			team1Off INT(11) NOT NULL,
-			team2Off INT(11) NOT NULL,
-			team3Off INT(11) NOT NULL,
-			team1Def INT(11) NOT NULL,
-			team2Def INT(11) NOT NULL,
-			team3Def INT(11) NOT NULL,
 			team1Dri INT(11) NOT NULL,
 			team2Dri INT(11) NOT NULL,
 			team3Dri INT(11) NOT NULL
@@ -266,27 +257,6 @@ function getUserList()
 	return ($names);
 }
 
-function getPickListTeamList()
-{
-	global $pickListTable;
-	$queryStringTwo = "SELECT `team1` FROM `" . $pickListTable . "`";
-	$resultTwo = runQuery($queryStringTwo);
-	$queryString = "SELECT `team2` FROM `" . $pickListTable . "`";
-	$result = runQuery($queryString);
-	$names = array();
-
-	foreach ($resultTwo as $row_key => $row) {
-		if (!in_array($row["team1"], $names)) {
-			array_push($names, $row["team1"]);
-		}
-	}
-	foreach ($result as $row_key => $row) {
-		if (!in_array($row["team2"], $names)) {
-			array_push($names, $row["team2"]);
-		}
-	}
-	return ($names);
-}
 
 
 function matchInput(
@@ -391,12 +361,6 @@ function matchInput(
 
 function leadScoutInput(
 	$matchNum,
-	$team1Off,
-	$team2Off,
-	$team3Off,
-	$team1Def,
-	$team2Def,
-	$team3Def,
 	$team1Dri,
 	$team2Dri,
 	$team3Dri
@@ -407,23 +371,11 @@ function leadScoutInput(
 	global $dbname;
 	global $leadScoutTable;
 	$queryString = "REPLACE INTO `" . $leadScoutTable . '`(  `matchNum`,
-															`team1Off`,
-															`team2Off`,
-															`team3Off`,
-															`team1Def`,
-															`team2Def`,
-															`team3Def`,
 															`team1Dri`,
 															`team2Dri`,
 															`team3Dri`)
 															VALUES
 															("' . $matchNum . '",
-															"' . $team1Off . '",
-															"' . $team2Off . '",
-															"' . $team3Off . '",
-															"' . $team1Def . '",
-															"' . $team2Def . '",
-															"' . $team3Def . '",
 															"' . $team1Dri . '",
 															"' . $team2Dri . '",
 															"' . $team3Dri . '")';
@@ -475,8 +427,7 @@ function getTeamData($teamNumber)
 	if ($result3 != FALSE) {
 		foreach ($result3 as $row_key => $row) {
 			array_push($teamData[7], array(
-				$row["matchNum"], $row["team1Off"], $row["team2Off"],
-				$row["team3Off"], $row["team1Def"], $row["team2Def"], $row["team3Def"], $row["team1Dri"],
+				$row["matchNum"], $row["team1Dri"],
 				$row["team2Dri"], $row["team3Dri"]
 			));
 		}

@@ -10,8 +10,8 @@ include("navBar.php");
 			document.getElementById('penalties').value = 0;
 		}
 
-		if (document.getElementById('matchNum').value == "" || document.getElementById('teamNum').value == "") {
-			alert("Please enter a Team and Match Number");
+		if (document.getElementById('matchNum').value == "" || document.getElementById('teamNum').value == "" || document.getElementById('allianceColor').value == "") {
+			alert("Please enter a Team, Alliance Color, and Match Number");
 			return;
 		}
 		check();
@@ -268,12 +268,10 @@ include("navBar.php");
 						}else if (check == ", "){
 							cycleCount = cycleCount.substring(0, cycleCount.length - 2);
 							cycleCount += ("]");
+						}else if (check1 == "[") {
+							cycleCount = "[]";
 						}else{
 							alert("There was an error with your Cycle Count");
-
-						}
-						if (check1 == "[") {
-							cycleCount = "[]";
 						}
 					}
 
