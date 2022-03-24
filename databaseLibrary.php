@@ -214,14 +214,34 @@ function pickListInput($team1, $team2)
 	$queryString = "REPLACE INTO `" . $pickListTable . "` (`team1`, `team2`)";
 	$queryString = $queryString . ' VALUES ("' . $team1 . '", "' . $team2 . '")';
 	$queryOutput = runQuery($queryString);
+	updateElo($team1, $team2);
 }
 
-function eloInput($team, $elo)
+function eloInput($team, $eloScore)
 {
 	global $eloRanking;
-	$queryString = "REPLACE INTO `" . $eloRanking . "` (`team`, `elo`)";
-	$queryString = $queryString . ' VALUES ("' . $team . '", "' . $elo . '")';
+	$queryString = "REPLACE INTO `" . $eloRanking . "` (`team`, `eloScore`)";
+	$queryString = $queryString . ' VALUES ("' . $team . '", "' . $eloScore . '")';
 	$queryOutput = runQuery($queryString);
+}
+
+function getElo($teamNumber){
+	global $eloRanking;
+	$qs1 = "SELECT eloScore FROM `" . $eloRanking . "` WHERE team = " . $teamNumber . "";
+	$result = runQuery($qs1);
+	$teams = array();
+	foreach ($result as $row_key => $row) {
+		if (!in_array($row["eloScore"], $teams)) {
+			array_push($teams, $row["eloScore"]);
+		}
+	}
+	return ($teams[0]);
+}
+
+function eloChange($teamNumber, $eloScore){
+	global $eloRanking;
+	$qs1 = "UPDATE `" . $eloRanking . "` SET eloScore = " . $eloScore . " WHERE team = " . $teamNumber;
+	$result = runQuery($qs1);
 }
 
 
@@ -957,6 +977,13 @@ function getAllPicklistData()
 	return runQuery($qs1);
 }
 
+function getAllElo()
+{
+	global $eloRanking;
+	$qs1 = "SELECT * FROM `" . $eloRanking . "`";
+	return runQuery($qs1);
+}
+
 
 
 
@@ -1416,6 +1443,45 @@ function getScoutGeneratedPicklist($teamNumber)
 	return ($score);
 }
 
+function updateElo($team1, $team2)
+{
+	$eloCheck = getAllElo();
+	if ($eloCheck == null){
+		$teamList = getEventTeams();
+		foreach ($teamList as $teamNumber) {
+			eloInput($teamNumber, 1000);
+		}
+	}
+	
+	$team1Elo = getElo($team1);
+	$team2Elo = getElo($team2);
+
+	$dif = $team1Elo - $team2Elo;
+
+	if($dif < -40){
+		$weight = 40;
+	}else if($dif < 0){
+		$weight = 30;
+	}else if($dif == 0){
+		$weight = 30;
+	}
+	if($dif > 50){
+		$weight = 10;
+	}else if($dif > 0){
+		$weight = 20;
+	}
+
+	
+	$expecScoreteam1 = ($weight*(1-(1/(1+(10^(($team1Elo - $team2Elo)/400))))));
+	$expecScoreteam2 = ($weight*(1-(1/(1+(10^(($team1Elo - $team2Elo)/400))))));
+
+	
+	$team1New = $team1Elo + $expecScoreteam1;
+	$team2New = $team2Elo - $expecScoreteam2;
+
+	eloChange($team1, $team1New);
+	eloChange($team2, $team2New);
+}
 
 
 
