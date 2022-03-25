@@ -13,7 +13,7 @@ include("header.php") ?>
 				<tr>
 					<th>Team Number</th>
 					<th>Weighted Score</th>
-					<th>Scouter Gen Picklist</th>
+					<th>Scouter Gen ELO</th>
 					<th>Avg Upper Shot Percentage</th>
 					<th>Avg Climb</th>
 					<th>Avg Alliance Rank</th>
@@ -36,7 +36,7 @@ include("header.php") ?>
 
 					$i = 0;
 					$picklist = (getPickList($teamNumber) - getAvgDriveRank($teamNumber));
-					$scoutPick = getScoutGeneratedPicklist($teamNumber);
+					$scoutPick = getElo($teamNumber);
 					$UpperShotPercentage = getAvgUpperShotPercentage($teamNumber);
 					$avgClimb = getAvgClimb($teamNumber);
 					$allianceRank = getAvgDriveRank($teamNumber);
