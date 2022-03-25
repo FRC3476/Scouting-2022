@@ -612,10 +612,6 @@ include("navBar.php"); ?>
 				<div class="table-responsive">
 					<table class="table">
 						<tbody>
-							<tr class="success">
-								<td>ELO</td>
-								<td><?php echo (getElo($teamNumber)); ?></td>
-							</tr>
 							<tr class="danger">
 								<td>DNP</td>
 								<td><?php echo (getTotalDNP($teamNumber)); ?></td>
