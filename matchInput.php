@@ -142,7 +142,7 @@ include("navBar.php");
 				</a>
 				<div>
 					<div class="row">
-						<canvas id="myCanvas2" width=600px height=300px style="border:0px solid #d3d3d3;">
+						<canvas id="myCanvas2" width=700px height=350px style="border:0px solid #d3d3d3;">
 							<script src="Drawing2.js"></script>
 						</canvas>
 					</div>
@@ -618,8 +618,8 @@ include("navBar.php");
 			font-weight: bold;
 			/*To get rid of weird 3D affect in some browsers*/
 			border: solid rgb(255, 120, 50);
-			height:75px;
-    		width:275px;
+			height:100px;
+    		width:325px;
 		}
 
 		.disable-dbl-tap-zoom-save {
@@ -655,8 +655,8 @@ include("navBar.php");
 			font-weight: bold;
 			/*To get rid of weird 3D affect in some browsers*/
 			border: solid rgb(58, 133, 129);
-			height:75px;
-    		width:275px;
+			height:100px;
+    		width:325px;
 		}
 
 	</style>

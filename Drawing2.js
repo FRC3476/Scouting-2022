@@ -10,7 +10,7 @@ var lastCoordinate2 = {};
 
 var imageObj2 = new Image();
   imageObj2.onload = function() {
-  context2.drawImage(imageObj2, 0, 0, 600, 300);
+  context2.drawImage(imageObj2, 0, 0, 700, 350);
   };
   imageObj2.src = 'images/field.png';
 
@@ -26,14 +26,14 @@ function saveUserName2(){
 }
 
 function clearPath2(){
-  context2.clearRect(0, 0, 600, 300);
-  context2.drawImage(imageObj2, 0, 0, 600, 300);
+  context2.clearRect(0, 0, 700, 350);
+  context2.drawImage(imageObj2, 0, 0, 700, 350);
   coordinateList2.splice(-1,1);
 }
 
 function clearPath3(){
-  context2.clearRect(0, 0, 600, 300);
-  context2.drawImage(imageObj2, 0, 0, 600, 300);
+  context2.clearRect(0, 0, 700, 350);
+  context2.drawImage(imageObj2, 0, 0, 700, 350);
   tempCoordinateList2 = [];
 }
 
