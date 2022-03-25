@@ -1473,7 +1473,7 @@ function updateElo($team1, $team2)
 
 	
 	$expecScoreteam1 = ($weight*(1-(1/(1+(10^(($team1Elo - $team2Elo)/400))))));
-	$expecScoreteam2 = ($weight*(1-(1/(1+(10^(($team1Elo - $team2Elo)/400))))));
+	$expecScoreteam2 = ($weight*(0-(1/(1+(10^(($team2Elo - $team1Elo)/400))))));
 
 	
 	$team1New = $team1Elo + $expecScoreteam1;
