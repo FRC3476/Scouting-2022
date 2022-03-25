@@ -457,7 +457,7 @@ include("navBar.php");
 					<h3><b><u>Upper Goal:</u></b></h3>
 				</a>
 				<div class="row">
-					<div class="col-md-7">
+					<div class="col-md-8">
 						<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoalT()" id="bigFont"><a id="upperGoalTemp" class="enlargedtext">0</a> Upper Goal </button>
 						<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoalMissT()" id="bigFont"> Upper Goal Miss <a id="upperGoalMissTemp" class="enlargedtext">0</a></button>
 						<button class="disable-dbl-tap-zoom" type="button" onClick="upperGoalClearT()" class="enlargedtext stylishUpperMiss" id="bigFont"> Clear <a class="enlargedtext"></a></button>
@@ -473,9 +473,9 @@ include("navBar.php");
 						<br>
 						<br>
 						<br>
-						<button class="disable-dbl-tap-zoom-save" type="button" onClick="undoSave()"  id="bigFont"> Edit Last Save <a class="enlargedtext"></a></button>
+						<button class="disable-dbl-tap-zoom-unsave" type="button" onClick="undoSave()"  id="bigFont"> Edit Last Save <a class="enlargedtext"></a></button>
 					</div>
-					<div class="col-md-5">
+					<div class="col-md-4">
 						<button class="disable-dbl-tap-zoom-save" type="button" onClick="okButton()"  id="bigFont"> Save Cycle <a class="enlargedtext"></a></button>
 					</div>
 				</div>
@@ -618,9 +618,24 @@ include("navBar.php");
 			font-weight: bold;
 			/*To get rid of weird 3D affect in some browsers*/
 			border: solid rgb(255, 120, 50);
+			height:75px;
+    		width:275px;
 		}
 
 		.disable-dbl-tap-zoom-save {
+  			touch-action: manipulation;
+			background-color: rgb(58, 156, 129);
+			color: white;
+			border-radius: 2px;
+			font-family: Helvetica;
+			font-weight: bold;
+			/*To get rid of weird 3D affect in some browsers*/
+			border: solid rgb(58, 156, 129);
+			height:262px;
+    		width:275px;
+		}
+
+		.disable-dbl-tap-zoom-unsave {
   			touch-action: manipulation;
 			background-color: rgb(58, 156, 129);
 			color: white;
@@ -640,6 +655,8 @@ include("navBar.php");
 			font-weight: bold;
 			/*To get rid of weird 3D affect in some browsers*/
 			border: solid rgb(58, 133, 129);
+			height:75px;
+    		width:275px;
 		}
 
 	</style>
