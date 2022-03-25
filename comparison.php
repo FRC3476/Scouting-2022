@@ -469,6 +469,10 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                     <div class="table-responsive">
                         <table class="table">
                             <tbody>
+                                <tr class="danger">
+                                    <td>ELO</td>
+                                    <td><?php echo (getElo($teamNumber)); ?></td>
+                                </tr>
                                 <tr class="info">
                                     <td>Average Auto Upper Goal</td>
                                     <td><?php echo (getAvgUpperGoal($teamNumber)); ?></td>
@@ -950,6 +954,10 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                     <div class="table-responsive">
                         <table class="table">
                             <tbody>
+                                <tr class="danger">
+                                    <td>ELO</td>
+                                    <td><?php echo (getElo($teamNumber2)); ?></td>
+                                </tr>
                                 <tr class="info">
                                     <td>Average Auto Upper Goal</td>
                                     <td><?php echo (getAvgUpperGoal($teamNumber2)); ?></td>
