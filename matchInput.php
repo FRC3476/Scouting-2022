@@ -116,9 +116,9 @@ include("navBar.php");
 						<a>
 							<h3><b><u> Upper Goal:</u></b></h3>
 						</a>
-						<button type="button" onClick="updateupperGoal()" class="enlargedtext stylishUpper" id="bigFont"><a id="upperGoal" class="enlargedtext">0</a> Upper Goal </button>
-						<button type="button" onClick="updateupperGoalMiss()" class="enlargedtext stylishUpper" id="bigFont"> Upper Goal Miss <a id="upperGoalMiss" class="enlargedtext">0</a></button>
-						<button type="button" onClick="upperGoalClear()" class="enlargedtext stylishUpperMiss" id="bigFont"> Clear <a class="enlargedtext"></a></button>
+						<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoal()" id="bigFont"><a id="upperGoal" class="enlargedtext">0</a> Upper Goal </button>
+						<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoalMiss()" id="bigFont"> Upper Goal Miss <a id="upperGoalMiss" class="enlargedtext">0</a></button>
+						<button class="disable-dbl-tap-zoom" type="button" onClick="upperGoalClear()" class="enlargedtext stylishUpperMiss" id="bigFont"> Clear <a class="enlargedtext"></a></button>
 						<br>
 						<br>
 						<br>
@@ -126,9 +126,9 @@ include("navBar.php");
 						<a>
 							<h3><b><u>Lower Goal:</u></b></h3>
 						</a>
-						<button type="button" onClick="updatelowerGoal()" class="enlargedtext stylishLower" id="bigFont"><a id="lowerGoal" class="enlargedtext">0</a> Lower Goal </button>
-						<button type="button" onClick="updatelowerGoalMiss()" class="enlargedtext stylishLower" id="bigFont"> Lower Goal Miss <a id="lowerGoalMiss" class="enlargedtext">0</a></button>
-						<button type="button" onClick="lowerGoalClear()" class="enlargedtext stylishUpperMiss" id="bigFont"> Clear <a class="enlargedtext"></a></button>
+						<button class="disable-dbl-tap-zoom-lower" type="button" onClick="updatelowerGoal()" class="enlargedtext stylishLower" id="bigFont"><a id="lowerGoal" class="enlargedtext">0</a> Lower Goal </button>
+						<button class="disable-dbl-tap-zoom-lower" type="button" onClick="updatelowerGoalMiss()" class="enlargedtext stylishLower" id="bigFont"> Lower Goal Miss <a id="lowerGoalMiss" class="enlargedtext">0</a></button>
+						<button class="disable-dbl-tap-zoom" type="button" onClick="lowerGoalClear()" class="enlargedtext stylishUpperMiss" id="bigFont"> Clear <a class="enlargedtext"></a></button>
 						<br>
 						<br>
 					</div>
@@ -456,26 +456,30 @@ include("navBar.php");
 				<a>
 					<h3><b><u>Upper Goal:</u></b></h3>
 				</a>
-				<button type="button" onClick="updateupperGoalT()" class="enlargedtext stylishUpper" id="bigFont"><a id="upperGoalTemp" class="enlargedtext">0</a> Upper Goal </button>
-				<button type="button" onClick="updateupperGoalMissT()" class="enlargedtext stylishUpper" id="bigFont"> Upper Goal Miss <a id="upperGoalMissTemp" class="enlargedtext">0</a></button>
-				<button type="button" onClick="upperGoalClearT()" class="enlargedtext stylishUpperMiss" id="bigFont"> Clear <a class="enlargedtext"></a></button>
-				<br>
-				<br>
-				<br>
+				<div class="row">
+					<div class="col-md-7">
+						<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoalT()" id="bigFont"><a id="upperGoalTemp" class="enlargedtext">0</a> Upper Goal </button>
+						<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoalMissT()" id="bigFont"> Upper Goal Miss <a id="upperGoalMissTemp" class="enlargedtext">0</a></button>
+						<button class="disable-dbl-tap-zoom" type="button" onClick="upperGoalClearT()" class="enlargedtext stylishUpperMiss" id="bigFont"> Clear <a class="enlargedtext"></a></button>
+						<br>
+						<br>
 
-				<a>
-					<h3><b><u>Lower Goal:</u></b></h3>
-				</a>
-				<button type="button" onClick="updatelowerGoalT()" class="enlargedtext stylishLower" id="bigFont"><a id="lowerGoalTemp" class="enlargedtext">0</a> Lower Goal </button>
-				<button type="button" onClick="updatelowerGoalMissT()" class="enlargedtext stylishLower" id="bigFont"> Lower Goal Miss <a id="lowerGoalMissTemp" class="enlargedtext">0</a></button>
-				<button type="button" onClick="lowerGoalClearT()" class="enlargedtext stylishUpperMiss" id="bigFont"> Clear <a class="enlargedtext"></a></button>
-				<br>
-				<br>
-				<br>
-
-				<button type="button" onClick="okButton()" class="btn btn-primary" id="bigFont"> Save Cycle <a class="enlargedtext"></a></button>
-				<button type="button" onClick="undoSave()" class="btn btn-primary" id="bigFont"> Edit Last Save <a class="enlargedtext"></a></button>
-
+						<a>
+							<h3><b><u>Lower Goal:</u></b></h3>
+						</a>
+						<button class="disable-dbl-tap-zoom-lower" type="button" onClick="updatelowerGoalT()" class="enlargedtext stylishLower" id="bigFont"><a id="lowerGoalTemp" class="enlargedtext">0</a> Lower Goal </button>
+						<button class="disable-dbl-tap-zoom-lower" type="button" onClick="updatelowerGoalMissT()" class="enlargedtext stylishLower" id="bigFont"> Lower Goal Miss <a id="lowerGoalMissTemp" class="enlargedtext">0</a></button>
+						<button class="disable-dbl-tap-zoom" type="button" onClick="lowerGoalClearT()" class="enlargedtext stylishUpperMiss" id="bigFont"> Clear <a class="enlargedtext"></a></button>
+						<br>
+						<br>
+						<br>
+						<button class="disable-dbl-tap-zoom-save" type="button" onClick="undoSave()"  id="bigFont"> Edit Last Save <a class="enlargedtext"></a></button>
+					</div>
+					<div class="col-md-5">
+						<button class="disable-dbl-tap-zoom-save" type="button" onClick="okButton()"  id="bigFont"> Save Cycle <a class="enlargedtext"></a></button>
+					</div>
+				</div>
+				
 				<!--Defense-->
 				<a>
 					<h3><b><u>Defense:</u></b></h3>
@@ -600,6 +604,44 @@ include("navBar.php");
 		.feedback:hover {
 			background-color: Orange;
 		}
+
+		.disable-dbl-tap-zoom {
+  			touch-action: manipulation;
+		}
+
+		.disable-dbl-tap-zoom-upper {
+  			touch-action: manipulation;
+			  background-color: rgb(255, 120, 50);
+			color: white;
+			border-radius: 2px;
+			font-family: Helvetica;
+			font-weight: bold;
+			/*To get rid of weird 3D affect in some browsers*/
+			border: solid rgb(255, 120, 50);
+		}
+
+		.disable-dbl-tap-zoom-save {
+  			touch-action: manipulation;
+			background-color: rgb(58, 156, 129);
+			color: white;
+			border-radius: 2px;
+			font-family: Helvetica;
+			font-weight: bold;
+			/*To get rid of weird 3D affect in some browsers*/
+			border: solid rgb(58, 156, 129);
+		}
+
+		.disable-dbl-tap-zoom-lower {
+  			touch-action: manipulation;
+			background-color: rgb(58, 133, 129);
+			color: white;
+			border-radius: 2px;
+			font-family: Helvetica;
+			font-weight: bold;
+			/*To get rid of weird 3D affect in some browsers*/
+			border: solid rgb(58, 133, 129);
+		}
+
 	</style>
 </body>
 
