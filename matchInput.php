@@ -473,10 +473,12 @@ include("navBar.php");
 						<br>
 						<br>
 						<br>
-						<button class="disable-dbl-tap-zoom-unsave" type="button" onClick="undoSave()"  id="bigFont"> Edit Last Save <a class="enlargedtext"></a></button>
 					</div>
 					<div class="col-md-4">
 						<button class="disable-dbl-tap-zoom-save" type="button" onClick="okButton()"  id="bigFont"> Save Cycle <a class="enlargedtext"></a></button>
+						<br>
+						<br>
+						<button class="disable-dbl-tap-zoom-unsave" type="button" onClick="undoSave()"  id="bigFont"> Edit Last Save <a class="enlargedtext"></a></button>
 					</div>
 				</div>
 				
@@ -631,7 +633,7 @@ include("navBar.php");
 			font-weight: bold;
 			/*To get rid of weird 3D affect in some browsers*/
 			border: solid rgb(58, 156, 129);
-			height:262px;
+			height:240px;
     		width:275px;
 		}
 
@@ -644,6 +646,8 @@ include("navBar.php");
 			font-weight: bold;
 			/*To get rid of weird 3D affect in some browsers*/
 			border: solid rgb(58, 156, 129);
+			height:50px;
+    		width:275px;
 		}
 
 		.disable-dbl-tap-zoom-lower {
