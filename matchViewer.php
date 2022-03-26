@@ -98,20 +98,20 @@ if (
     $blueAuto1 = getAuto($team1Blue);
     $blueAuto2 = getAuto($team2Blue);
     $blueAuto3 = getAuto($team3Blue);
-    $totalBlueCargo = getAvgUpperGoal($team1Blue)+getAvgUpperGoalT($team1Blue)+getAvgLowerGoal($team1Blue)+getAvgLowerGoalT($team1Blue)+getAvgUpperGoal($team2Blue)+getAvgUpperGoalT($team2Blue)+getAvgLowerGoal($team2Blue)+getAvgLowerGoalT($team2Blue)+getAvgUpperGoal($team3Blue)+getAvgUpperGoalT($team3Blue)+getAvgLowerGoal($team3Blue)+getAvgLowerGoalT($team3Blue);
-    $totalRedCargo = getAvgUpperGoal($team1Red)+getAvgUpperGoalT($team1Red)+getAvgLowerGoal($team1Red)+getAvgLowerGoalT($team1Red)+getAvgUpperGoal($team2Red)+getAvgUpperGoalT($team2Red)+getAvgLowerGoal($team2Red)+getAvgLowerGoalT($team2Red)+getAvgUpperGoal($team3Red)+getAvgUpperGoalT($team3Red)+getAvgLowerGoal($team3Red)+getAvgLowerGoalT($team3Red);
+    $totalBlueCargo = getAvgUpperGoal($team1Blue) + getAvgUpperGoalT($team1Blue) + getAvgLowerGoal($team1Blue) + getAvgLowerGoalT($team1Blue) + getAvgUpperGoal($team2Blue) + getAvgUpperGoalT($team2Blue) + getAvgLowerGoal($team2Blue) + getAvgLowerGoalT($team2Blue) + getAvgUpperGoal($team3Blue) + getAvgUpperGoalT($team3Blue) + getAvgLowerGoal($team3Blue) + getAvgLowerGoalT($team3Blue);
+    $totalRedCargo = getAvgUpperGoal($team1Red) + getAvgUpperGoalT($team1Red) + getAvgLowerGoal($team1Red) + getAvgLowerGoalT($team1Red) + getAvgUpperGoal($team2Red) + getAvgUpperGoalT($team2Red) + getAvgLowerGoal($team2Red) + getAvgLowerGoalT($team2Red) + getAvgUpperGoal($team3Red) + getAvgUpperGoalT($team3Red) + getAvgLowerGoal($team3Red) + getAvgLowerGoalT($team3Red);
     $blueAuto = getAutoValue($team1Blue) + getAutoValue($team2Blue) + getAutoValue($team3Blue);
     $blueEstimate += getAvgPenalties($team1Red) + getAvgPenalties($team2Red) + getAvgPenalties($team3Red);
     $redEstimate += getAvgPenalties($team1Blue) + getAvgPenalties($team2Blue) + getAvgPenalties($team3Blue);
     $redAutoTotal = getAvgUpperGoalT($team1Red) + getAvgUpperGoalT($team2Red) + getAvgUpperGoalT($team3Red);
     $blueAutoTotal = (getAvgUpperGoal($team1Blue) + getAvgUpperGoal($team2Blue) + getAvgUpperGoal($team3Blue));
-    $red1ClimbScore = (getQuadClimbPercent($team1Red)*15) + (getTripleClimbPercent($team1Red)*10) + (getDoubleClimbPercent($team1Red)*6) + (getSingleClimbPercent($team1Red)*4);
-    $red2ClimbScore = (getQuadClimbPercent($team2Red)*15) + (getTripleClimbPercent($team2Red)*10) + (getDoubleClimbPercent($team2Red)*6) + (getSingleClimbPercent($team2Red)*4);
-    $red3ClimbScore = (getQuadClimbPercent($team3Red)*15) + (getTripleClimbPercent($team3Red)*10) + (getDoubleClimbPercent($team3Red)*6) + (getSingleClimbPercent($team3Red)*4);
+    $red1ClimbScore = (getQuadClimbPercent($team1Red) * 15) + (getTripleClimbPercent($team1Red) * 10) + (getDoubleClimbPercent($team1Red) * 6) + (getSingleClimbPercent($team1Red) * 4);
+    $red2ClimbScore = (getQuadClimbPercent($team2Red) * 15) + (getTripleClimbPercent($team2Red) * 10) + (getDoubleClimbPercent($team2Red) * 6) + (getSingleClimbPercent($team2Red) * 4);
+    $red3ClimbScore = (getQuadClimbPercent($team3Red) * 15) + (getTripleClimbPercent($team3Red) * 10) + (getDoubleClimbPercent($team3Red) * 6) + (getSingleClimbPercent($team3Red) * 4);
     $redTotalClimb = ($red1ClimbScore + $red2ClimbScore + $red3ClimbScore);
-    $blue1ClimbScore = (getQuadClimbPercent($team1Blue)*15) + (getTripleClimbPercent($team1Blue)*10) + (getDoubleClimbPercent($team1Blue)*6) + (getSingleClimbPercent($team1Blue)*4);
-    $blue2ClimbScore = (getQuadClimbPercent($team2Blue)*15) + (getTripleClimbPercent($team2Blue)*10) + (getDoubleClimbPercent($team2Blue)*6) + (getSingleClimbPercent($team2Blue)*4);
-    $blue3ClimbScore = (getQuadClimbPercent($team3Blue)*15) + (getTripleClimbPercent($team3Blue)*10) + (getDoubleClimbPercent($team3Blue)*6) + (getSingleClimbPercent($team3Blue)*4);
+    $blue1ClimbScore = (getQuadClimbPercent($team1Blue) * 15) + (getTripleClimbPercent($team1Blue) * 10) + (getDoubleClimbPercent($team1Blue) * 6) + (getSingleClimbPercent($team1Blue) * 4);
+    $blue2ClimbScore = (getQuadClimbPercent($team2Blue) * 15) + (getTripleClimbPercent($team2Blue) * 10) + (getDoubleClimbPercent($team2Blue) * 6) + (getSingleClimbPercent($team2Blue) * 4);
+    $blue3ClimbScore = (getQuadClimbPercent($team3Blue) * 15) + (getTripleClimbPercent($team3Blue) * 10) + (getDoubleClimbPercent($team3Blue) * 6) + (getSingleClimbPercent($team3Blue) * 4);
     $blueTotalClimb = ($blue1ClimbScore + $blue2ClimbScore + $blue3ClimbScore);
     $redTotalScore = getAvgscore($team1Red) + getAvgscore($team2Red) + getAvgscore($team3Red);
     $blueTotalScore = getAvgscore($team1Blue) + getAvgscore($team2Blue) + getAvgscore($team3Blue);
@@ -243,30 +243,30 @@ if (
                 <table class="table" style="width:100%">
                     <tr>
                         <th>
-                            <th></th>
-                            <th>Red Alliance</th>
-                            <th>Blue Alliance</th>
+                        <th></th>
+                        <th>Red Alliance</th>
+                        <th>Blue Alliance</th>
                         </th>
                     </tr>
                     <tr>
                         <th>
-                            <th>Avg Total Points</th>
-                            <th><?php echo (($redTotalScore)); ?></th>
-                            <th><?php echo (($blueTotalScore)); ?></th>
+                        <th>Avg Total Points</th>
+                        <th><?php echo (($redTotalScore)); ?></th>
+                        <th><?php echo (($blueTotalScore)); ?></th>
                         </th>
                     </tr>
                     <tr>
                         <th>
-                            <th>Avg Total Cargo</th>
-                            <th><?php echo($totalRedCargo);?></th>
-                            <th><?php echo($totalBlueCargo);?></th>
+                        <th>Avg Total Cargo</th>
+                        <th><?php echo ($totalRedCargo); ?></th>
+                        <th><?php echo ($totalBlueCargo); ?></th>
                         </th>
                     </tr>
                     <tr>
                         <th>
-                            <th>Avg Climb Points</th>
-                            <th><?php echo (($redTotalClimb)); ?></th>
-                            <th><?php echo (($blueTotalClimb)); ?></th>
+                        <th>Avg Climb Points</th>
+                        <th><?php echo (($redTotalClimb)); ?></th>
+                        <th><?php echo (($blueTotalClimb)); ?></th>
                         </th>
                     </tr>
                 </table>
@@ -362,6 +362,9 @@ if (
                             </tr>
                         </table>
                     </div>
+                    <h5><?php echo($team1Red . ": Square")?></h5>
+                    <h5><?php echo($team2Red.": Circle")?></h5>
+                    <h5><?php echo($team3Red.": Cross")?></h5>
                     <canvas id="myCanvas" width="500" height="250" style="border:1px solid #d3d3d3;"></canvas>
                     <script type="text/javascript">
                         var canvas = document.getElementById('myCanvas');
@@ -508,21 +511,46 @@ if (
                                 if (a != null) {
                                     for (var i = 0; i != a.length; i++) {
                                         if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.9)) {
-                                            context.fillStyle = "#3cff00";
-                                            context.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context.strokeStyle = "#3cff00";
                                             console.log(b[i][1]);
+                                            context.beginPath();
+                                            context.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
+                                            context.lineTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) - 4);
+                                            context.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
+                                            context.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
+                                            context.stroke();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
-                                            context.fillStyle = "#fff200";
-                                            context.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context.strokeStyle = "#fff200";
+                                            context.beginPath();
+                                            context.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
+                                            context.lineTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) - 4);
+                                            context.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
+                                            context.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
+                                            context.stroke();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
-                                            context.fillStyle = "#ff9100";
-                                            context.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context.strokeStyle = "#ff9100";
+                                            context.beginPath();
+                                            context.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
+                                            context.lineTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) - 4);
+                                            context.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
+                                            context.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
+                                            context.stroke();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
-                                            context.fillStyle = "#ff0000";
-                                            context.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context.strokeStyle = "#ff0000";
+                                            context.beginPath();
+                                            context.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
+                                            context.lineTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) - 4);
+                                            context.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
+                                            context.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
+                                            context.stroke();
                                         } else {
-                                            context.fillStyle = "#000000";
-                                            context.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context.strokeStyle = "#000000";
+                                            context.beginPath();
+                                            context.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
+                                            context.lineTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) - 4);
+                                            context.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
+                                            context.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
+                                            context.stroke();
                                         }
                                     }
                                 } else {
@@ -625,6 +653,9 @@ if (
                             </tr>
                         </table>
                     </div>
+                    <h5><?php echo($team1Blue . ": Square")?></h5>
+                    <h5><?php echo($team2Blue.": Circle")?></h5>
+                    <h5><?php echo($team3Blue.": Cross")?></h5>
                     <canvas id="myCanvas1" width="500" height="250" style="border:1px solid #d3d3d3;"></canvas>
                     <script type="text/javascript">
                         var canvas1 = document.getElementById('myCanvas1');
@@ -723,38 +754,38 @@ if (
                                         if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.9)) {
                                             context1.fillStyle = "#3cff00";
                                             context1.strokeStyle = "#3cff00";
-                                            context.beginPath();
-                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
-                                            context.stroke();
-                                            context.fill();
+                                            context1.beginPath();
+                                            context1.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
+                                            context1.stroke();
+                                            context1.fill();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
                                             context1.fillStyle = "#fff200";
                                             context1.strokeStyle = "#fff200";
-                                            context.beginPath();
-                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
-                                            context.stroke();
-                                            context.fill();
+                                            context1.beginPath();
+                                            context1.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
+                                            context1.stroke();
+                                            context1.fill();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
                                             context1.fillStyle = "#ff9100";
                                             context1.strokeStyle = "#ff9100";
-                                            context.beginPath();
-                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
-                                            context.stroke();
-                                            context.fill();
+                                            context1.beginPath();
+                                            context1.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
+                                            context1.stroke();
+                                            context1.fill();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
                                             context1.fillStyle = "#ff0000";
                                             context1.strokeStyle = "#ff0000";
-                                            context.beginPath();
-                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
-                                            context.stroke();
-                                            context.fill();
+                                            context1.beginPath();
+                                            context1.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
+                                            context1.stroke();
+                                            context1.fill();
                                         } else {
                                             context1.fillStyle = "#000000";
                                             context1.strokeStyle = "#000000";
-                                            context.beginPath();
-                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
-                                            context.stroke();
-                                            context.fill();
+                                            context1.beginPath();
+                                            context1.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
+                                            context1.stroke();
+                                            context1.fill();
                                         }
                                     }
                                 } else {
@@ -768,21 +799,46 @@ if (
                                 if (a != null) {
                                     for (var i = 0; i != a.length; i++) {
                                         if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.9)) {
-                                            context1.fillStyle = "#3cff00";
-                                            context1.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context1.strokeStyle = "#3cff00";
+                                            context1.beginPath();
+                                            context1.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
+                                            context1.lineTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) - 4);
+                                            context1.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
+                                            context1.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
+                                            context1.stroke();
                                             console.log(b[i][1]);
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
-                                            context1.fillStyle = "#fff200";
-                                            context1.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context1.strokeStyle = "#fff200";
+                                            context1.beginPath();
+                                            context1.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
+                                            context1.lineTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) - 4);
+                                            context1.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
+                                            context1.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
+                                            context1.stroke();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
-                                            context1.fillStyle = "#ff9100";
-                                            context1.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context1.strokeStyle = "#ff9100";
+                                            context1.beginPath();
+                                            context1.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
+                                            context1.lineTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) - 4);
+                                            context1.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
+                                            context1.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
+                                            context1.stroke();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
-                                            context1.fillStyle = "#ff0000";
-                                            context1.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context1.strokeStyle = "#ff0000";
+                                            context1.beginPath();
+                                            context1.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
+                                            context1.lineTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) - 4);
+                                            context1.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
+                                            context1.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
+                                            context1.stroke();
                                         } else {
-                                            context1.fillStyle = "#000000";
-                                            context1.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context1.strokeStyle = "#000000";
+                                            context1.beginPath();
+                                            context1.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
+                                            context1.lineTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) - 4);
+                                            context1.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
+                                            context1.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
+                                            context1.stroke();
                                         }
                                     }
                                 } else {
