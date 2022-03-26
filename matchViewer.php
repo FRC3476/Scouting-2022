@@ -84,7 +84,6 @@ if (
         $blueAutoEst = 8;
     }
     $blueTeleopEst = getAvgUpperGoalT($team1Blue) + getAvgUpperGoalT($team2Blue) + getAvgUpperGoalT($team3Blue) + getAvgLowerGoalT($team1Blue) + getAvgLowerGoalT($team2Blue) + getAvgLowerGoalT($team3Blue);
-
     $redAuto1 = getAuto($team1Red);
     $redAuto2 = getAuto($team2Red);
     $redAuto3 = getAuto($team3Red);
@@ -98,6 +97,42 @@ if (
     $blueAuto1 = getAuto($team1Blue);
     $blueAuto2 = getAuto($team2Blue);
     $blueAuto3 = getAuto($team3Blue);
+    $blue1UpperTelop = getAvgUpperGoalT($team1Blue);
+    $blue2UpperTelop = getAvgUpperGoalT($team2Blue);
+    $blue3UpperTelop = getAvgUpperGoalT($team3Blue);
+    $blue1UpperAuto = getAvgUpperGoal($team1Blue);
+    $blue2UpperAuto = getAvgUpperGoal($team2Blue);
+    $blue3UpperAuto = getAvgUpperGoal($team3Blue);
+    $red1UpperTelop = getAvgUpperGoalT($team1Red);
+    $red2UpperTelop = getAvgUpperGoalT($team2Red);
+    $red3UpperTelop = getAvgUpperGoalT($team3Red);
+    $red1UpperAuto = getAvgUpperGoal($team1Red);
+    $red2UpperAuto = getAvgUpperGoal($team2Red);
+    $red3UpperAuto = getAvgUpperGoal($team3Red);
+    $blue1UpperGoal = getAvgUpperGoal($team1Blue) + getAvgUpperGoalT($team1Blue);
+    $blue2UpperGoal = getAvgUpperGoal($team2Blue) + getAvgUpperGoalT($team2Blue);
+    $blue3UpperGoal = getAvgUpperGoal($team3Blue) + getAvgUpperGoalT($team3Blue);
+    $red1UpperGoal = getAvgUpperGoal($team1Blue) + getAvgUpperGoalT($team1Blue);
+    $red2UpperGoal = getAvgUpperGoal($team2Blue) + getAvgUpperGoalT($team2Blue);
+    $red3UpperGoal = getAvgUpperGoal($team3Blue) + getAvgUpperGoalT($team3Blue);
+    $blue1LowerGoal = getAvgLowerGoal($team1Blue) + getAvgLowerGoalT($team1Blue);
+    $blue2LowerGoal = getAvgLowerGoal($team2Blue) + getAvgLowerGoalT($team2Blue);
+    $blue3LowerGoal = getAvgLowerGoal($team3Blue) + getAvgLowerGoalT($team3Blue);
+    $red1LowerGoal = getAvgLowerGoal($team1Red) + getAvgLowerGoalT($team1Red);
+    $red2LowerGoal = getAvgLowerGoal($team2Red) + getAvgLowerGoalT($team2Red);
+    $red3LowerGoal = getAvgLowerGoal($team3Red) + getAvgLowerGoalT($team3Red);
+    $blue1LowerTelop = getAvgLowerGoalT($team1Blue);
+    $blue2LowerTelop = getAvgLowerGoalT($team2Blue);
+    $blue3LowerTelop = getAvgLowerGoalT($team3Blue);
+    $blue1LowerAuto = getAvgLowerGoal($team1Blue);
+    $blue2LowerAuto = getAvgLowerGoal($team2Blue);
+    $blue3LowerAuto = getAvgLowerGoal($team3Blue);
+    $red1LowerTelop = getAvgLowerGoalT($team1Red);
+    $red2LowerTelop = getAvgLowerGoalT($team2Red);
+    $red3LowerTelop = getAvgLowerGoalT($team3Red);
+    $red1LowerAuto = getAvgLowerGoal($team1Red);
+    $red2LowerAuto = getAvgLowerGoal($team2Red);
+    $red3LowerAuto = getAvgLowerGoal($team3Red);
     $totalBlueCargo = getAvgUpperGoal($team1Blue) + getAvgUpperGoalT($team1Blue) + getAvgLowerGoal($team1Blue) + getAvgLowerGoalT($team1Blue) + getAvgUpperGoal($team2Blue) + getAvgUpperGoalT($team2Blue) + getAvgLowerGoal($team2Blue) + getAvgLowerGoalT($team2Blue) + getAvgUpperGoal($team3Blue) + getAvgUpperGoalT($team3Blue) + getAvgLowerGoal($team3Blue) + getAvgLowerGoalT($team3Blue);
     $totalRedCargo = getAvgUpperGoal($team1Red) + getAvgUpperGoalT($team1Red) + getAvgLowerGoal($team1Red) + getAvgLowerGoalT($team1Red) + getAvgUpperGoal($team2Red) + getAvgUpperGoalT($team2Red) + getAvgLowerGoal($team2Red) + getAvgLowerGoalT($team2Red) + getAvgUpperGoal($team3Red) + getAvgUpperGoalT($team3Red) + getAvgLowerGoal($team3Red) + getAvgLowerGoalT($team3Red);
     $blueAuto = getAutoValue($team1Blue) + getAutoValue($team2Blue) + getAutoValue($team3Blue);
@@ -113,8 +148,8 @@ if (
     $blue2ClimbScore = (getQuadClimbPercent($team2Blue) * 15) + (getTripleClimbPercent($team2Blue) * 10) + (getDoubleClimbPercent($team2Blue) * 6) + (getSingleClimbPercent($team2Blue) * 4);
     $blue3ClimbScore = (getQuadClimbPercent($team3Blue) * 15) + (getTripleClimbPercent($team3Blue) * 10) + (getDoubleClimbPercent($team3Blue) * 6) + (getSingleClimbPercent($team3Blue) * 4);
     $blueTotalClimb = ($blue1ClimbScore + $blue2ClimbScore + $blue3ClimbScore);
-    $redTotalScore = getAvgscore($team1Red) + getAvgscore($team2Red) + getAvgscore($team3Red);
-    $blueTotalScore = getAvgscore($team1Blue) + getAvgscore($team2Blue) + getAvgscore($team3Blue);
+    $redTotalScore =  getAvgScore($team1Red) + getAvgScore($team2Red) + getAvgScore($team3Red);
+    $blueTotalScore = getAvgScore($team1Blue) + getAvgScore($team2Blue) + getAvgScore($team3Blue);
 }
 ?>
 
@@ -242,129 +277,91 @@ if (
             <div class="row">
                 <table class="table" style="width:100%">
                     <tr>
-                        <th>
                         <th></th>
-                        <th>Red Alliance</th>
-                        <th>Blue Alliance</th>
-                        </th>
+                        <th>Red Alliance: [<?php echo ($team1Red . ", " . $team2Red . ", and " . $team3Red . "]"); ?></th>
+                        <th>Blue Alliance: [<?php echo ($team1Blue . ", " . $team2Blue . ", and " . $team3Blue . "]"); ?></th>
                     </tr>
                     <tr>
-                        <th>
                         <th>Avg Total Points</th>
                         <th><?php echo (($redTotalScore)); ?></th>
                         <th><?php echo (($blueTotalScore)); ?></th>
-                        </th>
                     </tr>
                     <tr>
-                        <th>
                         <th>Avg Total Cargo</th>
                         <th><?php echo ($totalRedCargo); ?></th>
                         <th><?php echo ($totalBlueCargo); ?></th>
-                        </th>
                     </tr>
                     <tr>
-                        <th>
                         <th>Avg Climb Points</th>
                         <th><?php echo (($redTotalClimb)); ?></th>
                         <th><?php echo (($blueTotalClimb)); ?></th>
-                        </th>
                     </tr>
                 </table>
             </div>
             <div class="row">
                 <div class="column1">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tr class="success">
-                                <td>Team Number</td>
-                                <td><?php echo (($team1Red)); ?></td>
-                                <td><?php echo (($team2Red)); ?></td>
-                                <td><?php echo (($team3Red)); ?></td>
-                                <td>Total</td>
-                            </tr>
-                            <tr class="danger">
-                                <td>Predicted Red Score:</td>
-                                <td><?php echo round(($red1Estimate)); ?></td>
-                                <td><?php echo round(($red2Estimate)); ?></td>
-                                <td><?php echo round(($red3Estimate)); ?></td>
-                                <td><?php echo round(($redEstimate)); ?></td>
-                            </tr>
-                            <tr class="danger">
-                                <td>Have Autos</td>
-                                <td><?php echo ($redAuto1); ?></td>
-                                <td><?php echo ($redAuto2); ?></td>
-                                <td><?php echo ($redAuto3); ?></td>
-                                <td><?php echo ($redAuto); ?></td>
-                            </tr>
-                            <tr class="danger">
-                                <td>Avg Auto Upper</td>
-                                <td><?php echo (getAvgUpperGoal($team1Red)); ?></td>
-                                <td><?php echo (getAvgUpperGoal($team2Red)); ?></td>
-                                <td><?php echo (getAvgUpperGoal($team3Red)); ?></td>
-                                <td><?php echo ($redAutoTotal); ?></td>
-                            </tr>
-                            <tr class="danger">
-                                <td>Avg Auto Lower</td>
-                                <td><?php echo round(getAvgLowerGoal($team1Red), 3); ?></td>
-                                <td><?php echo round(getAvgLowerGoal($team2Red), 3); ?></td>
-                                <td><?php echo round(getAvgLowerGoal($team3Red), 3); ?></td>
-                                <td><?php echo (getAvgLowerGoal($team1Red) + getAvgLowerGoal($team2Red) + getAvgLowerGoal($team3Red)); ?></td>
-                            </tr>
-                            <tr class="danger">
-                                <td>Avg Teleop Upper</td>
-                                <td><?php echo (getAvgUpperGoalT($team1Red)); ?></td>
-                                <td><?php echo (getAvgUpperGoalT($team2Red)); ?></td>
-                                <td><?php echo (getAvgUpperGoalT($team3Red)); ?></td>
-                                <td><?php echo (getAvgUpperGoalT($team1Red) + getAvgUpperGoalT($team2Red) + getAvgUpperGoalT($team3Red)); ?></td>
-                            </tr>
-                            </tr>
-                            <tr class="danger">
-                                <td>Avg Teleop Lower</td>
-                                <td><?php echo round(getAvgLowerGoalT($team1Red), 3); ?></td>
-                                <td><?php echo round(getAvgLowerGoalT($team2Red), 3); ?></td>
-                                <td><?php echo round(getAvgLowerGoalT($team3Red), 3); ?></td>
-                                <td><?php echo (getAvgLowerGoalT($team1Red) + getAvgLowerGoalT($team2Red) + getAvgLowerGoalT($team3Red)); ?></td>
-                            </tr>
-                            <tr class="danger">
-                                <td>Cycle Count</td>
-                                <td><?php echo round(getAvgCycleCount($team1Red), 3); ?></td>
-                                <td><?php echo round(getAvgCycleCount($team2Red), 3); ?></td>
-                                <td><?php echo round(getAvgCycleCount($team3Red), 3); ?></td>
-                                <td><?php echo (getAvgCycleCount($team3Red) + getAvgCycleCount($team2Red) + getAvgCycleCount($team1Red)); ?></td>
-                            </tr>
-                            <tr class="danger">
-                                <td>Traversal Climb Percentage</td>
-                                <td><?php echo round(100 * getQuadClimbPercent($team1Red), 3); ?>%</td>
-                                <td><?php echo round(100 * getQuadClimbPercent($team2Red), 3); ?>%</td>
-                                <td><?php echo round(100 * getQuadClimbPercent($team3Red), 3); ?>%</td>
-                                <td><?php echo 100 * (1 - ((1 - getQuadClimbPercent($team3Red)) * (1 - getQuadClimbPercent($team2Red)) * (1 - getQuadClimbPercent($team1Red)))); ?>%</td>
-                            </tr>
-                            <tr class="danger">
-                                <td>High Climb Percentage</td>
-                                <td><?php echo round(100 * getTripleClimbPercent($team1Red), 3); ?>%</td>
-                                <td><?php echo round(100 * getTripleClimbPercent($team2Red), 3); ?>%</td>
-                                <td><?php echo round(100 * getTripleClimbPercent($team3Red), 3); ?>%</td>
-                                <td><?php echo 100 * (1 - ((1 - getTripleClimbPercent($team3Red)) * (1 - getTripleClimbPercent($team2Red)) * (1 - getTripleClimbPercent($team1Red)))); ?>%</td>
-                            </tr>
-                            <tr class="danger">
-                                <td>Med Climb Percentage</td>
-                                <td><?php echo round(100 * getDoubleClimbPercent($team1Red), 3); ?>%</td>
-                                <td><?php echo round(100 * getDoubleClimbPercent($team2Red), 3); ?>%</td>
-                                <td><?php echo round(100 * getDoubleClimbPercent($team3Red), 3); ?>%</td>
-                                <td><?php echo 100 * (1 - ((1 - getDoubleClimbPercent($team3Red)) * (1 - getDoubleClimbPercent($team2Red)) * (1 - getDoubleClimbPercent($team1Red)))); ?>%</td>
-                            </tr>
-                            <tr class="danger">
-                                <td>Low Climb Percentage</td>
-                                <td><?php echo round(100 * getSingleClimbPercent($team1Red), 3); ?>%</td>
-                                <td><?php echo round(100 * getSingleClimbPercent($team2Red), 3); ?>%</td>
-                                <td><?php echo round(100 * getSingleClimbPercent($team3Red), 3); ?>%</td>
-                                <td><?php echo 100 * (1 - ((1 - getSingleClimbPercent($team3Red)) * (1 - getSingleClimbPercent($team2Red)) * (1 - getSingleClimbPercent($team1Red)))); ?>%</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <h5><?php echo($team1Red . ": Square")?></h5>
-                    <h5><?php echo($team2Red.": Circle")?></h5>
-                    <h5><?php echo($team3Red.": Cross")?></h5>
+                    <h><b>Red Alliance Members:</h></b>
+                    <br>
+                    <h><b><u>Red 1</u></h></b>
+                    <table class="table" style="width:100%">
+                        <tr class="danger">
+                            <th><?php echo ($team1Red) ?></th>
+                            <th>Upper Auto</th>
+                            <th>Lower Auto</th>
+                            <th>Upper Telop</th>
+                            <th>Lower Telop</th>
+                            <th>Climb</th>
+                        </tr>
+                        <tr class="danger">
+                            <th></th>
+                            <th><?php echo ($red1UpperAuto) ?></th>
+                            <th><?php echo ($red1LowerAuto) ?></th>
+                            <th><?php echo ($red1UpperTelop) ?></th>
+                            <th><?php echo ($red1LowerTeleop) ?></th>
+                            <th><?php echo ($red1Climb) ?></th>
+                        </tr>
+                    </table>
+                    <h><b><u>Red 2</u></h></b>
+                    <table class="table" style="width:100%">
+                        <tr class="danger">
+                            <th><?php echo ($team2Red) ?></th>
+                            <th>Upper Auto</th>
+                            <th>Lower Auto</th>
+                            <th>Upper Telop</th>
+                            <th>Lower Telop</th>
+                            <th>Climb</th>
+                        </tr>
+                        <tr class="danger">
+                            <th></th>
+                            <th><?php echo ($red2UpperAuto) ?></th>
+                            <th><?php echo ($red2LowerAuto) ?></th>
+                            <th><?php echo ($red2UpperTelop) ?></th>
+                            <th><?php echo ($red2LowerTeleop) ?></th>
+                            <th><?php echo ($red2Climb) ?></th>
+                        </tr>
+                    </table>
+                    <h><b><u>Red 3</u></h></b>
+                    <table class="table" style="width:100%">
+                        <tr class="danger">
+                            <th><?php echo ($team3Red) ?></th>
+                            <th>Upper Auto</th>
+                            <th>Lower Auto</th>
+                            <th>Upper Telop</th>
+                            <th>Lower Telop</th>
+                            <th>Climb</th>
+                        </tr>
+                        <tr class="danger">
+                            <th></th>
+                            <th><?php echo ($red3UpperAuto) ?></th>
+                            <th><?php echo ($red3LowerAuto) ?></th>
+                            <th><?php echo ($red3UpperTelop) ?></th>
+                            <th><?php echo ($red3LowerTeleop) ?></th>
+                            <th><?php echo ($red3Climb) ?></th>
+                        </tr>
+                    </table>
+                    <h5><?php echo ($team1Red . ": Square") ?></h5>
+                    <h5><?php echo ($team2Red . ": Circle") ?></h5>
+                    <h5><?php echo ($team3Red . ": Cross") ?></h5>
                     <canvas id="myCanvas" width="500" height="250" style="border:1px solid #d3d3d3;"></canvas>
                     <script type="text/javascript">
                         var canvas = document.getElementById('myCanvas');
@@ -565,97 +562,68 @@ if (
 
                 <div class="column1">
 
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tr class="success">
-                                <td>Team Number</td>
-                                <td><?php echo (($team1Blue)); ?></td>
-                                <td><?php echo (($team2Blue)); ?></td>
-                                <td><?php echo (($team3Blue)); ?></td>
-                                <td>Total</td>
-                            </tr>
-                            <tr class="info">
-                                <td>Predicted Blue Score:</td>
-                                <td><?php echo round(($blue1Estimate)); ?></td>
-                                <td><?php echo round(($blue2Estimate)); ?></td>
-                                <td><?php echo round(($blue3Estimate)); ?></td>
-                                <td><?php echo (($blueEstimate)); ?></td>
-                            </tr>
-                            <tr class="info">
-                                <td>Have Autos</td>
-                                <td><?php echo ($blueAuto1); ?></td>
-                                <td><?php echo ($blueAuto2); ?></td>
-                                <td><?php echo ($blueAuto3); ?></td>
-                                <td><?php echo ($blueAuto); ?></td>
-                            </tr>
-                            <tr class="info">
-                                <td>Avg Auto Upper</td>
-                                <td><?php echo (getAvgUpperGoal($team1Blue)); ?></td>
-                                <td><?php echo (getAvgUpperGoal($team2Blue)); ?></td>
-                                <td><?php echo (getAvgUpperGoal($team3Blue)); ?></td>
-                                <td><?php echo ($blueAutoTotal); ?></td>
-                            </tr>
-                            <tr class="info">
-                                <td>Avg Auto Lower</td>
-                                <td><?php echo round(getAvgLowerGoal($team1Blue), 3); ?></td>
-                                <td><?php echo round(getAvgLowerGoal($team2Blue), 3); ?></td>
-                                <td><?php echo round(getAvgLowerGoal($team3Blue), 3); ?></td>
-                                <td><?php echo (getAvgLowerGoal($team1Blue) + getAvgLowerGoal($team2Blue) + getAvgLowerGoal($team3Blue)); ?></td>
-                            </tr>
-                            <tr class="info">
-                                <td>Avg Teleop Upper</td>
-                                <td><?php echo (getAvgUpperGoalT($team1Blue)); ?></td>
-                                <td><?php echo (getAvgUpperGoalT($team2Blue)); ?></td>
-                                <td><?php echo (getAvgUpperGoalT($team3Blue)); ?></td>
-                                <td><?php echo (getAvgUpperGoalT($team1Blue) + getAvgUpperGoalT($team2Blue) + getAvgUpperGoalT($team3Blue)); ?></td>
-                            </tr>
-                            <tr class="info">
-                                <td>Avg Teleop Lower</td>
-                                <td><?php echo round(getAvgLowerGoalT($team1Blue), 3); ?></td>
-                                <td><?php echo round(getAvgLowerGoalT($team2Blue), 3); ?></td>
-                                <td><?php echo round(getAvgLowerGoalT($team3Blue), 3); ?></td>
-                                <td><?php echo (getAvgLowerGoalT($team1Blue) + getAvgLowerGoalT($team2Blue) + getAvgLowerGoalT($team3Blue)); ?></td>
-                            </tr>
-                            <tr class="info">
-                                <td>Cycle Count</td>
-                                <td><?php echo round(getAvgCycleCount($team1Blue), 3); ?></td>
-                                <td><?php echo round(getAvgCycleCount($team2Blue), 3); ?></td>
-                                <td><?php echo round(getAvgCycleCount($team3Blue), 3); ?></td>
-                                <td><?php echo (getAvgCycleCount($team3Blue) + getAvgCycleCount($team2Blue) + getAvgCycleCount($team1Blue)); ?></td>
-                            </tr>
-                            <tr class="info">
-                                <td>Traversal Climb Percentage</td>
-                                <td><?php echo round(100 * getQuadClimbPercent($team1Blue), 3); ?>%</td>
-                                <td><?php echo round(100 * getQuadClimbPercent($team2Blue), 3); ?>%</td>
-                                <td><?php echo round(100 * getQuadClimbPercent($team3Blue), 3); ?>%</td>
-                                <td><?php echo 100 * (1 - ((1 - getQuadClimbPercent($team3Blue)) * (1 - getQuadClimbPercent($team2Blue)) * (1 - getQuadClimbPercent($team1Blue)))); ?>%</td>
-                            </tr>
-                            <tr class="info">
-                                <td>High Climb Percentage</td>
-                                <td><?php echo round(100 * getTripleClimbPercent($team1Blue), 3); ?>%</td>
-                                <td><?php echo round(100 * getTripleClimbPercent($team2Blue), 3); ?>%</td>
-                                <td><?php echo round(100 * getTripleClimbPercent($team3Blue), 3); ?>%</td>
-                                <td><?php echo 100 * (1 - ((1 - getTripleClimbPercent($team3Blue)) * (1 - getTripleClimbPercent($team2Blue)) * (1 - getTripleClimbPercent($team1Blue)))); ?>%</td>
-                            </tr>
-                            <tr class="info">
-                                <td>Med Climb Percentage</td>
-                                <td><?php echo round(100 * getDoubleClimbPercent($team1Blue), 3); ?>%</td>
-                                <td><?php echo round(100 * getDoubleClimbPercent($team2Blue), 3); ?>%</td>
-                                <td><?php echo round(100 * getDoubleClimbPercent($team3Blue), 3); ?>%</td>
-                                <td><?php echo 100 * (1 - ((1 - getDoubleClimbPercent($team3Blue)) * (1 - getDoubleClimbPercent($team2Blue)) * (1 - getDoubleClimbPercent($team1Blue)))); ?>%</td>
-                            </tr>
-                            <tr class="info">
-                                <td>Low Climb Percentage</td>
-                                <td><?php echo round(100 * getSingleClimbPercent($team1Blue), 3); ?>%</td>
-                                <td><?php echo round(100 * getSingleClimbPercent($team2Blue), 3); ?>%</td>
-                                <td><?php echo round(100 * getSingleClimbPercent($team3Blue), 3); ?>%</td>
-                                <td><?php echo 100 * (1 - ((1 - getSingleClimbPercent($team3Blue)) * (1 - getSingleClimbPercent($team2Blue)) * (1 - getSingleClimbPercent($team1Blue)))); ?>%</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <h5><?php echo($team1Blue . ": Square")?></h5>
-                    <h5><?php echo($team2Blue.": Circle")?></h5>
-                    <h5><?php echo($team3Blue.": Cross")?></h5>
+                    <h><b>Blue Alliance Members:</h></b>
+                    <br>
+                    <h><b><u>Blue 1</u></h></b>
+                    <table class="table" style="width:100%">
+                        <tr class="info">
+                            <th><?php echo ($team1Blue) ?></th>
+                            <th>Upper Auto</th>
+                            <th>Lower Auto</th>
+                            <th>Upper Telop</th>
+                            <th>Lower Telop</th>
+                            <th>Climb</th>
+                        </tr>
+                        <tr class="info">
+                            <th></th>
+                            <th><?php echo ($blue1UpperAuto) ?></th>
+                            <th><?php echo ($blue1LowerAuto) ?></th>
+                            <th><?php echo ($blue1UpperTelop) ?></th>
+                            <th><?php echo ($blue1LowerTeleop) ?></th>
+                            <th><?php echo ($blue1Climb) ?></th>
+                        </tr>
+                    </table>
+                    <h><b><u>Blue 2</u></h></b>
+                    <table class="table" style="width:100%">
+                        <tr class="info">
+                            <th><?php echo ($team2Blue) ?></th>
+                            <th>Upper Auto</th>
+                            <th>Lower Auto</th>
+                            <th>Upper Telop</th>
+                            <th>Lower Telop</th>
+                            <th>Climb</th>
+                        </tr>
+                        <tr class="info">
+                            <th></th>
+                            <th><?php echo ($blue2UpperAuto) ?></th>
+                            <th><?php echo ($blue2LowerAuto) ?></th>
+                            <th><?php echo ($blue2UpperTelop) ?></th>
+                            <th><?php echo ($blue2LowerTelop) ?></th>
+                            <th><?php echo ($blue2Climb) ?></th>
+                        </tr>
+                    </table>
+                    <h><b><u>Blue 3</u></h></b>
+                    <table class="table" style="width:100%">
+                        <tr class="info">
+                            <th><?php echo ($team3Blue) ?></th>
+                            <th>Upper Auto</th>
+                            <th>Lower Auto</th>
+                            <th>Upper Telop</th>
+                            <th>Lower Telop</th>
+                            <th>Climb</th>
+                        </tr>
+                        <tr class="info">
+                            <th></th>
+                            <th><?php echo ($blue3UpperAuto) ?></th>
+                            <th><?php echo ($blue3LowerAuto) ?></th>
+                            <th><?php echo ($blue3UpperTelop) ?></th>
+                            <th><?php echo ($blue3LowerTeleop) ?></th>
+                            <th><?php echo ($blue3Climb) ?></th>
+                        </tr>
+                    </table>
+                    <h5><?php echo ($team1Blue . ": Square") ?></h5>
+                    <h5><?php echo ($team2Blue . ": Circle") ?></h5>
+                    <h5><?php echo ($team3Blue . ": Cross") ?></h5>
                     <canvas id="myCanvas1" width="500" height="250" style="border:1px solid #d3d3d3;"></canvas>
                     <script type="text/javascript">
                         var canvas1 = document.getElementById('myCanvas1');
@@ -860,7 +828,12 @@ if (
         float: left;
         width: 50%;
     }
-
+    th:nth-child(3),td:nth-child(5) {
+  background-color: #D6EEEE;
+    }
+    th:nth-child(2),td:nth-child(4) {
+  background-color: #EEDAD6;
+    }
     /* Clear floats after the columns */
     .row:after {
         content: "";
