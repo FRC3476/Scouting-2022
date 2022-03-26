@@ -83,7 +83,7 @@ if (
     if ($blueAutoEst >= 8) {
         $blueAutoEst = 8;
     }
-    $blueTeleopEst = getAvgUpperGoalT($team1Blue) + getAvgUpperGoalT($team2Blue) + getAvgUpperGoalT($team3Blue) + getAvgLowerGoalT($team1Blue) + getAvgLowerGoalT($team2Blue) + getAvgLowerGoalT($team3Blue);
+    $blueTelopEst = getAvgUpperGoalT($team1Blue) + getAvgUpperGoalT($team2Blue) + getAvgUpperGoalT($team3Blue) + getAvgLowerGoalT($team1Blue) + getAvgLowerGoalT($team2Blue) + getAvgLowerGoalT($team3Blue);
     $redAuto1 = getAuto($team1Red);
     $redAuto2 = getAuto($team2Red);
     $redAuto3 = getAuto($team3Red);
@@ -257,9 +257,7 @@ if (
             </select>
             <input type="text" name="match" id="match" value="<?php echo ((isset($_GET["match"])) ? htmlspecialchars($_GET["match"]) : ""); ?>" size="8" class="form-control">
             <br />
-            <script>
-                window.history.pushState('', '', 'matchViewer.php');
-            </script>
+
             <button id="submit" class="btn btn-primary" onclick="postwith('');">Submit</button>
             <br />
         </div>
@@ -317,7 +315,7 @@ if (
                             <th><?php echo ($red1UpperAuto) ?></th>
                             <th><?php echo ($red1LowerAuto) ?></th>
                             <th><?php echo ($red1UpperTelop) ?></th>
-                            <th><?php echo ($red1LowerTeleop) ?></th>
+                            <th><?php echo ($red1LowerTelop) ?></th>
                             <th><?php echo ($red1Climb) ?></th>
                         </tr>
                     </table>
@@ -336,7 +334,7 @@ if (
                             <th><?php echo ($red2UpperAuto) ?></th>
                             <th><?php echo ($red2LowerAuto) ?></th>
                             <th><?php echo ($red2UpperTelop) ?></th>
-                            <th><?php echo ($red2LowerTeleop) ?></th>
+                            <th><?php echo ($red2LowerTelop) ?></th>
                             <th><?php echo ($red2Climb) ?></th>
                         </tr>
                     </table>
@@ -355,7 +353,7 @@ if (
                             <th><?php echo ($red3UpperAuto) ?></th>
                             <th><?php echo ($red3LowerAuto) ?></th>
                             <th><?php echo ($red3UpperTelop) ?></th>
-                            <th><?php echo ($red3LowerTeleop) ?></th>
+                            <th><?php echo ($red3LowerTelop) ?></th>
                             <th><?php echo ($red3Climb) ?></th>
                         </tr>
                     </table>
@@ -579,7 +577,7 @@ if (
                             <th><?php echo ($blue1UpperAuto) ?></th>
                             <th><?php echo ($blue1LowerAuto) ?></th>
                             <th><?php echo ($blue1UpperTelop) ?></th>
-                            <th><?php echo ($blue1LowerTeleop) ?></th>
+                            <th><?php echo ($blue1LowerTelop) ?></th>
                             <th><?php echo ($blue1Climb) ?></th>
                         </tr>
                     </table>
@@ -617,7 +615,7 @@ if (
                             <th><?php echo ($blue3UpperAuto) ?></th>
                             <th><?php echo ($blue3LowerAuto) ?></th>
                             <th><?php echo ($blue3UpperTelop) ?></th>
-                            <th><?php echo ($blue3LowerTeleop) ?></th>
+                            <th><?php echo ($blue3LowerTelop) ?></th>
                             <th><?php echo ($blue3Climb) ?></th>
                         </tr>
                     </table>
