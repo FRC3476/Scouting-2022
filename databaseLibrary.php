@@ -247,10 +247,10 @@ function eloChange($teamNumber, $eloScore){
 
 //Input- getTeamList, accesses match scout table and gets team numbers from it.
 //Output- array, list of teams in teamNumber column of pitscout table.
-function getTeamList()
+function getTeamList($min=-1, $max=1000)
 {
 	global $matchScoutTable;
-	$queryStringTwo = "SELECT `teamNum` FROM `" . $matchScoutTable . "`";
+	$queryStringTwo = "SELECT `teamNum` FROM `" . $matchScoutTable . "`  WHERE matchNum >= ".$min." AND matchNum <= ".$max."";
 	$resultTwo = runQuery($queryStringTwo);
 	$teams = array();
 
@@ -403,7 +403,7 @@ function leadScoutInput(
 	$queryOutput = runQuery($queryString);
 }
 
-function getTeamData($teamNumber)
+function getTeamData($teamNumber, $min=-1, $max=1000)
 {
 	global $servername;
 	global $username;
@@ -413,7 +413,8 @@ function getTeamData($teamNumber)
 	global $matchScoutTable;
 	global $leadScoutTable;
 	$qs1 = "SELECT * FROM `" . $pitScoutTable . "` WHERE teamNumber = " . $teamNumber . "";
-	$qs2 = "SELECT * FROM `" . $matchScoutTable . "`  WHERE teamNum = " . $teamNumber . "";
+	$qs2 = "SELECT * FROM `" . $matchScoutTable . "`  WHERE teamNum = " . $teamNumber . " AND matchNum >= ".$min." AND matchNum <= ".$max."";
+	//echo "<script>console.log('".$qs2."');</script>";
 	$qs3 = "SELECT * FROM `" . $leadScoutTable . "`";
 
 	$result = runQuery($qs1);
@@ -720,9 +721,9 @@ function getScore($teamNumber)
 
 
 
-function getAvgUpperShotPercentage($teamNumber)
+function getAvgUpperShotPercentage($teamNumber, $min=-1, $max=1000)
 {
-	$teamData = getTeamData($teamNumber);
+	$teamData = getTeamData($teamNumber, $min, $max);
 	$upperGoalCount = 0;
 	$upperGoalMissCount = 0;
 	if ($teamData[8] != null) {
@@ -740,9 +741,9 @@ function getAvgUpperShotPercentage($teamNumber)
 	return (round((100 * ($upperGoalCount / ($upperGoalCount + $upperGoalMissCount))), 3));
 }
 
-function getAvgUpperGoalT($teamNumber)
+function getAvgUpperGoalT($teamNumber, $min=-1, $max=1000)
 {
-	$teamData = getTeamData($teamNumber);
+	$teamData = getTeamData($teamNumber, $min, $max);
 	$upperGoalCountT = 0;
 	$matchCount  = 0;
 	if ($teamData[8] != null) {
@@ -755,9 +756,9 @@ function getAvgUpperGoalT($teamNumber)
 	return (round(($upperGoalCountT / $matchCount), 3));
 }
 
-function getAvgLowerGoalT($teamNumber)
+function getAvgLowerGoalT($teamNumber, $min=-1, $max=1000)
 {
-	$teamData = getTeamData($teamNumber);
+	$teamData = getTeamData($teamNumber, $min, $max);
 	$lowerGoalCountT = 0;
 	$matchCount  = 0;
 	if ($teamData[8] != null) {
@@ -770,9 +771,9 @@ function getAvgLowerGoalT($teamNumber)
 	return ($lowerGoalCountT / $matchCount);
 }
 
-function getAvgUpperGoalMissT($teamNumber)
+function getAvgUpperGoalMissT($teamNumber, $min=-1, $max=1000)
 {
-	$teamData = getTeamData($teamNumber);
+	$teamData = getTeamData($teamNumber, $min, $max);
 	$upperGoalMissCountT = 0;
 	$matchCount  = 0;
 	if ($teamData[8] != null) {
@@ -785,9 +786,9 @@ function getAvgUpperGoalMissT($teamNumber)
 	return (round(($upperGoalMissCountT / $matchCount), 3));
 }
 
-function getAvgUpperGoal($teamNumber)
+function getAvgUpperGoal($teamNumber, $min=-1, $max=1000)
 {
-	$teamData = getTeamData($teamNumber);
+	$teamData = getTeamData($teamNumber, $min, $max);
 	$upperGoalCount = 0;
 	$matchCount  = 0;
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
@@ -798,9 +799,9 @@ function getAvgUpperGoal($teamNumber)
 	return (round(($upperGoalCount / $matchCount), 3));
 }
 
-function getAvgLowerGoal($teamNumber)
+function getAvgLowerGoal($teamNumber, $min=-1, $max=1000)
 {
-	$teamData = getTeamData($teamNumber);
+	$teamData = getTeamData($teamNumber, $min, $max);
 	$lowerGoalCount = 0;
 	$matchCount  = 0;
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
@@ -812,9 +813,9 @@ function getAvgLowerGoal($teamNumber)
 }
 
 
-function getAvgClimb($teamNumber)
+function getAvgClimb($teamNumber, $min=-1, $max=1000)
 {
-	$teamData = getTeamData($teamNumber);
+	$teamData = getTeamData($teamNumber, $min, $max);
 	$climbSum = 0;
 	$matchCount = 0;
 
@@ -886,9 +887,9 @@ function getAvgScore($teamNumber)
 
 
 
-function getMaxUpperGoalT($teamNumber)
+function getMaxUpperGoalT($teamNumber, $min=-1, $max=1000)
 {
-	$teamData = getTeamData($teamNumber);
+	$teamData = getTeamData($teamNumber, $min, $max);
 	$maxUpperGoalT = 0;
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 		if ($maxUpperGoalT < $teamData[8][$i][11]) {
@@ -899,9 +900,9 @@ function getMaxUpperGoalT($teamNumber)
 	return ($maxUpperGoalT);
 }
 
-function getMaxLowerGoalT($teamNumber)
+function getMaxLowerGoalT($teamNumber, $min=-1, $max=1000)
 {
-	$teamData = getTeamData($teamNumber);
+	$teamData = getTeamData($teamNumber, $min, $max);
 	$maxLowerGoalT = 0;
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 		if ($maxLowerGoalT < $teamData[8][$i][13]) {
@@ -912,9 +913,9 @@ function getMaxLowerGoalT($teamNumber)
 	return ($maxLowerGoalT);
 }
 
-function getMaxUpperGoal($teamNumber)
+function getMaxUpperGoal($teamNumber, $min=-1, $max=1000)
 {
-	$teamData = getTeamData($teamNumber);
+	$teamData = getTeamData($teamNumber, $min, $max);
 	$maxUpperGoal = 0;
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 		if ($maxUpperGoal < $teamData[8][$i][7]) {
@@ -925,9 +926,9 @@ function getMaxUpperGoal($teamNumber)
 	return ($maxUpperGoal);
 }
 
-function getMaxLowerGoal($teamNumber)
+function getMaxLowerGoal($teamNumber, $min=-1, $max=1000)
 {
-	$teamData = getTeamData($teamNumber);
+	$teamData = getTeamData($teamNumber, $min, $max);
 	$maxLowerGoal = 0;
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 		if ($maxLowerGoal < $teamData[8][$i][9]) {
@@ -963,10 +964,10 @@ function getAllMatchData()
 	return runQuery($qs1);
 }
 
-function getAllLeadScoutData()
+function getAllLeadScoutData($min=-1, $max=1000)
 {
 	global $leadScoutTable;
-	$qs1 = "SELECT * FROM `" . $leadScoutTable . "`";
+	$qs1 = "SELECT * FROM `" . $leadScoutTable . "` WHERE matchNum >= ".$min." AND matchNum <= ".$max."";
 	return runQuery($qs1);
 }
 
@@ -1361,9 +1362,9 @@ function getTotalDNP($teamNumber)
 
 
 
-function getAvgDriveRank($teamNumber)
+function getAvgDriveRank($teamNumber, $min=-1, $max=1000)
 {
-	$result = getAllLeadScoutData();
+	$result = getAllLeadScoutData($min, $max);
 	$driveRankSum = 0;
 	$matchCount = 0;
 	foreach ($result as $row_key => $row) {
@@ -1392,9 +1393,9 @@ function getAvgDriveRank($teamNumber)
 	return ($driveRankSum / $matchCount);
 }
 
-function getAllianceRankPoints($teamNumber)
+function getAllianceRankPoints($teamNumber, $min=-1, $max=1000)
 {
-	$result = getAllLeadScoutData();
+	$result = getAllLeadScoutData($min, $max);
 	$driveRankSum = 0;
 	$matchCount = 0;
 	foreach ($result as $row_key => $row) {
@@ -1522,9 +1523,9 @@ function matchComments($teamNumber)
 
 
 
-function getPickList($teamNumber)
+function getPickList($teamNumber, $min=-1, $max=1000)
 {
-	$teamData = getTeamData($teamNumber);
+	$teamData = getTeamData($teamNumber, $min, $max);
 	$pointCal = 0;
 	$matchCount = 0;
 	if ($teamData[8] != null) {
