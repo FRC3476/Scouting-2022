@@ -417,7 +417,7 @@ if (
                                 responsive: true
                             });
                         };
-                        imageObj.src = 'images/field.png';
+                        imageObj.src = 'images/fieldCopy.png';
 
                         function makeCanvasReady() {
                             context.clearRect(0, 0, 500, 250);
@@ -463,7 +463,7 @@ if (
                                             context.fillStyle = "#3cff00";
                                             context.strokeStyle = "#3cff00";
                                             context.beginPath();
-                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context.stroke();
                                             context.fill();
                                             console.log(b[i][1]);
@@ -471,28 +471,28 @@ if (
                                             context.fillStyle = "#fff200";
                                             context.strokeStyle = "#fff200";
                                             context.beginPath();
-                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context.stroke();
                                             context.fill();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
                                             context.fillStyle = "#ff9100";
                                             context.strokeStyle = "#ff9100";
                                             context.beginPath();
-                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context.stroke();
                                             context.fill();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
-                                            context.fillStyle = "#9c1010";
-                                            context.strokeStyle = "#9c1010";
+                                            context.fillStyle = "#ff0000";
+                                            context.strokeStyle = "#ff0000";
                                             context.beginPath();
-                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context.stroke();
                                             context.fill();
                                         } else {
                                             context.fillStyle = "#000000";
                                             context.strokeStyle = "#000000";
                                             context.beginPath();
-                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context.stroke();
                                             context.fill();
                                         }
@@ -678,7 +678,7 @@ if (
                                 responsive: true
                             });
                         };
-                        imageObj1.src = 'images/field.png';
+                        imageObj1.src = 'images/fieldCopy.png';
 
                         function makeCanvasReady1() {
                             context1.clearRect(0, 0, 500, 250);
@@ -724,35 +724,35 @@ if (
                                             context1.fillStyle = "#3cff00";
                                             context1.strokeStyle = "#3cff00";
                                             context.beginPath();
-                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context.stroke();
                                             context.fill();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
                                             context1.fillStyle = "#fff200";
                                             context1.strokeStyle = "#fff200";
                                             context.beginPath();
-                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context.stroke();
                                             context.fill();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
                                             context1.fillStyle = "#ff9100";
                                             context1.strokeStyle = "#ff9100";
                                             context.beginPath();
-                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context.stroke();
                                             context.fill();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
-                                            context1.fillStyle = "#9c1010";
-                                            context1.strokeStyle = "#9c1010";
+                                            context1.fillStyle = "#ff0000";
+                                            context1.strokeStyle = "#ff0000";
                                             context.beginPath();
-                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context.stroke();
                                             context.fill();
                                         } else {
                                             context1.fillStyle = "#000000";
                                             context1.strokeStyle = "#000000";
                                             context.beginPath();
-                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context.stroke();
                                             context.fill();
                                         }
