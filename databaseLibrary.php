@@ -1245,6 +1245,9 @@ function getBetScore($user)
 			$blueAuto = $data["score_breakdown"]["blue"]["autoCargoTotal"];
 			$redAuto = $data["score_breakdown"]["red"]["autoCargoTotal"];
 			$alliance = $data["winning_alliance"];
+			if($alliance == ""){
+				$alliance = "Tie";
+			}
 			$blueEndgame = $data["score_breakdown"]["blue"]["endgamePoints"];
 			$redEndgame = $data["score_breakdown"]["red"]["endgamePoints"];
 			if($blueEndgame == $redEndgame){

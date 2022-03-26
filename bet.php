@@ -116,6 +116,7 @@ if (isset($_POST['matchNum']) && isset($_POST['name'])) {
                         <option value="" disabled selected>Choose Winner</option>
                         <option value='blue'>Blue</option>
                         <option value='red'>Red</option>
+                        <option value='Tie'>Tie</option>
                     </select>
                     <br>
                 </div>
