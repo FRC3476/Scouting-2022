@@ -8,8 +8,7 @@ include("header.php") ?>
         <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
             <h2>Team Ranking</h2>
             <form action="" method="get">
-                <p>Enter range of matches ( Leave blank for all matches )</p>
-                <p>Ranges are inclusive (Example: Matches 3 to 5 will include data from matches 3 and 5)</p>
+                <p>Enter Range of Matches (Leave blank for all matches and ranges are inclusive)</p>
                 Min Match: <input class="control-label" type="number" name="min" id="min" size="10" height="10" width="40">
                 Max Match: <input class="control-label" type="number" name="max" id="max" size="10" height="10" width="40">
                 <button id="submit" class="btn btn-primary" onclick="">Load</button>
