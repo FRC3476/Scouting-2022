@@ -461,20 +461,40 @@ if (
                                     for (var i = 0; i != a.length; i++) {
                                         if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.9)) {
                                             context.fillStyle = "#3cff00";
-                                            context.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context.strokeStyle = "#3cff00";
+                                            context.beginPath();
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.stroke();
+                                            context.fill();
                                             console.log(b[i][1]);
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
                                             context.fillStyle = "#fff200";
-                                            context.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context.strokeStyle = "#fff200";
+                                            context.beginPath();
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.stroke();
+                                            context.fill();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
                                             context.fillStyle = "#ff9100";
-                                            context.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context.strokeStyle = "#ff9100";
+                                            context.beginPath();
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.stroke();
+                                            context.fill();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
-                                            context.fillStyle = "#ff0000";
-                                            context.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context.fillStyle = "#9c1010";
+                                            context.strokeStyle = "#9c1010";
+                                            context.beginPath();
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.stroke();
+                                            context.fill();
                                         } else {
                                             context.fillStyle = "#000000";
-                                            context.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context.strokeStyle = "#000000";
+                                            context.beginPath();
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.stroke();
+                                            context.fill();
                                         }
                                     }
                                 } else {
@@ -702,20 +722,39 @@ if (
                                     for (var i = 0; i != a.length; i++) {
                                         if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.9)) {
                                             context1.fillStyle = "#3cff00";
-                                            context1.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
-                                            console.log(b[i][1]);
+                                            context1.strokeStyle = "#3cff00";
+                                            context.beginPath();
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.stroke();
+                                            context.fill();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
                                             context1.fillStyle = "#fff200";
-                                            context1.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context1.strokeStyle = "#fff200";
+                                            context.beginPath();
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.stroke();
+                                            context.fill();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
                                             context1.fillStyle = "#ff9100";
-                                            context1.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context1.strokeStyle = "#ff9100";
+                                            context.beginPath();
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.stroke();
+                                            context.fill();
                                         } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
-                                            context1.fillStyle = "#ff0000";
-                                            context1.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context1.fillStyle = "#9c1010";
+                                            context1.strokeStyle = "#9c1010";
+                                            context.beginPath();
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.stroke();
+                                            context.fill();
                                         } else {
                                             context1.fillStyle = "#000000";
-                                            context1.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
+                                            context1.strokeStyle = "#000000";
+                                            context.beginPath();
+                                            context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 3, 0, Math.PI * 2);
+                                            context.stroke();
+                                            context.fill();
                                         }
                                     }
                                 } else {
