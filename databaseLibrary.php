@@ -1101,9 +1101,9 @@ function getTotalSingleClimb($teamNumber)
 	return ($climbCount);
 }
 
-function getSingleClimbPercent($teamNumber)
+function getSingleClimbPercent($teamNumber, $min=-1, $max=1000)
 {
-	$teamData = getTeamData($teamNumber);
+	$teamData = getTeamData($teamNumber, $min, $max);
 	$climbCount = 0;
 	$matchCount  = 0;
 	if ($teamData[8] != null) {
@@ -1127,9 +1127,9 @@ function getTotalDoubleClimb($teamNumber)
 	return ($climbCount);
 }
 
-function getDoubleClimbPercent($teamNumber)
+function getDoubleClimbPercent($teamNumber, $min=-1, $max=1000)
 {
-	$teamData = getTeamData($teamNumber);
+	$teamData = getTeamData($teamNumber, $min, $max);
 	$climbCount = 0;
 	$matchCount  = 0;
 	if ($teamData[8] != null) {
@@ -1153,9 +1153,9 @@ function getTotalTripleClimb($teamNumber)
 	return ($climbCount);
 }
 
-function getTripleClimbPercent($teamNumber)
+function getTripleClimbPercent($teamNumber, $min=-1, $max=1000)
 {
-	$teamData = getTeamData($teamNumber);
+	$teamData = getTeamData($teamNumber, $min, $max);
 	$climbCount = 0;
 	$matchCount  = 0;
 	if ($teamData[8] != null) {
@@ -1179,9 +1179,9 @@ function getTotalQuadClimb($teamNumber)
 	return ($climbCount);
 }
 
-function getQuadClimbPercent($teamNumber)
+function getQuadClimbPercent($teamNumber, $min=-1, $max=1000)
 {
-	$teamData = getTeamData($teamNumber);
+	$teamData = getTeamData($teamNumber, $min, $max);
 	$climbCount = 0;
 	$matchCount  = 0;
 	if ($teamData[8] != null) {
@@ -1349,9 +1349,9 @@ function getTotalDefense($teamNumber)
 	return ($defenseCount);
 }
 
-function getTotalDNP($teamNumber)
+function getTotalDNP($teamNumber, $min=-1, $max=1000)
 {
-	$teamData = getTeamData($teamNumber);
+	$teamData = getTeamData($teamNumber, $min, $max);
 	$dnp = 0;
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
 		$dnp = $dnp + $teamData[8][$i][26];

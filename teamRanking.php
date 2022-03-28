@@ -29,8 +29,12 @@ include("header.php") ?>
                     <th>Weighted Score</th>
                     <th>Scouter Gen ELO</th>
                     <th>Avg Upper Shot Percentage</th>
-                    <th>Avg Climb</th>
+                    <th>Low Climb %</th>
+                    <th>Mid Climb %</th>
+                    <th>High Climb %</th>
+                    <th>Traversal Climb %</th>
                     <th>Avg Alliance Rank</th>
+                    <th>Total DNP</th>
                     <th>Avg Teleop Upper Goal</th>
                     <th>Avg Teleop Lower Goal</th>
                     <th>Avg Auto Upper Goal</th>
@@ -39,7 +43,6 @@ include("header.php") ?>
                     <th>Max Teleop Lower Goal</th>
                     <th>Max Auto Upper Goal</th>
                     <th>Max Auto Lower Goal</th>
-                    <th>Total Defense</th>
                     <th>OPR</th>
                 </tr>
                 <?php
@@ -57,8 +60,12 @@ include("header.php") ?>
                     $picklist = (getPickList($teamNumber, $min, $max) - getAvgDriveRank($teamNumber, $min, $max));
                     $scoutPick = getElo($teamNumber);
                     $UpperShotPercentage = getAvgUpperShotPercentage($teamNumber, $min, $max);
-                    $avgClimb = getAvgClimb($teamNumber, $min, $max);
+                    $SingleClimbPer = getSingleClimbPercent($teamNumber, $min, $max);
+                    $MidClimbPer = getDoubleClimbPercent($teamNumber, $min, $max);
+                    $HighClimbPer = getTripleClimbPercent($teamNumber, $min, $max);
+                    $TravClimbPer = getQuadClimbPercent($teamNumber, $min, $max);
                     $allianceRank = getAvgDriveRank($teamNumber, $min, $max);
+                    $DNP = getTotalDNP($teamNumber, $min, $max);
                     $avgTeleopUpper = getAvgUpperGoalT($teamNumber, $min, $max);
                     $avgTeleopLower = getAvgLowerGoalT($teamNumber, $min, $max);
                     $avgAutoUpper = getAvgUpperGoal($teamNumber, $min, $max);
@@ -67,15 +74,18 @@ include("header.php") ?>
                     $maxTeleopLower = getMaxLowerGoalT($teamNumber, $min, $max);
                     $maxAutoUpper = getMaxUpperGoal($teamNumber, $min, $max);
                     $maxAutoLower = getMaxLowerGoal($teamNumber, $min, $max);
-                    $totalDefense = getTotalDefense($teamNumber, $min, $max);
                     $OPR = getOPR($teamNumber);
                     echo ("<tr>
                     <td><a href='matchStrategy.php?team=" . $teamNumber . "'>" . $teamNumber . "</a></td>
                     <th>" . $picklist . "</th>
                     <th>" . ($scoutPick) . "</th>
                     <th>" . $UpperShotPercentage . "</th>
-                    <th>" . round($avgClimb, 3) . "</th>
+                    <th>" . round($SingleClimbPer, 3) . "</th>
+                    <th>" . round($MidClimbPer, 3) . "</th>
+                    <th>" . round($HighClimbPer, 3) . "</th>
+                    <th>" . round($TravClimbPer, 3) . "</th>
                     <th>" . round($allianceRank, 3) . "</th>
+                    <th>" . round($DNP, 3) . "</th>
                     <th>" . round($avgTeleopUpper, 3) . "</th>
                     <th>" . round($avgTeleopLower, 3) . "</th>
                     <th>" . round($avgAutoUpper, 3) . "</th>
@@ -84,7 +94,6 @@ include("header.php") ?>
                     <th>" . $maxTeleopLower . "</th>
                     <th>" . $maxAutoUpper . "</th>
                     <th>" . $maxAutoLower . "</th>
-                    <th>" . $totalDefense . "</th>
                     <th>" . round($OPR, 3) . "</th>
                     </tr>");
                 }
