@@ -35,6 +35,7 @@ include("header.php") ?>
                     <th>Traversal Climb %</th>
                     <th>Avg Alliance Rank</th>
                     <th>Total DNP</th>
+                    <th>Get Average Score</th>
                     <th>Avg Teleop Upper Goal</th>
                     <th>Avg Teleop Lower Goal</th>
                     <th>Avg Auto Upper Goal</th>
@@ -66,6 +67,7 @@ include("header.php") ?>
                     $TravClimbPer = getQuadClimbPercent($teamNumber, $min, $max);
                     $allianceRank = getAvgDriveRank($teamNumber, $min, $max);
                     $DNP = getTotalDNP($teamNumber, $min, $max);
+                    $ScoreCont = getAvgScore($teamNumber, $min, $max);
                     $avgTeleopUpper = getAvgUpperGoalT($teamNumber, $min, $max);
                     $avgTeleopLower = getAvgLowerGoalT($teamNumber, $min, $max);
                     $avgAutoUpper = getAvgUpperGoal($teamNumber, $min, $max);
@@ -86,6 +88,7 @@ include("header.php") ?>
                     <th>" . round($TravClimbPer, 3) . "</th>
                     <th>" . round($allianceRank, 3) . "</th>
                     <th>" . round($DNP, 3) . "</th>
+                    <th>" . round($Score, 3) . "</th>
                     <th>" . round($avgTeleopUpper, 3) . "</th>
                     <th>" . round($avgTeleopLower, 3) . "</th>
                     <th>" . round($avgAutoUpper, 3) . "</th>

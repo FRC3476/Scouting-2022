@@ -281,18 +281,18 @@ if (
                     </tr>
                     <tr>
                         <th>Avg Total Points</th>
-                        <th><?php echo (($redTotalScore)); ?></th>
-                        <th><?php echo (($blueTotalScore)); ?></th>
+                        <th><?php echo (round($redTotalScore,3)); ?></th>
+                        <th><?php echo (round($blueTotalScore,3)); ?></th>
                     </tr>
                     <tr>
                         <th>Avg Total Cargo</th>
-                        <th><?php echo ($totalRedCargo); ?></th>
-                        <th><?php echo ($totalBlueCargo); ?></th>
+                        <th><?php echo round($totalRedCargo,3); ?></th>
+                        <th><?php echo round($totalBlueCargo,3); ?></th>
                     </tr>
                     <tr>
                         <th>Avg Climb Points</th>
-                        <th><?php echo (($redTotalClimb)); ?></th>
-                        <th><?php echo (($blueTotalClimb)); ?></th>
+                        <th><?php echo (round($redTotalClimb,3)); ?></th>
+                        <th><?php echo (round($blueTotalClimb,3)); ?></th>
                     </tr>
                 </table>
             </div>
@@ -312,10 +312,10 @@ if (
                         </tr>
                         <tr class="danger">
                             <th></th>
-                            <th><?php echo ($red1UpperAuto) ?></th>
-                            <th><?php echo ($red1LowerAuto) ?></th>
-                            <th><?php echo ($red1UpperTelop) ?></th>
-                            <th><?php echo ($red1LowerTelop) ?></th>
+                            <th><?php echo round($red1UpperAuto,3) ?></th>
+                            <th><?php echo round($red1LowerAuto,3) ?></th>
+                            <th><?php echo round($red1UpperTelop,3) ?></th>
+                            <th><?php echo round($red1LowerTelop,3) ?></th>
                             <th><?php echo ($red1Climb) ?></th>
                         </tr>
                     </table>
@@ -331,10 +331,10 @@ if (
                         </tr>
                         <tr class="danger">
                             <th></th>
-                            <th><?php echo ($red2UpperAuto) ?></th>
-                            <th><?php echo ($red2LowerAuto) ?></th>
-                            <th><?php echo ($red2UpperTelop) ?></th>
-                            <th><?php echo ($red2LowerTelop) ?></th>
+                            <th><?php echo round($red2UpperAuto,3) ?></th>
+                            <th><?php echo round($red2LowerAuto,3) ?></th>
+                            <th><?php echo round($red2UpperTelop,3) ?></th>
+                            <th><?php echo round($red2LowerTelop,3) ?></th>
                             <th><?php echo ($red2Climb) ?></th>
                         </tr>
                     </table>
@@ -350,10 +350,10 @@ if (
                         </tr>
                         <tr class="danger">
                             <th></th>
-                            <th><?php echo ($red3UpperAuto) ?></th>
-                            <th><?php echo ($red3LowerAuto) ?></th>
-                            <th><?php echo ($red3UpperTelop) ?></th>
-                            <th><?php echo ($red3LowerTelop) ?></th>
+                            <th><?php echo round($red3UpperAuto,3) ?></th>
+                            <th><?php echo round($red3LowerAuto,3) ?></th>
+                            <th><?php echo round($red3UpperTelop,3) ?></th>
+                            <th><?php echo round($red3LowerTelop,3) ?></th>
                             <th><?php echo ($red3Climb) ?></th>
                         </tr>
                     </table>
@@ -574,10 +574,10 @@ if (
                         </tr>
                         <tr class="info">
                             <th></th>
-                            <th><?php echo ($blue1UpperAuto) ?></th>
-                            <th><?php echo ($blue1LowerAuto) ?></th>
-                            <th><?php echo ($blue1UpperTelop) ?></th>
-                            <th><?php echo ($blue1LowerTelop) ?></th>
+                            <th><?php echo round($blue1UpperAuto,3) ?></th>
+                            <th><?php echo round($blue1LowerAuto,3) ?></th>
+                            <th><?php echo round($blue1UpperTelop,3) ?></th>
+                            <th><?php echo round($blue1LowerTelop,3) ?></th>
                             <th><?php echo ($blue1Climb) ?></th>
                         </tr>
                     </table>
@@ -593,10 +593,10 @@ if (
                         </tr>
                         <tr class="info">
                             <th></th>
-                            <th><?php echo ($blue2UpperAuto) ?></th>
-                            <th><?php echo ($blue2LowerAuto) ?></th>
-                            <th><?php echo ($blue2UpperTelop) ?></th>
-                            <th><?php echo ($blue2LowerTelop) ?></th>
+                            <th><?php echo round($blue2UpperAuto,3) ?></th>
+                            <th><?php echo round($blue2LowerAuto,3) ?></th>
+                            <th><?php echo round($blue2UpperTelop,3) ?></th>
+                            <th><?php echo round($blue2LowerTelop,3) ?></th>
                             <th><?php echo ($blue2Climb) ?></th>
                         </tr>
                     </table>
@@ -612,10 +612,10 @@ if (
                         </tr>
                         <tr class="info">
                             <th></th>
-                            <th><?php echo ($blue3UpperAuto) ?></th>
-                            <th><?php echo ($blue3LowerAuto) ?></th>
-                            <th><?php echo ($blue3UpperTelop) ?></th>
-                            <th><?php echo ($blue3LowerTelop) ?></th>
+                            <th><?php echo round($blue3UpperAuto,3) ?></th>
+                            <th><?php echo round($blue3LowerAuto,3) ?></th>
+                            <th><?php echo round($blue3UpperTelop,3) ?></th>
+                            <th><?php echo round($blue3LowerTelop,3) ?></th>
                             <th><?php echo ($blue3Climb) ?></th>
                         </tr>
                     </table>
