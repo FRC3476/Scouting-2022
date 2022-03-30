@@ -11,3 +11,4 @@
 	$betTable = "22template_bet";
 	$pickListTable = "22template_pickList";
 	$eloRanking = "22template_elo";
+	$sortablePickTable = "22template_SPT";

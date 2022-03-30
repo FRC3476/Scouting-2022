@@ -96,6 +96,7 @@ function createTables()
 	global $leadScoutTable;
 	global $$sorting_items;
 	global $eloRanking;
+	global $sortablePickTable;
 	$conn = connectToDB();
 	$query = "CREATE TABLE " . $dbname . "." . $pitScoutTable . " (
 			teamNumber VARCHAR(50) NOT NULL PRIMARY KEY,
@@ -170,6 +171,17 @@ function createTables()
 		throw new Exception("constructDatabase Error: CREATE TABLE Bet Table query failed.");
 	}
 
+	$query = "CREATE TABLE " . $dbname . "." . $sortablePickTable . " (
+		allTeams LONGTEXT NOT NULL,
+		attackTeams LONGTEXT NOT NULL,
+		defenseTeams LONGTEXT NOT NULL,
+		dnpTeams LONGTEXT NOT NULL
+	)";
+	$statement = $conn->prepare($query);
+	if (!$statement->execute()) {
+		throw new Exception("constructDatabase Error: CREATE TABLE Sortable Pick query failed.");
+	}
+
 	$query = "CREATE TABLE " . $dbname . "." . $pickListTable . " (
 		team1 VARCHAR(50) NOT NULL,
 		team2 VARCHAR(50) NOT NULL
@@ -205,6 +217,14 @@ function betInput($matchNum, $RedScorePredict, $BlueScorePredict, $TotalAutoRed,
 	global $betTable;
 	$queryString = "REPLACE INTO `" . $betTable . "` (`matchNum`, `RedScorePredict`, `BlueScorePredict`,`TotalAutoRed`, `TotalAutoBlue`, `Winner`, `name`, `ID`)";
 	$queryString = $queryString . ' VALUES ("' . $matchNum . '", "' . $RedScorePredict . '", "' . $BlueScorePredict . '", "' . $TotalAutoRed . '", "' . $TotalAutoBlue . '", "' . $Winner . '", "' . $name . '", "' . $ID . '")';
+	$queryOutput = runQuery($queryString);
+}
+
+function sortableInput($allTeams, $attackTeams, $defenseTeams, $dnpTeams)
+{
+	global $sortablePickTable;
+	$queryString = "REPLACE INTO `" . $sortablePickTable . "` (`allTeams`, `attackTeams`, `defenseTeams`,`TotalAutoRed`, `dnpTeams`)";
+	$queryString = $queryString . ' VALUES ("' . $allTeams . '", "' . $attackTeams . '", "' . $defenseTeams . '", "' . $dnpTeams . '")';
 	$queryOutput = runQuery($queryString);
 }
 
