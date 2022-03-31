@@ -77,94 +77,28 @@ include("header.php") ?>
             <div class="col" style="margin-right: 25px;">
                 <h3 style="text-align:center">All Teams</h3>
                 <div class='row task-list' id="all-teams">
-                    <?php
-                    include("databaseLibrary.php");
-                    $teamList = getEventTeams();
-                    foreach ($teamList as $teamNumber) {
-                        echo ("
-                        <div class='card mb-3 task' id='' style='max-width: 550px; margin-top: 25px'>
-                            <div class='row'>
-                                <div class='col-md-4'>
-                                    <img src='images/Logo.png' class='img-fluid rounded-start'
-                                        style='max-height: 100px; max-width: 100px; padding: 15px;' alt='...'>
-                                </div>
-                                <div class='col-md-8'>
-                                    <div class='card-body'>
-                                        <h3 class='card-title'>" . $teamNumber . "</h3>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ");
-                    }
-                    ?>
+                    <!-- Picklist Initialze Here -->
                 </div>
             </div>
 
             <div class="col" style="margin-right: 25px;">
                 <h3 style="text-align:center">Offense</h3>
                 <div class='row task-list' id="offense-teams">
-                    <div class='card mb-3 task' style='max-width: 550px; margin-top: 25px'>
-                        <div class='row'>
-                            <div class='col-md-4'>
-                                <img src='images/Logo.png' class='img-fluid rounded-start' style='max-height: 100px; max-width: 100px; padding: 15px;' alt='...'>
-                            </div>
-                            <div class='col-md-8'>
-                                <div class='card-body'>
-                                    <h3 class='card-title'>" . $teamNumber . "</h3>
-                                    <h3 class='card-text'>Rank: " . $picklist . "</h3>
-                                    <h3 class='card-text'># of Climbs: " . $avgClimb . "</h3>
-                                    <h3 class='card-text'>Defense?: " . $totalDefense . "</h3>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <div class="col" style="margin-right: 25px;">
                 <h3 style="text-align:center">Defense</h3>
                 <div class='row task-list' id="defense-teams">
-                    <div class='card mb-3 task' style='max-width: 550px; margin-top: 25px'>
-                        <div class='row'>
-                            <div class='col-md-4'>
-                                <img src='images/Logo.png' class='img-fluid rounded-start' style='max-height: 100px; max-width: 100px; padding: 15px;' alt='...'>
-                            </div>
-                            <div class='col-md-8'>
-                                <div class='card-body'>
-                                    <h3 class='card-title'>" . $teamNumber . "</h3>
-                                    <h3 class='card-text'>Rank: " . $picklist . "</h3>
-                                    <h3 class='card-text'># of Climbs: " . $avgClimb . "</h3>
-                                    <h3 class='card-text'>Defense?: " . $totalDefense . "</h3>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <div class="col" style="margin-right: 25px;">
                 <h3 style="text-align:center">DNP</h3>
                 <div class='row task-list' id="dnp-teams">
-                    <div class='card mb-3 task' style='max-width: 550px; margin-top: 25px'>
-                        <div class='row'>
-                            <div class='col-md-4'>
-                                <img src='images/Logo.png' class='img-fluid rounded-start' style='max-height: 100px; max-width: 100px; padding: 15px;' alt='...'>
-                            </div>
-                            <div class='col-md-8'>
-                                <div class='card-body'>
-                                    <h3 class='card-title'>" . $teamNumber . "</h3>
-                                    <h3 class='card-text'>Rank: " . $picklist . "</h3>
-                                    <h3 class='card-text'># of Climbs: " . $avgClimb . "</h3>
-                                    <h3 class='card-text'>Defense?: " . $totalDefense . "</h3>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -184,6 +118,7 @@ include("header.php") ?>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js'></script>
 
 <script src="./js/firebase.js" type="module"></script>
+
 <script src="./js/picklist.js" type="module"></script>
 
 <?php include("footer.php") ?>
