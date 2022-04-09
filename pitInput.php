@@ -65,12 +65,17 @@ if (isset($_POST['teamNumber'])) {
             		Pit Check
         		</button>
     		</a>
+			<a href='pictureUpload.php'>
+        		<button class="btn btn-primary">
+            		Picture Upload
+        		</button>
+    		</a>
 
 			<form action="" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<b><text class="col-lg-2 control-label">Team Number: </text></b>
 					<div class="col-lg-10">
-						<input type="text" class="form-control" id="teamNumber" name="teamNumber" placeholder=" ">
+						<input type="text" class="form-control" id="teamNumber" name="teamNumber" value="<?php echo ((isset($_GET["teamNumber"])) ? htmlspecialchars($_GET["teamNumber"]) : ""); ?>" placeholder=" ">
 					</div>
 				</div>
 
