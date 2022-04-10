@@ -15,6 +15,11 @@ include("header.php") ?>
             		PS Form
         		</button>
     		</a>
+			<a href='pictureUpload.php'>
+        		<button class="btn btn-primary">
+            		Picture Upload
+        		</button>
+    		</a>
 
 			<table class="sortable table table-hover" id="RawData" border="1">
 				<tr>
@@ -50,8 +55,8 @@ include("header.php") ?>
 
 					echo ("<tr>
 					<td bgcolor=".$color."><a href='matchStrategy.php?team=" . $teamNumber . "'>" . $teamNumber . "</a></td>
-					<th bgcolor=".$Pitcolor.">" . $pitScouted . "</th>
-					<th bgcolor=".$Piccolor.">" . $pictureTaken . "</th>
+					<td bgcolor=".$Pitcolor."><a href='pitInput.php?teamNumber=" . $teamNumber . "'>" . $pitScouted . "</a></td>
+					<td bgcolor=".$Piccolor."><a href='pictureUpload.php?teamNumber=" . $teamNumber . "'>" . $pictureTaken . "</a></td>
 					</tr>");
 				}
 

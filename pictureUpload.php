@@ -16,11 +16,21 @@
                 }
              ?>
 			<a><h2>Picture Upload: </h2></a>
+			<a href='pitCheck.php'>
+        		<button class="btn btn-primary">
+            		Pit Check
+        		</button>
+    		</a>
+			<a href='pitInput.php'>
+        		<button class="btn btn-primary">
+            		PS Form
+        		</button>
+    		</a>
             <form action="" method="post" enctype="multipart/form-data">
 			<div class="form-group">
 				<b><text class="col-lg-2 control-label" >Team Number: </text></b>
 				<div class="col-lg-10">
-					<input type="text" class="form-control" id="teamNumber" name="teamNumber" placeholder=" ">
+					<input type="text" class="form-control" id="teamNumber" name="teamNumber" value="<?php echo ((isset($_GET["teamNumber"])) ? htmlspecialchars($_GET["teamNumber"]) : ""); ?>" placeholder=" ">
 				</div>
 			</div>
 			<br>

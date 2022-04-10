@@ -263,10 +263,6 @@ if (
         </div>
     </div>
 
-    <!-- KEYUR ONLY EDIT BELOW THIS OKKKKKKK PLEASE PLEASE PLEASE DON'T TOUNCH ANYTHING ABOVE-->
-    <!-- KEYUR ONLY EDIT BELOW THIS OKKKKKKK PLEASE PLEASE PLEASE DON'T TOUNCH ANYTHING ABOVE-->
-    <!-- KEYUR ONLY EDIT BELOW THIS OKKKKKKK PLEASE PLEASE PLEASE DON'T TOUNCH ANYTHING ABOVE-->
-
     <div class="container row-offcanvas row-offcanvas-left">
         <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
             <?php
