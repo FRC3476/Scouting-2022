@@ -184,7 +184,8 @@ function createTables()
 
 	$query = "CREATE TABLE " . $dbname . "." . $pickListTable . " (
 		team1 VARCHAR(50) NOT NULL,
-		team2 VARCHAR(50) NOT NULL
+		team2 VARCHAR(50) NOT NULL,
+		equal VARCHAR(50) NOT NULL
 	)";
 	$statement = $conn->prepare($query);
 	if (!$statement->execute()) {
@@ -228,13 +229,13 @@ function sortableInput($allTeams, $attackTeams, $defenseTeams, $dnpTeams)
 	$queryOutput = runQuery($queryString);
 }
 
-function pickListInput($team1, $team2)
+function pickListInput($team1, $team2, $equal)
 {
 	global $pickListTable;
-	$queryString = "REPLACE INTO `" . $pickListTable . "` (`team1`, `team2`)";
-	$queryString = $queryString . ' VALUES ("' . $team1 . '", "' . $team2 . '")';
+	$queryString = "REPLACE INTO `" . $pickListTable . "` (`team1`, `team2`, `equal`)";
+	$queryString = $queryString . ' VALUES ("' . $team1 . '", "' . $team2 . '", "' . $equal . '")';
 	$queryOutput = runQuery($queryString);
-	updateElo($team1, $team2);
+	updateElo($team1, $team2, $equal);
 }
 
 function eloInput($team, $eloScore)
@@ -1467,7 +1468,7 @@ function getScoutGeneratedPicklist($teamNumber)
 	return ($score);
 }
 
-function updateElo($team1, $team2)
+function updateElo($team1, $team2, $equal)
 {
 	$eloCheck = getAllElo();
 	if ($eloCheck == null){
@@ -1495,13 +1496,21 @@ function updateElo($team1, $team2)
 		$weight = 20;
 	}
 
-	
-	$expecScoreteam1 = ($weight*(1-(1/(1+(10^(($team1Elo - $team2Elo)/400))))));
-	$expecScoreteam2 = ($weight*(0-(1/(1+(10^(($team2Elo - $team1Elo)/400))))));
+	if($equal == 0){
+		$weight = 5;
+	}
 
-	
-	$team1New = $team1Elo + $expecScoreteam1;
-	$team2New = $team2Elo - $expecScoreteam2;
+	if ($dif >= 0){
+		$expecScoreteam1 = ($weight*(1-(1/(1+(10^(($team1Elo - $team2Elo)/400))))));
+		$expecScoreteam2 = ($weight*(0-(1/(1+(10^(($team2Elo - $team1Elo)/400))))));
+		$team1New = $team1Elo + $expecScoreteam1;
+		$team2New = $team2Elo - $expecScoreteam2;
+	}else{
+		$expecScoreteam1 = ($weight*(1-(1/(1+(10^(($team1Elo - $team2Elo)/400))))));
+		$expecScoreteam2 = ($weight*(0-(1/(1+(10^(($team2Elo - $team1Elo)/400))))));
+		$team1New = $team1Elo - $expecScoreteam1;
+		$team2New = $team2Elo + $expecScoreteam2;
+	}
 
 	eloChange($team1, $team1New);
 	eloChange($team2, $team2New);

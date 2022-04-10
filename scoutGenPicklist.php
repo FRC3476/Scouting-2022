@@ -7,14 +7,17 @@ function filter($str)
 {
 	return filter_var($str, FILTER_SANITIZE_STRING);
 }
-if ((isset($_POST['team1']))&&(isset($_POST['team2']))) {
+if ((isset($_POST['team1'])) && (isset($_POST['team2']))) {
 	include("databaseLibrary.php");
 	$team1 = filter($_POST['team1']);
 	$team2 = filter($_POST['team2']);
+	$equal = filter($_POST['equal']);
+
 
 	pickListInput(
 		$team1,
-		$team2
+		$team2,
+		$equal
 	);
 }
 ?>
@@ -43,6 +46,13 @@ if ((isset($_POST['team1']))&&(isset($_POST['team2']))) {
 		<!--Team 2-->
 
 		<input id="team2" type="text" placeholder="Team 2">
+
+		<select id="equal" name="equal" class="form-control">
+            <option value="" disabled selected>Equal?</option>
+            <option value='0'>Yes</option>
+            <option value='1'>No</option>
+        </select>
+
 
 
 		<br />
@@ -196,15 +206,21 @@ if ((isset($_POST['team1']))&&(isset($_POST['team2']))) {
 			if (document.getElementById('team2').value == "") {
 				document.getElementById('team2').value = 0;
 			}
+			if (document.getElementById('equal').value == "") {
+				document.getElementById('equal').value = 0;
+			}
 
 			var names = [
 				'team1',
-				'team2'
+				'team2',
+				'equal'
 			];
 
 			var nums = [
 				document.getElementById('team1').value,
-				document.getElementById('team2').value
+				document.getElementById('team2').value,
+				document.getElementById('equal').value
+
 			];
 
 
