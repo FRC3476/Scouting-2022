@@ -14,8 +14,6 @@ include("navBar.php");
 			alert("Please enter a Team, Alliance Color, and Match Number");
 			return;
 		}
-		check();
-
 		var nums = {
 			'userName': document.getElementById('userName').value,
 			'matchNum': document.getElementById('matchNum').value,
@@ -140,14 +138,6 @@ include("navBar.php");
 				<a>
 					<h2><b><u>Teleop Scouting:</u></b></h2>
 				</a>
-				<div>
-					<div class="row">
-						<canvas id="myCanvas2" width=700px height=350px style="border:0px solid #d3d3d3;">
-							<script src="Drawing2.js"></script>
-						</canvas>
-					</div>
-
-				</div>
 
 				<script>
 					function updatelowerGoalMiss() {
@@ -204,203 +194,89 @@ include("navBar.php");
 
 
 
-					upperGoalTemp = 0;
-					upperGoalMissTemp = 0;
-					lowerGoalTemp = 0;
-					lowerGoalMissTemp = 0;
+					upperGoalT = 0;
+					upperGoalMissT = 0;
+					lowerGoalT = 0;
+					lowerGoalMissT = 0;
 					climb = 0;
 					climbTwo = 0;
 					climbThree = 0;
 					climbFour = 0;
 					increment = 1;
+					cycleCount = "[]";
 
 
 					function updateupperGoalT() {
-						upperGoalTemp += increment;
+						upperGoalT += increment;
 
-						document.getElementById("upperGoalTemp").innerHTML = upperGoalTemp;
+						document.getElementById("upperGoalT").innerHTML = upperGoalT;
+
+					}
+
+					function minusupperGoalT() {
+						upperGoalT -= increment;
+
+						document.getElementById("upperGoalT").innerHTML = upperGoalT;
 
 					}
 
 					function updateupperGoalMissT() {
-						upperGoalMissTemp += increment;
-						document.getElementById("upperGoalMissTemp").innerHTML = upperGoalMissTemp;
+						upperGoalMissT += increment;
+						document.getElementById("upperGoalMissT").innerHTML = upperGoalMissT;
+
+					}
+
+					function minusupperGoalMissT() {
+						upperGoalMissT -= increment;
+						document.getElementById("upperGoalMissT").innerHTML = upperGoalMissT;
 
 					}
 
 					function updatelowerGoalT() {
-						lowerGoalTemp += increment;
-						document.getElementById("lowerGoalTemp").innerHTML = lowerGoalTemp;
+						lowerGoalT += increment;
+						document.getElementById("lowerGoalT").innerHTML = lowerGoalT;
+
+					}
+
+					function minuslowerGoalT() {
+						lowerGoalT -= increment;
+						document.getElementById("lowerGoalT").innerHTML = lowerGoalT;
 
 					}
 
 					function updatelowerGoalMissT() {
-						lowerGoalMissTemp += increment;
-						document.getElementById("lowerGoalMissTemp").innerHTML = lowerGoalMissTemp;
+						lowerGoalMissT += increment;
+						document.getElementById("lowerGoalMissT").innerHTML = lowerGoalMissT;
+
+					}
+
+					function minuslowerGoalMissT() {
+						lowerGoalMissT -= increment;
+						document.getElementById("lowerGoalMissT").innerHTML = lowerGoalMissT;
 
 					}
 
 					function upperGoalClearT() {
-						upperGoalTemp = 0;
-						upperGoalMissTemp = 0;
+						upperGoalT = 0;
+						upperGoalMissT = 0;
 
-						document.getElementById("upperGoalTemp").innerHTML = upperGoalTemp;
-						document.getElementById("upperGoalMissTemp").innerHTML = upperGoalMissTemp;
+						document.getElementById("upperGoalT").innerHTML = upperGoalT;
+						document.getElementById("upperGoalMissT").innerHTML = upperGoalMissT;
 
 					}
 
 					function lowerGoalClearT() {
-						lowerGoalTemp = 0;
-						lowerGoalMissTemp = 0;
+						lowerGoalT = 0;
+						lowerGoalMissT = 0;
 
-						document.getElementById("lowerGoalTemp").innerHTML = lowerGoalTemp;
-						document.getElementById("lowerGoalMissTemp").innerHTML = lowerGoalMissTemp;
+						document.getElementById("lowerGoalT").innerHTML = lowerGoalT;
+						document.getElementById("lowerGoalMissT").innerHTML = lowerGoalMissT;
 
-					}
-
-					function check() {
-
-						check = cycleCount.substr(-2);
-						check1 = cycleCount.substr(-1);
-						console.log(check);
-						console.log(check1);
-						if (check == "]]"){
-						}else if (check == ", "){
-							cycleCount = cycleCount.substring(0, cycleCount.length - 2);
-							cycleCount += ("]");
-						}else if (check1 == "[") {
-							cycleCount = "[]";
-						}else{
-							alert("There was an error with your Cycle Count");
-						}
 					}
 
 					function addCoordinate2() {
 						coordinateList2.push(tempCoordinateList2[tempCoordinateList2.length - 1]);
 						tempCoordinateList2 = [];
-					}
-
-					function okButton() {
-
-
-						if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) == 0) {
-							alert("You haven't entered any data");
-						} else if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) > 9) {
-							alert(":| Did a team really do that? :|");
-						} else if (tempCoordinateList2 != 0) {
-
-							lowerGoalT += lowerGoalTemp;
-							upperGoalT += upperGoalTemp;
-							lowerGoalMissT += lowerGoalMissTemp;
-							upperGoalMissT += upperGoalMissTemp;
-
-							cycleNumber += 1;
-							if (cycleNumber >= 10) {
-								cycleNumber = 1;
-							}
-							cycleCount += ("[" + cycleNumber + ", " + upperGoalTemp + ", " + upperGoalMissTemp + ", " + lowerGoalTemp + "], ");
-							lowerMissTemp = lowerGoalMissTemp;
-
-							console.log(cycleCount);
-							console.log(cycleNumber);
-							console.log(coordinateList2);
-							addCoordinate2();
-							clearPath3();
-							console.log(coordinateList2);
-
-							lowerGoalTemp = 0;
-							upperGoalTemp = 0;
-							lowerGoalMissTemp = 0;
-							upperGoalMissTemp = 0;
-
-							document.getElementById("lowerGoalTemp").innerHTML = lowerGoalTemp;
-							document.getElementById("lowerGoalMissTemp").innerHTML = lowerGoalMissTemp;
-							document.getElementById("upperGoalTemp").innerHTML = upperGoalTemp;
-							document.getElementById("upperGoalMissTemp").innerHTML = upperGoalMissTemp;
-							undoSaveCounter = 0;
-						} else {
-							alert("You haven't selected a shot location");
-							exit();
-						}
-
-					}
-
-					function okButton1() {
-
-
-						if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) == 0) {} else if ((lowerGoalTemp + upperGoalTemp + lowerGoalMissTemp + upperGoalMissTemp) > 9) {
-							alert(":| Did a team really do that? :|");
-						} else if (tempCoordinateList2 != 0) {
-
-							lowerGoalT += lowerGoalTemp;
-							upperGoalT += upperGoalTemp;
-							lowerGoalMissT += lowerGoalMissTemp;
-							upperGoalMissT += upperGoalMissTemp;
-
-							cycleNumber += 1;
-							cycleCount += ("[" + cycleNumber + ", " + upperGoalTemp + ", " + upperGoalMissTemp + ", " + lowerGoalTemp + "], ");
-							lowerMissTemp = lowerGoalMissTemp;
-
-							console.log(cycleCount);
-							console.log(cycleNumber);
-							console.log(coordinateList2);
-							addCoordinate2();
-							clearPath3();
-							console.log(coordinateList2);
-
-							lowerGoalTemp = 0;
-							upperGoalTemp = 0;
-							lowerGoalMissTemp = 0;
-							upperGoalMissTemp = 0;
-
-							document.getElementById("lowerGoalTemp").innerHTML = lowerGoalTemp;
-							document.getElementById("lowerGoalMissTemp").innerHTML = lowerGoalMissTemp;
-							document.getElementById("upperGoalTemp").innerHTML = upperGoalTemp;
-							document.getElementById("upperGoalMissTemp").innerHTML = upperGoalMissTemp;
-							undoSaveCounter = 0;
-						} else {
-							alert("You haven't selected a shot location");
-							exit();
-						}
-
-					}
-
-
-					function undoSave() {
-
-						undoSaveCounter += 1;
-						if (cycleNumber == 0) {
-							console.log("continue");
-						} else if (undoSaveCounter > 1) {
-							console.log("Save Once");
-						} else {
-							cycleNumber -= 1;
-							lowerGoalTemp = parseInt(cycleCount.substring(cycleCount.length - 4, cycleCount.length - 3));
-							upperGoalTemp = parseInt(cycleCount.substring(cycleCount.length - 10, cycleCount.length - 9));
-							upperGoalMissTemp = parseInt(cycleCount.substring(cycleCount.length - 7, cycleCount.length - 6));
-							lowerGoalMissTemp = lowerMissTemp;
-
-							lowerGoalT -= lowerGoalTemp;
-							upperGoalT -= upperGoalTemp;
-							upperGoalMissT -= upperGoalMissTemp;
-
-							console.log(cycleCount);
-							console.log(cycleNumber);
-							console.log(coordinateList2);
-							popped = [];
-							popped = coordinateList2[coordinateList2.length - 1];
-							coordinateList2 = coordinateList2.slice(0, -1);
-							drawPoint2(context2, popped[0], popped[1]);
-							popped = [];
-							console.log(coordinateList2);
-							cycleCount = cycleCount.substring(0, cycleCount.length - 14);
-
-							document.getElementById("lowerGoalTemp").innerHTML = lowerGoalTemp;
-							document.getElementById("upperGoalTemp").innerHTML = upperGoalTemp;
-							document.getElementById("upperGoalMissTemp").innerHTML = upperGoalMissTemp;
-							document.getElementById("lowerGoalMissTemp").innerHTML = lowerGoalMissTemp;
-						}
-
 					}
 
 					function climbTyp(climbType) {
@@ -445,12 +321,6 @@ include("navBar.php");
 					var upperGoalMissT = 0;
 					var lowerGoalT = 0;
 					var lowerGoalMissT = 0;
-					var cycleNumber = 0;
-					var cycleCount = document.getElementById("[");
-					cycleCount = "[";
-					var undoSaveCounter = 0;
-					var check;
-					var check1;
 				</script>
 
 				<a>
@@ -458,28 +328,37 @@ include("navBar.php");
 				</a>
 				<div class="row">
 					<div class="col-md-8">
-						<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoalT()" id="bigFont"><a id="upperGoalTemp" class="enlargedtext">0</a> Upper Goal </button>
-						<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoalMissT()" id="bigFont"> Upper Goal Miss <a id="upperGoalMissTemp" class="enlargedtext">0</a></button>
-						<button class="disable-dbl-tap-zoom" type="button" onClick="upperGoalClearT()" class="enlargedtext stylishUpperMiss" id="bigFont"> Clear <a class="enlargedtext"></a></button>
+						<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoalT()" id="bigFont"><a id="upperGoalT" class="enlargedtext">0</a> Upper Goal</button>
+						<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoalMissT()" id="bigFont"> Upper Goal Miss <a id="upperGoalMissT" class="enlargedtext">0</a></button>
 						<br>
 						<br>
+						<button class="disable-dbl-tap-zoom-unsave" type="button" onClick="minusupperGoalT()" id="bigFont"><a id="upperGoalT" class="enlargedtext"></a> ---- </button>
+						<button class="disable-dbl-tap-zoom-unsave" type="button" onClick="minusupperGoalMissT()" id="bigFont"> ---- <a id="upperGoalMissT" class="enlargedtext"></a></button>
+
 
 						<a>
 							<h3><b><u>Lower Goal:</u></b></h3>
 						</a>
-						<button class="disable-dbl-tap-zoom-lower" type="button" onClick="updatelowerGoalT()" class="enlargedtext stylishLower" id="bigFont"><a id="lowerGoalTemp" class="enlargedtext">0</a> Lower Goal </button>
-						<button class="disable-dbl-tap-zoom-lower" type="button" onClick="updatelowerGoalMissT()" class="enlargedtext stylishLower" id="bigFont"> Lower Goal Miss <a id="lowerGoalMissTemp" class="enlargedtext">0</a></button>
-						<button class="disable-dbl-tap-zoom" type="button" onClick="lowerGoalClearT()" class="enlargedtext stylishUpperMiss" id="bigFont"> Clear <a class="enlargedtext"></a></button>
+						<button class="disable-dbl-tap-zoom-lower" type="button" onClick="updatelowerGoalT()" class="enlargedtext stylishLower" id="bigFont"><a id="lowerGoalT" class="enlargedtext">0</a> Lower Goal </button>
+						<button class="disable-dbl-tap-zoom-lower" type="button" onClick="updatelowerGoalMissT()" class="enlargedtext stylishLower" id="bigFont"> Lower Goal Miss <a id="lowerGoalMissT" class="enlargedtext">0</a></button>
 						<br>
+						<br>
+						<button class="disable-dbl-tap-zoom-unsave1" type="button" onClick="minuslowerGoalT()" id="bigFont"><a id="upperGoalT" class="enlargedtext"></a> ---- </button>
+						<button class="disable-dbl-tap-zoom-unsave1" type="button" onClick="minuslowerGoalMissT()" id="bigFont"> ---- <a id="upperGoalMissT" class="enlargedtext"></a></button>
 						<br>
 						<br>
 					</div>
-					<div class="col-md-4">
-						<button class="disable-dbl-tap-zoom-save" type="button" onClick="okButton()"  id="bigFont"> Save Cycle <a class="enlargedtext"></a></button>
-						<br>
-						<br>
-						<button class="disable-dbl-tap-zoom-unsave" type="button" onClick="undoSave()"  id="bigFont"> Edit Last Save <a class="enlargedtext"></a></button>
+				</div>
+
+				<div>
+					<div class="row">
+						<canvas id="myCanvas2" width=700px height=350px style="border:0px solid #d3d3d3;">
+							<script src="Drawing2.js"></script>
+						</canvas>
 					</div>
+
+					<button class="disable-dbl-tap-zoom" type="button" onClick="undoDraw()" class="enlargedtext stylishUpperMiss" id="bigFont"> Undo <a class="enlargedtext"></a></button>
+
 				</div>
 				
 				<!--Defense-->
@@ -533,7 +412,7 @@ include("navBar.php");
 
 				<br> <br>
 				<div style="padding: 5px; padding-bottom: 10;">
-					<input type="button" value="Submit Data" id="submitButton" class="btn btn-primary" onclick="okButton1(''); postwith('')" />
+					<input type="button" value="Submit Data" id="submitButton" class="btn btn-primary" onclick="postwith('')" />
 
 
 				</div>
@@ -639,26 +518,39 @@ include("navBar.php");
 
 		.disable-dbl-tap-zoom-unsave {
   			touch-action: manipulation;
-			background-color: rgb(58, 156, 129);
+			background-color: rgb(171, 95, 82);
 			color: white;
 			border-radius: 2px;
 			font-family: Helvetica;
 			font-weight: bold;
 			/*To get rid of weird 3D affect in some browsers*/
-			border: solid rgb(58, 156, 129);
-			height:50px;
-    		width:275px;
+			border: solid rgb(171, 95, 82);
+			height:40px;
+    		width:325px;
+		}
+
+		.disable-dbl-tap-zoom-unsave1 {
+  			touch-action: manipulation;
+			background-color: rgb(45, 105, 101);
+			color: white;
+			border-radius: 2px;
+			font-family: Helvetica;
+			font-weight: bold;
+			/*To get rid of weird 3D affect in some browsers*/
+			border: solid rgb(45, 105, 101);
+			height:40px;
+    		width:325px;
 		}
 
 		.disable-dbl-tap-zoom-lower {
   			touch-action: manipulation;
-			background-color: rgb(58, 133, 129);
+			background-color: rgb(53, 176, 169);
 			color: white;
 			border-radius: 2px;
 			font-family: Helvetica;
 			font-weight: bold;
 			/*To get rid of weird 3D affect in some browsers*/
-			border: solid rgb(58, 133, 129);
+			border: solid rgb(53, 176, 169);
 			height:100px;
     		width:325px;
 		}

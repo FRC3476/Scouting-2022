@@ -25,29 +25,11 @@ function saveUserName2(){
   localStorage.setItem("userName", $("#userName").val());
 }
 
-function clearPath2(){
-  context2.clearRect(0, 0, 700, 350);
-  context2.drawImage(imageObj2, 0, 0, 700, 350);
-  coordinateList2.splice(-1,1);
-}
-
 function clearPath3(){
   context2.clearRect(0, 0, 700, 350);
   context2.drawImage(imageObj2, 0, 0, 700, 350);
-  tempCoordinateList2 = [];
 }
 
-
-function addCoordinate2(){
-  coordinateList2.push(tempCoordinateList2[0]);
-  tempCoordinateList2 = [];
-}
-
-
-function addTempCoordinate2(coor2){
-  tempCoordinateList2 = [];  
-  tempCoordinateList2.push(coor2);
-}
 
 function updateRobotHTML(){
 
@@ -118,26 +100,26 @@ function getMousePos2(canvas2, evt2) {
 }
 
 function drawPoint2(context2 , x, y){
-  clearPath3();
   context2.fillRect(x,y,8,8);
   context2.fillStyle = "#FFFFFF";
   context2.fill();
-  addTempCoordinate2([x,y]);
+  coordinateList2.push([x,y]);
 }
 
-function drawPointLines2(context2 , point2){
-  var color = "#FFFFFF";
-  if(lastCoordinate2.length == 0){
-    lastCoordinate2 = point2;
-  }
-  else{
-    context2.beginPath();
-    context2.strokeStyle = color;
-    context2.moveTo(lastCoordinate2[0] , lastCoordinate2[1]);
-    context2.lineTo(point2[0] , point2[1]);
-    addCoordinate2(point2);
-    lastCoordinate2 = point2;
-    context2.stroke();
+function drawPoint3(context2 , x, y){
+  context2.fillRect(x,y,8,8);
+  context2.fillStyle = "#FFFFFF";
+  context2.fill();
+}
+
+function undoDraw(){
+  clearPath3();
+  coordinateList2.pop();
+  console.log(coordinateList2.length);
+  for(let i = 0; i < coordinateList2.length; i++){
+    console.log(coordinateList2[i][0]);
+    console.log(coordinateList2[i][1]);
+    drawPoint3(context2, coordinateList2[i][0], coordinateList2[i][1]);
   }
 }
 
