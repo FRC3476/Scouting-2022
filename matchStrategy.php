@@ -444,6 +444,9 @@ include("navBar.php"); ?>
 								var imageObj2 = new Image();
 								var matchToPoints2 = [];
 								var matchToPoints3 = [];
+								var matchToPoints7 = [];
+								var matchToPoints8 = [];
+								var matchToPoints9 = [];
 								var dataList = [];
 								<?php
 
@@ -451,7 +454,13 @@ include("navBar.php"); ?>
 									echo ("matchToPoints2[" . $teamData[8][$i][2] . "] = " . $teamData[8][$i][25] . ";");
 								}
 								for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-									echo ("matchToPoints3[" . $teamData[8][$i][2] . "] = " . $teamData[8][$i][24] . ";");
+									echo ("matchToPoints7[" . $teamData[8][$i][2] . "] = " . $teamData[8][$i][11] . ";");
+								}
+								for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+									echo ("matchToPoints8[" . $teamData[8][$i][2] . "] = " . $teamData[8][$i][12] . ";");
+								}
+								for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+									echo ("matchToPoints9[" . $teamData[8][$i][2] . "] = " . $teamData[8][$i][13] . ";");
 								}
 
 								?>
@@ -490,24 +499,26 @@ include("navBar.php"); ?>
 									makeCanvasReady2();
 									var matchNumber2 = document.getElementById("matchNum2").value;
 									var a = matchToPoints2[matchNumber2];
-									var b = matchToPoints3[matchNumber2];
+									var b = matchToPoints7[matchNumber2];
+									var c = matchToPoints8[matchNumber2];
+									var d = matchToPoints9[matchNumber2];
 									for (var i = 0; i != a.length; i++) {
-										if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.9)) {
+										if (((b / (b + c)) >= 0.9)) {
 											context2.fillStyle = "#3cff00";
-											context2.fillRect((6/7)*(a[i][0]), (6/7)*(a[i][1]), 5, 5);
-											console.log(b[i][1]);
-										} else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
+											console.log((a[i][0]));
+											context2.fillRect((6 / 7) * (a[i][0]), (6 / 7) * (a[i][1]), 5, 5);
+										} else if (((b / (b + c)) >= 0.5)) {
 											context2.fillStyle = "#fff200";
-											context2.fillRect((6/7)*(a[i][0]), (6/7)*(a[i][1]), 5, 5);
-										} else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
+											context2.fillRect((6 / 7) * (a[i][0]), (6 / 7) * (a[i][1]), 5, 5);
+										} else if (((b / (b + c)) >= 0.3)) {
 											context2.fillStyle = "#ff9100";
-											context2.fillRect((6/7)*(a[i][0]), (6/7)*(a[i][1]), 5, 5);
-										} else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
+											context2.fillRect((6 / 7) * (a[i][0]), (6 / 7) * (a[i][1]), 5, 5);
+										} else if (((b / (b + c)) >= 0)) {
 											context2.fillStyle = "#ff0000";
-											context2.fillRect((6/7)*(a[i][0]), (6/7)*(a[i][1]), 5, 5);
-										} else {
+											context2.fillRect((6 / 7) * (a[i][0]), (6 / 7) * (a[i][1]), 5, 5);
+										} else if (b + c == 0) {
 											context2.fillStyle = "#000000";
-											context2.fillRect((6/7)*(a[i][0]), (6/7)*(a[i][1]), 5, 5);
+											context2.fillRect((6 / 7) * (a[i][0]), (6 / 7) * (a[i][1]), 5, 5);
 										}
 									}
 								}
@@ -516,25 +527,27 @@ include("navBar.php"); ?>
 									makeCanvasReady2();
 									for (var j = 0; j != 200; j++) {
 										var a = matchToPoints2[j];
-										var b = matchToPoints3[j];
+										var b = matchToPoints7[j];
+										var c = matchToPoints8[j];
+										var d = matchToPoints9[j];
 										if (a != null) {
 											for (var i = 0; i != a.length; i++) {
-												if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.9)) {
+												if (((b / (b + c)) >= 0.9)) {
 													context2.fillStyle = "#3cff00";
-													context2.fillRect((6/7)*(a[i][0]), (6/7)*(a[i][1]), 5, 5);
-													console.log(b[i][1]);
-												} else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
+													console.log((a[i][0]));
+													context2.fillRect((6 / 7) * (a[i][0]), (6 / 7) * (a[i][1]), 5, 5);
+												} else if (((b / (b + c)) >= 0.5)) {
 													context2.fillStyle = "#fff200";
-													context2.fillRect((6/7)*(a[i][0]), (6/7)*(a[i][1]), 5, 5);
-												} else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
+													context2.fillRect((6 / 7) * (a[i][0]), (6 / 7) * (a[i][1]), 5, 5);
+												} else if (((b / (b + c)) >= 0.3)) {
 													context2.fillStyle = "#ff9100";
-													context2.fillRect((6/7)*(a[i][0]), (6/7)*(a[i][1]), 5, 5);
-												} else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
+													context2.fillRect((6 / 7) * (a[i][0]), (6 / 7) * (a[i][1]), 5, 5);
+												} else if (((b / (b + c)) >= 0)) {
 													context2.fillStyle = "#ff0000";
-													context2.fillRect((6/7)*(a[i][0]), (6/7)*(a[i][1]), 5, 5);
-												} else {
+													context2.fillRect((6 / 7) * (a[i][0]), (6 / 7) * (a[i][1]), 5, 5);
+												} else if (b + c == 0) {
 													context2.fillStyle = "#000000";
-													context2.fillRect((6/7)*(a[i][0]), (6/7)*(a[i][1]), 5, 5);
+													context2.fillRect((6 / 7) * (a[i][0]), (6 / 7) * (a[i][1]), 5, 5);
 												}
 											}
 										} else {
@@ -618,23 +631,23 @@ include("navBar.php"); ?>
 							</tr>
 							<tr class="info">
 								<td>Average Auto Upper Goal</td>
-								<td><?php echo round(getAvgUpperGoal($teamNumber),2); ?></td>
+								<td><?php echo round(getAvgUpperGoal($teamNumber), 2); ?></td>
 							</tr>
 							<tr class="success">
 								<td>Average Auto Lower Goal</td>
-								<td><?php echo round(getAvgLowerGoal($teamNumber),2); ?></td>
+								<td><?php echo round(getAvgLowerGoal($teamNumber), 2); ?></td>
 							</tr>
 							<tr class="danger">
 								<td>Average Teleop Upper Goal</td>
-								<td><?php echo round(getAvgUpperGoalT($teamNumber),2); ?></td>
+								<td><?php echo round(getAvgUpperGoalT($teamNumber), 2); ?></td>
 							</tr>
 							<tr class="info">
 								<td>Average Teleop Lower Goal</td>
-								<td><?php echo round(getAvgLowerGoalT($teamNumber),2); ?></td>
+								<td><?php echo round(getAvgLowerGoalT($teamNumber), 2); ?></td>
 							</tr>
 							<tr class="success">
 								<td>Average Cycle Count</td>
-								<td><?php echo round(getAvgCycleCount($teamNumber),2); ?></td>
+								<td><?php echo round(getAvgCycleCount($teamNumber), 2); ?></td>
 							</tr>
 						</tbody>
 					</table>
@@ -698,17 +711,17 @@ include("navBar.php"); ?>
 
 									<tr class="danger">
 										<td>Average Penalties</td>
-										<td><?php echo round(getAvgPenalties($teamNumber),2); ?></td>
+										<td><?php echo round(getAvgPenalties($teamNumber), 2); ?></td>
 									</tr>
 
 									<tr class="success">
 										<td>Avg Alliance Ranking</td>
-										<td><?php echo round(getAvgDriveRank($teamNumber),2); ?></td>
+										<td><?php echo round(getAvgDriveRank($teamNumber), 2); ?></td>
 									</tr>
 
 									<tr class="info">
 										<td>Total Defense</td>
-										<td><?php echo round(getTotalDefense($teamNumber),2); ?></td>
+										<td><?php echo round(getTotalDefense($teamNumber), 2); ?></td>
 									</tr>
 
 								</tbody>
@@ -725,27 +738,27 @@ include("navBar.php"); ?>
 								<tbody>
 									<tr class="info">
 										<td>Average Climbs</td>
-										<td><?php echo round(getAvgClimb($teamNumber),2); ?></td>
+										<td><?php echo round(getAvgClimb($teamNumber), 2); ?></td>
 									</tr>
 									<tr class="success">
 										<td>Total Climbs</td>
-										<td><?php echo round(getTotalClimb($teamNumber),2); ?></td>
+										<td><?php echo round(getTotalClimb($teamNumber), 2); ?></td>
 									</tr>
 									<tr class="danger">
 										<td>Total Low Climbs</td>
-										<td><?php echo round(getTotalSingleClimb($teamNumber),2); ?></td>
+										<td><?php echo round(getTotalSingleClimb($teamNumber), 2); ?></td>
 									</tr>
 									<tr class="info">
 										<td>Total Med Climbs</td>
-										<td><?php echo round(getTotalDoubleClimb($teamNumber),2); ?></td>
+										<td><?php echo round(getTotalDoubleClimb($teamNumber), 2); ?></td>
 									</tr>
 									<tr class="success">
 										<td>Total High Climbs</td>
-										<td><?php echo round(getTotalTripleClimb($teamNumber),2); ?></td>
+										<td><?php echo round(getTotalTripleClimb($teamNumber), 2); ?></td>
 									</tr>
 									<tr class="danger">
 										<td>Total Traversal Climbs</td>
-										<td><?php echo round(getTotalQuadClimb($teamNumber),2); ?></td>
+										<td><?php echo round(getTotalQuadClimb($teamNumber), 2); ?></td>
 									</tr>
 								</tbody>
 							</table>

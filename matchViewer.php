@@ -356,6 +356,7 @@ if (
                     <h5><?php echo ($team1Red . ": Square") ?></h5>
                     <h5><?php echo ($team2Red . ": Circle") ?></h5>
                     <h5><?php echo ($team3Red . ": Cross") ?></h5>
+                    
                     <canvas id="myCanvas" width="500" height="250" style="border:1px solid #d3d3d3;"></canvas>
                     <script type="text/javascript">
                         var canvas = document.getElementById('myCanvas');
@@ -367,10 +368,17 @@ if (
                         var imageObj = new Image();
                         var matchToPoints = [];
                         var matchToPoints1 = [];
+                        var matchToPoints7 = [];
+                        var matchToPoints8 = [];
+
                         var matchToPoints4 = [];
                         var matchToPoints5 = [];
                         var matchToPoints6 = [];
                         var matchToPoints20 = [];
+                        var matchToPoints51 = [];
+                        var matchToPoints52 = [];
+                        var matchToPoints23 = [];
+                        var matchToPoints9 = [];
                         var dataList = [];
                         <?php
 
@@ -378,19 +386,39 @@ if (
                             echo ("matchToPoints[" . $teamData[8][$i][2] . "] = " . $teamData[8][$i][25] . ";");
                         }
                         for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-                            echo ("matchToPoints1[" . $teamData[8][$i][2] . "] = " . $teamData[8][$i][24] . ";");
+                            echo ("matchToPoints1[" . $teamData[8][$i][2] . "] = " . $teamData[8][$i][11] . ";");
                         }
+                        for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+                            echo ("matchToPoints7[" . $teamData[8][$i][2] . "] = " . $teamData[8][$i][12] . ";");
+                        }
+                        for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+                            echo ("matchToPoints8[" . $teamData[8][$i][2] . "] = " . $teamData[8][$i][13] . ";");
+                        }
+                        
                         for ($i = 0; $i != sizeof($teamData1[8]); $i++) {
                             echo ("matchToPoints4[" . $teamData1[8][$i][2] . "] = " . $teamData1[8][$i][25] . ";");
                         }
                         for ($i = 0; $i != sizeof($teamData1[8]); $i++) {
-                            echo ("matchToPoints5[" . $teamData1[8][$i][2] . "] = " . $teamData1[8][$i][24] . ";");
+                            echo ("matchToPoints5[" . $teamData1[8][$i][2] . "] = " . $teamData1[8][$i][11] . ";");
                         }
+                        for ($i = 0; $i != sizeof($teamData1[8]); $i++) {
+                            echo ("matchToPoints51[" . $teamData1[8][$i][2] . "] = " . $teamData1[8][$i][12] . ";");
+                        }
+                        for ($i = 0; $i != sizeof($teamData1[8]); $i++) {
+                            echo ("matchToPoints52[" . $teamData1[8][$i][2] . "] = " . $teamData1[8][$i][13] . ";");
+                        }
+
                         for ($i = 0; $i != sizeof($teamData2[8]); $i++) {
                             echo ("matchToPoints6[" . $teamData2[8][$i][2] . "] = " . $teamData2[8][$i][25] . ";");
                         }
                         for ($i = 0; $i != sizeof($teamData2[8]); $i++) {
-                            echo ("matchToPoints20[" . $teamData2[8][$i][2] . "] = " . $teamData2[8][$i][24] . ";");
+                            echo ("matchToPoints20[" . $teamData2[8][$i][2] . "] = " . $teamData2[8][$i][11] . ";");
+                        }
+                        for ($i = 0; $i != sizeof($teamData2[8]); $i++) {
+                            echo ("matchToPoints23[" . $teamData2[8][$i][2] . "] = " . $teamData2[8][$i][12] . ";");
+                        }
+                        for ($i = 0; $i != sizeof($teamData2[8]); $i++) {
+                            echo ("matchToPoints9[" . $teamData2[8][$i][2] . "] = " . $teamData2[8][$i][13] . ";");
                         }
 
                         ?>
@@ -423,22 +451,23 @@ if (
                             for (var j = 0; j != 200; j++) {
                                 var a = matchToPoints[j];
                                 var b = matchToPoints1[j];
+                                var c = matchToPoints7[j];
+                                var d = matchToPoints8[j];
                                 if (a != null) {
                                     for (var i = 0; i != a.length; i++) {
-                                        if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.9)) {
+                                        if (((b / (b + c)) >= 0.9)) {
                                             context.fillStyle = "#3cff00";
                                             context.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
-                                            console.log(b[i][1]);
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
+                                        } else if (((b / (b + c)) >= 0.5)) {
                                             context.fillStyle = "#fff200";
                                             context.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
+                                        } else if (((b / (b + c)) >= 0.3)) {
                                             context.fillStyle = "#ff9100";
                                             context.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
+                                        } else if (((b / (b + c)) >= 0)) {
                                             context.fillStyle = "#ff0000";
                                             context.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
-                                        } else {
+                                        } else if (b + c == 0) {
                                             context.fillStyle = "#000000";
                                             context.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
                                         }
@@ -451,38 +480,39 @@ if (
                             for (var j = 0; j != 200; j++) {
                                 var a = matchToPoints4[j];
                                 var b = matchToPoints5[j];
+                                var c = matchToPoints51[j];
+                                var d = matchToPoints52[j];
                                 if (a != null) {
                                     for (var i = 0; i != a.length; i++) {
-                                        if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.9)) {
+                                        if (((b / (b + c)) >= 0.9)) {
                                             context.fillStyle = "#3cff00";
                                             context.strokeStyle = "#3cff00";
                                             context.beginPath();
                                             context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context.stroke();
                                             context.fill();
-                                            console.log(b[i][1]);
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
+                                        } else if (((b / (b + c)) >= 0.5)) {
                                             context.fillStyle = "#fff200";
                                             context.strokeStyle = "#fff200";
                                             context.beginPath();
                                             context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context.stroke();
                                             context.fill();
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
+                                        } else if (((b / (b + c)) >= 0.3)) {
                                             context.fillStyle = "#ff9100";
                                             context.strokeStyle = "#ff9100";
                                             context.beginPath();
                                             context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context.stroke();
                                             context.fill();
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
+                                        } else if (((b / (b + c)) >= 0)) {
                                             context.fillStyle = "#ff0000";
                                             context.strokeStyle = "#ff0000";
                                             context.beginPath();
                                             context.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context.stroke();
                                             context.fill();
-                                        } else {
+                                        } else if (b + c == 0) {
                                             context.fillStyle = "#000000";
                                             context.strokeStyle = "#000000";
                                             context.beginPath();
@@ -499,18 +529,19 @@ if (
                             for (var j = 0; j != 200; j++) {
                                 var a = matchToPoints6[j];
                                 var b = matchToPoints20[j];
+                                var c = matchToPoints23[j];
+                                var d = matchToPoints9[j];
                                 if (a != null) {
                                     for (var i = 0; i != a.length; i++) {
-                                        if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.9)) {
+                                        if (((b / (b + c)) >= 0.9)) {
                                             context.strokeStyle = "#3cff00";
-                                            console.log(b[i][1]);
                                             context.beginPath();
                                             context.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
                                             context.lineTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) - 4);
                                             context.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
                                             context.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
                                             context.stroke();
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
+                                        } else if (((b / (b + c)) >= 0.5)) {
                                             context.strokeStyle = "#fff200";
                                             context.beginPath();
                                             context.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
@@ -518,7 +549,7 @@ if (
                                             context.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
                                             context.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
                                             context.stroke();
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
+                                        } else if (((b / (b + c)) >= 0.3)) {
                                             context.strokeStyle = "#ff9100";
                                             context.beginPath();
                                             context.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
@@ -526,7 +557,7 @@ if (
                                             context.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
                                             context.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
                                             context.stroke();
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
+                                        } else if (((b / (b + c)) >= 0)) {
                                             context.strokeStyle = "#ff0000";
                                             context.beginPath();
                                             context.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
@@ -534,7 +565,7 @@ if (
                                             context.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
                                             context.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
                                             context.stroke();
-                                        } else {
+                                        } else if (b + c == 0) {
                                             context.strokeStyle = "#000000";
                                             context.beginPath();
                                             context.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
@@ -626,11 +657,19 @@ if (
                         var i = 1;
                         var imageObj1 = new Image();
                         var matchToPoints2 = [];
-                        var matchToPoints21 = [];
-                        var matchToPoints24 = [];
-                        var matchToPoints25 = [];
-                        var matchToPoints26 = [];
-                        var matchToPoints220 = [];
+                        var matchToPoints31 = [];
+                        var matchToPoints32 = [];
+                        var matchToPoints33 = [];
+
+                        var matchToPoints34 = [];
+                        var matchToPoints35 = [];
+                        var matchToPoints36 = [];
+                        var matchToPoints37 = [];
+
+                        var matchToPoints38 = [];
+                        var matchToPoints39 = [];
+                        var matchToPoints40 = [];
+                        var matchToPoints41 = [];
                         var dataList = [];
                         <?php
 
@@ -638,19 +677,40 @@ if (
                             echo ("matchToPoints2[" . $teamDataB[8][$i][2] . "] = " . $teamDataB[8][$i][25] . ";");
                         }
                         for ($i = 0; $i != sizeof($teamDataB[8]); $i++) {
-                            echo ("matchToPoints21[" . $teamDataB[8][$i][2] . "] = " . $teamDataB[8][$i][24] . ";");
+                            echo ("matchToPoints31[" . $teamDataB[8][$i][2] . "] = " . $teamDataB[8][$i][11] . ";");
+                        }
+                        for ($i = 0; $i != sizeof($teamDataB[8]); $i++) {
+                            echo ("matchToPoints32[" . $teamDataB[8][$i][2] . "] = " . $teamDataB[8][$i][12] . ";");
+                        }
+                        for ($i = 0; $i != sizeof($teamDataB[8]); $i++) {
+                            echo ("matchToPoints33[" . $teamDataB[8][$i][2] . "] = " . $teamDataB[8][$i][13] . ";");
+                        }
+
+                        for ($i = 0; $i != sizeof($teamDataB1[8]); $i++) {
+                            echo ("matchToPoints34[" . $teamDataB1[8][$i][2] . "] = " . $teamDataB1[8][$i][25] . ";");
                         }
                         for ($i = 0; $i != sizeof($teamDataB1[8]); $i++) {
-                            echo ("matchToPoints24[" . $teamDataB1[8][$i][2] . "] = " . $teamDataB1[8][$i][25] . ";");
+                            echo ("matchToPoints35[" . $teamDataB1[8][$i][2] . "] = " . $teamDataB1[8][$i][11] . ";");
                         }
                         for ($i = 0; $i != sizeof($teamDataB1[8]); $i++) {
-                            echo ("matchToPoints25[" . $teamDataB1[8][$i][2] . "] = " . $teamDataB1[8][$i][24] . ";");
+                            echo ("matchToPoints36[" . $teamDataB1[8][$i][2] . "] = " . $teamDataB1[8][$i][12] . ";");
+                        }
+                        for ($i = 0; $i != sizeof($teamDataB1[8]); $i++) {
+                            echo ("matchToPoints37[" . $teamDataB1[8][$i][2] . "] = " . $teamDataB1[8][$i][13] . ";");
+                        }
+
+
+                        for ($i = 0; $i != sizeof($teamDataB2[8]); $i++) {
+                            echo ("matchToPoints38[" . $teamDataB2[8][$i][2] . "] = " . $teamDataB2[8][$i][25] . ";");
                         }
                         for ($i = 0; $i != sizeof($teamDataB2[8]); $i++) {
-                            echo ("matchToPoints26[" . $teamDataB2[8][$i][2] . "] = " . $teamDataB2[8][$i][25] . ";");
+                            echo ("matchToPoints39[" . $teamDataB2[8][$i][2] . "] = " . $teamDataB2[8][$i][11] . ";");
                         }
                         for ($i = 0; $i != sizeof($teamDataB2[8]); $i++) {
-                            echo ("matchToPoints220[" . $teamDataB2[8][$i][2] . "] = " . $teamDataB2[8][$i][24] . ";");
+                            echo ("matchToPoints40[" . $teamDataB2[8][$i][2] . "] = " . $teamDataB2[8][$i][12] . ";");
+                        }
+                        for ($i = 0; $i != sizeof($teamDataB2[8]); $i++) {
+                            echo ("matchToPoints41[" . $teamDataB2[8][$i][2] . "] = " . $teamDataB2[8][$i][13] . ";");
                         }
 
                         ?>
@@ -682,23 +742,24 @@ if (
                         function drawPoint3() {
                             for (var j = 0; j != 200; j++) {
                                 var a = matchToPoints2[j];
-                                var b = matchToPoints21[j];
+                                var b = matchToPoints31[j];
+                                var c = matchToPoints32[j];
+                                var d = matchToPoints33[j];
                                 if (a != null) {
                                     for (var i = 0; i != a.length; i++) {
-                                        if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.9)) {
+                                        if (((b / (b + c)) >= 0.9)) {
                                             context1.fillStyle = "#3cff00";
                                             context1.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
-                                            console.log(b[i][1]);
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
+                                        } else if (((b / (b + c)) >= 0.5)) {
                                             context1.fillStyle = "#fff200";
                                             context1.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
+                                        } else if (((b / (b + c)) >= 0.3)) {
                                             context1.fillStyle = "#ff9100";
                                             context1.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
+                                        } else if (((b / (b + c)) >= 0)) {
                                             context1.fillStyle = "#ff0000";
                                             context1.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
-                                        } else {
+                                        } else if (b + c == 0) {
                                             context1.fillStyle = "#000000";
                                             context1.fillRect((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 5, 5);
                                         }
@@ -709,39 +770,41 @@ if (
                                 }
                             }
                             for (var j = 0; j != 200; j++) {
-                                var a = matchToPoints24[j];
-                                var b = matchToPoints25[j];
+                                var a = matchToPoints34[j];
+                                var b = matchToPoints35[j];
+                                var c = matchToPoints36[j];
+                                var d = matchToPoints37[j];
                                 if (a != null) {
                                     for (var i = 0; i != a.length; i++) {
-                                        if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.9)) {
+                                        if (((b / (b + c)) >= 0.9)) {
                                             context1.fillStyle = "#3cff00";
                                             context1.strokeStyle = "#3cff00";
                                             context1.beginPath();
                                             context1.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context1.stroke();
                                             context1.fill();
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
+                                        } else if (((b / (b + c)) >= 0.5)) {
                                             context1.fillStyle = "#fff200";
                                             context1.strokeStyle = "#fff200";
                                             context1.beginPath();
                                             context1.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context1.stroke();
                                             context1.fill();
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
+                                        } else if (((b / (b + c)) >= 0.3)) {
                                             context1.fillStyle = "#ff9100";
                                             context1.strokeStyle = "#ff9100";
                                             context1.beginPath();
                                             context1.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context1.stroke();
                                             context1.fill();
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
+                                        } else if (((b / (b + c)) >= 0)) {
                                             context1.fillStyle = "#ff0000";
                                             context1.strokeStyle = "#ff0000";
                                             context1.beginPath();
                                             context1.arc((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]), 2.5, 0, Math.PI * 2);
                                             context1.stroke();
                                             context1.fill();
-                                        } else {
+                                        } else if (b + c == 0) {
                                             context1.fillStyle = "#000000";
                                             context1.strokeStyle = "#000000";
                                             context1.beginPath();
@@ -756,11 +819,13 @@ if (
                                 }
                             }
                             for (var j = 0; j != 200; j++) {
-                                var a = matchToPoints26[j];
-                                var b = matchToPoints220[j];
+                                var a = matchToPoints38[j];
+                                var b = matchToPoints39[j];
+                                var c = matchToPoints40[j];
+                                var d = matchToPoints41[j];
                                 if (a != null) {
                                     for (var i = 0; i != a.length; i++) {
-                                        if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.9)) {
+                                        if (((b / (b + c)) >= 0.9)) {
                                             context1.strokeStyle = "#3cff00";
                                             context1.beginPath();
                                             context1.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
@@ -768,8 +833,7 @@ if (
                                             context1.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
                                             context1.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
                                             context1.stroke();
-                                            console.log(b[i][1]);
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.5)) {
+                                        } else if (((b / (b + c)) >= 0.5)) {
                                             context1.strokeStyle = "#fff200";
                                             context1.beginPath();
                                             context1.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
@@ -777,7 +841,7 @@ if (
                                             context1.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
                                             context1.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
                                             context1.stroke();
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0.3)) {
+                                        } else if (((b / (b + c)) >= 0.3)) {
                                             context1.strokeStyle = "#ff9100";
                                             context1.beginPath();
                                             context1.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
@@ -785,7 +849,7 @@ if (
                                             context1.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
                                             context1.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
                                             context1.stroke();
-                                        } else if (((b[i][1] / (b[i][2] + b[i][1])) >= 0)) {
+                                        } else if (((b / (b + c)) >= 0)) {
                                             context1.strokeStyle = "#ff0000";
                                             context1.beginPath();
                                             context1.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
@@ -793,7 +857,7 @@ if (
                                             context1.moveTo((5 / 7) * (a[i][0]) - 4, (5 / 7) * (a[i][1]));
                                             context1.lineTo((5 / 7) * (a[i][0]) + 4, (5 / 7) * (a[i][1]));
                                             context1.stroke();
-                                        } else {
+                                        } else if (b + c == 0) {
                                             context1.strokeStyle = "#000000";
                                             context1.beginPath();
                                             context1.moveTo((5 / 7) * (a[i][0]), (5 / 7) * (a[i][1]) + 4);
