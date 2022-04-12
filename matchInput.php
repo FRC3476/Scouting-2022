@@ -14,6 +14,7 @@ include("navBar.php");
 			alert("Please enter a Team, Alliance Color, and Match Number");
 			return;
 		}
+
 		var nums = {
 			'userName': document.getElementById('userName').value,
 			'matchNum': document.getElementById('matchNum').value,
@@ -48,6 +49,7 @@ include("navBar.php");
 		};
 
 		var id = document.getElementById('matchNum').value + "-" + document.getElementById('teamNum').value;
+
 		console.log(JSON.stringify(nums));
 		$.post("dataHandler.php", nums).done(function(data) {}).done(function() {
 			alert("Submission Succeeded! Form Reloading.");
@@ -184,6 +186,40 @@ include("navBar.php");
 						document.getElementById("lowerGoal").innerHTML = upperGoalT;
 						document.getElementById("lowerGoalMiss").innerHTML = upperGoalT;
 
+					}
+
+					function check() {
+
+						eventCode = "2022cala_qm";
+						matchNumberCode = eventCode + document.getElementById('matchNum').value;
+						match = document.getElementById('matchNum').value;
+
+						if (match > 500) {
+							postwith();
+						} else {
+							fetch('https://www.thebluealliance.com/api/v3/match/' + matchNumberCode + '/simple?X-TBA-Auth-Key=VPexr6soymZP0UMtFw2qZ11pLWcaDSxCMUYOfMuRj5CQT3bzoExsUGHuO1JvyCyU')
+								.then(response => {
+									return response.json();
+								})
+								.then(data => {
+									team1 = (data["alliances"]["blue"]["team_keys"][0]).substring(3);
+									team2 = (data["alliances"]["blue"]["team_keys"][1]).substring(3);
+									team3 = (data["alliances"]["blue"]["team_keys"][2]).substring(3);
+									team4 = (data["alliances"]["red"]["team_keys"][0]).substring(3);
+									team5 = (data["alliances"]["red"]["team_keys"][1]).substring(3);
+									team6 = (data["alliances"]["red"]["team_keys"][2]).substring(3);
+
+									let teamNumberInt = document.getElementById('teamNum').value;
+									let teamNumberString = teamNumberInt.toString();
+
+									if ((teamNumberString != team1) && (teamNumberString != team2) && (teamNumberString != team3) && (teamNumberString != team4) && (teamNumberString != team5) && (teamNumberString != team6)) {
+										alert("This team is not playing in this match");
+										return;
+									} else {
+										postwith();
+									}
+								});
+						}
 					}
 
 
@@ -360,7 +396,7 @@ include("navBar.php");
 					<button class="disable-dbl-tap-zoom" type="button" onClick="undoDraw()" class="enlargedtext stylishUpperMiss" id="bigFont"> Undo <a class="enlargedtext"></a></button>
 
 				</div>
-				
+
 				<!--Defense-->
 				<a>
 					<h3><b><u>Defense:</u></b></h3>
@@ -412,7 +448,7 @@ include("navBar.php");
 
 				<br> <br>
 				<div style="padding: 5px; padding-bottom: 10;">
-					<input type="button" value="Submit Data" id="submitButton" class="btn btn-primary" onclick="postwith('')" />
+					<input type="button" value="Submit Data" id="submitButton" class="btn btn-primary" onclick="check('')" />
 
 
 				</div>
@@ -487,24 +523,24 @@ include("navBar.php");
 		}
 
 		.disable-dbl-tap-zoom {
-  			touch-action: manipulation;
+			touch-action: manipulation;
 		}
 
 		.disable-dbl-tap-zoom-upper {
-  			touch-action: manipulation;
-			  background-color: rgb(255, 120, 50);
+			touch-action: manipulation;
+			background-color: rgb(255, 120, 50);
 			color: white;
 			border-radius: 2px;
 			font-family: Helvetica;
 			font-weight: bold;
 			/*To get rid of weird 3D affect in some browsers*/
 			border: solid rgb(255, 120, 50);
-			height:100px;
-    		width:325px;
+			height: 100px;
+			width: 325px;
 		}
 
 		.disable-dbl-tap-zoom-save {
-  			touch-action: manipulation;
+			touch-action: manipulation;
 			background-color: rgb(58, 156, 129);
 			color: white;
 			border-radius: 2px;
@@ -512,12 +548,12 @@ include("navBar.php");
 			font-weight: bold;
 			/*To get rid of weird 3D affect in some browsers*/
 			border: solid rgb(58, 156, 129);
-			height:240px;
-    		width:275px;
+			height: 240px;
+			width: 275px;
 		}
 
 		.disable-dbl-tap-zoom-unsave {
-  			touch-action: manipulation;
+			touch-action: manipulation;
 			background-color: rgb(171, 95, 82);
 			color: white;
 			border-radius: 2px;
@@ -525,12 +561,12 @@ include("navBar.php");
 			font-weight: bold;
 			/*To get rid of weird 3D affect in some browsers*/
 			border: solid rgb(171, 95, 82);
-			height:40px;
-    		width:325px;
+			height: 40px;
+			width: 325px;
 		}
 
 		.disable-dbl-tap-zoom-unsave1 {
-  			touch-action: manipulation;
+			touch-action: manipulation;
 			background-color: rgb(45, 105, 101);
 			color: white;
 			border-radius: 2px;
@@ -538,12 +574,12 @@ include("navBar.php");
 			font-weight: bold;
 			/*To get rid of weird 3D affect in some browsers*/
 			border: solid rgb(45, 105, 101);
-			height:40px;
-    		width:325px;
+			height: 40px;
+			width: 325px;
 		}
 
 		.disable-dbl-tap-zoom-lower {
-  			touch-action: manipulation;
+			touch-action: manipulation;
 			background-color: rgb(53, 176, 169);
 			color: white;
 			border-radius: 2px;
@@ -551,10 +587,9 @@ include("navBar.php");
 			font-weight: bold;
 			/*To get rid of weird 3D affect in some browsers*/
 			border: solid rgb(53, 176, 169);
-			height:100px;
-    		width:325px;
+			height: 100px;
+			width: 325px;
 		}
-
 	</style>
 </body>
 
