@@ -116,8 +116,8 @@ include("navBar.php");
 						<a>
 							<h3><b><u> Upper Goal:</u></b></h3>
 						</a>
-						<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoal()" id="bigFont"><a id="upperGoal" class="enlargedtext">0</a> Upper Goal </button>
-						<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoalMiss()" id="bigFont"> Upper Goal Miss <a id="upperGoalMiss" class="enlargedtext">0</a></button>
+						<button class="disable-dbl-tap-zoom-uppera" type="button" onClick="updateupperGoal()" id="bigFont"><a id="upperGoal" class="enlargedtext">0</a> Upper Goal </button>
+						<button class="disable-dbl-tap-zoom-uppera" type="button" onClick="updateupperGoalMiss()" id="bigFont"> Upper Goal Miss <a id="upperGoalMiss" class="enlargedtext">0</a></button>
 						<button class="disable-dbl-tap-zoom" type="button" onClick="upperGoalClear()" class="enlargedtext stylishUpperMiss" id="bigFont"> Clear <a class="enlargedtext"></a></button>
 						<br>
 						<br>
@@ -126,8 +126,8 @@ include("navBar.php");
 						<a>
 							<h3><b><u>Lower Goal:</u></b></h3>
 						</a>
-						<button class="disable-dbl-tap-zoom-lower" type="button" onClick="updatelowerGoal()" class="enlargedtext stylishLower" id="bigFont"><a id="lowerGoal" class="enlargedtext">0</a> Lower Goal </button>
-						<button class="disable-dbl-tap-zoom-lower" type="button" onClick="updatelowerGoalMiss()" class="enlargedtext stylishLower" id="bigFont"> Lower Goal Miss <a id="lowerGoalMiss" class="enlargedtext">0</a></button>
+						<button class="disable-dbl-tap-zoom-lowera" type="button" onClick="updatelowerGoal()" class="enlargedtext stylishLower" id="bigFont"><a id="lowerGoal" class="enlargedtext">0</a> Lower Goal </button>
+						<button class="disable-dbl-tap-zoom-lowera" type="button" onClick="updatelowerGoalMiss()" class="enlargedtext stylishLower" id="bigFont"> Lower Goal Miss <a id="lowerGoalMiss" class="enlargedtext">0</a></button>
 						<button class="disable-dbl-tap-zoom" type="button" onClick="lowerGoalClear()" class="enlargedtext stylishUpperMiss" id="bigFont"> Clear <a class="enlargedtext"></a></button>
 						<br>
 						<br>
@@ -363,7 +363,6 @@ include("navBar.php");
 					<h3><b><u>Upper Goal:</u></b></h3>
 				</a>
 				<div class="row">
-					<div class="col-md-8">
 						<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoalT()" id="bigFont"><a id="upperGoalT" class="enlargedtext">0</a> Upper Goal</button>
 						<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoalMissT()" id="bigFont"> Upper Goal Miss <a id="upperGoalMissT" class="enlargedtext">0</a></button>
 						<br>
@@ -383,7 +382,6 @@ include("navBar.php");
 						<button class="disable-dbl-tap-zoom-unsave1" type="button" onClick="minuslowerGoalMissT()" id="bigFont"> ---- <a id="upperGoalMissT" class="enlargedtext"></a></button>
 						<br>
 						<br>
-					</div>
 				</div>
 
 				<div>
@@ -535,8 +533,21 @@ include("navBar.php");
 			font-weight: bold;
 			/*To get rid of weird 3D affect in some browsers*/
 			border: solid rgb(255, 120, 50);
+			height: 240px;
+			width: 564px;
+		}
+
+		.disable-dbl-tap-zoom-uppera {
+			touch-action: manipulation;
+			background-color: rgb(255, 120, 50);
+			color: white;
+			border-radius: 2px;
+			font-family: Helvetica;
+			font-weight: bold;
+			/*To get rid of weird 3D affect in some browsers*/
+			border: solid rgb(255, 120, 50);
 			height: 100px;
-			width: 325px;
+			width: 564px;
 		}
 
 		.disable-dbl-tap-zoom-save {
@@ -562,7 +573,7 @@ include("navBar.php");
 			/*To get rid of weird 3D affect in some browsers*/
 			border: solid rgb(171, 95, 82);
 			height: 40px;
-			width: 325px;
+			width: 564px;
 		}
 
 		.disable-dbl-tap-zoom-unsave1 {
@@ -575,7 +586,7 @@ include("navBar.php");
 			/*To get rid of weird 3D affect in some browsers*/
 			border: solid rgb(45, 105, 101);
 			height: 40px;
-			width: 325px;
+			width: 564px;
 		}
 
 		.disable-dbl-tap-zoom-lower {
@@ -587,8 +598,21 @@ include("navBar.php");
 			font-weight: bold;
 			/*To get rid of weird 3D affect in some browsers*/
 			border: solid rgb(53, 176, 169);
+			height: 240px;
+			width: 564px;
+		}
+
+		.disable-dbl-tap-zoom-lowera {
+			touch-action: manipulation;
+			background-color: rgb(53, 176, 169);
+			color: white;
+			border-radius: 2px;
+			font-family: Helvetica;
+			font-weight: bold;
+			/*To get rid of weird 3D affect in some browsers*/
+			border: solid rgb(53, 176, 169);
 			height: 100px;
-			width: 325px;
+			width: 564px;
 		}
 	</style>
 </body>
