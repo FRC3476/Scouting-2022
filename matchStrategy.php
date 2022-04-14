@@ -164,8 +164,8 @@ include("navBar.php"); ?>
 										fillColor: "rgba(220,220,220,0.1)",
 										strokeColor: "purple",
 										pointColor: "rgba(146, 16, 222,1)",
-										pointStrokeColor: "#ee00ff",
-										pointHighlightFill: "#ee00ff",
+										pointStrokeColor: "#ffff00",
+										pointHighlightFill: "#fff",
 										pointHighlightStroke: "rgba(220,220,220,1)",
 										data: <?php echo (json_encode(getAutoUpperGoal($teamNumber))); ?>
 									},
