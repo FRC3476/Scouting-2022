@@ -30,8 +30,12 @@
   else if (isset($_GET["createTable"])){
     createTBATable($tbaTable);
   }
-  else {
-    echo("Please use the 'eventCode' argument to specify event.");
+  
+  
+  function getTBAHandler(){
+    return $tba;
   }
+  
+  
   
 ?>
