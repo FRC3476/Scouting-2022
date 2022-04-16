@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <html>
 <?php include("navBar.php");
 
@@ -9,9 +7,9 @@ function filter($str)
 }
 if ((isset($_POST['team1'])) && (isset($_POST['team2']))) {
 	include("databaseLibrary.php");
-	$team1 = filter($_POST['team1']);
-	$team2 = filter($_POST['team2']);
-	$equal = filter($_POST['equal']);
+	$team1 = ($_POST['team1']);
+	$team2 = ($_POST['team2']);
+	$equal = ($_POST['equal']);
 
 
 	pickListInput(
@@ -48,9 +46,10 @@ if ((isset($_POST['team1'])) && (isset($_POST['team2']))) {
 		<input id="team2" type="text" placeholder="Team 2">
 
 		<select id="equal" name="equal" class="form-control">
-            <option value="" disabled selected>Equal?</option>
-            <option value='0'>Yes</option>
-            <option value='1'>No</option>
+            <option value="" disabled selected>Compare</option>
+            <option value='0'>Team 1 is Better</option>
+            <option value='1'>Team 2 is Better</option>
+			<option value='2'>Equal</option>
         </select>
 
 
