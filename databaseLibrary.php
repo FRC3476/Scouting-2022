@@ -85,8 +85,10 @@ function connectToDB()
 }
 function createTBATable($tbaTableName){
   $conn = connectToDB();
+  global $dbname;
+
   
-  $query = "CREATE TABLE " .$tbaTableName . " (
+  $query = "CREATE TABLE " . $dbname . "." .$tbaTableName . " (
         requestURI VARCHAR(100) NOT NULL PRIMARY KEY,
         expiryTime BIGINT NOT NULL,
         response MEDIUMTEXT NOT NULL
@@ -97,6 +99,7 @@ function createTBATable($tbaTableName){
   }
   
 }
+
 function createTables()
 {
 	global $servername;
