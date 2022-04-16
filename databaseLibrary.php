@@ -83,6 +83,20 @@ function connectToDB()
 	];
 	return (new PDO($dsn, $username, $password, $opt));
 }
+function createTBATable($tbaTableName){
+  $conn = connectToDB();
+  
+  $query = "CREATE TABLE " .$tbaTableName . " (
+        requestURI VARCHAR(100) NOT NULL PRIMARY KEY,
+        expiryTime BIGINT NOT NULL,
+        response MEDIUMTEXT NOT NULL
+    )";
+  $statement = $conn->prepare($query);
+  if (!$statement->execute()) {
+    throw new Exception("createTBATable Error: CREATE TABLE ".$dbConfig["tbatable"]." query failed.");
+  }
+  
+}
 function createTables()
 {
 	global $servername;
