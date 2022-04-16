@@ -4,6 +4,7 @@ include("databaseName.php");
 //Output- queryOutput, data to/from the tables in phpMyAdmin databases.
 
 
+
 function runQuery($queryString)
 {
 	global $servername;
