@@ -9,16 +9,27 @@ function filter($str)
 }
 if (isset($_POST['matchNum'])) {
 	include("databaseLibrary.php");
+	$userName = filter($_POST['userName']);
 	$matchNum = filter($_POST['matchNum']);
 	$team1Dri = filter($_POST['team1Dri']);
 	$team2Dri = filter($_POST['team2Dri']);
 	$team3Dri = filter($_POST['team3Dri']);
+	$team4Dri = filter($_POST['team4Dri']);
+	$team5Dri = filter($_POST['team5Dri']);
+	$team6Dri = filter($_POST['team6Dri']);
+
+	$id = $userName . $matchNum;
 
 	leadScoutInput(
+		$userName,
 		$matchNum,
+		$id,
 		$team1Dri,
 		$team2Dri,
-		$team3Dri
+		$team3Dri,
+		$team4Dri,
+		$team5Dri,
+		$team6Dri
 	);
 }
 ?>
@@ -33,8 +44,10 @@ if (isset($_POST['matchNum'])) {
 
 
 		<h4 style=" color: rgb(120,120,120); font-family: sans-serif; display: inline-block; padding-left: 30px">Match Number:</h4>
-
 		<input style="display: inline-block; border:none; border-bottom: solid; border-color: rgba(120,120,120,50); border-width: 2px;width: 30%; margin-left: 30px; font-size: 16px; outline: none;" type="text" placeholder="Match Number" id="matchNum">
+
+		<h4 style=" color: rgb(120,120,120); font-family: sans-serif; display: inline-block; padding-left: 30px">Username:</h4>
+		<input style="display: inline-block; border:none; border-bottom: solid; border-color: rgba(120,120,120,50); border-width: 2px;width: 30%; margin-left: 30px; font-size: 16px; outline: none;" type="text" placeholder="User Name" id="userName">
 
 
 		<h3 style="font-size: 19px; font-family: sans-serif;font-weight: lighter;  padding-left: 30px; padding-bottom: 7px">Team Rank:</h3>
@@ -64,6 +77,29 @@ if (isset($_POST['matchNum'])) {
 		<input id="team3Dri" type="text" placeholder="Team 3">
 
 		<br>
+
+		<input id="team4Dri" type="text" placeholder="Team 4">
+
+
+		<br />
+		<br />
+		<br />
+
+		<!--Team 2-->
+
+		<input id="team5Dri" type="text" placeholder="Team 5">
+
+
+		<br />
+		<br />
+		<br />
+
+		<!--Team 3-->
+
+		<input id="team6Dri" type="text" placeholder="Team 6">
+
+		<br>
+		</br>
 		</br>
 
 		<input style="background-color: rgb(15,129,120); padding-left: 25px; padding-right: 25px; padding-top: 8px; padding-bottom: 8px; font-size: 15px; font-weight: medium; color: white; margin-left: 30px; border-radius: 5px; margin-top: 5px;" type="submit" name="submit" value="Submit data" onclick="postwith('');">
@@ -216,19 +252,38 @@ if (isset($_POST['matchNum'])) {
 			if (document.getElementById('team3Dri').value == "") {
 				document.getElementById('team3Dri').value = 0;
 			}
+			if (document.getElementById('team4Dri').value == "") {
+				document.getElementById('team4Dri').value = 0;
+			}
+			if (document.getElementById('team5Dri').value == "") {
+				document.getElementById('team5Dri').value = 0;
+			}
+			if (document.getElementById('team6Dri').value == "") {
+				document.getElementById('team6Dri').value = 0;
+			}
+
+
 
 			var names = [
+				'userName',
 				'matchNum',
 				'team1Dri',
 				'team2Dri',
-				'team3Dri'
+				'team3Dri',
+				'team4Dri',
+				'team5Dri',
+				'team6Dri'
 			];
 
 			var nums = [
+				document.getElementById('userName').value,
 				document.getElementById('matchNum').value,
 				document.getElementById('team1Dri').value,
 				document.getElementById('team2Dri').value,
 				document.getElementById('team3Dri').value,
+				document.getElementById('team4Dri').value,
+				document.getElementById('team5Dri').value,
+				document.getElementById('team6Dri').value
 			];
 
 

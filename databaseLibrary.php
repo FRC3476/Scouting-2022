@@ -160,10 +160,15 @@ function createTables()
 	}
 
 	$query = "CREATE TABLE " . $dbname . "." . $leadScoutTable . " (
-			matchNum INT(11) NOT NULL PRIMARY KEY,
+			userName LONGTEXT NOT NULL,
+			matchNum INT(11) NOT NULL,
+			ID VARCHAR(50) NOT NULL PRIMARY KEY,
 			team1Dri INT(11) NOT NULL,
 			team2Dri INT(11) NOT NULL,
-			team3Dri INT(11) NOT NULL
+			team3Dri INT(11) NOT NULL,
+			team4Dri INT(11) NOT NULL,
+			team5Dri INT(11) NOT NULL,
+			team6Dri INT(11) NOT NULL
 		)";
 	$statement = $conn->prepare($query);
 	if (!$statement->execute()) {
@@ -227,6 +232,37 @@ function pitScoutInput($teamNumber, $teamName, $numBatteries, $chargedBatteries,
 	$queryOutput = runQuery($queryString);
 }
 
+function leadScoutInput(
+	$userName,
+	$matchNum,
+	$id,
+	$team1Dri,
+	$team2Dri,
+	$team3Dri,
+	$team4Dri,
+	$team5Dri,
+	$team6Dri
+) {
+	global $servername;
+	global $username;
+	global $password;
+	global $dbname;
+	global $leadScoutTable;
+	$queryString = "REPLACE INTO `" . $leadScoutTable . '`(  `userName`, `matchNum`, `id`, `team1Dri`, `team2Dri`, `team3Dri`, `team4Dri`, `team5Dri`, `team6Dri`)
+															VALUES
+															("' . $userName . '",
+															"' . $matchNum . '",
+															"' . $id . '",
+															"' . $team1Dri . '",
+															"' . $team2Dri . '",
+															"' . $team3Dri . '",
+															"' . $team4Dri . '",
+															"' . $team5Dri . '",
+															"' . $team6Dri . '")';
+	error_log($queryString);
+	$queryOutput = runQuery($queryString);
+}
+
 function betInput($matchNum, $RedScorePredict, $BlueScorePredict, $TotalAutoRed, $TotalAutoBlue, $Winner, $name, $ID)
 {
 	global $betTable;
@@ -278,41 +314,6 @@ function eloChange($teamNumber, $eloScore){
 	$qs1 = "UPDATE `" . $eloRanking . "` SET eloScore = " . $eloScore . " WHERE team = " . $teamNumber;
 	$result = runQuery($qs1);
 }
-
-
-//Input- getTeamList, accesses match scout table and gets team numbers from it.
-//Output- array, list of teams in teamNumber column of pitscout table.
-function getTeamList($min=-1, $max=1000)
-{
-	global $matchScoutTable;
-	$queryStringTwo = "SELECT `teamNum` FROM `" . $matchScoutTable . "`  WHERE matchNum >= ".$min." AND matchNum <= ".$max."";
-	$resultTwo = runQuery($queryStringTwo);
-	$teams = array();
-
-	foreach ($resultTwo as $row_key => $row) {
-		if (!in_array($row["teamNum"], $teams)) {
-			array_push($teams, $row["teamNum"]);
-		}
-	}
-	return ($teams);
-}
-
-function getUserList()
-{
-	global $betTable;
-	$queryStringTwo = "SELECT `name` FROM `" . $betTable . "`";
-	$resultTwo = runQuery($queryStringTwo);
-	$names = array();
-
-	foreach ($resultTwo as $row_key => $row) {
-		if (!in_array($row["name"], $names)) {
-			array_push($names, $row["name"]);
-		}
-	}
-	return ($names);
-}
-
-
 
 function matchInput(
 	$user,
@@ -408,35 +409,38 @@ function matchInput(
 
 
 
+//Input- getTeamList, accesses match scout table and gets team numbers from it.
+//Output- array, list of teams in teamNumber column of pitscout table.
+function getTeamList($min=-1, $max=1000)
+{
+	global $matchScoutTable;
+	$queryStringTwo = "SELECT `teamNum` FROM `" . $matchScoutTable . "`  WHERE matchNum >= ".$min." AND matchNum <= ".$max."";
+	$resultTwo = runQuery($queryStringTwo);
+	$teams = array();
 
-
-
-
-
-
-function leadScoutInput(
-	$matchNum,
-	$team1Dri,
-	$team2Dri,
-	$team3Dri
-) {
-	global $servername;
-	global $username;
-	global $password;
-	global $dbname;
-	global $leadScoutTable;
-	$queryString = "REPLACE INTO `" . $leadScoutTable . '`(  `matchNum`,
-															`team1Dri`,
-															`team2Dri`,
-															`team3Dri`)
-															VALUES
-															("' . $matchNum . '",
-															"' . $team1Dri . '",
-															"' . $team2Dri . '",
-															"' . $team3Dri . '")';
-	error_log($queryString);
-	$queryOutput = runQuery($queryString);
+	foreach ($resultTwo as $row_key => $row) {
+		if (!in_array($row["teamNum"], $teams)) {
+			array_push($teams, $row["teamNum"]);
+		}
+	}
+	return ($teams);
 }
+
+function getUserList()
+{
+	global $betTable;
+	$queryStringTwo = "SELECT `name` FROM `" . $betTable . "`";
+	$resultTwo = runQuery($queryStringTwo);
+	$names = array();
+
+	foreach ($resultTwo as $row_key => $row) {
+		if (!in_array($row["name"], $names)) {
+			array_push($names, $row["name"]);
+		}
+	}
+	return ($names);
+}
+
 
 function getTeamData($teamNumber, $min=-1, $max=1000)
 {

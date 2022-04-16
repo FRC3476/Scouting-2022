@@ -160,18 +160,18 @@ include("navBar.php"); ?>
 								datasets: [
 
 									{
-										label: "Auto Upper Goal",
+										label: "Auto Upper",
 										fillColor: "rgba(220,220,220,0.1)",
 										strokeColor: "purple",
 										pointColor: "rgba(146, 16, 222,1)",
-										pointStrokeColor: "#ee00ff",
-										pointHighlightFill: "#ee00ff",
+										pointStrokeColor: "#ffff00",
+										pointHighlightFill: "#fff",
 										pointHighlightStroke: "rgba(220,220,220,1)",
 										data: <?php echo (json_encode(getAutoUpperGoal($teamNumber))); ?>
 									},
 
 									{
-										label: "Auto Lower Goal",
+										label: "Auto Lower",
 										fillColor: "rgba(220,220,220,0.1)",
 										strokeColor: "red",
 										pointColor: "rgba(219, 20, 20,1)",
@@ -182,7 +182,7 @@ include("navBar.php"); ?>
 									},
 
 									{
-										label: "Teleop Upper Goal Made",
+										label: "Teleop Upper",
 										fillColor: "rgba(220,220,220,0.1)",
 										strokeColor: "green",
 										pointColor: "rgba(16, 224, 19,1)",
@@ -193,7 +193,7 @@ include("navBar.php"); ?>
 									},
 
 									{
-										label: "Teleop Lower Goal",
+										label: "Teleop Lower",
 										fillColor: "rgba(220,220,220,0.1)",
 										strokeColor: "blue",
 										pointColor: "rgba(44, 130, 201, 1)",
