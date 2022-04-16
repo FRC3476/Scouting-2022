@@ -1388,8 +1388,6 @@ function getTotalDNP($teamNumber, $min=-1, $max=1000)
 // Ranks
 
 
-
-
 function getAvgDriveRank($teamNumber, $min=-1, $max=1000)
 {
 	$result = getAllLeadScoutData($min, $max);
