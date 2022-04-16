@@ -1,5 +1,6 @@
 <?php
 include("databaseName.php");
+require_once ('tbaAPI.php');
 
 //Input- runQuery, establishes connection with server, runs query, closes connection.
 //Output- queryOutput, data to/from the tables in phpMyAdmin databases.
@@ -1719,6 +1720,7 @@ function getEventTeams()
 	return $array;
 }
 
+/*
 function getOurMatches()
 {
 	// ************* Call API:
@@ -1737,22 +1739,22 @@ function getOurMatches()
 
 	return $array;
 }
+*/
 
 
-/*
 function getOurMatches()
 {
-	$match = getEventRaw();
-    $tba = getTBAHandler();
-	$data = $tba->makeDBCachedCall('/team/frc3476/event/'.$match.'/matches/simple')['response'];
-	$array = array();
-	for ($i = 0; $i < count($data); $i++) {
-		array_push($array, substr($data[$i]["key"], 9));
-    }
+  $match = getEventRaw();
+  $tba = getTBAHandler();
+  $data = $tba->makeDBCachedCall('/team/frc3476/event/'.$match.'/matches/simple')['response'];
+  $array = array();
+  for ($i = 0; $i < count($data); $i++) {
+    array_push($array, substr($data[$i]["key"], 9));
+  }
 
 	return $array;
 }
-*/
+
 
 function getThreePointNew($teamNumber)
 {

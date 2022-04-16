@@ -1,6 +1,6 @@
 <?php
-  require('tbaHandler.php');
-  require('databaseLibrary.php');
+  require_once('tbaHandler.php');
+  require_once('databaseLibrary.php');
   require('databaseName.php');
   
   global $tbaTable;
@@ -33,6 +33,7 @@
   
   
   function getTBAHandler(){
+    global $tba;
     return $tba;
   }
   
