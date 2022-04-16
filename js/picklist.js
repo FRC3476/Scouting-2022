@@ -73,6 +73,7 @@ dragula([
 	document.getElementById('dnp-teams')
 ])
 	.on('drag', function (el) {
+		clearTimeout(updateTeamsTimeout);
 		console.log('Moving');
 	})
 	.on('drop', function (el, target, source) {
@@ -87,7 +88,7 @@ dragula([
 		console.log(document.getElementById(el.id).innerHTML);
 		console.log(document.getElementById('all-teams').innerHTML);
 		try {
-			setTimeout(() => {
+			const updateTeamsTimeout = setTimeout(() => {
 				setDoc(doc(db, 'all-teams', 'teams'), {
 					teams: document.getElementById('all-teams').innerHTML
 				}).then(() => {
@@ -112,7 +113,7 @@ dragula([
 				setDoc(doc(db, source.id, 'teams'), {
 					teams: document.getElementById(source.id).innerHTML
 				});
-			}, 5000);
+			}, 3000);
 		} catch (e) {
 			console.error('Error adding document: ', e);
 		}
