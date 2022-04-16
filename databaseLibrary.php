@@ -93,7 +93,7 @@ function createTBATable($tbaTableName){
     )";
   $statement = $conn->prepare($query);
   if (!$statement->execute()) {
-    throw new Exception("createTBATable Error: CREATE TABLE ".$dbConfig["tbatable"]." query failed.");
+    throw new Exception("createTBATable Error: CREATE TABLE tbatable query failed.");
   }
   
 }
@@ -1400,8 +1400,6 @@ function getTotalDNP($teamNumber, $min=-1, $max=1000)
 }
 
 // Ranks
-
-
 
 
 function getAvgDriveRank($teamNumber, $min=-1, $max=1000)

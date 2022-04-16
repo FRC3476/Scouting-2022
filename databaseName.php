@@ -12,3 +12,6 @@
 	$pickListTable = "22template_pickList";
 	$eloRanking = "22template_elo";
 	$sortablePickTable = "22template_SPT";
+	$tbaTable = "22template_tba";
+  
+ 	 $tbaKey = "ENTER_REAL_TBA_KEY_HERE";
