@@ -1,5 +1,6 @@
 <?php
 include("databaseName.php");
+
 //Input- runQuery, establishes connection with server, runs query, closes connection.
 //Output- queryOutput, data to/from the tables in phpMyAdmin databases.
 
@@ -84,21 +85,21 @@ function connectToDB()
 	];
 	return (new PDO($dsn, $username, $password, $opt));
 }
-function createTBATable($tbaTableName){
-  $conn = connectToDB();
-  global $dbname;
+function createTBATable($tbaTableName)
+{
+	$conn = connectToDB();
+	global $dbname;
 
-  
-  $query = "CREATE TABLE " . $dbname . "." .$tbaTableName . " (
+
+	$query = "CREATE TABLE " . $dbname . "." . $tbaTableName . " (
         requestURI VARCHAR(100) NOT NULL PRIMARY KEY,
         expiryTime BIGINT NOT NULL,
         response MEDIUMTEXT NOT NULL
     )";
-  $statement = $conn->prepare($query);
-  if (!$statement->execute()) {
-    throw new Exception("createTBATable Error: CREATE TABLE tbatable query failed.");
-  }
-  
+	$statement = $conn->prepare($query);
+	if (!$statement->execute()) {
+		throw new Exception("createTBATable Error: CREATE TABLE tbatable query failed.");
+	}
 }
 
 function createTables()
@@ -300,7 +301,8 @@ function eloInput($team, $eloScore)
 	$queryOutput = runQuery($queryString);
 }
 
-function getElo($teamNumber){
+function getElo($teamNumber)
+{
 	global $eloRanking;
 	$qs1 = "SELECT eloScore FROM `" . $eloRanking . "` WHERE team = " . $teamNumber . "";
 	$result = runQuery($qs1);
@@ -313,7 +315,8 @@ function getElo($teamNumber){
 	return ($teams[0]);
 }
 
-function eloChange($teamNumber, $eloScore){
+function eloChange($teamNumber, $eloScore)
+{
 	global $eloRanking;
 	$qs1 = "UPDATE `" . $eloRanking . "` SET eloScore = " . $eloScore . " WHERE team = " . $teamNumber;
 	$result = runQuery($qs1);
@@ -415,10 +418,10 @@ function matchInput(
 
 //Input- getTeamList, accesses match scout table and gets team numbers from it.
 //Output- array, list of teams in teamNumber column of pitscout table.
-function getTeamList($min=-1, $max=1000)
+function getTeamList($min = -1, $max = 1000)
 {
 	global $matchScoutTable;
-	$queryStringTwo = "SELECT `teamNum` FROM `" . $matchScoutTable . "`  WHERE matchNum >= ".$min." AND matchNum <= ".$max."";
+	$queryStringTwo = "SELECT `teamNum` FROM `" . $matchScoutTable . "`  WHERE matchNum >= " . $min . " AND matchNum <= " . $max . "";
 	$resultTwo = runQuery($queryStringTwo);
 	$teams = array();
 
@@ -446,7 +449,7 @@ function getUserList()
 }
 
 
-function getTeamData($teamNumber, $min=-1, $max=1000)
+function getTeamData($teamNumber, $min = -1, $max = 1000)
 {
 	global $servername;
 	global $username;
@@ -456,7 +459,7 @@ function getTeamData($teamNumber, $min=-1, $max=1000)
 	global $matchScoutTable;
 	global $leadScoutTable;
 	$qs1 = "SELECT * FROM `" . $pitScoutTable . "` WHERE teamNumber = " . $teamNumber . "";
-	$qs2 = "SELECT * FROM `" . $matchScoutTable . "`  WHERE teamNum = " . $teamNumber . " AND matchNum >= ".$min." AND matchNum <= ".$max."";
+	$qs2 = "SELECT * FROM `" . $matchScoutTable . "`  WHERE teamNum = " . $teamNumber . " AND matchNum >= " . $min . " AND matchNum <= " . $max . "";
 	//echo "<script>console.log('".$qs2."');</script>";
 	$qs3 = "SELECT * FROM `" . $leadScoutTable . "`";
 
@@ -764,7 +767,7 @@ function getScore($teamNumber)
 
 
 
-function getAvgUpperShotPercentage($teamNumber, $min=-1, $max=1000)
+function getAvgUpperShotPercentage($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$upperGoalCount = 0;
@@ -784,7 +787,7 @@ function getAvgUpperShotPercentage($teamNumber, $min=-1, $max=1000)
 	return (round((100 * ($upperGoalCount / ($upperGoalCount + $upperGoalMissCount))), 3));
 }
 
-function getAvgUpperGoalT($teamNumber, $min=-1, $max=1000)
+function getAvgUpperGoalT($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$upperGoalCountT = 0;
@@ -799,7 +802,7 @@ function getAvgUpperGoalT($teamNumber, $min=-1, $max=1000)
 	return (round(($upperGoalCountT / $matchCount), 3));
 }
 
-function getAvgLowerGoalT($teamNumber, $min=-1, $max=1000)
+function getAvgLowerGoalT($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$lowerGoalCountT = 0;
@@ -814,7 +817,7 @@ function getAvgLowerGoalT($teamNumber, $min=-1, $max=1000)
 	return ($lowerGoalCountT / $matchCount);
 }
 
-function getAvgUpperGoalMissT($teamNumber, $min=-1, $max=1000)
+function getAvgUpperGoalMissT($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$upperGoalMissCountT = 0;
@@ -829,7 +832,7 @@ function getAvgUpperGoalMissT($teamNumber, $min=-1, $max=1000)
 	return (round(($upperGoalMissCountT / $matchCount), 3));
 }
 
-function getAvgUpperGoal($teamNumber, $min=-1, $max=1000)
+function getAvgUpperGoal($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$upperGoalCount = 0;
@@ -842,7 +845,7 @@ function getAvgUpperGoal($teamNumber, $min=-1, $max=1000)
 	return (round(($upperGoalCount / $matchCount), 3));
 }
 
-function getAvgLowerGoal($teamNumber, $min=-1, $max=1000)
+function getAvgLowerGoal($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$lowerGoalCount = 0;
@@ -856,7 +859,7 @@ function getAvgLowerGoal($teamNumber, $min=-1, $max=1000)
 }
 
 
-function getAvgClimb($teamNumber, $min=-1, $max=1000)
+function getAvgClimb($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$climbSum = 0;
@@ -906,7 +909,7 @@ function getAvgCycleCount($teamNumber)
 	return ($cycleCount / $matchCount);
 }
 
-function getAvgScore($teamNumber, $min=-1, $max=1000)
+function getAvgScore($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$matchCount  = 0;
@@ -930,7 +933,7 @@ function getAvgScore($teamNumber, $min=-1, $max=1000)
 
 
 
-function getMaxUpperGoalT($teamNumber, $min=-1, $max=1000)
+function getMaxUpperGoalT($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$maxUpperGoalT = 0;
@@ -943,7 +946,7 @@ function getMaxUpperGoalT($teamNumber, $min=-1, $max=1000)
 	return ($maxUpperGoalT);
 }
 
-function getMaxLowerGoalT($teamNumber, $min=-1, $max=1000)
+function getMaxLowerGoalT($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$maxLowerGoalT = 0;
@@ -956,7 +959,7 @@ function getMaxLowerGoalT($teamNumber, $min=-1, $max=1000)
 	return ($maxLowerGoalT);
 }
 
-function getMaxUpperGoal($teamNumber, $min=-1, $max=1000)
+function getMaxUpperGoal($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$maxUpperGoal = 0;
@@ -969,7 +972,7 @@ function getMaxUpperGoal($teamNumber, $min=-1, $max=1000)
 	return ($maxUpperGoal);
 }
 
-function getMaxLowerGoal($teamNumber, $min=-1, $max=1000)
+function getMaxLowerGoal($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$maxLowerGoal = 0;
@@ -1007,10 +1010,10 @@ function getAllMatchData()
 	return runQuery($qs1);
 }
 
-function getAllLeadScoutData($min=-1, $max=1000)
+function getAllLeadScoutData($min = -1, $max = 1000)
 {
 	global $leadScoutTable;
-	$qs1 = "SELECT * FROM `" . $leadScoutTable . "` WHERE matchNum >= ".$min." AND matchNum <= ".$max."";
+	$qs1 = "SELECT * FROM `" . $leadScoutTable . "` WHERE matchNum >= " . $min . " AND matchNum <= " . $max . "";
 	return runQuery($qs1);
 }
 
@@ -1144,7 +1147,7 @@ function getTotalSingleClimb($teamNumber)
 	return ($climbCount);
 }
 
-function getSingleClimbPercent($teamNumber, $min=-1, $max=1000)
+function getSingleClimbPercent($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$climbCount = 0;
@@ -1170,7 +1173,7 @@ function getTotalDoubleClimb($teamNumber)
 	return ($climbCount);
 }
 
-function getDoubleClimbPercent($teamNumber, $min=-1, $max=1000)
+function getDoubleClimbPercent($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$climbCount = 0;
@@ -1196,7 +1199,7 @@ function getTotalTripleClimb($teamNumber)
 	return ($climbCount);
 }
 
-function getTripleClimbPercent($teamNumber, $min=-1, $max=1000)
+function getTripleClimbPercent($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$climbCount = 0;
@@ -1222,7 +1225,7 @@ function getTotalQuadClimb($teamNumber)
 	return ($climbCount);
 }
 
-function getQuadClimbPercent($teamNumber, $min=-1, $max=1000)
+function getQuadClimbPercent($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$climbCount = 0;
@@ -1273,7 +1276,7 @@ function getBetScore($user)
 	$bet = getbetData($user);
 	$event = getEvent();
 	$Score = 0;
-	
+
 	if ($bet != null) {
 		for ($i = 0; $i != sizeof($bet); $i++) {
 			$match = $bet[$i][0];
@@ -1288,40 +1291,40 @@ function getBetScore($user)
 			$blueAuto = $data["score_breakdown"]["blue"]["autoCargoTotal"];
 			$redAuto = $data["score_breakdown"]["red"]["autoCargoTotal"];
 			$alliance = $data["winning_alliance"];
-			if($alliance == ""){
+			if ($alliance == "") {
 				$alliance = "Tie";
 			}
 			$blueEndgame = $data["score_breakdown"]["blue"]["endgamePoints"];
 			$redEndgame = $data["score_breakdown"]["red"]["endgamePoints"];
-			if($blueEndgame == $redEndgame){
+			if ($blueEndgame == $redEndgame) {
 				$endgameWinner = "equal";
-			}else if($blueEndgame > $redEndgame){
+			} else if ($blueEndgame > $redEndgame) {
 				$endgameWinner = "blue";
-			}else if($blueEndgame < $redEndgame){
+			} else if ($blueEndgame < $redEndgame) {
 				$endgameWinner = "red";
 			}
 			$bluePoints = $data["score_breakdown"]["blue"]["totalPoints"];
 			$redPoints = $data["score_breakdown"]["red"]["totalPoints"];
-			$margin = abs($redPoints-$bluePoints);
-			if($bet[$i][1]==$margin){
-				$Score+=5;
+			$margin = abs($redPoints - $bluePoints);
+			if ($bet[$i][1] == $margin) {
+				$Score += 5;
 			}
-			if($bet[$i][2]==$endgameWinner){
-				$Score+=2;
+			if ($bet[$i][2] == $endgameWinner) {
+				$Score += 2;
 			}
-			if($bet[$i][3]==$redAuto){
-				$Score+=1;
+			if ($bet[$i][3] == $redAuto) {
+				$Score += 1;
 			}
-			if($bet[$i][4]==$blueAuto){
-				$Score+=1;
+			if ($bet[$i][4] == $blueAuto) {
+				$Score += 1;
 			}
-			if($bet[$i][5]==$alliance){
-				$Score+=2;
+			if ($bet[$i][5] == $alliance) {
+				$Score += 2;
 			}
 		}
 	}
-	
-	return($Score);
+
+	return ($Score);
 }
 
 function getBetAvg($user)
@@ -1330,7 +1333,7 @@ function getBetAvg($user)
 	$event = getEvent();
 	$Score = 0;
 	$input = 0;
-	
+
 	if ($bet != null) {
 		for ($i = 0; $i != sizeof($bet); $i++) {
 			$match = $bet[$i][0];
@@ -1347,36 +1350,36 @@ function getBetAvg($user)
 			$alliance = $data["winning_alliance"];
 			$blueEndgame = $data["score_breakdown"]["blue"]["endgamePoints"];
 			$redEndgame = $data["score_breakdown"]["red"]["endgamePoints"];
-			if($blueEndgame == $redEndgame){
+			if ($blueEndgame == $redEndgame) {
 				$endgameWinner = "equal";
-			}else if($blueEndgame > $redEndgame){
+			} else if ($blueEndgame > $redEndgame) {
 				$endgameWinner = "blue";
-			}else if($blueEndgame < $redEndgame){
+			} else if ($blueEndgame < $redEndgame) {
 				$endgameWinner = "red";
 			}
 			$bluePoints = $data["score_breakdown"]["blue"]["totalPoints"];
 			$redPoints = $data["score_breakdown"]["red"]["totalPoints"];
-			$margin = abs($redPoints-$bluePoints);
-			if($bet[$i][1]==$margin){
-				$Score+=5;
+			$margin = abs($redPoints - $bluePoints);
+			if ($bet[$i][1] == $margin) {
+				$Score += 5;
 			}
-			if($bet[$i][2]==$endgameWinner){
-				$Score+=2;
+			if ($bet[$i][2] == $endgameWinner) {
+				$Score += 2;
 			}
-			if($bet[$i][3]==$redAuto){
-				$Score+=1;
+			if ($bet[$i][3] == $redAuto) {
+				$Score += 1;
 			}
-			if($bet[$i][4]==$blueAuto){
-				$Score+=1;
+			if ($bet[$i][4] == $blueAuto) {
+				$Score += 1;
 			}
-			if($bet[$i][5]==$alliance){
-				$Score+=2;
+			if ($bet[$i][5] == $alliance) {
+				$Score += 2;
 			}
-			$input +=1;
+			$input += 1;
 		}
 	}
-	
-	return($Score/$input);
+
+	return ($Score / $input);
 }
 
 function getTotalDefense($teamNumber)
@@ -1392,7 +1395,7 @@ function getTotalDefense($teamNumber)
 	return ($defenseCount);
 }
 
-function getTotalDNP($teamNumber, $min=-1, $max=1000)
+function getTotalDNP($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$dnp = 0;
@@ -1406,7 +1409,7 @@ function getTotalDNP($teamNumber, $min=-1, $max=1000)
 // Ranks
 
 
-function getAvgDriveRank($teamNumber, $min=-1, $max=1000)
+function getAvgDriveRank($teamNumber, $min = -1, $max = 1000)
 {
 	$result = getAllLeadScoutData($min, $max);
 	$driveRankSum = 0;
@@ -1437,7 +1440,7 @@ function getAvgDriveRank($teamNumber, $min=-1, $max=1000)
 	return ($driveRankSum / $matchCount);
 }
 
-function getAllianceRankPoints($teamNumber, $min=-1, $max=1000)
+function getAllianceRankPoints($teamNumber, $min = -1, $max = 1000)
 {
 	$result = getAllLeadScoutData($min, $max);
 	$driveRankSum = 0;
@@ -1491,49 +1494,103 @@ function getScoutGeneratedPicklist($teamNumber)
 function updateElo($team1, $team2, $equal)
 {
 	$eloCheck = getAllElo();
-	if ($eloCheck == null){
+	if ($eloCheck == null) {
 		$teamList = getEventTeams();
 		foreach ($teamList as $teamNumber) {
 			eloInput($teamNumber, 1000);
 		}
 	}
-	
-	$team1Elo = getElo($team1);
-	$team2Elo = getElo($team2);
 
-	$dif = $team1Elo - $team2Elo;
+	if ($equal == 0) {
+		$team1Elo = getElo($team1);
+		$team2Elo = getElo($team2);
 
-	if($dif < -40){
-		$weight = 40;
-	}else if($dif < 0){
-		$weight = 30;
-	}else if($dif == 0){
-		$weight = 30;
+		$dif = $team1Elo - $team2Elo;
+
+		if ($dif < -40) {
+			$weight = 40;
+		} else if ($dif < 0) {
+			$weight = 30;
+		} else if ($dif == 0) {
+			$weight = 30;
+		}
+		if ($dif > 50) {
+			$weight = 10;
+		} else if ($dif > 0) {
+			$weight = 20;
+		}
+
+		if ($dif >= 0) {
+			$expecScoreteam1 = ($weight * (1 - (1 / (1 + (10 ^ (($team1Elo - $team2Elo) / 400))))));
+			$expecScoreteam2 = ($weight * (0 - (1 / (1 + (10 ^ (($team2Elo - $team1Elo) / 400))))));
+			$team1New = $team1Elo + $expecScoreteam1;
+			$team2New = $team2Elo - $expecScoreteam2;
+		}
+
+		eloChange($team1, $team1New);
+		eloChange($team2, $team2New);
+	}else if ($equal == 1) {
+		$team1Elo = getElo($team1);
+		$team2Elo = getElo($team2);
+
+		$dif = $team2Elo - $team1Elo;
+
+		if ($dif < -40) {
+			$weight = 40;
+		} else if ($dif < 0) {
+			$weight = 30;
+		} else if ($dif == 0) {
+			$weight = 30;
+		}
+		if ($dif > 50) {
+			$weight = 10;
+		} else if ($dif > 0) {
+			$weight = 20;
+		}
+
+		if ($dif >= 0) {
+			$expecScoreteam1 = ($weight * (1 - (1 / (1 + (10 ^ (($team1Elo - $team2Elo) / 400))))));
+			$expecScoreteam2 = ($weight * (0 - (1 / (1 + (10 ^ (($team2Elo - $team1Elo) / 400))))));
+			$team1New = $team1Elo - $expecScoreteam1;
+			$team2New = $team2Elo + $expecScoreteam2;
+		}
+
+		eloChange($team1, $team1New);
+		eloChange($team2, $team2New);
+	}else if ($equal == 2) {
+		$team1Elo = getElo($team1);
+		$team2Elo = getElo($team2);
+
+		$dif = $team1Elo - $team2Elo;
+
+		if ($dif < -40) {
+			$weight = 15;
+		} else if ($dif < 0) {
+			$weight = 8;
+		} else if ($dif == 0) {
+			$weight = 5;
+		}
+		if ($dif > 40) {
+			$weight = 15;
+		} else if ($dif > 0) {
+			$weight = 8;
+		}
+
+		if ($dif >= 0) {
+			$expecScoreteam1 = ($weight * (1 - (1 / (1 + (10 ^ (($team1Elo - $team2Elo) / 400))))));
+			$expecScoreteam2 = ($weight * (0 - (1 / (1 + (10 ^ (($team2Elo - $team1Elo) / 400))))));
+			$team1New = $team1Elo - $expecScoreteam1;
+			$team2New = $team2Elo + $expecScoreteam2;
+		}else{
+			$expecScoreteam1 = ($weight * (1 - (1 / (1 + (10 ^ (($team1Elo - $team2Elo) / 400))))));
+			$expecScoreteam2 = ($weight * (0 - (1 / (1 + (10 ^ (($team2Elo - $team1Elo) / 400))))));
+			$team1New = $team1Elo + $expecScoreteam1;
+			$team2New = $team2Elo - $expecScoreteam2;
+		}
+
+		eloChange($team1, $team1New);
+		eloChange($team2, $team2New);
 	}
-	if($dif > 50){
-		$weight = 10;
-	}else if($dif > 0){
-		$weight = 20;
-	}
-
-	if($equal == 0){
-		$weight = 5;
-	}
-
-	if ($dif >= 0){
-		$expecScoreteam1 = ($weight*(1-(1/(1+(10^(($team1Elo - $team2Elo)/400))))));
-		$expecScoreteam2 = ($weight*(0-(1/(1+(10^(($team2Elo - $team1Elo)/400))))));
-		$team1New = $team1Elo + $expecScoreteam1;
-		$team2New = $team2Elo - $expecScoreteam2;
-	}else{
-		$expecScoreteam1 = ($weight*(1-(1/(1+(10^(($team1Elo - $team2Elo)/400))))));
-		$expecScoreteam2 = ($weight*(0-(1/(1+(10^(($team2Elo - $team1Elo)/400))))));
-		$team1New = $team1Elo - $expecScoreteam1;
-		$team2New = $team2Elo + $expecScoreteam2;
-	}
-
-	eloChange($team1, $team1New);
-	eloChange($team2, $team2New);
 }
 
 
@@ -1575,7 +1632,7 @@ function matchComments($teamNumber)
 
 
 
-function getPickList($teamNumber, $min=-1, $max=1000)
+function getPickList($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
 	$pointCal = 0;
@@ -1680,6 +1737,22 @@ function getOurMatches()
 
 	return $array;
 }
+
+
+/*
+function getOurMatches()
+{
+	$match = getEventRaw();
+    $tba = getTBAHandler();
+	$data = $tba->makeDBCachedCall('/team/frc3476/event/'.$match.'/matches/simple')['response'];
+	$array = array();
+	for ($i = 0; $i < count($data); $i++) {
+		array_push($array, substr($data[$i]["key"], 9));
+    }
+
+	return $array;
+}
+*/
 
 function getThreePointNew($teamNumber)
 {
