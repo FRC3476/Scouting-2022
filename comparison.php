@@ -985,7 +985,7 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                                     <td><?php echo (getAvgUpperShotPercentage($teamNumber2)); ?></td>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table> 
                     </div>
                     <a>
                         <h3><b><u>Comments</u></b></h3>
