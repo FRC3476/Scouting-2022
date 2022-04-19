@@ -23,6 +23,12 @@
     else if (isset($_GET["getCOPRs"])){
       echo(json_encode($tba->getComponentOPRS($eventCode)));
     }
+    else if (isset($_GET["lastEventOPRS"])){
+      $teamList = $tba->getSimpleTeamList($eventCode);
+      $oprs = $tba->getLastEventOPRS($teamList);
+      // print_r($oprs);
+      echo(json_encode($oprs));
+    }
     else {
       echo("API arguments not recognized.");
     }
