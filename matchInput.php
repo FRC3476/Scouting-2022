@@ -1,6 +1,9 @@
 <html>
 <?php
 include("navBar.php");
+include("databaseLibrary.php");
+$event = getEvent();
+//echo (json_encode($event));
 ?>
 <script src="Orange-Rind/js/orangePersist.js"></script>
 <script src="matchInputDynamic.js"></script>
@@ -190,7 +193,17 @@ include("navBar.php");
 
 					function check() {
 
-						eventCode = "2022gal_qm";
+						/*
+						var req = new XMLHttpRequest();
+						req.onload = function() {
+							console.log(this.responseText);
+						};
+						req.open("get", "get-data.php", true);
+						req.send();
+						*/
+
+						//eventCode = "2022gal_qm";
+						eventCode = '<?=$event?>';;
 						matchNumberCode = eventCode + document.getElementById('matchNum').value;
 						match = document.getElementById('matchNum').value;
 
@@ -363,25 +376,25 @@ include("navBar.php");
 					<h3><b><u>Upper Goal:</u></b></h3>
 				</a>
 				<div class="row">
-						<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoalT()" id="bigFont"><a id="upperGoalT" class="enlargedtext">0</a> Upper Goal</button>
-						<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoalMissT()" id="bigFont"> Upper Goal Miss <a id="upperGoalMissT" class="enlargedtext">0</a></button>
-						<br>
-						<br>
-						<button class="disable-dbl-tap-zoom-unsave" type="button" onClick="minusupperGoalT()" id="bigFont"><a id="upperGoalT" class="enlargedtext"></a> ---- </button>
-						<button class="disable-dbl-tap-zoom-unsave" type="button" onClick="minusupperGoalMissT()" id="bigFont"> ---- <a id="upperGoalMissT" class="enlargedtext"></a></button>
+					<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoalT()" id="bigFont"><a id="upperGoalT" class="enlargedtext">0</a> Upper Goal</button>
+					<button class="disable-dbl-tap-zoom-upper" type="button" onClick="updateupperGoalMissT()" id="bigFont"> Upper Goal Miss <a id="upperGoalMissT" class="enlargedtext">0</a></button>
+					<br>
+					<br>
+					<button class="disable-dbl-tap-zoom-unsave" type="button" onClick="minusupperGoalT()" id="bigFont"><a id="upperGoalT" class="enlargedtext"></a> ---- </button>
+					<button class="disable-dbl-tap-zoom-unsave" type="button" onClick="minusupperGoalMissT()" id="bigFont"> ---- <a id="upperGoalMissT" class="enlargedtext"></a></button>
 
 
-						<a>
-							<h3><b><u>Lower Goal:</u></b></h3>
-						</a>
-						<button class="disable-dbl-tap-zoom-lower" type="button" onClick="updatelowerGoalT()" class="enlargedtext stylishLower" id="bigFont"><a id="lowerGoalT" class="enlargedtext">0</a> Lower Goal </button>
-						<button class="disable-dbl-tap-zoom-lower" type="button" onClick="updatelowerGoalMissT()" class="enlargedtext stylishLower" id="bigFont"> Lower Goal Miss <a id="lowerGoalMissT" class="enlargedtext">0</a></button>
-						<br>
-						<br>
-						<button class="disable-dbl-tap-zoom-unsave1" type="button" onClick="minuslowerGoalT()" id="bigFont"><a id="upperGoalT" class="enlargedtext"></a> ---- </button>
-						<button class="disable-dbl-tap-zoom-unsave1" type="button" onClick="minuslowerGoalMissT()" id="bigFont"> ---- <a id="upperGoalMissT" class="enlargedtext"></a></button>
-						<br>
-						<br>
+					<a>
+						<h3><b><u>Lower Goal:</u></b></h3>
+					</a>
+					<button class="disable-dbl-tap-zoom-lower" type="button" onClick="updatelowerGoalT()" class="enlargedtext stylishLower" id="bigFont"><a id="lowerGoalT" class="enlargedtext">0</a> Lower Goal </button>
+					<button class="disable-dbl-tap-zoom-lower" type="button" onClick="updatelowerGoalMissT()" class="enlargedtext stylishLower" id="bigFont"> Lower Goal Miss <a id="lowerGoalMissT" class="enlargedtext">0</a></button>
+					<br>
+					<br>
+					<button class="disable-dbl-tap-zoom-unsave1" type="button" onClick="minuslowerGoalT()" id="bigFont"><a id="upperGoalT" class="enlargedtext"></a> ---- </button>
+					<button class="disable-dbl-tap-zoom-unsave1" type="button" onClick="minuslowerGoalMissT()" id="bigFont"> ---- <a id="upperGoalMissT" class="enlargedtext"></a></button>
+					<br>
+					<br>
 				</div>
 
 				<div>
