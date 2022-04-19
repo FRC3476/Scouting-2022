@@ -30,6 +30,10 @@ include("navBar.php"); ?>
 			-ms-transform: rotate(90deg);
 			transform: rotate(90deg);
 		}
+    
+    tr td{
+      font-size: 12px; 
+    }
 	</style>
 	<script>
 		var $ = jQuery.noConflict();
@@ -41,8 +45,18 @@ include("navBar.php"); ?>
 				$teamNumber = $_GET["team"];
 				include("databaseName.php");
 				include("databaseLibrary.php");
+        $leadScoutELO = getLeadScoutELODict();
 				$teamData = getTeamData($teamNumber);
 			}
+      
+      
+      function dummy_lookup($dict, $k){
+        if (isset($dict[$k])){
+          return $dict[$k];
+        }
+        return 0;
+      }
+      
 			?>
 			<form action="" method="get">
 				Enter Team Number: <input class="control-label" type="number" name="team" id="team" size="10" height="10" width="40">
@@ -715,8 +729,10 @@ include("navBar.php"); ?>
 									</tr>
 
 									<tr class="success">
-										<td>Avg Alliance Ranking</td>
-										<td><?php echo round(getAvgDriveRank($teamNumber), 2); ?></td>
+										<td>Lead Scout ELO</td>
+										<td><?php 
+                            echo round(dummy_lookup($leadScoutELO, $teamNumber));
+                      ?></td>
 									</tr>
 
 									<tr class="info">

@@ -1,7 +1,7 @@
 <?php
 include("databaseName.php");
 require_once('tbaAPI.php');
-
+require_once("qualRankGen.php");
 //Input- runQuery, establishes connection with server, runs query, closes connection.
 //Output- queryOutput, data to/from the tables in phpMyAdmin databases.
 
@@ -118,6 +118,16 @@ function createTables()
 	global $eloRanking;
 	global $sortablePickTable;
 	$conn = connectToDB();
+  
+  $query = "CREATE TABLE " . $dbname . "." . $leadScoutTable . " (
+			matchkey VARCHAR(60) NOT NULL,
+      teamrank MEDIUMTEXT NOT NULL
+		)";
+	$statement = $conn->prepare($query);
+	if (!$statement->execute()) {
+		throw new Exception("constructDatabase Error: CREATE TABLE leadScoutTable query failed.");
+	}
+  
 	$query = "CREATE TABLE " . $dbname . "." . $pitScoutTable . " (
 			teamNumber VARCHAR(50) NOT NULL PRIMARY KEY,
 			teamName VARCHAR(60) NOT NULL,
@@ -165,21 +175,6 @@ function createTables()
 		throw new Exception("constructDatabase Error: CREATE TABLE matchScoutTable query failed.");
 	}
 
-	$query = "CREATE TABLE " . $dbname . "." . $leadScoutTable . " (
-			userName LONGTEXT NOT NULL,
-			matchNum INT(11) NOT NULL,
-			ID VARCHAR(50) NOT NULL PRIMARY KEY,
-			team1Dri INT(11) NOT NULL,
-			team2Dri INT(11) NOT NULL,
-			team3Dri INT(11) NOT NULL,
-			team4Dri INT(11) NOT NULL,
-			team5Dri INT(11) NOT NULL,
-			team6Dri INT(11) NOT NULL
-		)";
-	$statement = $conn->prepare($query);
-	if (!$statement->execute()) {
-		throw new Exception("constructDatabase Error: CREATE TABLE leadScoutTable query failed.");
-	}
 
 	$query = "CREATE TABLE " . $dbname . "." . $betTable . " (
 		matchNum INT(11) NOT NULL,
@@ -238,35 +233,21 @@ function pitScoutInput($teamNumber, $teamName, $numBatteries, $chargedBatteries,
 	$queryOutput = runQuery($queryString);
 }
 
-function leadScoutInput(
-	$userName,
-	$matchNum,
-	$id,
-	$team1Dri,
-	$team2Dri,
-	$team3Dri,
-	$team4Dri,
-	$team5Dri,
-	$team6Dri
-) {
+function leadScoutInput($matchKey, $teamRank) {
 	global $servername;
 	global $username;
 	global $password;
 	global $dbname;
 	global $leadScoutTable;
-	$queryString = "REPLACE INTO `" . $leadScoutTable . '`(  `userName`, `matchNum`, `id`, `team1Dri`, `team2Dri`, `team3Dri`, `team4Dri`, `team5Dri`, `team6Dri`)
-															VALUES
-															("' . $userName . '",
-															"' . $matchNum . '",
-															"' . $id . '",
-															"' . $team1Dri . '",
-															"' . $team2Dri . '",
-															"' . $team3Dri . '",
-															"' . $team4Dri . '",
-															"' . $team5Dri . '",
-															"' . $team6Dri . '")';
-	error_log($queryString);
-	$queryOutput = runQuery($queryString);
+  
+  $data = array();
+  $data["matchkey"] = $matchKey;
+  $data["teamrank"] = $teamRank;
+  
+  $conn = connectToDB();
+  $sql = "INSERT INTO ".$leadScoutTable."(matchkey, teamrank) VALUES(:matchkey, :teamrank)";
+  $prepared_statement = $conn->prepare($sql);
+  $prepared_statement->execute($data);
 }
 
 function betInput($matchNum, $RedScorePredict, $BlueScorePredict, $TotalAutoRed, $TotalAutoBlue, $Winner, $name, $ID)
@@ -514,11 +495,11 @@ function getTeamData($teamNumber, $min = -1, $max = 1000)
 	$qs1 = "SELECT * FROM `" . $pitScoutTable . "` WHERE teamNumber = " . $teamNumber . "";
 	$qs2 = "SELECT * FROM `" . $matchScoutTable . "`  WHERE teamNum = " . $teamNumber . " AND matchNum >= " . $min . " AND matchNum <= " . $max . "";
 	//echo "<script>console.log('".$qs2."');</script>";
-	$qs3 = "SELECT * FROM `" . $leadScoutTable . "`";
+	// $qs3 = "SELECT * FROM `" . $leadScoutTable . "`";
 
 	$result = runQuery($qs1);
 	$result2 = runQuery($qs2);
-	$result3 = runQuery($qs3);
+	// $result3 = runQuery($qs3);
 	$teamData = array();
 	$pitExists = False;
 	if ($result != FALSE) {
@@ -544,14 +525,14 @@ function getTeamData($teamNumber, $min = -1, $max = 1000)
 			));
 		}
 	}
-	if ($result3 != FALSE) {
-		foreach ($result3 as $row_key => $row) {
-			array_push($teamData[7], array(
-				$row["matchNum"], $row["team1Dri"],
-				$row["team2Dri"], $row["team3Dri"]
-			));
-		}
-	}
+	// if ($result3 != FALSE) {
+		// foreach ($result3 as $row_key => $row) {
+			// array_push($teamData[7], array(
+				// $row["matchNum"], $row["team1Dri"],
+				// $row["team2Dri"], $row["team3Dri"]
+			// ));
+		// }
+	// }
 	return ($teamData);
 }
 
@@ -1063,12 +1044,29 @@ function getAllMatchData()
 	return runQuery($qs1);
 }
 
-function getAllLeadScoutData($min = -1, $max = 1000)
-{
-	global $leadScoutTable;
-	$qs1 = "SELECT * FROM `" . $leadScoutTable . "` WHERE matchNum >= " . $min . " AND matchNum <= " . $max . "";
-	return runQuery($qs1);
-}
+    function getRawLeadScoutData()
+    {
+      global $leadScoutTable;
+      $qs1 = "SELECT * FROM `" . $leadScoutTable . "`";
+      return runQuery($qs1);
+    }
+    
+    function getLeadScoutData(){
+      $rawRankData = getRawLeadScoutData();
+      $rankData = array();
+      $dataSize = sizeof($rawRankData);
+      for($i = 0; $i < $dataSize; $i++){
+        array_push($rankData, json_decode($rawRankData[$i]["teamrank"], True));
+      }
+      return $rankData;
+    }
+    
+    function getLeadScoutELODict(){
+      $qrg = new qualRankGen(getLeadScoutData());
+      return $qrg->raw_votes_to_elo_map(30);
+    }
+
+
 
 function getAllPicklistData()
 {
@@ -1455,7 +1453,7 @@ function getTotalDNP($teamNumber, $min = -1, $max = 1000)
 
 function getAvgDriveRank($teamNumber, $min = -1, $max = 1000)
 {
-	$result = getAllLeadScoutData($min, $max);
+	$result = getRawLeadScoutData();
 	$driveRankSum = 0;
 	$matchCount = 0;
 	foreach ($result as $row_key => $row) {
@@ -1486,7 +1484,7 @@ function getAvgDriveRank($teamNumber, $min = -1, $max = 1000)
 
 function getAllianceRankPoints($teamNumber, $min = -1, $max = 1000)
 {
-	$result = getAllLeadScoutData($min, $max);
+	$result = getRawLeadScoutData();
 	$driveRankSum = 0;
 	$matchCount = 0;
 	foreach ($result as $row_key => $row) {

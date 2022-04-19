@@ -26,14 +26,13 @@ include("header.php") ?>
             <table class="sortable table table-hover" id="RawData" border="1">
                 <tr>
                     <th>Team Number</th>
-                    <th>Weighted Score</th>
+                    <th>Lead Gen ELO</th>
                     <th>Scouter Gen ELO</th>
                     <th>Avg Upper Shot Percentage</th>
                     <th>Low Climb %</th>
                     <th>Mid Climb %</th>
                     <th>High Climb %</th>
                     <th>Traversal Climb %</th>
-                    <th>Avg Alliance Rank</th>
                     <th>Total DNP</th>
                     <th>Get Average Score</th>
                     <th>Avg Teleop Upper Goal</th>
@@ -47,6 +46,14 @@ include("header.php") ?>
                     <th>OPR</th>
                 </tr>
                 <?php
+                
+                function dummy_lookup($dict, $k){
+                  if (isset($dict[$k])){
+                    return $dict[$k];
+                  }
+                  return 0;
+                }
+                
                 $min = -1;
                 $max = 1000;
                 if ($_GET["min"] != "" && $_GET["max"] != "") // isset(), for some reason, returns true if the value is "". Not very helpful.
@@ -56,16 +63,20 @@ include("header.php") ?>
                 }
                 include("databaseLibrary.php");
                 $teamList = getTeamList($min, $max);
+                $leadScoutELO = getLeadScoutELODict();
+                
+
                 foreach ($teamList as $teamNumber) {
                     $i = 0;
-                    $picklist = (getPickList($teamNumber, $min, $max) - getAvgDriveRank($teamNumber, $min, $max));
+                    $picklist = dummy_lookup($leadScoutELO, $teamNumber);
+                    // $picklist = (getPickList($teamNumber, $min, $max) - getAvgDriveRank($teamNumber, $min, $max));
                     $scoutPick = getElo($teamNumber);
                     $UpperShotPercentage = getAvgUpperShotPercentage($teamNumber, $min, $max);
                     $SingleClimbPer = getSingleClimbPercent($teamNumber, $min, $max);
                     $MidClimbPer = getDoubleClimbPercent($teamNumber, $min, $max);
                     $HighClimbPer = getTripleClimbPercent($teamNumber, $min, $max);
                     $TravClimbPer = getQuadClimbPercent($teamNumber, $min, $max);
-                    $allianceRank = getAvgDriveRank($teamNumber, $min, $max);
+                    // $allianceRank = getAvgDriveRank($teamNumber, $min, $max);
                     $DNP = getTotalDNP($teamNumber, $min, $max);
                     $ScoreCont = getAvgScore($teamNumber, $min, $max);
                     $avgTeleopUpper = getAvgUpperGoalT($teamNumber, $min, $max);
@@ -79,14 +90,13 @@ include("header.php") ?>
                     $OPR = getOPR($teamNumber);
                     echo ("<tr>
                     <td><a href='matchStrategy.php?team=" . $teamNumber . "'>" . $teamNumber . "</a></td>
-                    <th>" . $picklist . "</th>
+                    <th>" . round($picklist) . "</th>
                     <th>" . ($scoutPick) . "</th>
                     <th>" . $UpperShotPercentage . "</th>
                     <th>" . round($SingleClimbPer, 3) . "</th>
                     <th>" . round($MidClimbPer, 3) . "</th>
                     <th>" . round($HighClimbPer, 3) . "</th>
                     <th>" . round($TravClimbPer, 3) . "</th>
-                    <th>" . round($allianceRank, 3) . "</th>
                     <th>" . round($DNP, 3) . "</th>
                     <th>" . round($Score, 3) . "</th>
                     <th>" . round($avgTeleopUpper, 3) . "</th>
