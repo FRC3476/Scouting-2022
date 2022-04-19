@@ -325,5 +325,56 @@
       
       return $out;
     }
+    
+    function getAllEventCodes($team){
+      $year = '2022';
+      $uri = '/team/frc'.$team.'/events/'.$year.'/keys';
+      $dataCall = $this->makeDBCachedCall($uri)['response'];
+      return($dataCall);
+    }
+    
+    function getLastEventCode($team){
+      $year = '2022';
+      $uri = '/team/frc'.$team.'/events/'.$year.'/statuses';
+      $dataCall = $this->makeDBCachedCall($uri)['response'];
+      $lastEventCode = null;
+      foreach($this->getAllEventCodes($team) as $eventCode){
+        if ($dataCall[$eventCode] != null && $eventCode != '2022week0'){
+          $lastEventCode = $eventCode;
+        }
+      }
+      return $lastEventCode;
+    }
+    
+    function getLastEventOPRS($teamList){
+      /*
+        Iterate through the last event for each team and add OPRs, climb OPRs, and cargo OPRs to dict.
+      */
+      
+      // Create last event dict
+      $lastEventDict = array();
+      foreach($teamList as $team){
+        $lastEventDict[$team] = $this->getLastEventCode($team);
+      }
+      
+      // Create Output Dict
+      $out = array();
+      $coprLocalOutput = array();
+      foreach($teamList as $team){
+        $lastEvent = $lastEventDict[$team];
+        if (!isset($coprLocalOutput[$lastEvent])){
+          $coprLocalOutput[$lastEvent] = $this->getComponentOPRS($lastEvent);
+        }
+        
+        $out[$team] = array();
+        $out[$team]["event"] = $lastEvent;
+        try{
+          $out[$team]["oprs"] = $coprLocalOutput[$lastEvent]['data'][$team];
+        } catch (Exception $e) {
+          $out[$team]["oprs"] = null;
+        }
+      }
+      return $out;
+    }
   }
 ?>

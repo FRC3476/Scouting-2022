@@ -449,6 +449,58 @@ function getUserList()
 	return ($names);
 }
 
+function getAllTeamAverageData(){
+  global $servername;
+  global $username;
+  global $password;
+  global $dbname;
+  global $matchScoutTable;
+  $qs = "SELECT * FROM `" . $matchScoutTable . "`";
+  $result = runQuery($qs);
+  $teamData = array();
+  $teamList = array();
+  foreach ($result as $row_key => $row) {
+    
+    $teamNum = $row["teamNum"];
+    if (!isset($teamList[$teamNum])){
+      $teamList[$teamNum] = 1;
+      $teamData[$teamNum] = array();
+      $teamData[$teamNum]['matchCount'] = 0;
+      $teamData[$teamNum]['ballsScored'] = 0;
+      $teamData[$teamNum]['autoPoints'] = 0;
+      $teamData[$teamNum]['teleopPoints'] = 0;
+      $teamData[$teamNum]['endgamePoints'] = 0;
+      $teamData[$teamNum]['totalPoints'] = 0;
+    }
+    
+    $autoPoints = (($row['crossLineA'] == 1) ? 2 : 0) + ($row['upperGoal'] * 4) + ($row['lowerGoal'] * 2);
+    $teleopPoints = ($row['upperGoalT'] * 2) + ($row['lowerGoalT'] * 1);
+    $endgamePoints = 0;
+    if($row['climb']){$endgamePoints = 4;}
+    else if($row['climbTwo']){$endgamePoints = 6;}
+    else if($row['climbThree']){$endgamePoints = 10;}
+    else if($row['climbFour']){$endgamePoints = 15;}
+    $totalPoints = $autoPoints + $teleopPoints + $endgamePoints;
+    $ballsScored = $row['upperGoal'] + $row['lowerGoal'] + $row['upperGoalT'] + $row['lowerGoalT'];
+    
+    $teamData[$teamNum]['matchCount'] += 1;
+    $teamData[$teamNum]['ballsScored'] += $ballsScored;
+    $teamData[$teamNum]['autoPoints'] += $autoPoints;
+    $teamData[$teamNum]['teleopPoints'] += $teleopPoints;
+    $teamData[$teamNum]['endgamePoints'] += $endgamePoints;
+    $teamData[$teamNum]['totalPoints'] += $totalPoints;
+  }
+  
+  foreach ($teamList as $team => $teamRow){
+    $teamData[$team]['ballsScored']   = $teamData[$team]['ballsScored']   / $teamData[$team]['matchCount'];
+    $teamData[$team]['autoPoints']    = $teamData[$team]['autoPoints']    / $teamData[$team]['matchCount'];
+    $teamData[$team]['teleopPoints']  = $teamData[$team]['teleopPoints']  / $teamData[$team]['matchCount'];
+    $teamData[$team]['endgamePoints'] = $teamData[$team]['endgamePoints'] / $teamData[$team]['matchCount'];
+    $teamData[$team]['totalPoints']   = $teamData[$team]['totalPoints'] / $teamData[$team]['matchCount'];
+  }
+  
+  return $teamData;
+}
 
 function getTeamData($teamNumber, $min = -1, $max = 1000)
 {
