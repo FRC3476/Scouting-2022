@@ -72,13 +72,8 @@ include('navBar.php');
             <div class="row pt-3">
 
                 <div class="col-lg-4">
-                    <a href="https://www.thebluealliance.com/event/2022cala" class="btn btn-warning">The Blue Alliance</a>
+                    <a href="https://www.thebluealliance.com/event/2022gal" class="btn btn-warning">The Blue Alliance</a>
                 </div>
-
-                <div class="col-lg-4">
-                    <a href="http://teamcodeorange.com/api/?key=2022cala&type=OPR" class="btn btn-warning">OPR</a>
-                </div>
-
             </div>
 
         </section>

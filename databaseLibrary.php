@@ -535,7 +535,7 @@ function getBetData($user)
 function getEvent()
 {
 
-	return ("2022cala_qm");
+	return ("2022gal_qm");
 }
 
 function getEventRaw()

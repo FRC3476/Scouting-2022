@@ -190,7 +190,7 @@ include("navBar.php");
 
 					function check() {
 
-						eventCode = "2022cala_qm";
+						eventCode = "2022gal_qm";
 						matchNumberCode = eventCode + document.getElementById('matchNum').value;
 						match = document.getElementById('matchNum').value;
 
