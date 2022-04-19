@@ -1813,37 +1813,3 @@ function getOPR($teamNumber)
 
 	return ($data["oprs"][$teamNum]);
 }
-
-function getCCWM($teamNumber)
-{
-	// ************* Call API:
-	$match = getEventRaw();
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, "https://www.thebluealliance.com/api/v3/event/" . $match . "/oprs?X-TBA-Auth-Key=VPexr6soymZP0UMtFw2qZ11pLWcaDSxCMUYOfMuRj5CQT3bzoExsUGHuO1JvyCyU");
-	curl_setopt($ch, CURLOPT_HEADER, 0);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$json = curl_exec($ch);
-	curl_close($ch);
-	$data = json_decode($json, true);
-	$teamNum = (string) $teamNumber;
-	$teamNum = "frc" . $teamNumber;
-
-	return ($data["ccwms"][$teamNum]);
-}
-
-function getDPR($teamNumber)
-{
-	// ************* Call API:
-	$match = getEventRaw();
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, "https://www.thebluealliance.com/api/v3/event/" . $match . "/oprs?X-TBA-Auth-Key=VPexr6soymZP0UMtFw2qZ11pLWcaDSxCMUYOfMuRj5CQT3bzoExsUGHuO1JvyCyU");
-	curl_setopt($ch, CURLOPT_HEADER, 0);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$json = curl_exec($ch);
-	curl_close($ch);
-	$data = json_decode($json, true);
-	$teamNum = (string) $teamNumber;
-	$teamNum = "frc" . $teamNumber;
-
-	return ($data["dprs"][$teamNum]);
-}
