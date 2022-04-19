@@ -1,6 +1,6 @@
 <?php
 include("databaseName.php");
-require_once ('tbaAPI.php');
+require_once('tbaAPI.php');
 
 //Input- runQuery, establishes connection with server, runs query, closes connection.
 //Output- queryOutput, data to/from the tables in phpMyAdmin databases.
@@ -535,7 +535,7 @@ function getBetData($user)
 function getEvent()
 {
 
-	return ("2022gal_qm");
+	return ("2022cala_qm");
 }
 
 function getEventRaw()
@@ -1282,13 +1282,8 @@ function getBetScore($user)
 		for ($i = 0; $i != sizeof($bet); $i++) {
 			$match = $bet[$i][0];
 			$eventMatch = $event . $match;
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, "https://www.thebluealliance.com/api/v3/match/" . $eventMatch . "?X-TBA-Auth-Key=VPexr6soymZP0UMtFw2qZ11pLWcaDSxCMUYOfMuRj5CQT3bzoExsUGHuO1JvyCyU");
-			curl_setopt($ch, CURLOPT_HEADER, 0);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			$json = curl_exec($ch);
-			curl_close($ch);
-			$data = json_decode($json, true);
+			$tba = getTBAHandler();
+			$data = $tba->makeDBCachedCall('/match/' . $eventMatch)['response'];
 			$blueAuto = $data["score_breakdown"]["blue"]["autoCargoTotal"];
 			$redAuto = $data["score_breakdown"]["red"]["autoCargoTotal"];
 			$alliance = $data["winning_alliance"];
@@ -1339,13 +1334,9 @@ function getBetAvg($user)
 		for ($i = 0; $i != sizeof($bet); $i++) {
 			$match = $bet[$i][0];
 			$eventMatch = $event . $match;
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, "https://www.thebluealliance.com/api/v3/match/" . $eventMatch . "?X-TBA-Auth-Key=VPexr6soymZP0UMtFw2qZ11pLWcaDSxCMUYOfMuRj5CQT3bzoExsUGHuO1JvyCyU");
-			curl_setopt($ch, CURLOPT_HEADER, 0);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			$json = curl_exec($ch);
-			curl_close($ch);
-			$data = json_decode($json, true);
+			$tba = getTBAHandler();
+			$data = $tba->makeDBCachedCall('/match/' . $eventMatch)['response'];
+
 			$blueAuto = $data["score_breakdown"]["blue"]["autoCargoTotal"];
 			$redAuto = $data["score_breakdown"]["red"]["autoCargoTotal"];
 			$alliance = $data["winning_alliance"];
@@ -1530,7 +1521,7 @@ function updateElo($team1, $team2, $equal)
 
 		eloChange($team1, $team1New);
 		eloChange($team2, $team2New);
-	}else if ($equal == 1) {
+	} else if ($equal == 1) {
 		$team1Elo = getElo($team1);
 		$team2Elo = getElo($team2);
 
@@ -1558,7 +1549,7 @@ function updateElo($team1, $team2, $equal)
 
 		eloChange($team1, $team1New);
 		eloChange($team2, $team2New);
-	}else if ($equal == 2) {
+	} else if ($equal == 2) {
 		$team1Elo = getElo($team1);
 		$team2Elo = getElo($team2);
 
@@ -1582,7 +1573,7 @@ function updateElo($team1, $team2, $equal)
 			$expecScoreteam2 = ($weight * (0 - (1 / (1 + (10 ^ (($team2Elo - $team1Elo) / 400))))));
 			$team1New = $team1Elo - $expecScoreteam1;
 			$team2New = $team2Elo + $expecScoreteam2;
-		}else{
+		} else {
 			$expecScoreteam1 = ($weight * (1 - (1 / (1 + (10 ^ (($team1Elo - $team2Elo) / 400))))));
 			$expecScoreteam2 = ($weight * (0 - (1 / (1 + (10 ^ (($team2Elo - $team1Elo) / 400))))));
 			$team1New = $team1Elo + $expecScoreteam1;
@@ -1674,14 +1665,8 @@ function getPickList($teamNumber, $min = -1, $max = 1000)
 function getCorrectData($match, $alliance, $detail)
 {
 	// ************* Call API:
-
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, "https://www.thebluealliance.com/api/v3/match/" . $match . "?X-TBA-Auth-Key=VPexr6soymZP0UMtFw2qZ11pLWcaDSxCMUYOfMuRj5CQT3bzoExsUGHuO1JvyCyU");
-	curl_setopt($ch, CURLOPT_HEADER, 0);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$json = curl_exec($ch);
-	curl_close($ch);
-	$data = json_decode($json, true);
+	$tba = getTBAHandler();
+	$data = $tba->makeDBCachedCall('/match/' . $match)['response'];
 
 	return $data["score_breakdown"]["$alliance"]["$detail"];
 }
@@ -1689,14 +1674,8 @@ function getCorrectData($match, $alliance, $detail)
 function getMatchAlliance($match, $alliance, $team)
 {
 	// ************* Call API:
-
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, "https://www.thebluealliance.com/api/v3/match/" . $match . "?X-TBA-Auth-Key=VPexr6soymZP0UMtFw2qZ11pLWcaDSxCMUYOfMuRj5CQT3bzoExsUGHuO1JvyCyU");
-	curl_setopt($ch, CURLOPT_HEADER, 0);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$json = curl_exec($ch);
-	curl_close($ch);
-	$data = json_decode($json, true);
+	$tba = getTBAHandler();
+	$data = $tba->makeDBCachedCall('/match/' . $match)['response'];
 
 	return substr($data["alliances"]["$alliance"]["team_keys"]["$team"], 3);
 }
@@ -1705,13 +1684,8 @@ function getEventTeams()
 {
 	// ************* Call API:
 	$match = getEventRaw();
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, "https://www.thebluealliance.com/api/v3/event/" . $match . "/teams/keys?X-TBA-Auth-Key=VPexr6soymZP0UMtFw2qZ11pLWcaDSxCMUYOfMuRj5CQT3bzoExsUGHuO1JvyCyU");
-	curl_setopt($ch, CURLOPT_HEADER, 0);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$json = curl_exec($ch);
-	curl_close($ch);
-	$data = json_decode($json, true);
+	$tba = getTBAHandler();
+	$data = $tba->makeDBCachedCall('/event/' . $match . '/teams/keys')['response'];
 	$array = array();
 	for ($i = 0; $i < count($data); $i++) {
 		array_push($array, substr($data[$i], 3));
@@ -1723,13 +1697,13 @@ function getEventTeams()
 
 function getOurMatches()
 {
-  $match = getEventRaw();
-  $tba = getTBAHandler();
-  $data = $tba->makeDBCachedCall('/team/frc3476/event/'.$match.'/matches/simple')['response'];
-  $array = array();
-  for ($i = 0; $i < count($data); $i++) {
-    array_push($array, substr($data[$i]["key"], 9));
-  }
+	$match = getEventRaw();
+	$tba = getTBAHandler();
+	$data = $tba->makeDBCachedCall('/team/frc3476/event/'.$match.'/matches/simple')['response'];
+	$array = array();
+	for ($i = 0; $i < count($data); $i++) {
+		array_push($array, substr($data[$i]["key"], 9));
+	}
 
 	return $array;
 }
@@ -1780,13 +1754,9 @@ function getOPR($teamNumber)
 {
 	// ************* Call API:
 	$match = getEventRaw();
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, "https://www.thebluealliance.com/api/v3/event/" . $match . "/oprs?X-TBA-Auth-Key=VPexr6soymZP0UMtFw2qZ11pLWcaDSxCMUYOfMuRj5CQT3bzoExsUGHuO1JvyCyU");
-	curl_setopt($ch, CURLOPT_HEADER, 0);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$json = curl_exec($ch);
-	curl_close($ch);
-	$data = json_decode($json, true);
+	$tba = getTBAHandler();
+	$data = $tba->makeDBCachedCall('/event/' . $match . '/oprs')['response'];
+
 	$teamNum = (string) $teamNumber;
 	$teamNum = "frc" . $teamNumber;
 
