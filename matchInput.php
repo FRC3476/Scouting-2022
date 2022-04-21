@@ -3,7 +3,7 @@
 include("navBar.php");
 include("databaseLibrary.php");
 $event = getEvent();
-//echo (json_encode($event));
+//echo (json_encode($event)); 
 ?>
 <script src="Orange-Rind/js/orangePersist.js"></script>
 <script src="matchInputDynamic.js"></script>
