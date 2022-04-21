@@ -40,6 +40,7 @@
 	<script src="js/material.min.js"></script>
 	<script src="js/ripples.min.js"></script>
 	<script src="js/sorttable.js"></script>
+	<script src="js/sortable.js"></script>
 <!-- Adding script tags for Jquery init of dropdown and material bootstrap -->
  <script>
      $(document).ready(function(){

@@ -1,451 +1,228 @@
+<title>Alliance Rank</title>
 <!DOCTYPE html>
 
 <html>
-<?php include("navBar.php");
-?>
-
-<head>
-
-
-</head>
-
+<?php include("navBar.php");?>
 <body>
-	<div class="container row-offcanvas row-offcanvas-left">
-		<div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
-			<h3><b><u>Match Number:</u></b></h3>
-			</a>
-			<select id="match_type" value="<?php $types = ((isset($_GET["match_type"])) ? htmlspecialchars($_GET["match_type"]) : ""); ?>">
-				<option <?php if ($types == "q") : ?>selected="selected" <?php endif; ?> value="q">Qual</option>
-				<option <?php if ($types == "qf1") : ?>selected="selected" <?php endif; ?> value="qf1">QF 1</option>
-				<option <?php if ($types == "qf2") : ?>selected="selected" <?php endif; ?> value="qf2">QF 2</option>
-				<option <?php if ($types == "qf3") : ?>selected="selected" <?php endif; ?> value="qf3">QF 3</option>
-				<option <?php if ($types == "qf4") : ?>selected="selected" <?php endif; ?> value="qf4">QF 4</option>
-				<option <?php if ($types == "sf1") : ?>selected="selected" <?php endif; ?> value="sf1">SF 1</option>
-				<option <?php if ($types == "sf2") : ?>selected="selected" <?php endif; ?> value="sf2">SF 2</option>
-				<option <?php if ($types == "f1") : ?>selected="selected" <?php endif; ?> value="f1">Final</option>
-			</select>
-			<input type="text" name="match" id="match" value="<?php echo ((isset($_GET["match"])) ? htmlspecialchars($_GET["match"]) : ""); ?>" size="8" class="form-control">
-			<br />
-			<h4 style=" color: rgb(120,120,120); font-family: sans-serif; display: inline-block; padding-left: 30px">Username:</h4>
-			<input style="display: inline-block; border:none; border-bottom: solid; border-color: rgba(120,120,120,50); border-width: 2px;width: 30%; margin-left: 30px; font-size: 16px; outline: none;" type="text" placeholder="User Name" id="userName">
-			<br />
-
-			<button id="get" class="btn btn-primary" onclick="getTeams('');">Get Teams</button>
-			<br />
-		</div>
-	</div>
-	<!--Rest of the code for the inputs-->
-
-	<?php
-	include('databaseLibrary.php');
-	function filter($str)
-	{
-		return filter_var($str, FILTER_UNSAFE_RAW);
-	}
-	if (
-		isset($_POST['match']) && isset($_POST['match_type'])
-	) {
-		$matchNum = filter($_POST['match']);
-		$matchNum = "m" . $matchNum;
-		$matchType = filter($_POST['match_type']);
-		if ($matchNum != null) {
-			$event = getEventRaw();
-			$match = $event . "_" . $matchType . $matchNum;
-			$team1Blue = getMatchAlliance($match, "blue", 0);
-			$team2Blue = getMatchAlliance($match, "blue", 1);
-			$team3Blue = getMatchAlliance($match, "blue", 2);
-			$team1Red = getMatchAlliance($match, "red", 0);
-			$team2Red = getMatchAlliance($match, "red", 1);
-			$team3Red = getMatchAlliance($match, "red", 2);
-			echo ("
-			<div class='container' id='teams' style='display: grid;align-items: center;justify-items: center;align-content: center;'>
-                        <div class='card mb-3 box' id='' style='max-width: 750px; margin-top: 25px' draggable='true'>
-                            <div class='row'>
-                                <div class='col-md-6'>
-                                    <img src='images/Logo.png' class='img-fluid rounded-start'
-                                        style='max-height: 100px; max-width: 100px; padding: 15px;' alt='...'>
-                                </div>
-                                <div class='col-md-6'>
-                                    <div class='card-body'>
-                                        <h3 class='card-title'>" . $team1Blue . "</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-						<div class='card mb-3 box' id='' style='max-width: 750px; margin-top: 25px' draggable='true'>
-                            <div class='row'>
-                                <div class='col-md-6'>
-                                    <img src='images/Logo.png' class='img-fluid rounded-start'
-                                        style='max-height: 100px; max-width: 100px; padding: 15px;' alt='...'>
-                                </div>
-                                <div class='col-md-6'>
-                                    <div class='card-body'>
-                                        <h3 class='card-title'>" . $team2Blue . "</h3>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-						<div class='card mb-3 box' id='' style='max-width: 750px; margin-top: 25px' draggable='true'>
-                            <div class='row'>
-                                <div class='col-md-6'>
-                                    <img src='images/Logo.png' class='img-fluid rounded-start'
-                                        style='max-height: 100px; max-width: 100px; padding: 15px;' alt='...'>
-                                </div>
-                                <div class='col-md-6'>
-                                    <div class='card-body'>
-                                        <h3 class='card-title'>" . $team3Blue . "</h3>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-						<div class='card mb-3 box' id='' style='max-width: 750px; margin-top: 25px' draggable='true'>
-                            <div class='row'>
-                                <div class='col-md-6'>
-                                    <img src='images/Logo.png' class='img-fluid rounded-start'
-                                        style='max-height: 100px; max-width: 100px; padding: 15px;' alt='...'>
-                                </div>
-                                <div class='col-md-6'>
-                                    <div class='card-body'>
-                                        <h3 class='card-title'>" . $team1Red . "</h3>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-						<div class='card mb-3 box' id='' style='max-width: 750px; margin-top: 25px' draggable='true'>
-                            <div class='row'>
-                                <div class='col-md-6'>
-                                    <img src='images/Logo.png' class='img-fluid rounded-start'
-                                        style='max-height: 100px; max-width: 100px; padding: 15px;' alt='...'>
-                                </div>
-                                <div class='col-md-6'>
-                                    <div class='card-body'>
-                                        <h3 class='card-title'>" . $team2Red . "</h3>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-						<div class='card mb-3 box' id='' style='max-width: 750px; margin-top: 25px' draggable='true'>
-                            <div class='row'>
-                                <div class='col-md-6'>
-                                    <img src='images/Logo.png' class='img-fluid rounded-start'
-                                        style='max-height: 100px; max-width: 100px; padding: 15px;' alt='...'>
-                                </div>
-                                <div class='col-md-6'>
-                                    <div class='card-body'>
-                                        <h3 class='card-title'>" . $team3Red . "</h3>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-						</div>
-                    ");
-		}
-	}
-	?>
-
-	<br />
-	<br />
-	<div style="display:flex; justify-content:center;">
-		<button id="submit" class="btn btn-primary" onclick="postwith('');">Submit</button>
-	</div>
-	</div>
-
-
-	<style type="text/css">
-		#input {
-			margin-left: 10%;
-			padding-left: 10px;
-			/*border-style: inset;  */
-			margin-right: 10%;
-			padding-bottom: 5px;
-			padding-top: 5px;
-			box-shadow: 0px 0px 12px #000000;
-			/*  0 0 0 10px hsl(0, 0%, 70%),
-    0 0 0 15px hsl(0, 0%, 100%);*/
-
-		}
-
-		.container {
-			display: grid;
-
-			gap: 10px;
-		}
-
-		.box {
-			border: 3px solid #666;
-			background-color: #ddd;
-			border-radius: .5em;
-			padding: 10px;
-			cursor: move;
-		}
-
-		[draggable] {
-			user-select: none;
-		}
-
-		/*style for the textboxes*/
-
-
-		#team1 {
-			display: inline-block;
-			border: none;
-			border-bottom: solid;
-			border-color: rgba(120, 120, 120, 50);
-			border-width: 2px;
-			width: 30%;
-			margin-left: 30px;
-			font-size: 15px;
-			outline: none;
-			padding-bottom: 10px;
-		}
-
-
-		#team2 {
-			display: inline-block;
-			border: none;
-			border-bottom: solid;
-			border-color: rgba(120, 120, 120, 50);
-			border-width: 2px;
-			width: 30%;
-			margin-left: 30px;
-			font-size: 15px;
-			outline: none;
-			padding-bottom: 10px;
-		}
-
-		#team3 {
-			display: inline-block;
-			border: none;
-			border-bottom: solid;
-			border-color: rgba(120, 120, 120, 50);
-			border-width: 2px;
-			width: 30%;
-			margin-left: 30px;
-			font-size: 15px;
-			outline: none;
-			padding-bottom: 10px;
-		}
-
-		#team4 {
-			display: inline-block;
-			border: none;
-			border-bottom: solid;
-			border-color: rgba(120, 120, 120, 50);
-			border-width: 2px;
-			width: 30%;
-			margin-left: 30px;
-			font-size: 15px;
-			outline: none;
-			padding-bottom: 10px;
-		}
-
-		#team5 {
-			display: inline-block;
-			border: none;
-			border-bottom: solid;
-			border-color: rgba(120, 120, 120, 50);
-			border-width: 2px;
-			width: 30%;
-			margin-left: 30px;
-			font-size: 15px;
-			outline: none;
-			padding-bottom: 10px;
-		}
-
-		#team6 {
-			display: inline-block;
-			border: none;
-			border-bottom: solid;
-			border-color: rgba(120, 120, 120, 50);
-			border-width: 2px;
-			width: 30%;
-			margin-left: 30px;
-			font-size: 15px;
-			outline: none;
-			padding-bottom: 10px;
-		}
-
-
-
-		#team1:hover {
-			border-color: orange;
-		}
-
-		#team2:hover {
-			border-color: orange;
-		}
-
-		#team3:hover {
-			border-color: orange;
-		}
-
-		#team4:hover {
-			border-color: orange;
-		}
-
-		#team5:hover {
-			border-color: orange;
-		}
-
-		#team6:hover {
-			border-color: orange;
-		}
-	</style>
-	<script>
-		function postwith(to) {
-			const unorderedTeams = document.getElementById('teams').getElementsByClassName('card-title');
-			let orderedTeams = [];
-			for (let i = 0; i < unorderedTeams.length; i++) {
-				orderedTeams.push(unorderedTeams[i].outerText);
-			}
-
-			console.log(orderedTeams);
-			// var myForm = document.createElement("form");
-			// myForm.method = "post";
-			// myForm.action = to;
-
-			// if (document.getElementById('team1Dri').value == "") {
-			// 	document.getElementById('team1Dri').value = 0;
-			// }
-			// if (document.getElementById('team2Dri').value == "") {
-			// 	document.getElementById('team2Dri').value = 0;
-			// }
-			// if (document.getElementById('team3Dri').value == "") {
-			// 	document.getElementById('team3Dri').value = 0;
-			// }
-
-			// var names = [
-			// 	'matchNum',
-			// 	'team1Dri',
-			// 	'team2Dri',
-			// 	'team3Dri'
-			// ];
-
-			// var nums = [
-			// 	document.getElementById('matchNum').value,
-			// 	document.getElementById('team1Dri').value,
-			// 	document.getElementById('team2Dri').value,
-			// 	document.getElementById('team3Dri').value,
-			// ];
-
-
-			// for (var i = 0; i != names.length; i++) {
-			// 	var myInput = document.createElement("input");
-			// 	myInput.setAttribute("name", names[i]);
-			// 	myInput.setAttribute("value", nums[i]);
-			// 	myForm.appendChild(myInput);
-			// }
-
-			// document.body.appendChild(myForm);
-			// myForm.submit();
-			// document.body.removeChild(myForm);
-		}
-
-		function getTeams(to) {
-
-			var myForm = document.createElement("form");
-			myForm.method = "post";
-			myForm.action = to;
-
-			var names = [
-				'match_type',
-				'match'
-			];
-
-			var nums = [
-				document.getElementById('match_type').value,
-				document.getElementById('match').value
-			];
-
-
-			for (var i = 0; i != names.length; i++) {
-				var myInput = document.createElement("input");
-				myInput.setAttribute("name", names[i]);
-				myInput.setAttribute("value", nums[i]);
-				myForm.appendChild(myInput);
-			}
-
-			document.body.appendChild(myForm);
-			myForm.submit();
-			document.body.removeChild(myForm);
-		}
-	</script>
-
-
-	<!-- <script src="./js/leadscout.js" type="module"></script> -->
-	<script>
-		var dragSrcEl = null;
-
-		function handleDragStart(e) {
-			this.style.opacity = '0.4';
-
-			dragSrcEl = this;
-
-			e.dataTransfer.effectAllowed = 'move';
-			e.dataTransfer.setData('text/html', this.innerHTML);
-		}
-
-		function handleDragOver(e) {
-			if (e.preventDefault) {
-				e.preventDefault();
-			}
-
-			e.dataTransfer.dropEffect = 'move';
-
-			return false;
-		}
-
-		function handleDragEnter(e) {
-			this.classList.add('over');
-		}
-
-		function handleDragLeave(e) {
-			this.classList.remove('over');
-		}
-
-		function handleDrop(e) {
-			if (e.stopPropagation) {
-				e.stopPropagation(); // stops the browser from redirecting.
-			}
-
-			if (dragSrcEl != this) {
-				dragSrcEl.innerHTML = this.innerHTML;
-				this.innerHTML = e.dataTransfer.getData('text/html');
-			}
-
-			return false;
-		}
-
-		function handleDragEnd(e) {
-			this.style.opacity = '1';
-
-			items.forEach(function(item) {
-				item.classList.remove('over');
-			});
-		}
-
-
-		let items = document.querySelectorAll('.container .box');
-		items.forEach(function(item) {
-			item.addEventListener('dragstart', handleDragStart, false);
-			item.addEventListener('dragenter', handleDragEnter, false);
-			item.addEventListener('dragover', handleDragOver, false);
-			item.addEventListener('dragleave', handleDragLeave, false);
-			item.addEventListener('drop', handleDrop, false);
-			item.addEventListener('dragend', handleDragEnd, false);
-		});
-	</script>
-</body>
-
-</html>
-<?php include("footer.php"); ?>
+<div class="container row-offcanvas row-offcanvas-left">
+  <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
+    <div class="row pt-3 pb-3 mb-3">
+      <h2 id="allianceRankName">Alliance Rank</h2>
+    </div>
+    <div class="row g-3 justify-content-md-center">
+      <div class="input-group mb-3">
+        <select class="form-select" id="writeCompLevel" aria-label="Comp Level Select">
+          <option value="QM">QM</option>
+          <option value="QF">QF</option>
+          <option value="SF">SF</option>
+          <option value="F">F</option>
+        </select>
+        <input id="writeMatchNumber" type="text" class="form-control" placeholder="Match Number" aria-label="writeMatchNumber">
+        <button id="loadMatch" type="button" class="btn btn-primary">Show Match</button>
+      </div>
+    </div>
+    
+    <div class="row pt-3 pb-3 mb-3 g-3">
+      <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
+        Team List
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Color</th>
+              <th scope="col">Team</th>
+            </tr>                 
+          </thead>
+          <tbody id="rawAllianceRows">
+          </tbody>
+        </table>
+      </div>
+      <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
+        Drag to Rank
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Color</th>
+              <th scope="col">Team #</th>
+            </tr>                 
+          </thead>
+          <tbody id="sortedAllianceRank">
+              
+          </tbody>
+         </table>
+      </div>
+    </div>
+  <div class="row pt-78 pb-3 mb-3">
+    <button id="submitData" type="button" class="btn btn-success">Submit Ranking</button>
+  </div> 
+</div>
+</div>
+
+<?php include("footer.php") ?>
+
+<style>
+  table td, table th{
+    font-size: 12px;
+  }
+</style>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+<script>
+
+  var sortedTable = null;
+  var unsortedTable = null;
+  
+  var matchList = null;
+  var lockMatchList = false;
+
+  function loadTeams(redTeams, blueTeams){
+    var icon_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-move" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10zM.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L1.707 7.5H5.5a.5.5 0 0 1 0 1H1.707l1.147 1.146a.5.5 0 0 1-.708.708l-2-2zM10 8a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L14.293 8.5H10.5A.5.5 0 0 1 10 8z"/></svg>';
+     
+    $("#rawAllianceRows").html("");
+    for (let j = 0; j != 2; j++){
+      var teamList = j == 0 ? redTeams : blueTeams;
+      var color = j == 0 ? "Red" : "Blue";
+      var colorClass = j == 0 ? "bg-danger" : "bg-info";
+      for (let i = 0; i < teamList.length; i++){
+        var row = "";
+        row += "<tr data-team='"+teamList[i]+"' class='" + colorClass + "'>";
+        row += "  <td scope='col' class='pickHandle'>"+icon_svg+"</td>";
+        row += "  <td scope='col' >" + color + "</td>";
+        row += "  <td scope='col' >" + teamList[i] + "</td>";
+        row += "</tr>";
+        $("#rawAllianceRows").append(row);
+      }
+    }
+  }
+  
+  function getSortedTeams(){
+    var teamList = [];
+    var sortDiv = $("#sortedAllianceRank tr");
+    for (var i = 0; i != sortDiv.length; i++){
+      teamList.push(Number($(sortDiv[i]).attr("data-team")));
+    }
+    return teamList;
+  }
+  
+  function updateMatchNumber(matchNumber){
+    $("#teamTitle").html("Match " + matchNumber);
+  }
+  
+  function getMatchRequestKey(){
+    var key = "";
+    key += $("#writeCompLevel").val();
+    key += $("#writeMatchNumber").val();
+    key = key.toUpperCase();
+    return key;
+  }
+  
+  function alertSuccess(){
+    alert("Data successfully submitted!");
+    $("#rawAllianceRows").html("");
+    $("#sortedAllianceRank").html("");
+    updateMatchNumber("????");
+  }
+  
+  function alertFailure(){
+    alert("Data NOT submitted!");
+  }
+  
+  function stripTeamTags(teamList){
+    var out = []
+    for (let i = 0; i != teamList.length; i++){
+      var team = teamList[i];
+      team = team.toUpperCase();
+      team = team.replace("FRC", "");
+      out.push(parseInt(team, 10));
+    }
+    return out;
+  }
+  
+  function makeCachedMatchListRequest(completeFunction){
+    if (matchList == null){
+      $.get( "tbaAPI.php", {getMatchList: 1}).done( function( data ) {
+        if (!lockMatchList){
+          lockMatchList = true; // A good enough mutex
+          rawMatchData = JSON.parse(data)["response"];
+          matchList = {};
+          for(let mi in rawMatchData){
+            var newMatch = {};
+            var match = rawMatchData[mi];
+            newMatch["comp_level"]   = match["comp_level"];
+            newMatch["match_number"] = match["comp_level"] == "qm" ? match["match_number"] : match["set_number"];
+            newMatch["red_teams"]    = stripTeamTags(match["alliances"]["red"]["team_keys"]);
+            newMatch["blue_teams"]   = stripTeamTags(match["alliances"]["blue"]["team_keys"]);
+            var key = newMatch["comp_level"] + newMatch["match_number"];
+            key = key.toUpperCase();
+            matchList[key] = newMatch;
+          }
+          lockMatchList = false; // Release mutex
+          // Run Complete Function
+          completeFunction();
+        }
+      });
+    }
+    else {
+      completeFunction();
+    }
+  }
+  
+  
+  $(document).ready(function() {
+    
+    unsortedTable = new Sortable(document.getElementById('rawAllianceRows'), {
+      group: 'shared',
+      animation: 150,
+      sort: true,
+      delayOnTouchOnly: true,
+      fallbackTolerance: 3,
+      scroll: true,
+      handle: '.pickHandle'
+    });
+    
+    sortedTable = new Sortable(document.getElementById('sortedAllianceRank'), {
+      group: 'shared',
+      animation: 150,
+      sort: true,
+      delayOnTouchOnly: true,
+      fallbackTolerance: 3,
+      scroll: true,
+      handle: '.pickHandle'
+    });
+    
+    
+      
+    $("#loadMatch").click(function(){
+      // Load New Match
+      makeCachedMatchListRequest(function (){
+        var key = getMatchRequestKey();
+        if (!(key in matchList)){
+          alert("Match " + key + " not found in loaded match list!");
+        }
+        else {
+          loadTeams(matchList[key]["red_teams"], matchList[key]["blue_teams"]);
+          updateMatchNumber(key);
+        }
+      });
+    });
+    
+    $("#submitData").click(function(){
+      // Submit Current Ranking
+      var sortedTeamList = getSortedTeams();
+      if (sortedTeamList.length != 0){
+        $.post( "writeAPI.php", {writeAllianceRankData: JSON.stringify(sortedTeamList), matchKey: getMatchRequestKey()}).done( function( data ) {
+          console.log(data);
+          if (data == "success"){
+            alertSuccess();
+          }
+          else {
+            alertFailure();
+          }
+        }).fail(function () {
+          alertFailure();
+        });
+      }
+    });
+    
+  });
+</script>
