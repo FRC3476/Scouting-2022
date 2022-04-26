@@ -6,7 +6,6 @@ require_once("qualRankGen.php");
 //Output- queryOutput, data to/from the tables in phpMyAdmin databases.
 
 
-
 function runQuery($queryString)
 {
 	global $servername;
@@ -284,27 +283,6 @@ function eloInput($team, $eloScore)
 	$queryOutput = runQuery($queryString);
 }
 
-function getElo($teamNumber)
-{
-	global $eloRanking;
-	$qs1 = "SELECT eloScore FROM `" . $eloRanking . "` WHERE team = " . $teamNumber . "";
-	$result = runQuery($qs1);
-	$teams = array();
-	foreach ($result as $row_key => $row) {
-		if (!in_array($row["eloScore"], $teams)) {
-			array_push($teams, $row["eloScore"]);
-		}
-	}
-	return ($teams[0]);
-}
-
-function eloChange($teamNumber, $eloScore)
-{
-	global $eloRanking;
-	$qs1 = "UPDATE `" . $eloRanking . "` SET eloScore = " . $eloScore . " WHERE team = " . $teamNumber;
-	$result = runQuery($qs1);
-}
-
 function matchInput(
 	$user,
 	$ID,
@@ -397,10 +375,30 @@ function matchInput(
 	$queryOutput = runQuery($queryString);
 }
 
-
-
 //Input- getTeamList, accesses match scout table and gets team numbers from it.
 //Output- array, list of teams in teamNumber column of pitscout table.
+
+function getElo($teamNumber)
+{
+	global $eloRanking;
+	$qs1 = "SELECT eloScore FROM `" . $eloRanking . "` WHERE team = " . $teamNumber . "";
+	$result = runQuery($qs1);
+	$teams = array();
+	foreach ($result as $row_key => $row) {
+		if (!in_array($row["eloScore"], $teams)) {
+			array_push($teams, $row["eloScore"]);
+		}
+	}
+	return ($teams[0]);
+}
+
+function eloChange($teamNumber, $eloScore)
+{
+	global $eloRanking;
+	$qs1 = "UPDATE `" . $eloRanking . "` SET eloScore = " . $eloScore . " WHERE team = " . $teamNumber;
+	$result = runQuery($qs1);
+}
+
 function getTeamList($min = -1, $max = 1000)
 {
 	global $matchScoutTable;
@@ -532,14 +530,6 @@ function getTeamData($teamNumber, $min = -1, $max = 1000)
 			));
 		}
 	}
-	// if ($result3 != FALSE) {
-	// foreach ($result3 as $row_key => $row) {
-	// array_push($teamData[7], array(
-	// $row["matchNum"], $row["team1Dri"],
-	// $row["team2Dri"], $row["team3Dri"]
-	// ));
-	// }
-	// }
 	return ($teamData);
 }
 
@@ -623,7 +613,6 @@ function getAutoLowerGoal($teamNumber)
 	}
 	return ($out);
 }
-
 
 
 function getAutoUpperGoalMiss($teamNumber)
@@ -765,26 +754,6 @@ function getUpperShotPercentage($teamNumber)
 	return ($out);
 }
 
-
-
-function getAutoUpperShotPercentage($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchN = matchNum($teamNumber);
-	$cubeGraphT = array();
-	if ($teamData[8] != null) {
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$cubeGraphT[$teamData[8][$i][2]] = (($teamData[8][$i][7]) / (($teamData[8][$i][8]) + ($teamData[8][$i][7])));
-		}
-	}
-
-	$out = array();
-	for ($i = 0; $i != sizeof($matchN); $i++) {
-		array_push($out, $cubeGraphT[$matchN[$i]]);
-	}
-	return ($out);
-}
-
 function getScore($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);
@@ -864,21 +833,6 @@ function getAvgLowerGoalT($teamNumber, $min = -1, $max = 1000)
 	return ($lowerGoalCountT / $matchCount);
 }
 
-function getAvgUpperGoalMissT($teamNumber, $min = -1, $max = 1000)
-{
-	$teamData = getTeamData($teamNumber, $min, $max);
-	$upperGoalMissCountT = 0;
-	$matchCount  = 0;
-	if ($teamData[8] != null) {
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$upperGoalMissCountT = $upperGoalMissCountT + $teamData[8][$i][12];
-			$matchCount++;
-		}
-	}
-
-	return (round(($upperGoalMissCountT / $matchCount), 3));
-}
-
 function getAvgUpperGoal($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
@@ -938,24 +892,6 @@ function getAvgPenalties($teamNumber)
 	return ($penalCount / $matchCount);
 }
 
-
-// Below, it considers $teamData[8][$i][24] a string. We found the length of the string and divided by 14 because there were 14 characters used to store data for each Cycle
-function getAvgCycleCount($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$cycleCount = 0;
-	$array = [];
-	$matchCount  = 0;
-	if ($teamData[8] != null) {
-		for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-			$cycleCount = $cycleCount + (strlen($teamData[8][$i][24]) / 14);
-			$matchCount++;
-		}
-	}
-
-	return ($cycleCount / $matchCount);
-}
-
 function getAvgScore($teamNumber, $min = -1, $max = 1000)
 {
 	$teamData = getTeamData($teamNumber, $min, $max);
@@ -970,8 +906,6 @@ function getAvgScore($teamNumber, $min = -1, $max = 1000)
 
 	return ($Score / $matchCount);
 }
-
-
 
 
 // Get Max
@@ -1772,47 +1706,6 @@ function getOurMatches()
 	}
 
 	return $array;
-}
-
-
-function getThreePointNew($teamNumber)
-{
-	$command = escapeshellcmd('python3 threecalcufinal.py');
-	$output = shell_exec($command);
-
-	$csvFile = file('ThreeOPR.txt');
-	$data = array();
-	foreach ($csvFile as $line) {
-		$data[] = str_getcsv($line);
-	}
-
-	for ($x = 0; $x < sizeof($data); $x++) {
-		$word = $data[$x][0];
-		$word = substr($word, 3);
-		if ($word == $teamNumber) {
-			return round($data[$x][1], 2);
-		}
-	}
-}
-
-function getUpperTotal($teamNumber)
-{
-	$command = escapeshellcmd('python3 uppercalcufinal.py');
-	$output = shell_exec($command);
-
-	$csvFile = file('upperOPR.txt');
-	$data = array();
-	foreach ($csvFile as $line) {
-		$data[] = str_getcsv($line);
-	}
-
-	for ($x = 0; $x < sizeof($data); $x++) {
-		$word = $data[$x][0];
-		$word = substr($word, 3);
-		if ($word == $teamNumber) {
-			return round($data[$x][1], 2);
-		}
-	}
 }
 
 

@@ -491,10 +491,6 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                                     <td><?php echo (getAvgLowerGoalT($teamNumber)); ?></td>
                                 </tr>
                                 <tr class="success">
-                                    <td>Average Cycle Count</td>
-                                    <td><?php echo (getAvgCycleCount($teamNumber)); ?></td>
-                                </tr>
-                                <tr class="danger">
                                     <td>Upper Shot Percentage</td>
                                     <td><?php echo (getAvgUpperShotPercentage($teamNumber)); ?></td>
                                 </tr>
@@ -977,10 +973,6 @@ if (isset($_POST['team1']) && isset($_POST['team2'])) {
                                     <td><?php echo (getAvgLowerGoalT($teamNumber2)); ?></td>
                                 </tr>
                                 <tr class="success">
-                                    <td>Average Cycle Count</td>
-                                    <td><?php echo (getAvgCycleCount($teamNumber2)); ?></td>
-                                </tr>
-                                <tr class="danger">
                                     <td>Upper Shot Percentage</td>
                                     <td><?php echo (getAvgUpperShotPercentage($teamNumber2)); ?></td>
                                 </tr>

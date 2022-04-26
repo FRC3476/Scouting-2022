@@ -659,10 +659,6 @@ include("navBar.php"); ?>
 								<td>Average Teleop Lower Goal</td>
 								<td><?php echo round(getAvgLowerGoalT($teamNumber), 2); ?></td>
 							</tr>
-							<tr class="success">
-								<td>Average Cycle Count</td>
-								<td><?php echo round(getAvgCycleCount($teamNumber), 2); ?></td>
-							</tr>
 						</tbody>
 					</table>
 				</div>
