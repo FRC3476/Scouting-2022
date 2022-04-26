@@ -118,8 +118,8 @@ function createTables()
 	global $eloRanking;
 	global $sortablePickTable;
 	$conn = connectToDB();
-  
-  $query = "CREATE TABLE " . $dbname . "." . $leadScoutTable . " (
+
+	$query = "CREATE TABLE " . $dbname . "." . $leadScoutTable . " (
 			matchkey VARCHAR(60) NOT NULL,
       teamrank MEDIUMTEXT NOT NULL
 		)";
@@ -127,7 +127,7 @@ function createTables()
 	if (!$statement->execute()) {
 		throw new Exception("constructDatabase Error: CREATE TABLE leadScoutTable query failed.");
 	}
-  
+
 	$query = "CREATE TABLE " . $dbname . "." . $pitScoutTable . " (
 			teamNumber VARCHAR(50) NOT NULL PRIMARY KEY,
 			teamName VARCHAR(60) NOT NULL,
@@ -233,21 +233,22 @@ function pitScoutInput($teamNumber, $teamName, $numBatteries, $chargedBatteries,
 	$queryOutput = runQuery($queryString);
 }
 
-function leadScoutInput($matchKey, $teamRank) {
+function leadScoutInput($matchKey, $teamRank)
+{
 	global $servername;
 	global $username;
 	global $password;
 	global $dbname;
 	global $leadScoutTable;
-  
-  $data = array();
-  $data["matchkey"] = $matchKey;
-  $data["teamrank"] = $teamRank;
-  
-  $conn = connectToDB();
-  $sql = "INSERT INTO ".$leadScoutTable."(matchkey, teamrank) VALUES(:matchkey, :teamrank)";
-  $prepared_statement = $conn->prepare($sql);
-  $prepared_statement->execute($data);
+
+	$data = array();
+	$data["matchkey"] = $matchKey;
+	$data["teamrank"] = $teamRank;
+
+	$conn = connectToDB();
+	$sql = "INSERT INTO " . $leadScoutTable . "(matchkey, teamrank) VALUES(:matchkey, :teamrank)";
+	$prepared_statement = $conn->prepare($sql);
+	$prepared_statement->execute($data);
 }
 
 function betInput($matchNum, $RedScorePredict, $BlueScorePredict, $TotalAutoRed, $TotalAutoBlue, $Winner, $name, $ID)
@@ -430,57 +431,63 @@ function getUserList()
 	return ($names);
 }
 
-function getAllTeamAverageData(){
-  global $servername;
-  global $username;
-  global $password;
-  global $dbname;
-  global $matchScoutTable;
-  $qs = "SELECT * FROM `" . $matchScoutTable . "`";
-  $result = runQuery($qs);
-  $teamData = array();
-  $teamList = array();
-  foreach ($result as $row_key => $row) {
-    
-    $teamNum = $row["teamNum"];
-    if (!isset($teamList[$teamNum])){
-      $teamList[$teamNum] = 1;
-      $teamData[$teamNum] = array();
-      $teamData[$teamNum]['matchCount'] = 0;
-      $teamData[$teamNum]['ballsScored'] = 0;
-      $teamData[$teamNum]['autoPoints'] = 0;
-      $teamData[$teamNum]['teleopPoints'] = 0;
-      $teamData[$teamNum]['endgamePoints'] = 0;
-      $teamData[$teamNum]['totalPoints'] = 0;
-    }
-    
-    $autoPoints = (($row['crossLineA'] == 1) ? 2 : 0) + ($row['upperGoal'] * 4) + ($row['lowerGoal'] * 2);
-    $teleopPoints = ($row['upperGoalT'] * 2) + ($row['lowerGoalT'] * 1);
-    $endgamePoints = 0;
-    if($row['climb']){$endgamePoints = 4;}
-    else if($row['climbTwo']){$endgamePoints = 6;}
-    else if($row['climbThree']){$endgamePoints = 10;}
-    else if($row['climbFour']){$endgamePoints = 15;}
-    $totalPoints = $autoPoints + $teleopPoints + $endgamePoints;
-    $ballsScored = $row['upperGoal'] + $row['lowerGoal'] + $row['upperGoalT'] + $row['lowerGoalT'];
-    
-    $teamData[$teamNum]['matchCount'] += 1;
-    $teamData[$teamNum]['ballsScored'] += $ballsScored;
-    $teamData[$teamNum]['autoPoints'] += $autoPoints;
-    $teamData[$teamNum]['teleopPoints'] += $teleopPoints;
-    $teamData[$teamNum]['endgamePoints'] += $endgamePoints;
-    $teamData[$teamNum]['totalPoints'] += $totalPoints;
-  }
-  
-  foreach ($teamList as $team => $teamRow){
-    $teamData[$team]['ballsScored']   = $teamData[$team]['ballsScored']   / $teamData[$team]['matchCount'];
-    $teamData[$team]['autoPoints']    = $teamData[$team]['autoPoints']    / $teamData[$team]['matchCount'];
-    $teamData[$team]['teleopPoints']  = $teamData[$team]['teleopPoints']  / $teamData[$team]['matchCount'];
-    $teamData[$team]['endgamePoints'] = $teamData[$team]['endgamePoints'] / $teamData[$team]['matchCount'];
-    $teamData[$team]['totalPoints']   = $teamData[$team]['totalPoints'] / $teamData[$team]['matchCount'];
-  }
-  
-  return $teamData;
+function getAllTeamAverageData()
+{
+	global $servername;
+	global $username;
+	global $password;
+	global $dbname;
+	global $matchScoutTable;
+	$qs = "SELECT * FROM `" . $matchScoutTable . "`";
+	$result = runQuery($qs);
+	$teamData = array();
+	$teamList = array();
+	foreach ($result as $row_key => $row) {
+
+		$teamNum = $row["teamNum"];
+		if (!isset($teamList[$teamNum])) {
+			$teamList[$teamNum] = 1;
+			$teamData[$teamNum] = array();
+			$teamData[$teamNum]['matchCount'] = 0;
+			$teamData[$teamNum]['ballsScored'] = 0;
+			$teamData[$teamNum]['autoPoints'] = 0;
+			$teamData[$teamNum]['teleopPoints'] = 0;
+			$teamData[$teamNum]['endgamePoints'] = 0;
+			$teamData[$teamNum]['totalPoints'] = 0;
+		}
+
+		$autoPoints = (($row['crossLineA'] == 1) ? 2 : 0) + ($row['upperGoal'] * 4) + ($row['lowerGoal'] * 2);
+		$teleopPoints = ($row['upperGoalT'] * 2) + ($row['lowerGoalT'] * 1);
+		$endgamePoints = 0;
+		if ($row['climb']) {
+			$endgamePoints = 4;
+		} else if ($row['climbTwo']) {
+			$endgamePoints = 6;
+		} else if ($row['climbThree']) {
+			$endgamePoints = 10;
+		} else if ($row['climbFour']) {
+			$endgamePoints = 15;
+		}
+		$totalPoints = $autoPoints + $teleopPoints + $endgamePoints;
+		$ballsScored = $row['upperGoal'] + $row['lowerGoal'] + $row['upperGoalT'] + $row['lowerGoalT'];
+
+		$teamData[$teamNum]['matchCount'] += 1;
+		$teamData[$teamNum]['ballsScored'] += $ballsScored;
+		$teamData[$teamNum]['autoPoints'] += $autoPoints;
+		$teamData[$teamNum]['teleopPoints'] += $teleopPoints;
+		$teamData[$teamNum]['endgamePoints'] += $endgamePoints;
+		$teamData[$teamNum]['totalPoints'] += $totalPoints;
+	}
+
+	foreach ($teamList as $team => $teamRow) {
+		$teamData[$team]['ballsScored']   = $teamData[$team]['ballsScored']   / $teamData[$team]['matchCount'];
+		$teamData[$team]['autoPoints']    = $teamData[$team]['autoPoints']    / $teamData[$team]['matchCount'];
+		$teamData[$team]['teleopPoints']  = $teamData[$team]['teleopPoints']  / $teamData[$team]['matchCount'];
+		$teamData[$team]['endgamePoints'] = $teamData[$team]['endgamePoints'] / $teamData[$team]['matchCount'];
+		$teamData[$team]['totalPoints']   = $teamData[$team]['totalPoints'] / $teamData[$team]['matchCount'];
+	}
+
+	return $teamData;
 }
 
 function getTeamData($teamNumber, $min = -1, $max = 1000)
@@ -526,12 +533,12 @@ function getTeamData($teamNumber, $min = -1, $max = 1000)
 		}
 	}
 	// if ($result3 != FALSE) {
-		// foreach ($result3 as $row_key => $row) {
-			// array_push($teamData[7], array(
-				// $row["matchNum"], $row["team1Dri"],
-				// $row["team2Dri"], $row["team3Dri"]
-			// ));
-		// }
+	// foreach ($result3 as $row_key => $row) {
+	// array_push($teamData[7], array(
+	// $row["matchNum"], $row["team1Dri"],
+	// $row["team2Dri"], $row["team3Dri"]
+	// ));
+	// }
 	// }
 	return ($teamData);
 }
@@ -1050,27 +1057,29 @@ function getAllMatchData()
 	return runQuery($qs1);
 }
 
-    function getRawLeadScoutData()
-    {
-      global $leadScoutTable;
-      $qs1 = "SELECT * FROM `" . $leadScoutTable . "`";
-      return runQuery($qs1);
-    }
-    
-    function getLeadScoutData(){
-      $rawRankData = getRawLeadScoutData();
-      $rankData = array();
-      $dataSize = sizeof($rawRankData);
-      for($i = 0; $i < $dataSize; $i++){
-        array_push($rankData, json_decode($rawRankData[$i]["teamrank"], True));
-      }
-      return $rankData;
-    }
-    
-    function getLeadScoutELODict(){
-      $qrg = new qualRankGen(getLeadScoutData());
-      return $qrg->raw_votes_to_elo_map(30);
-    }
+function getRawLeadScoutData()
+{
+	global $leadScoutTable;
+	$qs1 = "SELECT * FROM `" . $leadScoutTable . "`";
+	return runQuery($qs1);
+}
+
+function getLeadScoutData()
+{
+	$rawRankData = getRawLeadScoutData();
+	$rankData = array();
+	$dataSize = sizeof($rawRankData);
+	for ($i = 0; $i < $dataSize; $i++) {
+		array_push($rankData, json_decode($rawRankData[$i]["teamrank"], True));
+	}
+	return $rankData;
+}
+
+function getLeadScoutELODict()
+{
+	$qrg = new qualRankGen(getLeadScoutData());
+	return $qrg->raw_votes_to_elo_map(30);
+}
 
 
 
@@ -1756,7 +1765,7 @@ function getOurMatches()
 	$match = getEventRaw();
 	$yourTeam = getYourTeam();
 	$tba = getTBAHandler();
-	$data = $tba->makeDBCachedCall('/team/'.$yourTeam.'/event/'.$match.'/matches/simple')['response'];
+	$data = $tba->makeDBCachedCall('/team/' . $yourTeam . '/event/' . $match . '/matches/simple')['response'];
 	$array = array();
 	for ($i = 0; $i < count($data); $i++) {
 		array_push($array, substr($data[$i]["key"], 9));
