@@ -571,6 +571,12 @@ function getEvent()
 	return ("2022gal_qm");
 }
 
+function getYourTeam()
+{
+
+	return ("frc3476");
+}
+
 function getEventRaw()
 {
 
@@ -1748,8 +1754,9 @@ function getEventTeams()
 function getOurMatches()
 {
 	$match = getEventRaw();
+	$yourTeam = getYourTeam();
 	$tba = getTBAHandler();
-	$data = $tba->makeDBCachedCall('/team/frc3476/event/'.$match.'/matches/simple')['response'];
+	$data = $tba->makeDBCachedCall('/team/'.$yourTeam.'/event/'.$match.'/matches/simple')['response'];
 	$array = array();
 	for ($i = 0; $i < count($data); $i++) {
 		array_push($array, substr($data[$i]["key"], 9));

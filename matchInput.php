@@ -193,16 +193,6 @@ $event = getEvent();
 
 					function check() {
 
-						/*
-						var req = new XMLHttpRequest();
-						req.onload = function() {
-							console.log(this.responseText);
-						};
-						req.open("get", "get-data.php", true);
-						req.send();
-						*/
-
-						//eventCode = "2022gal_qm";
 						eventCode = '<?=$event?>';;
 						matchNumberCode = eventCode + document.getElementById('matchNum').value;
 						match = document.getElementById('matchNum').value;

@@ -71,9 +71,6 @@ include('navBar.php');
 
             <div class="row pt-3">
 
-                <div class="col-lg-4">
-                    <a href="https://www.thebluealliance.com/event/2022gal" class="btn btn-warning">The Blue Alliance</a>
-                </div>
             </div>
 
         </section>
