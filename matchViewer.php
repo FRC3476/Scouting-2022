@@ -84,9 +84,6 @@ if (
         $blueAutoEst = 8;
     }
     $blueTelopEst = getAvgUpperGoalT($team1Blue) + getAvgUpperGoalT($team2Blue) + getAvgUpperGoalT($team3Blue) + getAvgLowerGoalT($team1Blue) + getAvgLowerGoalT($team2Blue) + getAvgLowerGoalT($team3Blue);
-    $redAuto1 = getAuto($team1Red);
-    $redAuto2 = getAuto($team2Red);
-    $redAuto3 = getAuto($team3Red);
     $teamData = getTeamData($team1Red);
     $teamData1 = getTeamData($team2Red);
     $teamData2 = getTeamData($team3Red);
@@ -94,9 +91,6 @@ if (
     $teamDataB1 = getTeamData($team2Blue);
     $teamDataB2 = getTeamData($team3Blue);
     $redAuto = getAutoValue($team1Red) + getAutoValue($team2Red) + getAutoValue($team3Red);
-    $blueAuto1 = getAuto($team1Blue);
-    $blueAuto2 = getAuto($team2Blue);
-    $blueAuto3 = getAuto($team3Blue);
     $blue1UpperTelop = getAvgUpperGoalT($team1Blue);
     $blue2UpperTelop = getAvgUpperGoalT($team2Blue);
     $blue3UpperTelop = getAvgUpperGoalT($team3Blue);

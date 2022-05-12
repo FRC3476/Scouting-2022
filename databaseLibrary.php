@@ -1063,16 +1063,6 @@ function getTotalAuto($teamNumber)
 	return ($auto);
 }
 
-function getAuto($teamNumber)
-{
-	$auto = getTotalAuto($teamNumber);
-	if ($auto == 0) {
-		return "No/Not Run";
-	} else {
-		return "Yes";
-	}
-}
-
 function getAutoValue($teamNumber)
 {
 	$auto = getTotalAuto($teamNumber);
