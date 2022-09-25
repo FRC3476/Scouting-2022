@@ -26,6 +26,7 @@ include("header.php") ?>
             <table class="sortable table table-hover" id="RawData" border="1">
                 <tr>
                     <th>Team Number</th>
+                    <th>Weighted Score</th>
                     <th>Lead Gen ELO</th>
                     <th>Scouter Gen ELO</th>
                     <th>Avg Upper Shot Percentage</th>
