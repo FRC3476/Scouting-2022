@@ -6,7 +6,7 @@
   global $tbaTable;
   global $tbaKey;
   
-  $eventCode = "2022cala";
+  $eventCode = "2022cabl";
   if (isset($_GET["eventCode"])){
     $eventCode = $_GET["eventCode"];
   }
